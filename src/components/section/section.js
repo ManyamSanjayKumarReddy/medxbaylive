@@ -10,6 +10,9 @@ import Nestednavbar from '../Nestednavbar/Nestednavbar'
 import Hero from '../Hero/Hero'
 import MidPartTwo from '../../MidPartTwo';
 import TestimonialSlider from '../section5/TestimonialSlider';
+import Siri from '../siri/Siri';
+import DemoExplore from '../Demo/DemoExplore';
+
 // import Insights from '../section.6/Appp';
 
 function Section() {
@@ -17,8 +20,10 @@ function Section() {
     <div className="Container">
       <Hero/>
       <Nestednavbar/>
+      <Siri/>
       <Whyus/>
       <MiddlePart />
+     <DemoExplore/>
       <Insights />
       <TestimonialSlider/>
       <MidPartTwo/>

@@ -1,0 +1,320 @@
+.siri-background {
+    width: 100%;
+
+    position: relative;
+    top: 150px;
+    background: linear-gradient(180deg, #E4EDFF -17.3%, rgba(253, 254, 255, 0.0763343) 72.99%, rgba(255, 255, 255, 0) 80.46%);
+    /* background: url('../Assets/Siri.svg') no-repeat; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.gif-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.introduction-afya {
+    width: 80%;
+    max-width: 357px;
+    height: auto;
+    margin: 40px auto 0;
+    font-family: Matter, sans-serif;
+    font-size: 45px; 
+    font-weight: 600;
+    line-height: 1.25; 
+    text-align: center;
+    color: #000000;
+    position: relative;
+    top: 20px;
+}
+.introduction-afya-sub{
+    width: 80%;
+    max-width: 357px;
+    height: auto;
+    margin: 40px auto 0;
+    font-family: Matter, sans-serif;
+    font-size: 45px; 
+    font-weight: 600;
+    line-height: 1.25; 
+    text-align: center;
+    color: #0067FF;
+    position: relative;
+
+}
+
+.afya-explaination {
+    width: 90%; 
+    max-width: 725px; 
+    height: auto; 
+    margin: 60px auto 0; 
+    font-family: Matter, sans-serif;
+    font-size: 1rem; 
+    font-weight: 400;
+    line-height: 1.5625rem; 
+    text-align: center;
+    color: #000000;
+    position: relative;
+    top: -20px;
+}
+
+.afya-zip {
+    width: 90%;
+    max-width: 416px; 
+    height: auto; 
+    margin: 0px auto 0; 
+    position: relative;
+    top: -10px;
+}
+.afya-zip-container{
+    width: 400px;
+    height: 400px;
+}
+.left-siri-content{
+    position: relative;
+    left: -430px;
+    width: 460px;
+    top: -350px;
+}
+.right-siri-content{
+    position: relative;
+    left: 430px;
+    width: 450px;
+    top: -660px;
+}
+.tick-size{
+  position: relative;
+  left: -15px;
+}
+.right-siri-content p,.left-siri-content p{
+    font-family: Matter, sans-serif;
+    position: relative;
+    left: -15px;
+  }
+.tick {
+    margin-right: 10px;
+    color: #FF7F50;
+    font-weight: bold;
+}
+.siri-patient-head,.siri-provider-head{
+    font-family: Matter, sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 57.5px;
+    text-align: left;
+    position: relative;
+    top: -10px;
+    
+}
+
+@media (min-width: 413px) and (max-width:1249px){
+    .siri-background {
+        top: 150px; 
+    }
+    .introduction-afya {
+        font-size: 2.25rem; 
+    }
+
+    .afya-explaination {
+        font-size: 0.875rem; 
+    }
+
+    .siri-background {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 150px;
+        background: linear-gradient(180deg, #E4EDFF -17.3%, rgba(253, 254, 255, 0.0763343) 72.99%, rgba(255, 255, 255, 0) 80.46%);
+        /* background: url('../Assets/Siri.svg'); */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .left-siri-content {
+        height: 600px; 
+        width: 90%;
+        max-width: 100%;
+        left: 0;
+        top: 0;
+    }
+    .right-siri-content {
+        height: 600px; 
+        width: 90%;
+        max-width: 100%;
+        left: 0;
+        top: -200px;
+        position: relative;
+    }
+}
+@media (min-width: 1250px) and (max-width:1439px){
+    .siri-background {
+        width: 100%;
+    
+        position: relative;
+        top: 150px;
+        background: linear-gradient(180deg, #E4EDFF -17.3%, rgba(253, 254, 255, 0.0763343) 72.99%, rgba(255, 255, 255, 0) 80.46%);
+        /* background: url('../Assets/Siri.svg') no-repeat; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .gif-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .introduction-afya {
+        width: 80%;
+        max-width: 357px;
+        height: auto;
+        margin: 40px auto 0;
+        font-family: Matter, sans-serif;
+        font-size: 45px; 
+        font-weight: 600;
+        line-height: 1.25; 
+        text-align: center;
+        color: #000000;
+        position: relative;
+        top: 20px;
+    }
+    .introduction-afya-sub{
+        width: 80%;
+        max-width: 357px;
+        height: auto;
+        margin: 40px auto 0;
+        font-family: Matter, sans-serif;
+        font-size: 45px; 
+        font-weight: 600;
+        line-height: 1.25; 
+        text-align: center;
+        color: #0067FF;
+        position: relative;
+    
+    }
+    
+    .afya-explaination {
+        width: 90%; 
+        max-width: 725px; 
+        height: auto; 
+        margin: 60px auto 0; 
+        font-family: Matter, sans-serif;
+        font-size: 1rem; 
+        font-weight: 400;
+        line-height: 1.5625rem; 
+        text-align: center;
+        color: #000000;
+        position: relative;
+        top: -20px;
+    }
+    
+    .afya-zip {
+        width: 90%;
+        max-width: 416px; 
+        height: auto; 
+        margin: 0px auto 0; 
+        position: relative;
+        top: -10px;
+    }
+    .left-siri-content{
+        position: relative;
+        left: -370px;
+        width: 460px;
+        top: -350px;
+    }
+    .right-siri-content{
+        position: relative;
+        left: 400px;
+        width: 450px;
+        top: -610px;
+    }
+    .tick-size{
+      position: relative;
+      left: -15px;
+    }
+    .right-siri-content p,.left-siri-content p{
+        position: relative;
+        left: -15px;
+        font-size: 14px;
+      }
+    .tick {
+        margin-right: 10px;
+        color: #FF7F50;
+        font-weight: bold;
+    }
+    .siri-patient-head,.siri-provider-head{
+        font-family: Matter, sans-serif;
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 57.5px;
+        text-align: left;
+        position: relative;
+        top: -10px;
+        
+    }
+}
+
+@media (max-width: 576px) {
+    .siri-background {
+        top: 150px; 
+    }
+
+    .introduction-afya {
+        font-size: 1.75rem; 
+    }
+
+    .afya-explaination {
+        font-size: 0.75rem; 
+    }
+    .siri-background {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 150px;
+        background: linear-gradient(180deg, #E4EDFF -17.3%, rgba(253, 254, 255, 0.0763343) 72.99%, rgba(255, 255, 255, 0) 80.46%);
+        /* background: url('../Assets/Siri.svg'); */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .afya-zip {
+        width: 200px;
+
+        height: auto; 
+        margin: 0px auto 0; 
+        position: relative;
+        top: -10px;
+    }
+    .left-siri-content {
+        height: 600px; 
+        width: 90%;
+        max-width: 100%;
+        left: 0;
+        top: 20px;
+        position: relative;
+    }
+    .right-siri-content {
+        height: 600px; 
+        width: 90%;
+        max-width: 100%;
+        left: 0;
+        top: -150px;
+        position: relative;
+    }
+    .afya-zip-container{
+        width: 300px;
+        height: 300px;
+    }
+}
+
+
+

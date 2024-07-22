@@ -160,7 +160,7 @@ const LoginCard = ({ show, handleClose }) => {
     <Modal show={show} onHide={handleClose} centered className="custom-modal">
       <Modal.Title>
         <span className="model-header-login">Sign In</span>{' '}
-        <span className="model-header-sub-login"> Sign up to your account.</span>
+        <span className="model-header-sub-login"> Sign In to your account.</span>
       </Modal.Title>
       <button type="button" className="btn-close-custom" aria-label="Close" onClick={handleClose}>
         x
@@ -207,7 +207,7 @@ const LoginCard = ({ show, handleClose }) => {
           <div className='login-option-container'>
 <div className='account-sign-up'>Don't have an account?</div>
 
-<Link className='login-link-signup-login'>Sign In</Link>
+<Link className='login-link-signup-login'>Sign Up</Link>
 
             </div>
   
@@ -248,7 +248,7 @@ const LoginCard = ({ show, handleClose }) => {
 
 
           <Button variant="primary" type="submit" className="btn-custom">
-Sign Up
+Sign In
           </Button>
         </Form>
       </Modal.Body>

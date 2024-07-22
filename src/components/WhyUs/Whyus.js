@@ -1,26 +1,29 @@
 import React from "react";
 import './WhyUs.css';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserMd,faUserFriends  ,faPills} from '@fortawesome/free-solid-svg-icons';
 function Whyus() {
   return (
     <div className="background">
-      <p className="lorem">LOREM IPSUM</p>
-      <h1 className="why">Why Us?</h1>
+      <p className="lorem"></p>
+      <h1 className="why">Why MedxBay?</h1>
       <div className="grid-container">
         <div className="grid-item">
-          <img src="/icon1.png" alt="Icon 1" className="icon"/>
-          <h2>Patient Centered</h2>
-          <p>From provider profiles reviewed by other patients to in-depth articles that explore numerous conditions, we have designed our platform to empower you to be your own health advocate.</p>
+        <FontAwesomeIcon icon={faUserFriends} className="icon-doctor"/>
+          <h2>PATIENTS</h2>
+          <p>MedXBay simplifies your healthcare experience by connecting you with trusted providers and offering convenient, real-time appointment scheduling. Access telemedicine services and reliable health information from anywhere.  Our platform streamlines your healthcare interactions and information.</p>
         </div>
         <div className="grid-item">
-          <img src="/icon2.png" alt="Icon 2" className="icon"/>
-          <h2>AI First Company</h2>
-          <p>To help deliver a quality experience that supports our continuous improvement process, we are dedicated to being an AI first company. This will allow us to implement the latest and greatest tools to best serve.</p>
+        <FontAwesomeIcon icon={faUserMd}  className="icon-doctor"/>         
+         <h2>MEDICAL PROVIDERS</h2>
+          <p>MedXBay revolutionizes healthcare management for providers by automating essential operations like scheduling, billing, and patient management. With advanced AI technology and access to the latest medical innovations, we ensure your practice stays competitive and effective.
+          </p>
         </div>
         <div className="grid-item">
-          <img src="/icon3.png" alt="Icon 3" className="icon"/>
-          <h2>Patient Centered</h2>
-          <p>With a focus on serving the Middle East and various countries throughout Africa, we are aligning our efforts to the UN'S Sustainable Development Goal #3, good health & well-being.</p>
+        <FontAwesomeIcon icon={faPills} className="icon-doctor"/> 
+                 <h2>MEDICAL SUPPLIERS</h2>
+          <p>MedXBay connects medical providers with an extensive network of suppliers, ensuring access to the latest healthcare innovations and supplies. This seamless integration enhances practice efficiency and elevates patient care, keeping providers at the forefront of the healthcare industry.
+          </p>
         </div>
       </div>
     </div>
