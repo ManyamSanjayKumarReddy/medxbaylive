@@ -245,8 +245,7 @@ const SignupCard = ({ show, handleClose }) => {
           </p>
       
         </div>
-        <div className='text-sign-up'>Yes, We Care!<br></br>
-        Your Wellness, Our Mission</div>
+      
         <div className='or-sign-up-container'>
        
        <div className='or-sign-up'>OR</div>

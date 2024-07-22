@@ -16,6 +16,7 @@ import apple from '../../assests/img/apple.png'
 import Typed from 'typed.js';
 import { Link } from 'react-router-dom';
 
+
 const LoginCard = ({ show, handleClose }) => {
   const typedElement = useRef('');
   const typedElementTwo = useRef('');
@@ -191,8 +192,7 @@ const LoginCard = ({ show, handleClose }) => {
           </p>
       
         </div>
-        <div className='text-sign-up'>Yes, We Care!<br></br>
-        Your Wellness, Our Mission</div>
+    
         <div className='or-sign-up-container-login'>
        
        <div className='or-sign-up'>OR</div>
@@ -210,12 +210,7 @@ const LoginCard = ({ show, handleClose }) => {
 <Link className='login-link-signup-login'>Sign In</Link>
 
             </div>
-            <div className='provider-option-container'>
-<div className='account-sign-up-provider'>Are you a provider?</div>
-
-<button className='provider-link-signup'>Sign In Here</button>
-
-            </div>
+  
 
      </div>
 
