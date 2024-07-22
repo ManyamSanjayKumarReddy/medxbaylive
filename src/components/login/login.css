@@ -1,0 +1,53 @@
+.form-overall-container-login{
+  position: relative;
+  top: -150px;
+
+}
+.model-header-login{
+  width: 187px;
+  height: 22px;
+  top: 140px;
+  left: 39%;
+  font-family: 'Matter', sans-serif;
+  font-size:26px;
+  font-weight: 600;
+  line-height: 19.2px;
+  text-align: left;
+position: relative;
+color: #272848;
+  border-bottom: none;
+  display: flex;
+}
+.model-header-sub-login{
+width: 187px;
+height: 22px;
+top: 150px;
+left: 39%;
+font-family: 'Matter', sans-serif;
+font-size: 16px;
+font-weight: 600;
+line-height: 19.2px;
+text-align: left;
+color: #272848;
+  border-bottom: none;
+  display: flex;
+  position: relative;
+}
+.or-sign-up-container-login{
+  display: flex;
+  position: relative;
+  top: -200px;
+}
+.login-link-signup-login{
+  width: 40px;
+  height: 15px;
+  top: 26px;
+  left: 0px;
+  font-family: 'Matter', sans-serif;
+  font-size: 9.5px;
+  font-weight: 600;
+  line-height: 11.4px;
+  text-align: left;
+  color: #0067FF;
+  position: relative;
+}

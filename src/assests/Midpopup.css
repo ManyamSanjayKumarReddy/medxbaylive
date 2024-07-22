@@ -1,0 +1,1323 @@
+.custom-modal .modal-dialog {
+  max-width: none;
+  width: 90%; 
+  margin: auto; 
+
+
+}
+.smile-emoji{
+  position: relative;
+  top: -40px;
+}
+
+.custom-modal .modal-content {
+  border-radius: 10px;
+  border: none;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  height: 90vh; 
+  font-family: 'Matter', sans-serif;
+  background-color:  #F4F7FC;
+}
+.model-header{
+  width: 715px;
+  height: 39px;
+  top: 150px;
+  left: 38.5%;
+  font-family: 'Matter', sans-serif;
+  font-size:26px;
+  font-weight: 600;
+  line-height: 38.4px;
+  text-align: left;
+  
+  
+position: relative;
+
+color: #272848;
+
+  border-bottom: none;
+
+  display: flex;
+
+
+
+
+}
+.model-header-sub{
+position: relative;
+width: 387px;
+height: 22px;
+top: 161px;
+left: 38.5%;
+font-family: 'Matter', sans-serif;
+font-size: 16px;
+font-weight: 600;
+line-height: 19.2px;
+text-align: left;
+
+color: #272848;
+
+  border-bottom: none;
+
+  display: flex;
+
+  position: relative;
+
+
+}
+.form-overall-container{
+  position: relative;
+  top: -40px;
+
+
+}
+.custom-modal .modal-title {
+  font-family: 'Matter', sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  width: 100%;
+  position: relative;
+  left: -10px;
+}
+
+.btn-close-custom {
+  color: rgb(0, 0, 0);
+  font-size: 1.0rem;
+  background: none;
+  border: none;
+  position: relative;
+left: 46%;
+  top: -2.0rem;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.custom-modal .modal-body {
+  padding: 2rem;
+}
+
+.custom-modal .form-label {
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 0.5rem;
+  margin-left: 37.5%;
+}
+.radio-buttons{
+  margin-left: 37.5%;
+}
+.custom-modal .form-control-custom {
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: none;
+  transition: border-color 0.3s ease;
+  font-family: 'Matter', sans-serif;
+  width: 25%;
+  margin-left: 37.5%;
+  border: 1px solid #272848
+}
+
+.custom-modal .form-control-custom:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  font-family: 'Matter', sans-serif;
+
+}
+
+.custom-modal .btn-custom {
+  width: 306px;
+  height: 49px;
+  top: 7px;
+
+  border: 0.5px solid #FFFFFF;
+  border-radius: 22px;
+
+  background: #0067FF;
+
+  
+
+
+
+  position: relative;
+
+
+  padding: 0.5rem 2rem;
+
+  border: none;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+
+  align-items: center;
+
+  font-family: 'Matter', sans-serif;
+  margin-left: 37.5%;
+}
+
+
+.custom-modal .btn-custom:hover {
+  background-color: #0056b3;
+}
+
+.custom-modal-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none !important;
+  padding: 1.5rem;
+}
+
+.sign-up-now {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.sign-up-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.sign-up-link:hover {
+  text-decoration: underline;
+}
+.invalid-feedback{
+  margin-left: 37.5%;
+}
+.radio-invalid{
+  margin-left: -0px;
+}
+
+
+
+.smile-emoji{
+  display: flex;
+}
+.brand-image-logo{
+  width: 150px;
+height: 50px;
+top: -50px;
+left: 50px;
+position: relative;
+
+}
+.curvedesign{
+  position: relative;
+  width: 565px;
+height: 117px;
+top: 249px;
+left: -1159px;
+
+
+}
+.running-text{
+  position: relative;
+  width: 205px;
+height: 22px;
+top: 290px;
+left: -1542px;
+font-family: Matter;
+font-size: 16px;
+font-weight: 600;
+line-height: 19.2px;
+text-align: left;
+color: #272848;
+white-space: nowrap;
+
+}
+.curvedsigntwo{
+  position: relative;
+  width: 565px;
+height: 117px;
+left: 310px;
+top: 50px;
+}
+.running-text-two{
+  position: relative;
+  width: 205px;
+height: 37px;
+top: -30px;
+left: 500px;
+
+font-family: Matter;
+font-size: 13px;
+font-weight: 600;
+line-height: 15.6px;
+text-align: left;
+color: #272848;
+white-space: nowrap;
+animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+
+}
+@keyframes typing {
+  from { width: 0 }
+  to { width: 205px } 
+}
+
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #272848 }
+}
+
+
+.emoji-ring{
+  position: relative;
+  width: 36px;
+height: 18px;
+top: 100px;
+left: 100px;
+
+
+font-family: Font Awesome 5 Free;
+font-size: 36px;
+font-weight: 900;
+line-height: 18px;
+text-align: right;
+animation: upDown 2s infinite, disappear 30s infinite;
+
+}
+.calender-emoji{
+  width: 40px;
+height: 40px;
+top: 209px;
+left: -100px;
+position: relative;
+opacity: 0.7px;
+animation: upDown 2s infinite, disappear 26s infinite;
+
+}
+.band-aid-emoji{
+  position: relative;
+  width: 40px;
+height: 40px;
+top: 368px;
+left: 64px;
+gap: 0px;
+opacity: 0.7px;
+animation: upDown 2s infinite, disappear 36s infinite;
+
+}
+.stethoscope-emoji{
+  position: relative;
+  width: 40px;
+height: 40px;
+top: 468px;
+left: -240px;
+gap: 0px;
+opacity: 0.7px;
+animation: upDown 2s infinite, disappear 46s infinite;
+
+}
+.scheduletwo-emoji{
+  position: relative;
+  width: 40px;
+  height: 40px;
+  top: 542px;
+  left: -70px;
+  gap: 0px;
+  animation: upDown 2s infinite, disappear 50s infinite;
+  
+}
+.consultation-emoji{
+  position: relative;
+  width: 40px;
+height: 40px;
+top: 250px;
+left: 780px;
+gap: 0px;
+animation: upDown 2s infinite, disappear 60s infinite;
+
+
+}
+.medicalexam-emoji{
+  position: relative;
+  width: 40px;
+height: 40px;
+top: 450px;
+left: 795px;
+
+animation: upDown 2s infinite, disappear 70s infinite;
+}
+.hand-emoji{
+  width: 40px;
+height: 40px;
+top: 155px;
+left: 483px;
+position: relative;
+font-family: Matter;
+font-size: 32px;
+font-weight: 600;
+line-height: 38.4px;
+text-align: left;
+animation: upDown 2s infinite, disappear 90s infinite;
+
+}
+.heartbeat-emoji{
+  position: relative;
+  width: 40px;
+height: 40px;
+top: 398px;
+left:425px;
+animation: upDown 2s infinite, disappear 100s infinite;
+
+
+}
+/* @keyframes upDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+} */
+
+@keyframes disappear {
+  0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100% {
+    opacity: 0.7;
+  }
+  5%, 15%, 25%, 35%, 45%, 55%, 65%, 75%, 85%, 95% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 412px) {
+  .brand-image-logo {
+    width: 150px;
+    height: 50px;
+    top: -75px;
+    left: 0px;
+    position: relative;
+align-items: center;
+    justify-content: center;
+
+  }
+
+  .curvedesign,
+  .running-text,
+  .curvedsigntwo,
+  .running-text-two,
+  .emoji-ring,
+  .calender-emoji,
+  .band-aid-emoji,
+  .stethoscope-emoji,
+  .scheduletwo-emoji,
+  .consultation-emoji,
+  .medicalexam-emoji,
+  .hand-emoji,
+  .heartbeat-emoji {
+    display: none;
+  }
+
+  .custom-modal .modal-dialog {
+    max-width: none;
+    width: 90%;
+    height: auto;
+    margin: auto;
+  }
+  .custom-modal .modal-content {
+    border-radius: 10px;
+    border: none;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    height: auto;
+    font-family: 'Matter', sans-serif;
+    background-color:  #F4F7FC;
+  }
+
+  .form-overall-container {
+    position: relative;
+    top: 10px;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  .model-header {
+    width: 100%;
+    height: 39px;
+    top: 70px;
+    left: 0;
+    font-family: 'Matter', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 38.4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .model-header-sub {
+    position: relative;
+    width: 100%;
+    height: 22px;
+    top: 80px;
+    left: 0;
+    font-family: 'Matter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19.2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .custom-modal .modal-title {
+    font-family: 'Matter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    width: 100%;
+    position: relative;
+    left: 0;
+    text-align: center;
+  }
+
+  .btn-close-custom {
+    color: rgb(0, 0, 0);
+    font-size: 1rem;
+    background: none;
+    border: none;
+    position: relative;
+    left: 43%;
+    top: -3rem;
+    cursor: pointer;
+    z-index: 999;
+  }
+
+  .custom-modal .form-control-custom {
+    border-radius: 10px;
+    padding: 1rem;
+    font-family: 'Matter', sans-serif;
+    width: 90%;
+    margin-left: 5%;
+    box-sizing: border-box;
+  }
+
+  .custom-modal .form-label {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 0.5rem;
+    margin-left: 5%;
+  }
+
+  .radio-buttons {
+    margin-left: 5%;
+  }
+
+  .custom-modal .btn-custom {
+    width: 206px;
+    height: 49px;
+    border: 0.5px solid #FFFFFF;
+    border-radius: 22px;
+    background: #0067FF;
+    padding: 0.5rem 2rem;
+    align-items: center;
+    font-family: 'Matter', sans-serif;
+    margin: 20px auto;
+    display: block;
+    top: 0;
+  }
+
+  .invalid-feedback {
+    margin-left: 5%;
+  }
+}
+
+
+
+@media (min-width:413px) and (max-width: 600px) {
+  .brand-image-logo {
+    width: 150px;
+    height: 50px;
+    top: -75px;
+    left: 0px;
+    position: relative;
+align-items: center;
+    justify-content: center;
+
+  }
+
+  .curvedesign,
+  .running-text,
+  .curvedsigntwo,
+  .running-text-two,
+  .emoji-ring,
+  .calender-emoji,
+  .band-aid-emoji,
+  .stethoscope-emoji,
+  .scheduletwo-emoji,
+  .consultation-emoji,
+  .medicalexam-emoji,
+  .hand-emoji,
+  .heartbeat-emoji {
+    display: none;
+  }
+
+  .custom-modal .modal-dialog {
+    max-width: none;
+    width: 90%;
+    height: auto;
+    margin: auto;
+  }
+  .custom-modal .modal-content {
+    border-radius: 10px;
+    border: none;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    height: auto;
+    font-family: 'Matter', sans-serif;
+    background-color:  #F4F7FC;
+  }
+  .form-overall-container {
+    position: relative;
+    top: 10px;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  .model-header {
+    width: 100%;
+    height: 39px;
+    top: 70px;
+    left: 0;
+    font-family: 'Matter', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 38.4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .model-header-sub {
+    position: relative;
+    width: 100%;
+    height: 22px;
+    top: 80px;
+    left: 0;
+    font-family: 'Matter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19.2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .custom-modal .modal-title {
+    font-family: 'Matter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    width: 100%;
+    position: relative;
+    left: 0;
+    text-align: center;
+  }
+
+  .btn-close-custom {
+    color: rgb(0, 0, 0);
+    font-size: 1rem;
+    background: none;
+    border: none;
+    position: relative;
+    left: 43%;
+    top: -3rem;
+    cursor: pointer;
+    z-index: 999;
+  }
+
+  .custom-modal .form-control-custom {
+    border-radius: 10px;
+    padding: 1rem;
+    font-family: 'Matter', sans-serif;
+    width: 90%;
+    margin-left: 5%;
+    box-sizing: border-box;
+  }
+
+  .custom-modal .form-label {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 0.5rem;
+    margin-left: 5%;
+  }
+
+  .radio-buttons {
+    margin-left: 5%;
+  }
+
+  .custom-modal .btn-custom {
+    width: 206px;
+    height: 49px;
+    border: 0.5px solid #FFFFFF;
+    border-radius: 22px;
+    background: #0067FF;
+    padding: 0.5rem 2rem;
+    align-items: center;
+    font-family: 'Matter', sans-serif;
+    margin: 20px auto;
+    display: block;
+    top: 0;
+  }
+
+  .invalid-feedback {
+    margin-left: 5%;
+  }
+}
+
+@media (min-width:601px) and (max-width: 767px) {
+  .brand-image-logo {
+    width: 150px;
+    height: 50px;
+    top: -75px;
+    left: 0px;
+    position: relative;
+align-items: center;
+    justify-content: center;
+
+  }
+
+  .curvedesign,
+  .running-text,
+  .curvedsigntwo,
+  .running-text-two,
+  .emoji-ring,
+  .calender-emoji,
+  .band-aid-emoji,
+  .stethoscope-emoji,
+  .scheduletwo-emoji,
+  .consultation-emoji,
+  .medicalexam-emoji,
+  .hand-emoji,
+  .heartbeat-emoji {
+    display: none;
+  }
+
+  .custom-modal .modal-dialog {
+    max-width: none;
+    width: 90%;
+height: auto;
+    margin: auto;
+  }
+  .custom-modal .modal-content {
+    border-radius: 10px;
+    border: none;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    height: auto;
+    font-family: 'Matter', sans-serif;
+    background-color:  #F4F7FC;
+  }
+
+  .form-overall-container {
+    position: relative;
+    top: 10px;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  .model-header {
+    width: 100%;
+    height: 39px;
+    top: 70px;
+    left: 0;
+    font-family: 'Matter', sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 38.4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .model-header-sub {
+    position: relative;
+    width: 100%;
+    height: 22px;
+    top: 80px;
+    left: 0;
+    font-family: 'Matter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .custom-modal .modal-title {
+    font-family: 'Matter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    width: 100%;
+    position: relative;
+    left: 0;
+    text-align: center;
+  }
+
+  .btn-close-custom {
+    color: rgb(0, 0, 0);
+    font-size: 1rem;
+    background: none;
+    border: none;
+    position: relative;
+    left: 43%;
+    top: -3rem;
+    cursor: pointer;
+    z-index: 999;
+  }
+
+  .custom-modal .form-control-custom {
+    border-radius: 10px;
+    padding: 1rem;
+    font-family: 'Matter', sans-serif;
+    width: 90%;
+    margin-left: 5%;
+    box-sizing: border-box;
+  }
+
+  .custom-modal .form-label {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 0.5rem;
+    margin-left: 5%;
+  }
+
+  .radio-buttons {
+    margin-left: 5%;
+  }
+
+  .custom-modal .btn-custom {
+    width: 206px;
+    height: 49px;
+    border: 0.5px solid #FFFFFF;
+    border-radius: 22px;
+    background: #0067FF;
+    padding: 0.5rem 2rem;
+    align-items: center;
+    font-family: 'Matter', sans-serif;
+    margin: 20px auto;
+    display: block;
+    top: 0;
+  }
+
+  .invalid-feedback {
+    margin-left: 5%;
+  }
+}
+
+
+
+@media (min-width:768px) and (max-width: 1023px) {
+  .brand-image-logo {
+    width: 150px;
+    height: 50px;
+    top: -75px;
+    left: 0px;
+    position: relative;
+align-items: center;
+    justify-content: center;
+
+  }
+
+  .curvedesign,
+  .running-text,
+  .curvedsigntwo,
+  .running-text-two,
+  .emoji-ring,
+  .calender-emoji,
+  .band-aid-emoji,
+  .stethoscope-emoji,
+  .scheduletwo-emoji,
+  .consultation-emoji,
+  .medicalexam-emoji,
+  .hand-emoji,
+  .heartbeat-emoji {
+    display: none;
+  }
+
+  .custom-modal .modal-dialog {
+    max-width: none;
+    width: 90%;
+height: auto;
+    margin: auto;
+  }
+  .custom-modal .modal-content {
+    border-radius: 10px;
+    border: none;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    height: auto;
+    font-family: 'Matter', sans-serif;
+    background-color:  #F4F7FC;
+  }
+
+  .form-overall-container {
+    position: relative;
+    top: 10px;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  .model-header {
+    width: 100%;
+    height: 39px;
+    top: 70px;
+    left: 0;
+    font-family: 'Matter', sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 38.4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .model-header-sub {
+    position: relative;
+    width: 100%;
+    height: 22px;
+    top: 80px;
+    left: 0;
+    font-family: 'Matter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .custom-modal .modal-title {
+    font-family: 'Matter', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    width: 100%;
+    position: relative;
+    left: 0;
+    text-align: center;
+  }
+
+  .btn-close-custom {
+    color: rgb(0, 0, 0);
+    font-size: 1rem;
+    background: none;
+    border: none;
+    position: relative;
+    left: 43%;
+    top: -3rem;
+    cursor: pointer;
+    z-index: 999;
+  }
+
+  .custom-modal .form-control-custom {
+    border-radius: 10px;
+    padding: 1rem;
+    font-family: 'Matter', sans-serif;
+    width: 90%;
+    margin-left: 5%;
+    box-sizing: border-box;
+  }
+
+  .custom-modal .form-label {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 0.5rem;
+    margin-left: 5%;
+  }
+
+  .radio-buttons {
+    margin-left: 5%;
+  }
+
+  .custom-modal .btn-custom {
+    width: 206px;
+    height: 49px;
+    border: 0.5px solid #FFFFFF;
+    border-radius: 22px;
+    background: #0067FF;
+    padding: 0.5rem 2rem;
+    align-items: center;
+    font-family: 'Matter', sans-serif;
+    margin: 20px auto;
+    display: block;
+    top: 0;
+  }
+
+  .invalid-feedback {
+    margin-left: 5%;
+  }
+}
+
+@media (min-width:1024px) and (max-width: 1439px) {
+  .form-overall-container {
+    position: relative;
+    top: -10;
+    left: 20%;
+  }
+
+  .custom-modal .modal-dialog {
+    max-width: none;
+    width: 90%;
+    height: auto;
+    margin: auto;
+  }
+
+  .custom-modal .modal-content {
+    border-radius: 10px;
+    border: none;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    height: auto;
+    font-family: 'Matter', sans-serif;
+    background-color: #F4F7FC;
+  }
+
+  .model-header {
+    width: 100%;
+    height: auto;
+    top: 10vh;
+    left: 57.5%;
+    font-family: 'Matter', sans-serif;
+    font-size: 2vw;
+    font-weight: 600;
+    line-height: 1.2em;
+    display: flex;
+    justify-content: left;
+    text-align: left;
+  }
+
+  .model-header-sub {
+    position: relative;
+    width: 100%;
+    height: auto;
+    top: 12vh;
+    left: 57.5%;
+    font-family: 'Matter', sans-serif;
+    font-size: 1.5vw;
+    font-weight: 600;
+    line-height: 1.2em;
+    display: flex;
+    text-align: left;
+  }
+
+  .custom-modal .btn-custom {
+    width: 20vw;
+    height: auto;
+    border: 0.5px solid #FFFFFF;
+    border-radius: 22px;
+    background: #0067FF;
+    padding: 0.5rem 2rem;
+    align-items: center;
+    font-family: 'Matter', sans-serif;
+    margin: 2vh auto;
+    display: block;
+    top: 0;
+  }
+
+  .smile-emoji {
+    display: flex;
+    position: relative;
+    top: -10vh;
+    left: 2%;
+  }
+
+  .brand-image-logo {
+    width: 10vw;
+    height: 50px;
+    position: relative;
+    top: -2vh;
+    left: 5vw;
+  }
+
+  .curvedesign {
+    position: relative;
+    width: 120vw;
+    height: auto;
+    top: 25vh;
+    left: -35vw;
+  }
+  
+  .curvedesign {
+    position: relative;
+    width: 120vw;
+    height: auto;
+    top: 25vh;
+    left: -35vw;
+  }
+  
+  .running-text {
+    position: absolute; 
+    width: 12vw;
+    height: auto;
+    top: 32vh; 
+    left: 12%; 
+    transform: translateY(-50%); 
+    font-family: Matter;
+    font-size: 1.5vw;
+    font-weight: 600;
+    line-height: 1.2em;
+    text-align: center; 
+    color: #272848;
+    white-space: nowrap;
+  }
+  
+  
+
+  .emoji-ring {
+    position: relative;
+    width: 3vw;
+    height: auto;
+    top: 10vh;
+    left: 16vw;
+    font-family: 'Font Awesome 5 Free';
+    font-size: 3vw;
+    font-weight: 900;
+    line-height: 1em;
+    text-align: right;
+    animation: upDown 2s infinite, disappear 16s infinite;
+  }
+
+  .calender-emoji,
+  .band-aid-emoji,
+  .stethoscope-emoji,
+  .scheduletwo-emoji,
+  .consultation-emoji,
+  .medicalexam-emoji,
+  .hand-emoji,
+  .heartbeat-emoji {
+    width: 3vw;
+    height: auto;
+    position: relative;
+    opacity: 0.7;
+    animation: upDown 2s infinite, disappear infinite;
+  }
+
+  .calender-emoji {
+    top: 17vh;
+    left: -7vw;
+  }
+
+  .band-aid-emoji {
+    top: 35vh;
+    left: 22vh;
+  }
+
+  .stethoscope-emoji {
+    top: 43vh;
+    left: -18vw;
+  }
+
+  .scheduletwo-emoji {
+    top: 55vh;
+    left:-2vw;
+  }
+
+  .consultation-emoji {
+    top: 25vh;
+    left: 70vw;
+  }
+
+  .medicalexam-emoji {
+    top: 35vh;
+    left: 75vw;
+  }
+
+  .hand-emoji {
+    top: 15vh;
+    left: 40vw;
+    font-family: Matter;
+    font-size: 2.5vw;
+    font-weight: 600;
+    line-height: 1.2em;
+    text-align: left;
+  }
+
+  .heartbeat-emoji {
+    top: 35vh;
+    left: 35vw;
+  }
+
+  .curvedsigntwo,
+  .running-text-two,
+  .consultation-emoji,
+  .medicalexam-emoji,
+  .hand-emoji,
+  .heartbeat-emoji {
+    display: none;
+  }
+}
+
+  @media (min-width: 1500px) {
+    .emoji-ring,
+.calender-emoji,
+.band-aid-emoji,
+.stethoscope-emoji,
+.scheduletwo-emoji,
+.consultation-emoji,
+.medicalexam-emoji,
+.hand-emoji,
+.heartbeat-emoji {
+  position: absolute; 
+  opacity: 1;
+}
+
+.emoji-ring {
+  width: 36px;
+  height: 18px;
+  top: 100%; 
+  left: 23%; 
+}
+
+.calender-emoji {
+  width: 40px;
+  height: 40px;
+  top: 305%;
+  left: 9%;
+}
+
+.band-aid-emoji {
+  width: 40px;
+  height: 40px;
+  top: 700%;
+  left: 28%;
+}
+
+.stethoscope-emoji {
+  width: 40px;
+  height: 40px;
+  top: 785%;
+  left: 4%;
+}
+
+
+.scheduletwo-emoji {
+  width: 40px;
+  height: 40px;
+  top: 1015%;
+  left: 18%;
+}
+
+.consultation-emoji {
+  width: 40px;
+  height: 40px;
+  top: 385%;
+  left: 86%;
+}
+
+.medicalexam-emoji {
+  width: 40px;
+  height: 40px;
+  top: 850%;
+  left: 93%;
+}
+
+.hand-emoji {
+  width: 40px;
+  height: 40px;
+  top: 230%;
+  left: 70%;
+}
+
+.heartbeat-emoji {
+  width: 40px;
+  height: 40px;
+  top:700%;
+  left: 70%;
+}
+.curvedesign,
+.running-text,
+.curvedsigntwo,
+.running-text-two {
+  position: absolute; 
+}
+
+
+.curvedesign {
+  width: 565px;
+  height: 117px;
+  top: 440%; 
+  left: -1%; 
+}
+
+.running-text {
+  width: 205px;
+  height: 22px;
+  top: 530%;
+  left: 11.5%;
+  font-family: Matter;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19.2px;
+  text-align: left;
+  color: #272848;
+  white-space: nowrap;
+}
+
+.curvedsigntwo {
+  width: 565px;
+  height: 117px;
+  top: 0%;
+  left: 65%;
+}
+
+.running-text-two {
+  width: 205px;
+  height: 37px;
+  top: 80%;
+  left: 78%;
+  font-family: Matter;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 15.6px;
+  text-align: left;
+  color: #272848;
+  white-space: nowrap;
+}
+.form-overall-container{
+  position: relative;
+  top: 60px;
+}
+.model-header {
+  width: 100%;
+  height: 39px;
+  top: 110px;
+  left: 38.5%;
+  font-family: 'Matter', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 38.4px;
+  display: flex;
+
+  text-align: left;
+}
+
+.model-header-sub {
+  position: relative;
+  width: 100%;
+  height: 22px;
+  top: 120px;
+  left: 38.5%;
+  font-family: 'Matter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19.2px;
+  display: flex;
+
+  text-align: left;
+}
+  }
+  

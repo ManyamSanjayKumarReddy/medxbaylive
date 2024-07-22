@@ -1,0 +1,2820 @@
+.insight-background{
+
+    max-width: 100%;
+    min-width: 100%;
+    height: 853px;
+    top: 3401px;
+    padding: 120px 0px 119.02px 80px;
+    gap: 0px;
+     opacity: 1;
+background: #F4F7FC;
+display: flex;
+margin-top: 200px;
+overflow-x: hidden; 
+
+}
+.frame{
+max-width: 414px;
+height: 231px;
+top: 311px;
+left: 80px;
+gap: 0px;
+ opacity: 1;
+margin-top: 180px;
+
+}
+
+.blog{
+width: 43px;
+height: 25px;
+gap: 0px;
+ opacity: 1;
+ font-family: 'Matter', sans-serif;
+font-size: 12px;
+font-weight: 600;
+line-height: 25px;
+text-align: left;
+color: #0167FF;
+}
+
+
+.explore-insight{
+    width: 338px;
+height: 58px;
+top: 33px;
+gap: 0px;
+ opacity: 1; 
+font-family: 'Matter', sans-serif;
+font-size: 36px;
+font-weight: 600;
+line-height: 57.5px;
+text-align: left;
+color: #272848;
+}
+
+.insight-content{
+    width: 414px;
+    height: 36px;
+    top: 123px;
+    gap: 0px;
+     opacity: 1;
+     font-family: 'Matter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 25px;
+    text-align: left;
+    color: #535353;
+}
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 92px; 
+    height: 40px;
+    gap: 12px;
+    opacity: 1; 
+    margin-top: 35px;
+}
+
+.left-round, .right-round {
+    width: 40px;
+    height: 40px;
+    border-radius: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #272848;
+    transition: background 0.3s, border 0.3s;
+    cursor: pointer;
+}
+
+.left-round.active:hover, .right-round.active:hover, 
+.left-round.active:active, .right-round.active:active,
+.left-round.inactive:hover, .right-round.inactive:hover,
+.left-round.inactive:active, .right-round.inactive:active {
+    background: #0167FF;
+    border: 1px solid transparent;
+}
+
+.left-round svg path, .right-round svg path {
+    stroke: #272848;
+    transition: stroke 0.3s;
+}
+
+.left-round.active:hover svg path, .right-round.active:hover svg path, 
+.left-round.active:active svg path, .right-round.active:active svg path,
+.left-round.inactive:hover svg path, .right-round.inactive:hover svg path,
+.left-round.inactive:active svg path, .right-round.inactive:active svg path {
+    stroke: #fff;
+}
+
+.left-round.inactive, .right-round.inactive {
+    background: #fff;
+    border: 1px solid #272848;
+    cursor: default;
+}
+
+.left-round.inactive svg path, .right-round.inactive svg path {
+    stroke: #000;
+}
+
+
+.insight-card{
+    width: 1032px;
+height: 613.98px;
+top: 120px;
+left: 513px;
+gap: 0px;
+ opacity: 1;
+display: flex;
+
+}
+.insight-card-one{
+    width: 504px;
+    height: 613px;
+    top: 0.02px;
+    gap: 0px;
+    border-radius: 15px ;
+    border: 1px ;
+     opacity: 1;
+    background-color: #fff;
+    
+    margin-left: 20px;
+    border: 1px solid #C3CFE0;
+
+}
+
+.image-one{
+    width: 488px;
+height: 260.32px;
+gap: 0px;
+ opacity: 1;
+
+
+}
+.insight-card-one-background{
+    width: 504px;
+    height: 613px;
+    top: -0.02px;
+    gap: 0px;
+     opacity: 1;
+    
+    
+
+}
+.insight-card-one-inner{
+    width: 432px;
+    height: 541px;
+    top: 36.02px;
+    left: 36px;
+    gap: 0px;
+     opacity: 1;
+margin-left: 35px;
+margin-top: 35px;
+    
+    
+
+}
+.text-box-outter{
+    width:432px;
+height:  262px;
+top: 315.02px;
+left: 36px;
+gap: 22px;
+ opacity: 1;
+
+}
+.text-box-inner-head{
+    width: 96px;
+height:  10px;
+gap: 16px;
+ opacity: 1;
+
+}
+.head-text{
+    width: 96px;
+height: 10px;
+gap: 0px;
+ opacity: 1;
+ font-family: 'Matter', sans-serif;
+font-size: 14px;
+font-weight: 500;
+line-height: 21px;
+text-align: left;
+color: #0167FF;
+
+}
+
+.text-box-inner-date{
+    width: 175px;
+    height:  21px;
+    gap: 8px;
+     opacity: 1;
+    display: flex;
+    margin-top: 25px;
+
+    
+
+}
+.text-box-inner-year{
+    width: 88px;
+    height: 21px;
+    gap: 0px;
+     opacity: 1;
+     font-family: 'Matter', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    color: #717171;
+
+}
+.text-box-inner-ellipse{
+width: 4px;
+height: 4px;
+gap: 0px;
+ opacity: 1;
+border-radius: 8px;
+background: #717171;
+margin-top: 8px;
+
+}
+.text-box-inner-time{
+    width: 67px;
+height: 10px;
+gap: 0px;
+ opacity: 1;
+ font-family: 'Matter', sans-serif;
+font-size: 12px;
+font-weight: 400;
+line-height: 21px;
+text-align: left;
+color: #717171;
+
+
+}
+.text-box-content{
+    width: 432px;
+height: 127px;
+gap: 0px;
+ opacity: 1;
+
+margin-top: 15px;
+}
+.text-box-content-title{
+    width: 432px;
+height: 44px;
+top: 75px;
+gap: 0px;
+ opacity: 1;
+font-family: 'Matter', sans-serif;
+font-size: 22px;
+font-weight: 500;
+line-height: 29px;
+text-align: left;
+color: #000000;
+
+
+}
+
+.text-box-content-sub-content{
+    width: 412px;
+    height: 61px;
+    top: 141px;
+    gap: 0px;
+     opacity: 1;
+    font-family: 'Matter', sans-serif;
+font-size: 16px;
+font-weight: 400;
+line-height: 25px;
+text-align: left;
+color: #616161;
+margin-top: 25px;
+
+    }
+.text-box-person-one{
+    width:  177px;
+height:  38px;
+gap: 12px;
+ opacity: 1;
+display: flex;
+margin-top: 30px;
+
+}  
+.text-box-person-one-image {
+    width: 38px;
+    height: 38px;
+    gap: 0px;
+     opacity: 1;
+    background: #D9F4FF;
+    border-radius: 50%;
+    /* border-radius: 50%;
+    background: #D9F4FF;
+    background: url('../insightpersonone.png') no-repeat;
+    background-size: cover; 
+    background-position: 110% 30%;  */
+}
+.text-box-person-one-image-back{
+    width: 38px;
+    height: 38px;
+    gap: 0px;
+     opacity: 1;
+      border-radius: 50%;
+
+    background: url('/public/insightpersonone.png') no-repeat;
+   
+    background-size: 150% 150%;
+    background-position: 130% top; 
+}
+.text-box-person-one-name{
+    width: 140px;
+height: 10px;
+gap: 0px;
+ opacity: 1;
+font-family: 'Matter', sans-serif;
+font-size: 14px;
+font-weight: 400;
+line-height: 21px;
+text-align: center;
+margin-top: 6px;
+
+
+
+}
+.insight-image-one{
+    width: 432px;
+height: 244px;
+top: 36.02px;
+left: 36px;
+gap: 0px;
+ opacity: 1;
+background: url('/public/insight1.jpg') center no-repeat;
+background-size: cover;
+}
+
+
+
+.insight-card-two{
+    width: 504px;
+    height: 613px;
+    top: 0.02px;
+    gap: 0px;
+    border-radius: 15px ;
+    background-color: #fff;
+     opacity: 1;
+margin-left: 20px;
+border: 1px solid #C3CFE0
+
+
+
+
+}
+
+
+.insight-card-two-background{
+    width: 504px;
+height: 613px;
+top: -0.02px;
+gap: 0px;
+ opacity: 1;
+border-radius: 5px;
+
+
+}
+.insight-card-two-inner{
+    width: 432px;
+    height: 541px;
+    top: 36.02px;
+    left: 36px;
+    gap: 0px;
+     opacity: 1;
+    margin-left: 35px;
+margin-top: 35px;
+    
+    
+
+}
+
+.text-box-person-two{
+    width:200px;
+height: 38px;
+gap: 12px;
+ opacity: 1;
+display: flex;
+margin-top: 30px;
+
+}  
+.text-box-person-two-image{
+    width: 38px;
+height: 38px;
+gap: 0px;
+ opacity: 1;
+background: #D9F4FF;
+border-radius: 50%;
+}  
+.text-box-person-two-image-back {
+    width: 38px;
+    height: 38px;
+    gap: 0px;
+     opacity: 1;
+    border-radius: 50%;
+
+    background: url('/public/insightpersontwo.jpeg') no-repeat;
+    background-size: 230% 230%; 
+    background-position: 35% top; 
+}
+.text-box-person-two-name{
+    width: 140px;
+    height: 10px;
+    gap: 0px;
+     opacity: 1;
+     font-family: 'Matter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    text-align: center;
+    margin-top: 6px;
+}
+.insight-image-two{
+    width: 432px;
+height: 244px;
+top: 36.02px;
+left: 36px;
+gap: 0px;
+ opacity: 1;
+background: url('/public/insight2.jpg') center no-repeat ;
+background-size: cover;
+}
+
+
+
+
+
+@media (max-width: 412px) {
+    .insight-background {
+        width: 100%;
+        height: 50%;
+        max-width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box; 
+overflow-x: hidden; 
+            padding: 120px 20px 119.02px 2px;
+    
+
+
+    }
+    .frame{
+        max-width: 100%;
+        height: auto; 
+        top: auto; 
+        left: auto;
+        gap: 0px;
+         opacity: 1;
+        margin-top: 30px;
+      text-align: center;
+ 
+        
+        }
+
+
+        
+        .blog{
+            width: 100%;
+            height: auto;
+            gap: 0px;
+             opacity: 1;
+             font-family: 'Matter', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 25px;
+            text-align: center;
+            color: #0167FF;
+            }
+            .explore-insight{
+                width: 100%;
+ 
+            height: 100%;
+            top: 33px;
+            gap: 0px;
+             opacity: 1; 
+            font-family: 'Matter', sans-serif;
+            font-size: 36px;
+            font-weight: 600;
+            line-height: 57.5px;
+            text-align: center;
+            color: #272848;
+          
+            }            
+
+      .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 92px; 
+    height: 40px;
+    gap: 12px;
+    opacity: 1; 
+    margin-top: 35px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+        
+            .left-round {
+                width: 40px;
+                height: 40px;
+                border-radius: 1000px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #fff;
+                border: 1px solid #272848;
+                transition: background 0.3s, border 0.3s;
+                cursor: pointer;
+
+            }
+            .right-round {
+                width: 40px;
+                height: 40px;
+                border-radius: 1000px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #fff;
+                border: 1px solid #272848;
+                transition: background 0.3s, border 0.3s;
+                cursor: pointer;
+            }
+            .left-round:hover, .right-round:hover, 
+            .left-round:active, .right-round:active {
+                background: #0167FF;
+                border: 1px solid transparent;
+            }
+        
+            .left-round:hover svg path, .right-round:hover svg path, 
+            .left-round:active svg path, .right-round:active svg path {
+                stroke: #fff;
+            }
+        
+            .left-round svg path, .right-round svg path {
+                stroke: #272848;
+                transition: stroke 0.3s;
+            }
+        
+            .left-round.inactive, .right-round.inactive {
+                background: #fff;
+                border: 1px solid #272848;
+                cursor: default;
+            }
+        
+            .left-round.inactive svg path, .right-round.inactive svg path {
+                stroke: #000;
+            }
+   
+
+            
+            .explore-insight{
+                width: 100%;
+                height: auto;
+            top: 33px;
+            gap: 0px;
+             opacity: 1; 
+            font-family: 'Matter', sans-serif;
+            font-size: 36px;
+            font-weight: 600;
+            line-height: 57.5px;
+            text-align: center;
+            color: #272848;
+            }
+            
+            .insight-content {
+           
+                max-width: 414px;
+                width:100% ;
+                height: auto; 
+                top: 123px;
+                gap: 0;
+                opacity: 1;
+                font-family: 'Matter', sans-serif;
+                font-size: 14px; 
+                font-weight: 400;
+                line-height: 1.5; 
+                text-align: center;
+                color: #535353;
+                display: flex;
+                justify-content: center;
+           
+                
+                
+            }
+            .head-text{
+                width: 96px;
+            height: 10px;
+            gap: 0px;
+             opacity: 1;
+             font-family: 'Matter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 21px;
+            text-align: left;
+            color: #0167FF;
+            margin-top: 15px;
+            
+            }
+
+.insight-card{
+    width: 100%;
+height: auto;
+top: 120px;
+left: 513px;
+gap: 0px;
+ opacity: 1;
+display: flex;
+/* margin-right: 50px; */
+justify-content: center;
+
+
+}
+.insight-card-one{
+    width: 100%;
+    max-width: 504px;
+height: auto;
+    top: 0.02px;
+    gap: 0px;
+    border-radius: 15px ;
+    border: 1px ;
+     opacity: 1;
+    background-color: #fff;
+    justify-content: center;
+
+    border: 1px solid #C3CFE0;
+
+
+
+}
+
+.insight-card-one-background{
+    width: 100%;
+    height: 613px;
+    top: -0.02px;
+    gap: 0px;
+     opacity: 1;
+    
+    
+
+}
+
+
+.insight-card-one-inner{
+    width:100%;
+    height: 541px;
+    top: 36.02px;
+    left: 36px;
+    gap: 0px;
+     opacity: 1;
+
+margin-top: 35px;
+    
+    
+
+}
+.text-box-outter{
+    max-width:80%;
+height:  262px;
+top: 315.02px;
+left: 36px;
+gap: 22px;
+ opacity: 1;
+ margin-left: 2px;
+
+}
+.text-box-content{
+    width: 100%;
+height: 127px;
+gap: 0px;
+ opacity: 1;
+
+margin-top: 15px;
+}
+.text-box-content-title{
+    width: 100%;
+height: 44px;
+top: 75px;
+gap: 0px;
+ opacity: 1;
+font-family: 'Matter', sans-serif;
+font-size: 20px;
+font-weight: 500;
+line-height: 20px;
+text-align: left;
+color: #000000;
+
+
+}
+.text-box-content-sub-content{
+    width: 100%;
+    height: 61px;
+    top: 141px;
+    gap: 0px;
+     opacity: 1;
+    font-family: 'Matter', sans-serif;
+font-size: 14px;
+font-weight: 400;
+line-height: 25px;
+text-align: left;
+color: #616161;
+margin-top: 25px;
+
+    }
+    .image-one{
+        max-width: 100%;
+        width: 100%;
+    height: 260.32px;
+    gap: 0px;
+     opacity: 1;
+     margin-left: 2px;
+    
+    }
+    .insight-image-one{
+        max-width: 78%;
+        height: 100%;
+    top: 36.02px;
+    left: 36px;
+    gap: 0px;
+     opacity: 1;
+    background: url('/public/insight1.jpg') center no-repeat;
+    background-size: cover;
+    }
+
+    .insight-image-two{
+        max-width: 78%;
+        height: 100%;
+    top: 36.02px;
+    left: 36px;
+    gap: 0px;
+     opacity: 1;
+    background: url('/public/insight2.jpg') center no-repeat;
+    background-size: cover;
+    }
+    .text-box-person-two{
+        width:  177px;
+        height: auto;
+    gap: 12px;
+     opacity: 1;
+    display: flex;
+    margin-top: 75px;
+    
+    }  
+    .text-box-person-two-name{
+        width: 140px;
+        height: 10px;
+        gap: 0px;
+         opacity: 1;
+         font-family: 'Matter', sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 21px;
+        text-align: left;
+        text-align: center;
+        margin-top: 6px;
+    }
+    .insight-card-two{
+        width: 100%;
+        max-width: 504px;
+    height: auto;
+        top: 0.02px;
+        gap: 0px;
+        border-radius: 15px ;
+        border: 1px ;
+         opacity: 1;
+        background-color: #fff;
+        justify-content: center;
+    
+        border: 1px solid #C3CFE0;
+
+        
+        }
+        .image-two{
+            width: 100%;
+        height: 260.32px;
+        gap: 0px;
+         opacity: 1;
+        
+        }
+        .insight-card-two-background{
+            width: 100%;
+            height: 613px;
+            top: -0.02px;
+            gap: 0px;
+             opacity: 1;
+            
+            
+        
+        }
+        
+        
+        .insight-card-two-inner{
+            width:100%;
+            height: 541px;
+            top: 36.02px;
+            left: 36px;
+            gap: 0px;
+             opacity: 1;
+        
+        margin-top: 35px;
+            
+            
+        
+        }
+        .text-box-person-one{
+            width:  177px;
+            height: auto;
+        gap: 12px;
+         opacity: 1;
+        display: flex;
+        margin-top: 75px;
+        
+        }  
+
+}
+
+@media (min-width: 413px) and (max-width: 600px) {
+    .insight-background {
+        width: 100%;
+        height: 50%;
+        max-width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box; 
+overflow-x: hidden; 
+            padding: 120px 20px 119.02px 2px;
+    
+
+
+    }
+    .frame{
+        max-width: 100%;
+        height: auto; 
+        top: auto; 
+        left: auto;
+        gap: 0px;
+         opacity: 1;
+        margin-top: 30px;
+      text-align: center;
+ 
+        
+        }
+
+
+        
+        .blog{
+            width: 100%;
+            height: auto;
+            gap: 0px;
+             opacity: 1;
+             font-family: 'Matter', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 25px;
+            text-align: center;
+            color: #0167FF;
+            }
+            .explore-insight{
+                width: 100%;
+ 
+            height: 100%;
+            top: 33px;
+            gap: 0px;
+             opacity: 1; 
+            font-family: 'Matter', sans-serif;
+            font-size: 36px;
+            font-weight: 600;
+            line-height: 57.5px;
+            text-align: center;
+            color: #272848;
+          
+            }            
+
+      .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 92px; 
+    height: 40px;
+    gap: 12px;
+    opacity: 1; 
+    margin-top: 35px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+        
+            .left-round {
+                width: 40px;
+                height: 40px;
+                border-radius: 1000px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #fff;
+                border: 1px solid #272848;
+                transition: background 0.3s, border 0.3s;
+                cursor: pointer;
+
+            }
+            .right-round {
+                width: 40px;
+                height: 40px;
+                border-radius: 1000px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #fff;
+                border: 1px solid #272848;
+                transition: background 0.3s, border 0.3s;
+                cursor: pointer;
+            }
+            .left-round:hover, .right-round:hover, 
+            .left-round:active, .right-round:active {
+                background: #0167FF;
+                border: 1px solid transparent;
+            }
+        
+            .left-round:hover svg path, .right-round:hover svg path, 
+            .left-round:active svg path, .right-round:active svg path {
+                stroke: #fff;
+            }
+        
+            .left-round svg path, .right-round svg path {
+                stroke: #272848;
+                transition: stroke 0.3s;
+            }
+        
+            .left-round.inactive, .right-round.inactive {
+                background: #fff;
+                border: 1px solid #272848;
+                cursor: default;
+            }
+        
+            .left-round.inactive svg path, .right-round.inactive svg path {
+                stroke: #000;
+            }
+   
+
+            
+            .explore-insight{
+                width: 100%;
+                height: auto;
+            top: 33px;
+            gap: 0px;
+             opacity: 1; 
+            font-family: 'Matter', sans-serif;
+            font-size: 36px;
+            font-weight: 600;
+            line-height: 57.5px;
+            text-align: center;
+            color: #272848;
+            }
+            
+            .insight-content {
+           
+                max-width: 414px;
+                width:100% ;
+                height: auto; 
+                top: 123px;
+                gap: 0;
+                opacity: 1;
+                font-family: 'Matter', sans-serif;
+                font-size: 14px; 
+                font-weight: 400;
+                line-height: 1.5; 
+                text-align: center;
+                color: #535353;
+                display: flex;
+                justify-content: center;
+           
+                
+                
+            }
+            .head-text{
+                width: 96px;
+            height: 10px;
+            gap: 0px;
+             opacity: 1;
+             font-family: 'Matter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 21px;
+            text-align: left;
+            color: #0167FF;
+            margin-top: 15px;
+            
+            }
+
+.insight-card{
+    width: 100%;
+height: auto;
+top: 120px;
+left: 513px;
+gap: 0px;
+ opacity: 1;
+display: flex;
+/* margin-right: 50px; */
+justify-content: center;
+
+
+}
+.insight-card-one{
+    width: 100%;
+    max-width: 504px;
+height: auto;
+    top: 0.02px;
+    gap: 0px;
+    border-radius: 15px ;
+    border: 1px ;
+     opacity: 1;
+    background-color: #fff;
+    justify-content: center;
+
+    border: 1px solid #C3CFE0;
+
+
+
+}
+
+.insight-card-one-background{
+    width: 100%;
+    height: 613px;
+    top: -0.02px;
+    gap: 0px;
+     opacity: 1;
+    
+    
+
+}
+
+
+.insight-card-one-inner{
+    width:100%;
+    height: 541px;
+    top: 36.02px;
+    left: 36px;
+    gap: 0px;
+     opacity: 1;
+
+margin-top: 35px;
+    
+    
+
+}
+.text-box-outter{
+    max-width:80%;
+height:  262px;
+top: 315.02px;
+left: 36px;
+gap: 22px;
+ opacity: 1;
+
+}
+.text-box-content{
+    width: 100%;
+height: 127px;
+gap: 0px;
+ opacity: 1;
+
+margin-top: 15px;
+}
+.text-box-content-title{
+    width: 100%;
+height: 44px;
+top: 75px;
+gap: 0px;
+ opacity: 1;
+font-family: 'Matter', sans-serif;
+font-size: 20px;
+font-weight: 500;
+line-height: 20px;
+text-align: left;
+color: #000000;
+
+
+}
+.text-box-content-sub-content{
+    width: 100%;
+    height: 61px;
+    top: 141px;
+    gap: 0px;
+     opacity: 1;
+    font-family: 'Matter', sans-serif;
+font-size: 14px;
+font-weight: 400;
+line-height: 25px;
+text-align: left;
+color: #616161;
+margin-top: 25px;
+
+    }
+    .image-one{
+        max-width: 100%;
+        width: 100%;
+    height: 260.32px;
+    gap: 0px;
+     opacity: 1;
+    
+    }
+    .insight-image-one{
+        max-width: 85%;
+        height: 100%;
+    top: 36.02px;
+    left: 36px;
+    gap: 0px;
+     opacity: 1;
+    background: url('/public/insight1.jpg') center no-repeat;
+    background-size: cover;
+    }
+
+    .insight-image-two{
+        max-width: 85%;
+        height: 100%;
+    top: 36.02px;
+    left: 36px;
+    gap: 0px;
+     opacity: 1;
+    background: url('/public/insight2.jpg') center no-repeat;
+    background-size: cover;
+    }
+    .text-box-person-two{
+        width:200px;
+        height: auto;
+    gap: 12px;
+     opacity: 1;
+    display: flex;
+        margin-top: 75px;
+    
+    }  
+    .text-box-person-two-name{
+        width: 140px;
+        height: 10px;
+        gap: 0px;
+         opacity: 1;
+         font-family: 'Matter', sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 21px;
+        text-align: left;
+        text-align: center;
+        margin-top: 6px;
+    }
+    .insight-card-two{
+        width: 100%;
+        max-width: 504px;
+    height: auto;
+        top: 0.02px;
+        gap: 0px;
+        border-radius: 15px ;
+        border: 1px ;
+         opacity: 1;
+        background-color: #fff;
+        justify-content: center;
+    
+        border: 1px solid #C3CFE0;
+
+        
+        }
+        .image-two{
+            width: 100%;
+        height: 260.32px;
+        gap: 0px;
+         opacity: 1;
+        
+        }
+        .insight-card-two-background{
+            width: 100%;
+            height: 613px;
+            top: -0.02px;
+            gap: 0px;
+             opacity: 1;
+            
+            
+        
+        }
+        
+        
+        .insight-card-two-inner{
+            width:100%;
+            height: 541px;
+            top: 36.02px;
+            left: 36px;
+            gap: 0px;
+             opacity: 1;
+        
+        margin-top: 35px;
+            
+            
+        
+        }
+        .text-box-person-one{
+            width:  177px;
+            height: auto;
+        gap: 12px;
+         opacity: 1;
+        display: flex;
+        margin-top: 75px;
+        
+        }  
+}
+
+
+@media (min-width: 601px) and (max-width: 767px) {
+    .insight-background {
+        width: 100%;
+        height: 50%;
+        max-width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box; 
+overflow-x: hidden; 
+            padding: 120px 20px 119.02px 2px;
+
+    }
+
+.insight-card{
+    width: 100%;
+height: auto;
+justify-content: center;
+
+
+}
+    
+    .frame{
+        max-width: 100%;
+        height: auto; 
+        top: auto; 
+        left: auto;
+        gap: 0px;
+         opacity: 1;
+        margin-top: 30px;
+      text-align: center;
+        }
+
+    .text-box-person-one,.text-box-person-two{
+            margin-top: 50px;
+        }  
+    .blog{
+        width: 100%;
+        height: auto;
+        text-align: center;
+ 
+    }    
+    .explore-insight{
+        width: 100%;
+
+    height: 100%;
+
+    text-align: center;
+
+  
+    }      
+    .navigation {
+  
+
+        margin-bottom: 30px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .insight-content {
+           
+
+        justify-content: center;
+        text-align: center;
+   
+        
+        
+    }
+
+ 
+      
+
+}
+@media (min-width: 768px) and (max-width: 911px) {
+    .insight-background {
+        width: 100%;
+        height: 50%;
+        max-width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box; 
+overflow-x: hidden; 
+            padding: 120px 20px 119.02px 2px;
+
+    }
+
+.insight-card{
+    width: 100%;
+height: auto;
+
+justify-content: center;
+
+
+}
+    
+    .frame{
+        max-width: 100%;
+        height: auto; 
+        top: auto; 
+        left: auto;
+        gap: 0px;
+         opacity: 1;
+        margin-top: 30px;
+      text-align: center;
+        }
+        .text-box-person-one,.text-box-person-two{
+            margin-top: 50px;
+        }  
+    
+        .blog{
+            width: 100%;
+            height: auto;
+            text-align: center;
+     
+        }    
+        .explore-insight{
+            width: 100%;
+    
+        height: 100%;
+    
+        text-align: center;
+    
+      
+        }      
+        .navigation {
+      
+    
+            margin-bottom: 30px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .insight-content {
+               
+    
+            justify-content: center;
+            text-align: center;
+       
+            
+            
+        }
+
+}
+
+
+@media (min-width: 912px) and (max-width: 1350px) {
+    .insight-background {
+        
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    height: auto;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box; 
+overflow-x: hidden; 
+padding: 120px 120px 119.02px 0px;
+
+    
+      
+    }
+
+    .frame {
+        max-width: 80%;
+        height: auto; 
+        top: auto; 
+        left: auto;
+        gap: 0px;
+         opacity: 1;
+        margin-top: 30px;
+      text-align: center;
+      margin-left: 15%;
+
+    }
+
+    .blog{
+        width: 43px;
+        height: 25px;
+        gap: 0px;
+         opacity: 1;
+         font-family: 'Matter', sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 25px;
+        text-align: center;
+        color: #0167FF;
+        }
+        
+        .navigation {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 92px; 
+            height: 40px;
+            gap: 12px;
+            opacity: 1; 
+            margin-top: 35px;
+        }
+    
+        .left-round, .right-round {
+            width: 40px;
+            height: 40px;
+            border-radius: 1000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fff;
+            border: 1px solid #272848;
+            transition: background 0.3s, border 0.3s;
+            cursor: pointer;
+        }
+    
+        .left-round:hover, .right-round:hover, 
+        .left-round:active, .right-round:active {
+            background: #0167FF;
+            border: 1px solid transparent;
+        }
+    
+        .left-round:hover svg path, .right-round:hover svg path, 
+        .left-round:active svg path, .right-round:active svg path {
+            stroke: #fff;
+        }
+    
+        .left-round svg path, .right-round svg path {
+            stroke: #272848;
+            transition: stroke 0.3s;
+        }
+    
+        .left-round.inactive, .right-round.inactive {
+            background: #fff;
+            border: 1px solid #272848;
+            cursor: default;
+        }
+    
+        .left-round.inactive svg path, .right-round.inactive svg path {
+            stroke: #000;
+        }
+
+
+
+        
+        .explore-insight{
+            width: 338px;
+        height: 58px;
+        top: 33px;
+        gap: 0px;
+         opacity: 1; 
+        font-family: 'Matter', sans-serif;
+        font-size: 36px;
+        font-weight: 600;
+        line-height: 57.5px;
+        text-align: left;
+        color: #272848;
+        }
+        
+        .insight-content{
+            max-width: 150%;
+            height: 20%;
+            top: 123px;
+            gap: 0px;
+             opacity: 1;
+             font-family: 'Matter', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 25px;
+            text-align: left;
+            color: #535353;
+        }
+   
+        .head-text{
+            width: 96px;
+        height: 10px;
+        gap: 0px;
+         opacity: 1;
+         font-family: 'Matter', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 21px;
+        text-align: left;
+        color: #0167FF;
+        margin-top: 10px;
+        
+        }
+
+        .insight-card{
+            width: 100%;
+            max-width:504px ;
+            height: auto;
+            top: 120px;
+            left: 513px;
+            gap: 0px;
+             opacity: 1;
+            display: flex;
+  
+
+
+        
+        }
+        .insight-card-one{
+            width: 100%;
+    max-width: 450px;
+height: auto;
+    top: 0.02px;
+    gap: 0px;
+    border-radius: 15px ;
+    border: 1px ;
+     opacity: 1;
+    background-color: #fff;
+
+    justify-content: center;
+
+    border: 1px solid #C3CFE0;
+        
+        }
+        
+
+       
+.insight-card-one-background{
+    width: 100%;
+    height: 613px;
+    top: -0.02px;
+    gap: 0px;
+     opacity: 1;
+    
+    
+
+}
+
+
+.insight-card-one-inner{
+    width:100%;
+    height: 541px;
+    top: 36.02px;
+    left: 36px;
+    gap: 0px;
+     opacity: 1;
+
+margin-top: 35px;
+    
+    
+
+}
+.text-box-outter{
+    max-width:80%;
+height:  262px;
+top: 315.02px;
+left: 36px;
+gap: 22px;
+ opacity: 1;
+
+}
+.text-box-content{
+    width: 100%;
+height: 127px;
+gap: 0px;
+ opacity: 1;
+
+margin-top: 15px;
+}
+.text-box-content-title{
+    width: 100%;
+height: 44px;
+top: 75px;
+gap: 0px;
+ opacity: 1;
+font-family: 'Matter', sans-serif;
+font-size: 22px;
+font-weight: 500;
+line-height: 20px;
+text-align: left;
+color: #000000;
+
+
+}
+.text-box-content-sub-content{
+    width: 100%;
+    height: 61px;
+    top: 141px;
+    gap: 0px;
+     opacity: 1;
+    font-family: 'Matter', sans-serif;
+font-size: 16px;
+font-weight: 400;
+line-height: 25px;
+text-align: left;
+color: #616161;
+margin-top: 25px;
+
+    }
+    .image-one{
+        max-width: 100%;
+width: 100%;
+height: 260.32px;
+gap: 0px;
+opacity: 1;;
+    
+    
+    }
+    .insight-image-one{
+        max-width: 85%;
+        height: 100%;
+    top: 36.02px;
+    left: 36px;
+    gap: 0px;
+     opacity: 1;
+    background: url('/public/insight1.jpg') center no-repeat;
+    background-size: cover;
+    }
+
+    .insight-image-two{
+        max-width: 85%;
+        height: 100%;
+    top: 36.02px;
+    left: 36px;
+    gap: 0px;
+     opacity: 1;
+    background: url('/public/insight2.jpg') center no-repeat;
+    background-size: cover;
+    }
+    .text-box-person-two{
+        width:200px;
+            height: auto;
+        gap: 12px;
+         opacity: 1;
+        display: flex;
+        margin-top: 70px;
+    
+    }  
+    .text-box-person-two-name{
+        width: 140px;
+        height: 10px;
+        gap: 0px;
+         opacity: 1;
+         font-family: 'Matter', sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 21px;
+        text-align: left;
+        text-align: center;
+        margin-top: 6px;
+    }
+    .insight-card-two{
+        width: 100%;
+        max-width: 450px;
+    height: auto;
+        top: 0.02px;
+        gap: 0px;
+        border-radius: 15px ;
+        border: 1px ;
+         opacity: 1;
+        background-color: #fff;
+    
+        justify-content: center;
+    
+        border: 1px solid #C3CFE0;
+        }
+        .image-two{
+            width: 100%;
+        height: 260.32px;
+        gap: 0px;
+         opacity: 1;
+        
+        }
+        .insight-card-two-background{
+            width: 100%;
+            height: 613px;
+            top: -0.02px;
+            gap: 0px;
+             opacity: 1;
+            
+            
+        
+        }
+        
+        
+        .insight-card-two-inner{
+            width:100%;
+            height: 541px;
+            top: 36.02px;
+            left: 36px;
+            gap: 0px;
+             opacity: 1;
+        
+        margin-top: 35px;
+            
+            
+        
+        }
+        .text-box-person-one{
+            width:  177px;
+            height: auto;
+        gap: 12px;
+         opacity: 1;
+        display: flex;
+        margin-top: 70px;
+        
+        }  
+
+}
+
+
+/* 2560px Screens */
+@media (min-width: 2560px) {
+    .insight-background {
+        
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    height: auto;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box; 
+overflow-x: hidden; 
+padding: 120px 0px 119.02px 100px;
+
+    
+      
+    }
+
+    .frame {
+        max-width: 100%;
+        height: auto; 
+        top: auto; 
+        left: auto;
+        gap: 0px;
+         opacity: 1;
+        margin-top: 20px;
+      text-align: center;
+   margin-right: 80px;
+
+    }
+
+    .blog{
+        width: 60px;
+        height: 35px;
+        gap: 0px;
+         opacity: 1;
+         font-family: 'Matter', sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 25px;
+        text-align: center;
+        color: #0167FF;
+        }
+        
+        .navigation {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 92px; 
+            height: 60px;
+            gap: 12px;
+            opacity: 1; 
+            margin-top: 40px;
+        }
+    
+        .left-round, .right-round {
+            width: 40px;
+            height: 40px;
+            border-radius: 1000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fff;
+            border: 1px solid #272848;
+            transition: background 0.3s, border 0.3s;
+            cursor: pointer;
+        }
+    
+        .left-round:hover, .right-round:hover, 
+        .left-round:active, .right-round:active {
+            background: #0167FF;
+            border: 1px solid transparent;
+        }
+    
+        .left-round:hover svg path, .right-round:hover svg path, 
+        .left-round:active svg path, .right-round:active svg path {
+            stroke: #fff;
+        }
+    
+        .left-round svg path, .right-round svg path {
+            stroke: #272848;
+            transition: stroke 0.3s;
+        }
+    
+        .left-round.inactive, .right-round.inactive {
+            background: #fff;
+            border: 1px solid #272848;
+            cursor: default;
+        }
+    
+        .left-round.inactive svg path, .right-round.inactive svg path {
+            stroke: #000;
+        }
+
+
+
+        
+        .explore-insight{
+            width: 398px;
+        height: 68px;
+        top: 33px;
+        gap: 0px;
+         opacity: 1; 
+        font-family: 'Matter', sans-serif;
+        font-size: 48px;
+        font-weight: 600;
+        line-height: 57.5px;
+        text-align: left;
+        color: #272848;
+        }
+        
+        .insight-content{
+            max-width: 514px;
+            width: 100%;
+            height: 36px;
+            top: 133px;
+            gap: 0px;
+             opacity: 1;
+             font-family: 'Matter', sans-serif;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 29px;
+            text-align: left;
+            color: #535353;
+            margin-top: 10px;
+        }
+   
+        .head-text{
+            width: 108px;
+        height: 10px;
+        gap: 0px;
+         opacity: 1;
+         font-family: 'Matter', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 21px;
+        text-align: left;
+        color: #0167FF;
+        margin-top: 20px;
+        
+        }
+        .text-box-inner-date{
+            width: 205px;
+            height:  21px;
+            gap: 8px;
+             opacity: 1;
+            display: flex;
+            margin-top: 25px;
+        
+            
+        
+        }
+        .text-box-inner-year{
+            width: 100px;
+            height: 25px;
+            gap: 0px;
+             opacity: 1;
+             font-family: 'Matter', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 26px;
+            text-align: left;
+            color: #717171;
+        
+        }
+        .text-box-inner-ellipse{
+        width: 5px;
+        height: 5px;
+        gap: 0px;
+         opacity: 1;
+        border-radius: 8px;
+        background: #717171;
+        margin-top: 8px;
+        
+        }
+        .text-box-inner-time{
+            width: 88px;
+        height: 18px;
+        gap: 0px;
+         opacity: 1;
+         font-family: 'Matter', sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 21px;
+        text-align: left;
+        color: #717171;
+        margin-top: 1px;
+        margin-left: 2px;
+        
+        
+        }
+
+        .insight-card{
+            width: 100%;
+            max-width:1800px ;
+            height: auto;
+            top: 120px;
+            left: 513px;
+            gap: 0px;
+             opacity: 1;
+            display: flex;
+  
+
+
+        
+        }
+        .insight-card-one{
+            width: 100%;
+    max-width: 1100px;
+height:auto ;
+    top: 0.02px;
+    gap: 0px;
+    border-radius: 15px ;
+    border: 1px ;
+     opacity: 1;
+    background-color: #fff;
+
+    justify-content: center;
+
+    border: 1px solid #C3CFE0;
+        
+        }
+        
+        .insight-card-two{
+            width: 100%;
+            max-width: 1100px;
+        height: auto;
+            top: 0.02px;
+            gap: 0px;
+            border-radius: 15px ;
+            border: 1px ;
+             opacity: 1;
+            background-color: #fff;
+        
+            justify-content: center;
+        
+            border: 1px solid #C3CFE0;
+            }
+
+       
+.insight-card-one-background{
+    width: 100%;
+    height: 613px;
+    top: -0.02px;
+    gap: 0px;
+     opacity: 1;
+    
+    
+
+}
+
+
+.insight-card-one-inner{
+    width:100%;
+    height: 541px;
+    top: 36.02px;
+    left: 36px;
+    gap: 0px;
+     opacity: 1;
+
+margin-top: 35px;
+    
+    
+
+}
+.text-box-outter{
+   width:100%;
+   max-width:508px;
+height:  262px;
+top: 315.02px;
+left: 36px;
+gap: 22px;
+ opacity: 1;
+
+}
+.text-box-content{
+    width: 100%;
+
+height: 127px;
+gap: 0px;
+ opacity: 1;
+
+margin-top: 15px;
+}
+.text-box-content-title{
+    width: 100%;
+height: 44px;
+top: 75px;
+gap: 0px;
+ opacity: 1;
+font-family: 'Matter', sans-serif;
+font-size: 26px;
+font-weight: 500;
+line-height: 34px;
+text-align: left;
+color: #000000;
+
+
+}
+.text-box-content-sub-content{
+    width: 100%;
+    height: 61px;
+    max-width: 612px;
+    top: 141px;
+    gap: 0px;
+     opacity: 1;
+    font-family: 'Matter', sans-serif;
+font-size: 18px;
+font-weight: 400;
+line-height: 30px;
+text-align: left;
+color: #616161;
+margin-top: 30px;
+
+    }
+    .image-one{
+        max-width: 100%;
+width: 100%;
+height: 260.32px;
+gap: 0px;
+opacity: 1;;
+    
+    
+    }
+    .insight-image-one{
+        width: 100%;
+        max-width: 508px;
+        height: 100%;
+    top: 36.02px;
+    left: 36px;
+    gap: 0px;
+     opacity: 1;
+    background: url('/public/insight1.jpg') center no-repeat;
+    background-size: cover;
+    }
+
+    .insight-image-two{
+        width: 100%;
+        max-width: 508px;
+        height: 100%;
+    top: 36.02px;
+    left: 36px;
+    gap: 0px;
+     opacity: 1;
+    background: url('/public/insight2.jpg') center no-repeat;
+    background-size: cover;
+    }
+
+    .text-box-person-two-name{
+        width: 160px;
+        height: 16px;
+        gap: 0px;
+         opacity: 1;
+         font-family: 'Matter', sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 21px;
+        text-align: left;
+        text-align: center;
+        margin-top: 8px;
+    }
+    .text-box-person-one-name{
+        width: 160px;
+        height: 16px;
+        gap: 0px;
+         opacity: 1;
+         font-family: 'Matter', sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 21px;
+        text-align: left;
+        text-align: center;
+        margin-top: 8px;
+    }
+        .image-two{
+            width: 100%;
+        height: 260.32px;
+        gap: 0px;
+         opacity: 1;
+        
+        }
+        .insight-card-two-background{
+            width: 100%;
+            height: 613px;
+            top: -0.02px;
+            gap: 0px;
+             opacity: 1;
+            
+            
+        
+        }
+        
+        
+        .insight-card-two-inner{
+            width:100%;
+            height: 541px;
+            top: 36.02px;
+            left: 36px;
+            gap: 0px;
+             opacity: 1;
+        
+        margin-top: 35px;
+            
+            
+        
+        }
+        .text-box-person-one{
+            width:  200px;
+            height: auto;
+        gap: 12px;
+         opacity: 1;
+        display: flex;
+        margin-top: 50px;
+}
+.text-box-person-two{
+    width:200px;
+        height: auto;
+    gap: 12px;
+     opacity: 1;
+    display: flex;
+    margin-top: 50px;
+
+}  
+.text-box-person-one-image {
+    width: 44px;
+    height: 44px;
+    gap: 0px;
+     opacity: 1;
+    background: #D9F4FF;
+    border-radius: 50%;
+  
+}
+.text-box-person-two-image {
+    width: 44px;
+    height: 44px;
+    gap: 0px;
+     opacity: 1;
+    background: #D9F4FF;
+    border-radius: 50%;
+  
+}
+.text-box-person-one-image-back{
+    width: 44px;
+    height: 44px;
+    gap: 0px;
+     opacity: 1;
+      border-radius: 50%;
+
+    background: url('/public/insightpersonone.png') no-repeat;
+   
+    background-size: 150% 150%;
+    background-position: 130% top; 
+}
+.text-box-person-two-image-back {
+    width: 44px;
+    height: 44px;
+    gap: 0px;
+     opacity: 1;
+    border-radius: 50%;
+
+    background: url('/public/insightpersontwo.jpeg') no-repeat;
+    background-size: 230% 230%; 
+    background-position: 35% top; 
+}
+
+}
+
+
+@media (min-width: 3840px) {
+    .insight-background {
+        
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    height: auto;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box; 
+overflow-x: hidden; 
+padding: 120px 100px 119.02px 0px;
+
+    
+      
+    }
+
+    .frame {
+        max-width: 100%;
+        height: auto; 
+        top: auto; 
+        left: auto;
+        gap: 0px;
+         opacity: 1;
+        margin-top: 30px;
+      text-align: center;
+   margin-right: 80px;
+
+    }
+
+    .blog{
+        width: 50px;
+        height: 35px;
+        gap: 0px;
+         opacity: 1;
+         font-family: 'Matter', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 25px;
+        text-align: center;
+        color: #0167FF;
+        }
+        
+        .navigation {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 108px; 
+            height: 60px;
+            gap: 12px;
+            opacity: 1; 
+            margin-top: 35px;
+        }
+    
+        .left-round, .right-round {
+            width: 40px;
+            height: 40px;
+            border-radius: 1000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fff;
+            border: 1px solid #272848;
+            transition: background 0.3s, border 0.3s;
+            cursor: pointer;
+        }
+    
+        .left-round:hover, .right-round:hover, 
+        .left-round:active, .right-round:active {
+            background: #0167FF;
+            border: 1px solid transparent;
+        }
+    
+        .left-round:hover svg path, .right-round:hover svg path, 
+        .left-round:active svg path, .right-round:active svg path {
+            stroke: #fff;
+        }
+    
+        .left-round svg path, .right-round svg path {
+            stroke: #272848;
+            transition: stroke 0.3s;
+        }
+    
+        .left-round.inactive, .right-round.inactive {
+            background: #fff;
+            border: 1px solid #272848;
+            cursor: default;
+        }
+    
+        .left-round.inactive svg path, .right-round.inactive svg path {
+            stroke: #000;
+        }
+
+
+
+        
+        .explore-insight{
+            width: 368px;
+        height: 68px;
+        top: 33px;
+        gap: 0px;
+         opacity: 1; 
+        font-family: 'Matter', sans-serif;
+        font-size: 38px;
+        font-weight: 600;
+        line-height: 57.5px;
+        text-align: left;
+        color: #272848;
+        }
+        
+        .insight-content{
+            max-width: 150%;
+            height: 20%;
+            top: 123px;
+            gap: 0px;
+             opacity: 1;
+             font-family: 'Matter', sans-serif;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 25px;
+            text-align: left;
+            color: #535353;
+        }
+   
+        .head-text{
+            width: 108px;
+        height: 10px;
+        gap: 0px;
+         opacity: 1;
+         font-family: 'Matter', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 21px;
+        text-align: left;
+        color: #0167FF;
+        margin-top: 20px;
+        
+        }
+        .text-box-inner-date{
+            width: 205px;
+            height:  21px;
+            gap: 8px;
+             opacity: 1;
+            display: flex;
+            margin-top: 25px;
+        
+            
+        
+        }
+        .text-box-inner-year{
+            width: 100px;
+            height: 25px;
+            gap: 0px;
+             opacity: 1;
+             font-family: 'Matter', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 26px;
+            text-align: left;
+            color: #717171;
+        
+        }
+        .text-box-inner-ellipse{
+        width: 5px;
+        height: 5px;
+        gap: 0px;
+         opacity: 1;
+        border-radius: 8px;
+        background: #717171;
+        margin-top: 8px;
+        
+        }
+        .text-box-inner-time{
+            width: 88px;
+        height: 18px;
+        gap: 0px;
+         opacity: 1;
+         font-family: 'Matter', sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 21px;
+        text-align: left;
+        color: #717171;
+        margin-top: 1px;
+        margin-left: 2px;
+        
+        
+        }
+
+        .insight-card{
+            width: 100%;
+            max-width:1800px ;
+            height: auto;
+            top: 120px;
+            left: 513px;
+            gap: 0px;
+             opacity: 1;
+            display: flex;
+  
+
+
+        
+        }
+        .insight-card-one{
+            width: 100%;
+    max-width: 1100px;
+height:auto ;
+    top: 0.02px;
+    gap: 0px;
+    border-radius: 15px ;
+    border: 1px ;
+     opacity: 1;
+    background-color: #fff;
+
+    justify-content: center;
+
+    border: 1px solid #C3CFE0;
+        
+        }
+        
+        .insight-card-two{
+            width: 100%;
+            max-width: 1100px;
+        height: auto;
+            top: 0.02px;
+            gap: 0px;
+            border-radius: 15px ;
+            border: 1px ;
+             opacity: 1;
+            background-color: #fff;
+        
+            justify-content: center;
+        
+            border: 1px solid #C3CFE0;
+            }
+
+       
+.insight-card-one-background{
+    width: 100%;
+    height: 613px;
+    top: -0.02px;
+    gap: 0px;
+     opacity: 1;
+    
+    
+
+}
+
+
+.insight-card-one-inner{
+    width:100%;
+    height: 541px;
+    top: 36.02px;
+    left: 36px;
+    gap: 0px;
+     opacity: 1;
+
+margin-top: 35px;
+    
+    
+
+}
+.text-box-outter{
+   width:100%;
+   max-width:508px;
+height:  262px;
+top: 315.02px;
+left: 36px;
+gap: 22px;
+ opacity: 1;
+
+}
+.text-box-content{
+    width: 100%;
+
+height: 127px;
+gap: 0px;
+ opacity: 1;
+
+margin-top: 15px;
+}
+.text-box-content-title{
+    width: 100%;
+height: 44px;
+top: 75px;
+gap: 0px;
+ opacity: 1;
+font-family: 'Matter', sans-serif;
+font-size: 26px;
+font-weight: 500;
+line-height: 34px;
+text-align: left;
+color: #000000;
+
+
+}
+.text-box-content-sub-content{
+    width: 100%;
+    height: 61px;
+    max-width: 612px;
+    top: 141px;
+    gap: 0px;
+     opacity: 1;
+    font-family: 'Matter', sans-serif;
+font-size: 18px;
+font-weight: 400;
+line-height: 30px;
+text-align: left;
+color: #616161;
+margin-top: 30px;
+
+    }
+    .image-one{
+        max-width: 100%;
+width: 100%;
+height: 260.32px;
+gap: 0px;
+opacity: 1;;
+    
+    
+    }
+    .insight-image-one{
+        width: 100%;
+        max-width: 508px;
+        height: 100%;
+    top: 36.02px;
+    left: 36px;
+    gap: 0px;
+     opacity: 1;
+    background: url('/public/insight1.jpg') center no-repeat;
+    background-size: cover;
+    }
+
+    .insight-image-two{
+        width: 100%;
+        max-width: 508px;
+        height: 100%;
+    top: 36.02px;
+    left: 36px;
+    gap: 0px;
+     opacity: 1;
+    background: url('/public/insight2.jpg') center no-repeat;
+    background-size: cover;
+    }
+
+    .text-box-person-two-name{
+        width: 160px;
+        height: 16px;
+        gap: 0px;
+         opacity: 1;
+         font-family: 'Matter', sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 21px;
+        text-align: left;
+        text-align: center;
+        margin-top: 8px;
+    }
+    .text-box-person-one-name{
+        width: 160px;
+        height: 16px;
+        gap: 0px;
+         opacity: 1;
+         font-family: 'Matter', sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 21px;
+        text-align: left;
+        text-align: center;
+        margin-top: 8px;
+    }
+        .image-two{
+            width: 100%;
+        height: 260.32px;
+        gap: 0px;
+         opacity: 1;
+        
+        }
+        .insight-card-two-background{
+            width: 100%;
+            height: 613px;
+            top: -0.02px;
+            gap: 0px;
+             opacity: 1;
+            
+            
+        
+        }
+        
+        
+        .insight-card-two-inner{
+            width:100%;
+            height: 541px;
+            top: 36.02px;
+            left: 36px;
+            gap: 0px;
+             opacity: 1;
+        
+        margin-top: 35px;
+            
+            
+        
+        }
+        .text-box-person-one{
+            width:  200px;
+            height: auto;
+        gap: 12px;
+         opacity: 1;
+        display: flex;
+        margin-top: 50px;
+}
+.text-box-person-two{
+    width:200px;
+        height: auto;
+    gap: 12px;
+     opacity: 1;
+    display: flex;
+    margin-top: 50px;
+
+}  
+.text-box-person-one-image {
+    width: 44px;
+    height: 44px;
+    gap: 0px;
+     opacity: 1;
+    background: #D9F4FF;
+    border-radius: 50%;
+  
+}
+.text-box-person-two-image {
+    width: 44px;
+    height: 44px;
+    gap: 0px;
+     opacity: 1;
+    background: #D9F4FF;
+    border-radius: 50%;
+  
+}
+.text-box-person-one-image-back{
+    width: 44px;
+    height: 44px;
+    gap: 0px;
+     opacity: 1;
+      border-radius: 50%;
+
+    background: url('/public/insightpersonone.png') no-repeat;
+   
+    background-size: 150% 150%;
+    background-position: 130% top; 
+}
+.text-box-person-two-image-back {
+    width: 44px;
+    height: 44px;
+    gap: 0px;
+     opacity: 1;
+    border-radius: 50%;
+
+    background: url('/public/insightpersontwo.jpeg') no-repeat;
+    background-size: 230% 230%; 
+    background-position: 35% top; 
+}
+
+}
+
+@media (min-width: 7680px) {
+    .insight-background {
+        height: 100%;
+        padding: 3% 0 3% 11%;
+        margin-top: 5%;
+        margin-right: 5%;
+    }
+    .frame {
+        max-width: 1656px;
+        height: 924px;
+        margin-top: 720px;
+    }
+    .blog {
+        width: 172px;
+        height: 100px;
+        font-size: 48px;
+        line-height: 100px;
+    }
+    .explore-insight {
+        width: 1352px;
+        height: 232px;
+        font-size: 144px;
+        line-height: 230px;
+    }
+    .insight-content {
+        width: 1656px;
+        height: 144px;
+        font-size: 64px;
+        line-height: 100px;
+    }
+    .navigation {
+        width: 368px;
+        height: 160px;
+        margin-top: 140px;
+    }
+    .left-round, .right-round {
+        width: 160px;
+        height: 160px;
+    }
+
+
+
+    .insight-card {
+        width: 4128px;
+        height: 2455.92px;
+    }
+    .insight-card-one, .insight-card-two {
+        width: 2016px;
+        height: 2455px;
+        margin-left: 80px;
+    }
+    .insight-card-one-inner, .insight-card-two-inner {
+        width: 1728px;
+        height: 2164px;
+        margin: 140px;
+    }
+    .insight-image-one, .insight-image-two {
+        width: 1728px;
+        height: 976px;
+    }
+    .text-box-outter {
+        width: 1728px;
+        height: 1048px;
+        margin-top: 48%;
+    }
+    .text-box-inner-head {
+        width: 384px;
+        height: 40px;
+    }
+    .head-text {
+        width: 384px;
+        height: 40px;
+        font-size: 56px;
+        line-height: 84px;
+    }
+    .text-box-inner-date {
+        width: 700px;
+        height: 84px;
+        margin-top: 100px;
+    }
+    .text-box-inner-year, .text-box-inner-time {
+        width: 352px;
+        height: 84px;
+        font-size: 52px;
+        line-height: 84px;
+    }
+    .text-box-inner-ellipse {
+        width: 16px;
+        height: 16px;
+        margin-top: 32px;
+    }
+    .text-box-content {
+        width: 1728px;
+        height: 508px;
+        margin-top: 60px;
+    }
+    .text-box-content-title {
+        width: 1728px;
+        height: 176px;
+        font-size: 88px;
+        line-height: 116px;
+    }
+    .text-box-content-sub-content {
+        width: 1648px;
+        height: 244px;
+        font-size: 64px;
+        line-height: 100px;
+        margin-top: 100px;
+    }
+    .text-box-person-one, .text-box-person-two {
+        width: 708px;
+        height: 152px;
+        margin-top: 120px;
+    }
+    .text-box-person-one-image, .text-box-person-two-image {
+        width: 152px;
+        height: 152px;
+    }
+    .text-box-person-one-name, .text-box-person-two-name {
+        width: 560px;
+        height: 40px;
+        font-size: 56px;
+        line-height: 84px;
+        margin-top: 24px;
+    }
+    .text-box-person-one-image-back,.text-box-person-two-image-back{
+        width: 152px;
+        height: 152px;
+
+    }
+}
+
+@media (min-width: 1441px) and (max-width: 2559px){
+    .insight-background {
+        height: 100%;
+
+        padding: 120px 80px 119.02px 80px;
+        width: 100%;
+    }
+   
+}

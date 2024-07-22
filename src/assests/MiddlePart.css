@@ -1,0 +1,697 @@
+
+@font-face {
+    font-family: 'Matter';
+    src: url('../assests/matter-font/Matter-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Matter';
+    src: url('../assests/matter-font/Matter-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Matter';
+    src: url('../assests/matter-font/Matter-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+  }
+  @font-face {
+    font-family: 'Matter';
+    src: url('../assests/matter-font/Matter-Medium.ttf') format('truetype');
+    font-weight: 500;
+  }
+body{
+    font-family: 'Matter', sans-serif;
+}
+.heading {
+    margin-left: 5px;
+    color: #0167ff;
+    font-weight: 600;
+}
+
+.main-heading {
+    color: #272848;
+    font-size: 45px;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+
+.list p {
+    margin: 0px 0 15px 0;
+}
+
+.fa-size {
+    font-size: 25px;
+}
+
+.overlay-container {
+    position: relative;
+    width: fit-content;
+}
+
+.overlay-container-2 {
+    position: relative;
+    width: fit-content;
+}
+
+.overlay-image {
+    width: 100%;
+    height: auto;
+    max-height: 75vh;
+  }
+
+  .overlay-image-2 {
+    width: 100%;
+    height: auto;
+    max-height: 75vh;
+  }
+  .x-image1 {
+    position: relative;
+}
+
+.x-image1 img {
+    position: absolute;
+    top: 50px;
+    left: 15%;
+    transform: translate(-40%, -29%);
+    width: 100%;
+    max-width: 500.14px;
+    height: auto;
+    max-height: 400.86px;
+    color: #0067FF;
+    opacity: 1;
+    z-index: 1;
+}
+
+.x-image2 {
+    position: relative;
+}
+
+.x-image2 img {
+    position: absolute;
+    transform: translate(18%, -55%);
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    max-height: 400.86px;
+    color: #0067FF;
+    opacity: 1;
+    z-index: 1;
+}
+.midSecondRow{
+    margin-top: 7rem;
+}
+.col-first{
+    margin-top: 30px !important;
+}
+.reveal {
+    opacity: 0 !important;
+    transform: translate(-5%, -15%) !important;
+    transition: opacity 1s, transform 1.2s ease !important;
+}
+
+.reveal_visible {
+    opacity: 1 !important;
+    transform: translate(-7%, -135%) !important;
+}
+
+.reveal-card {
+    padding: 20px;
+    position: absolute;
+    z-index: 2;
+    width: 350px;
+    height: 174px;
+    border: none;
+    border-radius: 16px;
+}
+
+
+.reveal-2 {
+    opacity: 0 !important;
+    transform: translate(40%, 210%) !important;
+    transition: opacity 1s, transform 1.2s ease !important;
+}
+
+.reveal_visible-2 {
+    opacity: 1 !important;
+    transform: translate(40%, 170%) !important;
+}
+
+.reveal-card-2 {
+    padding: 20px;
+    position: absolute;
+    z-index: 2;
+    width: 350px;
+    height: 180px;
+    border: none;
+    border-radius: 16px;
+}
+.card-3{
+    width: 320px;
+    height: 230px;
+}
+.reveal-profile-card {
+    background: white;
+    border: 1px solid #ffffff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 16px !important;
+    opacity: 0;
+    animation: fadeInCard 0.3s ease-in-out forwards;
+}
+
+.card-1 {
+    position: relative;
+    top: -15px;
+    left: 0;
+    animation: swipeUpCard 0.6s ease-in-out forwards;
+    animation-delay: 3s;
+    z-index: 1;
+    border-radius: 0 20px 0 20px !important; 
+    padding: 0px 10px;
+}
+
+.card-2 {
+    animation-delay: 1.2s;  
+    z-index: 2;
+}
+.card-3 {
+    animation-delay: 1.2s;
+    /* Delay for card 2 to appear after card 1 */
+    z-index: 2;
+}
+.reveal-profile-card .doctor-profile-img {
+    opacity: 0;
+    animation: fadeInImage 0.7s ease-in-out forwards;
+}
+
+.card-1 .doctor-profile-img {
+    animation-delay: 3.1s;
+}
+
+.card-2 .doctor-profile-img {
+    animation-delay: 1.5s;
+}
+.card-3 .doctor-profile-img {
+    animation-delay: 1.5s;
+}
+
+.reveal-profile-card .profile-name {
+    opacity: 0;
+    animation: revealText 1s forwards;
+}
+
+.reveal-profile-card .profile-name-2 {
+    opacity: 0;
+    animation: revealText 1s forwards;
+}
+
+.card-1 .profile-name {
+    animation-delay: 3.3s;
+}
+
+.card-2 .profile-name {
+    animation-delay: 2s;
+}
+
+.card-3 .profile-name-2 {
+    animation-delay: 2s;
+}
+
+.profile-name-2 {
+    margin-left: 10px;
+    margin-top: -40px;
+}
+
+.reveal-profile-card .bar-image-1,
+.reveal-profile-card .bar-image-2,
+.reveal-profile-card .bar-image-3,
+.reveal-profile-card .bar-image-4,
+.reveal-profile-card .bar-image-5,
+.reveal-profile-card .bar-image-6 {
+    opacity: 0;
+    animation: revealText 2s forwards;
+}
+
+.card-1 .bar-image-1,
+.card-1 .bar-image-2 {
+    animation-delay: 3.5s;
+}
+
+.card-2 .bar-image-1,
+.card-2 .bar-image-2,
+.card-2 .bar-image-3,
+.card-2 .bar-image-4 {
+    animation-delay: 2.1s;
+}
+.card-3 .bar-image-1,
+.card-3 .bar-image-2,
+.card-3 .bar-image-3,
+.card-3 .bar-image-4, 
+.card-3 .bar-image-5, 
+.card-3 .bar-image-6{
+    animation-delay: 2.1s;
+}
+@keyframes fadeInCard {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes swipeUpCard {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInImage {
+    from {
+        opacity: 0;
+        transform: scale(0.1);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes revealText {
+    0% {
+        opacity: 0;
+        clip-path: inset(0 100% 0 0);
+    }
+    100% {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+@keyframes fadeInName {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInBar {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.bar-image-1 {
+    margin-left: 70px;
+    margin-top: -47px;
+}
+.bar-image-alt{
+    margin-left: 15px;
+    margin-top: -20px;
+}
+.bar-image-alt img{
+    height: 8px;
+    width: 250px !important;
+}
+.bar-image-1 img {
+    height: 8px;
+    width: 170px;
+}
+
+.bar-image-2 {
+    margin-left: 70px;
+    margin-top: -25px;
+}
+
+.bar-image-2 img {
+    height: 8px;
+    width: 130px;
+}
+
+.bar-image-3 {
+    margin-left: 13px;
+    margin-bottom: 0 !important;
+}
+
+.bar-image-4 {
+    margin-left: 13px;
+    margin-bottom: 0 !important;
+}
+
+.bar-image-3 img {
+    height: 8px;
+    width: 230px;
+}
+
+.bar-image-4 img {
+    height: 8px;
+    width: 230px;
+}
+
+.bar-image-5 {
+    margin-left: 13px;
+    margin-top: -10px !important;
+    margin-bottom: 0;
+}
+
+.bar-image-6 {
+    margin-left: 13px;
+    margin-top: -10px !important;}
+
+.bar-image-5 img {
+    height: 8px;
+    width: 230px;
+}
+
+.bar-image-6 img {
+    height: 8px;
+    width: 230px;
+}
+.reveal-profile-card .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555555;
+    display: flex;
+    align-items: center;
+}
+
+.reveal-profile-card .card-text {
+    font-family: 'Matter';
+    font-size: 13.9px;
+    font-weight:400;
+    color: #555555;
+    display: flex;
+    margin:0 15px;
+}
+
+.reveal-profile-card .card-title .doctor-profile-img {
+    top: 10px;
+    margin-right: 10px;
+    width: 52px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.reveal-profile-card .card-title .profile-name {
+    margin-top: -40px;
+    width: 120px;
+    /* height: 9px; */
+    margin-left: 10px;
+}
+
+@media (min-width : 541px) and (max-width: 1023px) {
+    .overlay-image {
+        width: 40vw;
+        height: auto;
+    }
+    .overlay-image-2 {
+        width: 40vw;
+        height: auto;
+    }
+    
+    .col-first,.col-second{
+        font-size: 12px;
+    }
+    .heading {
+        font-size: 12px;
+    }
+    
+    .main-heading {
+        font-size: 25px;
+    }
+    .x-image1 img, .x-image2 img {
+        width: 50%;
+        height: 30vh;
+        left: 0;
+        transform: translate(0, 0);
+    }
+       
+    .card-3{
+        width: 280px !important;
+        height: 230px;
+    }
+.reveal {
+    opacity: 0 !important;
+    transform: translate(-15%, -15%) !important;
+    transition: opacity 0.5s, transform 1.2s ease !important;
+}
+
+.reveal_visible {
+    opacity: 1 !important;
+    transform: translate(-15%, -125%) !important;
+}
+
+.reveal-card {
+    position: absolute;
+    width: 300px;
+}
+
+
+.reveal-2 {
+    opacity: 0 !important;
+    transform: translate(25%, 170%) !important;
+    transition: opacity 0.5s, transform 1.2s ease !important;
+}
+
+.reveal_visible-2 {
+    padding: 0 !important;
+    opacity: 1 !important;
+    transform: translate(25%, 100%) !important;
+}
+
+.reveal-card-2 {
+    position:absolute;
+    width:270px;
+}
+
+    .bar-image-alt{
+        margin-left: 15px;
+        margin-top: -20px;
+    }
+    .bar-image-alt img{
+        height: 8px;
+        width: 150px !important;
+    }
+    .bar-image-1 img {
+        height: 8px;
+        width: 140px;
+    }
+    .bar-image-2 img {
+        height: 8px;
+        width: 110px;
+    }
+    .bar-image-3 img {
+        height: 8px;
+        width: 195px;
+    }
+    .bar-image-4 img {
+        height: 8px;
+        width: 195px;
+    }
+    .reveal-profile-card .card-title .profile-name {
+        margin-top: -40px;
+        width: 120px;
+        height: 13px;
+        margin-left: 7.5px;
+    }
+    .profile-name-2 {
+        margin-left: 10px;
+        margin-top: -40px;
+    }
+
+}
+
+@media (min-width : 300px ) and (max-width: 540px) {
+    .overlay-image {
+        width: 90vw;
+        height: auto;
+    }
+    .overlay-image-2 {
+        width: 90vw;
+        height: auto;
+    }
+    /* .card-3 {
+        margin-top: 1rem;
+        margin-right: 0.5rem;
+        margin-left: 0.5rem;
+    } */
+    .card-title {
+        font-size: 18px;
+    }
+
+    .card-text {
+        font-size: 14px;
+    }
+
+    .x-image1 img, .x-image2 img {
+        width: 100%;
+        height: auto;
+        left: 0;
+        transform: translate(0, 0);
+    }
+    .col-first{
+        margin-top: 100px !important;
+    }
+    
+.reveal {
+    opacity: 0 !important;
+    transform: translate(-8%, -5%) !important;
+    transition: opacity 0.5s, transform 1.2s ease !important;
+}
+
+.reveal_visible {
+    opacity: 1 !important;
+    transform: translate(-8%, -155%) !important;
+}
+
+.reveal-card {
+    position: absolute;
+    width: 300px;
+}
+
+.reveal-2 {
+    opacity: 0 !important;
+    transform: translate(45%, 200%) !important;
+    transition: opacity 0.5s, transform 1.2s ease !important;
+}
+
+.reveal_visible-2 {
+    padding: 0 !important;
+    opacity: 1 !important;
+    transform: translate(45%, 120%) !important;
+}
+
+.reveal-card-2 {
+    position:absolute;
+    width:245px;
+}
+.card-3{
+    width: 250px !important;
+    height: 230px;
+}
+    /* .bar-image-alt{
+        margin-left: 15px;
+        margin-top: -20px;
+    }
+    .bar-image-alt img{
+        height: 8px;
+        width: 150px !important;
+    } */
+    .bar-image-1 img {
+        height: 8px;
+        width: 90px;
+    }
+    .bar-image-2 img {
+        height: 8px;
+        width: 80px;
+    }
+    .bar-image-3 img {
+        height: 8px;
+        width: 175px;
+    }
+    .bar-image-4 img {
+        height: 8px;
+        width: 175px;
+    }
+    .bar-image-5 img {
+        height: 8px;
+        width: 160px;
+    }
+
+    .bar-image-6 img {
+        height: 8px;
+        width: 160px;
+    }
+    .reveal-profile-card .card-title .profile-name {
+        margin-top: -40px;
+        width: 120px;
+        height: 13px;
+        margin-left: 7.5px;
+    }
+    .profile-name-2 {
+        margin-left: 10px;
+        margin-top: -40px;
+    }
+
+}
+@media (min-width: 1440px) and (max-width: 2000px){
+    .reveal {
+        opacity: 0 !important;
+        transform: translate(-9%, -15%) !important;
+        transition: opacity 1s, transform 1.2s ease !important;
+    }
+    
+    .reveal_visible {
+        opacity: 1 !important;
+        transform: translate(-9%, -135%) !important;
+    }
+    
+    .reveal-2 {
+        opacity: 0 !important;
+        transform: translate(65%, 300%) !important;
+        transition: opacity 1s, transform 1.2s ease !important;
+    }
+
+    .reveal_visible-2 {
+        opacity: 1 !important;
+        transform: translate(65%, 230%) !important;
+    }
+    .col-second{
+        padding-top: 6rem !important;
+        padding-left: 6rem !important;
+    }
+}
+
+
+@media (min-width : 2001px) {
+    .reveal {
+        opacity: 0 !important;
+        transform: translate(-9%, -15%) !important;
+        transition: opacity 1s, transform 1.2s ease !important;
+    }
+    
+    .reveal_visible {
+        opacity: 1 !important;
+        transform: translate(-9%, -135%) !important;
+    }
+    
+    .reveal-2 {
+        opacity: 0 !important;
+        transform: translate(65%, 300%) !important;
+        transition: opacity 1s, transform 1.2s ease !important;
+    }
+
+    .reveal_visible-2 {
+        opacity: 1 !important;
+        transform: translate(65%, 230%) !important;
+    }
+    .col-second{
+        padding-top: 6rem !important;
+        padding-left: 6rem !important;
+    }
+    .col-first{
+        margin-top: 100px !important;
+    }
+}
