@@ -5,11 +5,11 @@
     width: 100%;
     /* max-width: 1440px; */
 height: 679px;
-top: 1638px;
+top: -400px;
 gap: 0px;
 opacity: 1px;
 background: linear-gradient(180deg, #E4EDFF -17.3%, rgba(253, 254, 255, 0.0763343) 72.99%, rgba(255, 255, 255, 0) 80.46%);
-
+position: relative;
 }
 
 .lorem {

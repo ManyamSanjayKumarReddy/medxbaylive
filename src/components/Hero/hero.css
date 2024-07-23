@@ -1,12 +1,56 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure the popup is on top of other content */
+}
+
+.popup {
+  background-color: #ffffff; /* White background */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  max-width: 80%;
+  text-align: center;
+  position: relative;
+}
+
+.close-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.popup h3 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: #0167FF; /* Dark gray color */
+}
+
+.popup p {
+  font-size: 18px;
+  color: #666666; /* Medium gray color */
+  line-height: 1.5; /* Improved readability with increased line height */
+}
+
 .hero-head {
   background: linear-gradient(180deg, #EDF3FF 0%, #FFFFFF 100%);
 }
 
 .hero-content {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 4rem; /* Adjusted for better padding */
+  top: -50px;
 }
 
 .hero-item {
@@ -162,16 +206,13 @@
   animation:all 2.5s ease-in-out;
 }
 
-.search-box .search .search-button:hover {
-  margin:0px;
-}
 
 .ecg-container {
   position: absolute;
-  top: 5%; /* Adjust as needed to position the SVG */
-  left: 33%;
+  top: 5%; 
+  left: 32%;
   width: 300px;
-  height: auto; /* Adjust height as needed */
+  height: auto; 
   z-index: 1;
 }
 
@@ -323,7 +364,42 @@
     height: auto; /* Adjust height as needed */
     z-index: 1;
   }
+
 }
+@media (min-width: 1560px) {
+
+  .ecg-container {
+    position: absolute;
+    top: 3%; /* Adjust as needed to position the SVG */
+    left: 30%;
+    width: 45%;
+    height: auto; /* Adjust height as needed */
+    z-index: 1;
+  }
+}
+@media (min-width: 1090px)and (max-width:1334px) {
+
+  .ecg-container {
+    position: absolute;
+    top: 3%; /* Adjust as needed to position the SVG */
+    left: 33%;
+    width: 45%;
+    height: auto; /* Adjust height as needed */
+    z-index: 1;
+  }
+}
+@media (min-width: 1335px)and (max-width:1439px) {
+
+  .ecg-container {
+    position: absolute;
+    top: 3%; /* Adjust as needed to position the SVG */
+    left: 30%;
+    width: 45%;
+    height: auto; /* Adjust height as needed */
+    z-index: 1;
+  }
+}
+
 
 
 @media (min-width: 2560px) {
@@ -526,12 +602,13 @@
     border:none;
     border-radius:3.5px;
     padding: 10px 20px;
-    width:200px !important;
+    width:170px !important;
     height:44px;
     font-weight: 600;
     line-height: 15px !important;
     animation:all 2.5s ease-in-out;
     text-wrap: nowrap;
+
   }
   .layout {
     margin-left: 10px !important;
@@ -708,4 +785,19 @@
     height: auto; /* Adjust height as needed */
     z-index: 1;
   }  
+}
+@media (max-width : 412px) {
+  .search-button {
+    background-color: #0167FF;
+    color: white;
+    border:none;
+    border-radius:3.5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    width:164px;
+    height:44px;
+    font-weight: 600;
+    line-height: 25px;
+    animation:all 2.5s ease-in-out;
+  }
 }
