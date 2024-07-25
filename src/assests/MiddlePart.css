@@ -490,6 +490,10 @@ body{
     margin-left: 10px;
 }
     @media (max-width : 412px) {
+        .mid-container{
+        
+            top:-100px;
+        }
         .overlay-image {
             width: 90vw;
             height: auto;

@@ -69,7 +69,10 @@
   } */
   
   @media (max-width: 412px) {
+    .container-box-explore {
 
+      top: 50px;
+    }
 .row {
       display: flex;
       flex-direction: column;
@@ -283,7 +286,7 @@ top: 110px;
       align-items: center;
       padding: 50px 20px;
       position: relative;
-      top: -160px;
+      top: 0px;
     }
     
     .content-division .head-re {

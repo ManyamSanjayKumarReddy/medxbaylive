@@ -479,6 +479,7 @@ margin-top: 400px;
 .background {
         height: auto;
         padding: 20px;
+        top: -100px;
     }
 
     .lorem {
