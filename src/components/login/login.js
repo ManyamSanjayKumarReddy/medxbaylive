@@ -14,10 +14,12 @@ import curvedsigntwo from '../../assests/img/curvedsigntwo.svg';
 import google from '../../assests/img/google.png'
 import apple from '../../assests/img/apple.png'
 import Typed from 'typed.js';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const LoginCard = ({ show, handleClose }) => {
+
+  const navigate = useNavigate();
   const typedElement = useRef('');
   const typedElementTwo = useRef('');
 
@@ -25,12 +27,83 @@ const LoginCard = ({ show, handleClose }) => {
   
   const [password, setPassword] = useState('');
 
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
 
+  
   const [emailError, setEmailError] = useState('');
+
 
   const [passwordError, setPasswordError] = useState('');
 
+  const login = async (e) => {
+    e.preventDefault();
+    const user = { email, password };
   
+    if (validateForm()) {
+      try {
+        const res = await axios.post('http://localhost:8000/auth/login', user);
+        if (res.data.success) {
+          const { redirectUrl, role, token } = res.data;
+          localStorage.setItem('token', token);
+          if (redirectUrl && role) {
+            switch (role) {
+              case 'doctor':
+                navigate('/doctor/doctor-index');
+                break;
+              case 'patient':
+                navigate('/patient/patient-index');
+                break;
+              case 'admin':
+                navigate('/admin/admin-home');
+                break;
+              default:
+                alert('Unexpected role.');
+                break;
+            }
+          } else {
+            alert('Unexpected response from server.');
+          }
+        } else {
+          alert(res.data.message || 'Login failed. Please try again.');
+        }
+      } catch (err) {
+        console.error('Error during login:', err);
+        alert('Login failed. Please try again.');
+      }
+    }
+  };
+  const forgetPassword = async (e) => {
+    e.preventDefault();
+    if (validateEmail(email)) {
+      try {
+        const res = await axios.post('http://localhost:8000/auth/forgot-password', { email });
+        if (res.data.success) {
+          alert('Password reset email sent successfully.');
+          setIsForgotPassword(false);
+        } else {
+          alert(res.data.message || 'Failed to send reset email. Please try again.');
+        }
+      } catch (err) {
+        console.error('Error during password reset:', err);
+        if (err.response && err.response.data && err.response.data.message) {
+          alert(err.response.data.message);
+        } else {
+          alert('Failed to send reset email. Please try again.');
+        }
+      }
+    } else {
+      alert('Please enter a valid email address.');
+    }
+  };
+
+
+
+
+  const validateForm = () => {
+    return   validateEmail(email) && validatePassword(password);
+  };
+
+
   useEffect(() => {
     if (typedElement.current) {
       const options = {
@@ -108,54 +181,9 @@ const LoginCard = ({ show, handleClose }) => {
     setPassword(value);
     validatePassword(value);
   };
-  const handleSubmit = async (event) => {
-    event.preventDefault();
 
 
-    const isEmailValid = validateEmail(email);
   
-    const isPasswordValid = validatePassword(password);
-
-
-    if (  !isEmailValid  || !isPasswordValid ) {
-      return;
-    }
-
-    const formData = {
-
-      email: email,
-
-      password: password,
- 
-    };
-
-    try {
-      const response = await fetch('https://medxbay.com/form.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const result = await response.json();
-      if (result.message) {
-        alert(result.message);
-      } else {
-        console.log(result);
-      }
-
-      handleClose();
-    } catch (error) {
-      console.error('Error:', error);
-      alert('An error occurred. Please try again.');
-    }
-  };
-
   return (
     <Modal show={show} onHide={handleClose} centered className="custom-modal">
       <Modal.Title>
@@ -214,10 +242,8 @@ const LoginCard = ({ show, handleClose }) => {
 
      </div>
 
-     <div className='sign-up-button-container'></div>
-        <Form onSubmit={handleSubmit} className="form-overall-container-login">
-   
-
+     <div className="sign-up-button-container"></div>
+        <Form onSubmit={isForgotPassword ? forgetPassword : login} className="form-overall-container-login">
           <Form.Group className="mb-3" controlId="formEmail">
             <Form.Label>Email</Form.Label>
             <Form.Control
@@ -231,25 +257,49 @@ const LoginCard = ({ show, handleClose }) => {
             <Form.Control.Feedback type="invalid">{emailError}</Form.Control.Feedback>
           </Form.Group>
 
-       
+          {!isForgotPassword && (
+            <Form.Group className="mb-3" controlId="formPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Enter your Password"
+                className="form-control-custom"
+                value={password}
+                onChange={handlePasswordChange}
+                isInvalid={!!passwordError}
+              />
+              <Form.Control.Feedback type="invalid">{passwordError}</Form.Control.Feedback>
+            </Form.Group>
+          )}
 
-          <Form.Group className="mb-3" controlId="formPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Enter your Password"
-              className="form-control-custom"
-              value={password}
-              onChange={handlePasswordChange}
-              isInvalid={!!passwordError}
-            />
-            <Form.Control.Feedback type="invalid">{passwordError}</Form.Control.Feedback>
-          </Form.Group>
 
 
-          <Button variant="primary" type="submit" className="btn-custom">
-Sign In
-          </Button>
+
+          <div className="d-grid gap-2">
+            {!isForgotPassword ? (
+              <>
+                <Button variant="primary" type="submit" className="btn-custom login-button-home">
+                  {isForgotPassword ? 'Reset Password' : 'Sign In'}
+                </Button>
+                {!isForgotPassword && !isForgotPassword && (
+                  <Link to="#" onClick={() => setIsForgotPassword(true)} className="forgot-password-login">
+                    Forgot Password?
+                  </Link>
+                )}
+              </>
+            ) : (
+              <>
+                <Button variant="primary" type="submit" className="btn-custom login-button-home">
+                  Reset Password
+                </Button>
+                <Link to="#" onClick={() => setIsForgotPassword(false)} className="forgot-password-login">
+                  Back to Login
+                </Link>
+              </>
+            )}
+          </div>
+
+
         </Form>
       </Modal.Body>
     </Modal>

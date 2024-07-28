@@ -39,7 +39,7 @@ color: #272848;
 .or-sign-up-container-login{
   display: flex;
   position: relative;
-  top: -130px;
+  top: -110px;
 }
 .login-link-signup-login{
   width: 40px;
@@ -54,6 +54,28 @@ color: #272848;
   color: #0067FF;
   position: relative;
 }
+
+.forgot-password-login {
+  width: 113px;
+height: 22px;
+top: -25px;
+left: -100px;
+font-family: 'Matter', sans-serif;
+font-size: 12px;
+font-weight: 600;
+line-height: 14.4px;
+text-align: left;
+color: #272848;
+position: relative;
+cursor: pointer;
+
+}
+
+.custom-modal .login-button-home{
+  position: relative;
+  top: 30px;
+}
+
 @media (max-width: 412px) {
   .form-overall-container-login{
     position: relative;

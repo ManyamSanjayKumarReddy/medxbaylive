@@ -1432,19 +1432,21 @@ height: auto;
   }
   
   .running-text {
-    position: absolute; 
-    width: 12vw;
-    height: auto;
-    top: 32vh; 
-    left: 12%; 
-    transform: translateY(-50%); 
-    font-family: Matter;
-    font-size: 1.5vw;
+    width: 205px;
+    height: 22px;
+    top: 290px;
+    left:-743px;
+    font-family: 'Matter', sans-serif;
+    font-size: 16px;
     font-weight: 600;
-    line-height: 1.2em;
-    text-align: center; 
+    line-height: 19.2px;
+    text-align: left;
     color: #272848;
     white-space: nowrap;
+    position: relative;
+
+
+
   }
   
   
