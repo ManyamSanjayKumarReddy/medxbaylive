@@ -1,5 +1,5 @@
 import React, { useState, useEffect,useRef } from 'react';
-import './login.css';
+// import './login.css';
 import { Modal, Button, Form } from 'react-bootstrap';
 import schedule from '../Assets/schedule.svg'
 import meds from '../../assests/img/meds.svg';
@@ -18,7 +18,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const LoginCard = ({ show, handleClose }) => {
-
+  useEffect(() => {
+    import('./login.css');
+  }, []);
   const navigate = useNavigate();
   const typedElement = useRef('');
   const typedElementTwo = useRef('');
@@ -34,34 +36,34 @@ const LoginCard = ({ show, handleClose }) => {
 
 
   const [passwordError, setPasswordError] = useState('');
-
   const login = async (e) => {
     e.preventDefault();
-    const user = { email, password };
-  
     if (validateForm()) {
       try {
-        const res = await axios.post('http://localhost:8000/auth/login', user);
+        const res = await axios.post('http://localhost:8000/auth/login', { email, password });
         if (res.data.success) {
-          const { redirectUrl, role, token } = res.data;
-          localStorage.setItem('token', token);
-          if (redirectUrl && role) {
-            switch (role) {
-              case 'doctor':
-                navigate('/doctor/doctor-index');
-                break;
-              case 'patient':
-                navigate('/patient/patient-index');
-                break;
-              case 'admin':
-                navigate('/admin/admin-home');
-                break;
-              default:
-                alert('Unexpected role.');
-                break;
-            }
-          } else {
-            alert('Unexpected response from server.');
+          const { user } = res.data;
+          const { role, _id: doctorId, email: doctorEmail } = user;
+  
+          // Store user info and login status in sessionStorage
+          sessionStorage.setItem('doctorId', doctorId);
+          sessionStorage.setItem('doctorEmail', doctorEmail);
+          sessionStorage.setItem('role', role); // Store the role to determine redirection
+          sessionStorage.setItem('loggedIn', 'true'); // Set logged-in status to true
+  
+          switch (role) {
+            case 'doctor':
+              navigate('profile/doctorprofile/settings');
+              break;
+            case 'patient':
+              navigate('profile/userprofile/edit/profile');
+              break;
+            case 'admin':
+              navigate('/admin/admin-home');
+              break;
+            default:
+              alert('Unexpected role.');
+              break;
           }
         } else {
           alert(res.data.message || 'Login failed. Please try again.');
@@ -72,6 +74,9 @@ const LoginCard = ({ show, handleClose }) => {
       }
     }
   };
+  
+  
+  
   const forgetPassword = async (e) => {
     e.preventDefault();
     if (validateEmail(email)) {

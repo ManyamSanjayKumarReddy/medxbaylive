@@ -1,0 +1,22 @@
+/* src/components/StarRating.css */
+.star-rating {
+  display: flex;
+  flex-direction: row;
+  margin-left: 5%;
+  margin-top: 5px;
+
+}
+
+.star {
+  font-size: 1rem;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.star.filled {
+  color: #37ADFF;
+}
+
+.star.hovered {
+  color: #37ADFF;
+}

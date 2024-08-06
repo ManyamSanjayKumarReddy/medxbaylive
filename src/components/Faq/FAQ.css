@@ -1,0 +1,1039 @@
+/* src/FAQ.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.faq {
+  position: relative;
+
+  /* background-color: #ffffff; */
+
+  margin: 0 auto;
+  top: -640px;
+}
+
+.heading {
+  width: 681px;
+height: 67px;
+top: 15px;
+left: 419.76px;
+font-family: 'Matter', sans-serif;
+font-size: 48px;
+font-weight: 600;
+line-height: 67px;
+text-align: center;
+color: #1B3C74;
+  position: relative;
+  text-align: center;
+}
+
+.faq-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  position: relative;
+top:55px;
+/* left: 80px; */
+margin-left: 100px;
+}
+
+.faq-left {
+  position: relative;
+  width: 522px;
+  height: 499.84px;
+
+
+}
+.smile-emoji-container{
+  position: relative;
+  width: 241.93px;
+height: 104.59px;
+top: -180px;
+left: 10px;
+border-radius: 8px ;
+
+background: #FFFFFF;
+box-shadow: 0px 15px 35px -5px #00000012;
+
+}
+.smile-emoji{
+  width: 44px;
+height: 44px;
+top: 31.29px;
+left: 22px;
+position: relative;
+
+}
+.people-count-faq{
+  position: relative;
+  width: 62px;
+height: 34px;
+top: -25px;
+left: 81px;
+font-family: 'Matter', sans-serif;
+font-size: 24px;
+font-weight: 600;
+line-height: 33.6px;
+text-align: center;
+color: #1B3C74;
+
+}
+.happy-patient{
+  position: relative;
+  width: 129px;
+height: 28px;
+top: -40px;
+left: 78px;
+font-family: 'Matter', sans-serif;
+font-size: 17px;
+font-weight: 400;
+line-height: 28px;
+text-align: center;
+color: #77829D;
+
+}
+.heart-hands-container{
+  position: relative;
+  width: 80px;
+height: 80px;
+top: -286.82px;
+left: 555px;
+padding: 19.84px 0px 20.16px 0px;
+border-radius: 40px;
+background: #FFFFFF;
+box-shadow: 0px 15px 25px 0px #0000000F;
+
+}
+
+
+.faq-image-doctor{
+
+  position: relative;
+  width: 500px;
+  height: 479px;
+  
+  top: 10px;
+  left: 110px;
+
+  border-radius: 8px ;
+
+  box-shadow: 0px 15px 55px -10px #00000017;
+
+  border: 10px solid #FFFFFF
+
+
+}
+
+.hand-heart{
+  position: relative;
+  width: 80px;
+height: 40px;
+top: .84px;
+left: -0.16px;
+
+
+}
+
+.faq-right {
+  position: relative;
+  width: 80%;
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+  gap: 40px;
+  text-align: start;
+  margin-left: 20px;
+}
+
+/* .faq-item {
+} */
+
+.faq-question {
+  position: relative;
+  width: 381px;
+height: 30px;
+top: -30px;
+left: 15px;
+display: flex;
+justify-content: space-between;
+cursor: pointer;
+font-weight: bold;
+color: #1B3C74;
+font-family: 'Matter', sans-serif;
+font-size: 19px;
+font-weight: 600;
+line-height: 30px;
+text-align: left;
+margin-top: 20px;
+}
+
+.faq-question span {
+  position: relative;
+  color: #2AA7FF;
+  font-family: 'Matter', sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 18px;
+  text-align: right;
+  
+  width: 30;
+  height: 30px;
+  top: 7px;
+  left: 12px;
+  
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding-top 0.3s ease;
+  color: #333333;
+  padding-top: 0;
+  text-align: left;
+  margin-left: 15px;
+}
+
+.faq-answer.show {
+  max-height: 100px; /* Adjust as needed */
+  padding-top: 0px;
+}
+
+
+@media (max-width:412px)  {
+
+  .faq {
+    top: -80px;
+  }
+  .heading {
+    width: auto;
+    left: 0;
+    font-size: 24px;
+    line-height: 30px;
+    top:200px;
+    position: relative;
+  }
+
+  .faq-container {
+    grid-template-columns: 1fr;
+    margin-left: 0;
+  }
+
+  .faq-left{
+    width: 100%;
+    padding: 0;
+  }
+  .faq-right {
+max-width: 80%;
+    width: 100%;
+    padding: 0;
+  }
+
+
+  .faq-image-doctor {
+    width: 80%;
+    height: auto;
+    left: 10%;
+    top: 40%;
+    margin-bottom: 20px;
+  }
+
+  .faq-question {
+    width: auto;
+    left: 0;
+    font-size: 16px;
+  }
+
+  .faq-answer {
+    font-size: 14px;
+  }
+
+  .heart-hands-container {
+width: 40px;
+height:40px ;
+    top: -150px;
+    left: 270%;
+  }
+  .hand-heart{
+    width: 40px;
+height:40px ;
+margin-top: -70%;
+  }
+  .smile-emoji-container {
+    width: 100%;
+    max-width: 30%;
+    height: 80px;
+    left: 0;
+    top: 15%;
+  }
+  .smile-emoji{
+    width: 28px;
+  height: 28px;
+  top: 31.29px;
+  left: 10px;
+  position: relative;
+  
+  }
+  .people-count-faq{
+    position: relative;
+    width: 32px;
+  height: 34px;
+  top: -20px;
+  margin-left: 14px;
+  font-family: 'Matter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 33.6px;
+  text-align: center;
+  color: #1B3C74;
+  
+  }
+  .happy-patient{
+    position: relative;
+    width: 90px;
+  height: 28px;
+  top: -40px;
+  margin-left: 18px;
+  font-family: 'Matter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 15px;
+  text-align: center;
+  color: #77829D;
+  
+  }
+
+  .hand-heart,
+  .smile-emoji {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .people-count-faq {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .happy-patient {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .faq-question span {
+
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 18px;
+    text-align: left;
+    
+    width: 30;
+    height: 30px;
+    top: 7px;
+    left: 5%;
+    
+  }
+  
+ 
+  }
+
+
+
+  @media (min-width:413px) and (max-width: 600px) {
+
+  .heart-hands-container {
+    width: 50px;
+    height:50px ;
+        top: -150px;
+        left: 270%;
+      }
+      .hand-heart{
+        width: 50px;
+    height:50px ;
+    margin-top: -40%;
+   
+      }
+    .smile-emoji-container {
+      width: 100%;
+      max-width: 30%;
+      height: 80px;
+      left: 0;
+      top: 14%;
+    }
+    .smile-emoji{
+      width: 28px;
+    height: 28px;
+    top: 31.29px;
+    left: 15px;
+    position: relative;
+    
+    }
+    .people-count-faq{
+      position: relative;
+      width: 32px;
+    height: 34px;
+    top: -20px;
+    margin-left: 14px;
+    font-family: 'Matter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 33.6px;
+    text-align: center;
+    color: #1B3C74;
+    
+    }
+    .happy-patient{
+      position: relative;
+      width: 90px;
+    height: 28px;
+    top: -40px;
+    margin-left: 18px;
+    font-family: 'Matter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 15px;
+    text-align: center;
+    color: #77829D;
+    
+    }
+  
+    .hand-heart,
+    .smile-emoji {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+    .people-count-faq {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  
+    .happy-patient {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  .faq {
+    top: -80px;
+  }
+  .heading {
+    width: auto;
+    left: 0;
+    font-size: 24px;
+    line-height: 30px;
+    top:200px;
+    position: relative;
+  }
+
+  .faq-container {
+    grid-template-columns: 1fr;
+    margin-left: 0;
+  }
+
+  .faq-left{
+    width: 100%;
+    padding: 0;
+  }
+  .faq-right {
+max-width: 80%;
+    width: 100%;
+    padding: 0;
+    top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+  .faq-image-doctor {
+    width: 80%;
+    height: auto;
+    left: 10%;
+    top: 40%;
+    margin-bottom: 20px;
+  }
+
+  .faq-question {
+    width: auto;
+    left: 0;
+    font-size: 16px;
+  }
+
+  .faq-answer {
+    font-size: 14px;
+  }
+
+  
+ 
+  }
+
+  @media (min-width:601px) and (max-width: 767px) {
+
+    .heart-hands-container {
+      width: 80px;
+      height:80px ;
+          top: -200px;
+          left: 275%;
+        }
+        .hand-heart{
+          width: 80px;
+      height:50px ;
+      margin-top: -5%;
+     
+        }
+      .smile-emoji-container {
+        width: 100%;
+        max-width: 30%;
+        height: 80px;
+        left: 0;
+        top: -20%;
+      }
+      .smile-emoji{
+        width: 28px;
+      height: 28px;
+      top: 31.29px;
+      left: 15px;
+      position: relative;
+      
+      }
+      .people-count-faq{
+        position: relative;
+        width: 32px;
+      height: 34px;
+      top: -20px;
+      margin-left: 14px;
+      font-family: 'Matter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 33.6px;
+      text-align: center;
+      color: #1B3C74;
+      
+      }
+      .happy-patient{
+        position: relative;
+        width: 90px;
+      height: 28px;
+      top: -40px;
+      margin-left: 18px;
+      font-family: 'Matter', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 15px;
+      text-align: center;
+      color: #77829D;
+      
+      }
+    
+      .hand-heart,
+      .smile-emoji {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    
+      .people-count-faq {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    
+      .happy-patient {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    .faq {
+      top: 80px;
+    }
+    .heading {
+      width: auto;
+      left: 0;
+      font-size: 40px;
+      line-height: 30px;
+      top:100px;
+      position: relative;
+    }
+  
+    .faq-container {
+      grid-template-columns: 1fr;
+      margin-left: 0;
+    }
+  
+    .faq-left{
+      width: 100%;
+      padding: 0;
+    }
+    .faq-right {
+  max-width: 80%;
+      width: 100%;
+      padding: 0;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+  
+    .faq-image-doctor {
+      width: 80%;
+      height: auto;
+      left: 10%;
+      top: 15%;
+      margin-bottom: 20px;
+    }
+  
+    .faq-question {
+      width: auto;
+      left: 0;
+      font-size: 16px;
+    }
+  
+    .faq-answer {
+      font-size: 14px;
+    }
+  
+
+  }
+  @media (min-width:768px) and (max-width: 914px) {
+
+    .heart-hands-container {
+      width: 80px;
+      height:80px ;
+          top: -200px;
+          left: 275%;
+        }
+        .hand-heart{
+          width: 80px;
+      height:50px ;
+      margin-top: -5%;
+     
+        }
+      .smile-emoji-container {
+        width: 100%;
+        max-width: 30%;
+        height: 80px;
+        left: 0;
+        top: -20%;
+      }
+      .smile-emoji{
+        width: 28px;
+      height: 28px;
+      top: 31.29px;
+      left: 15px;
+      position: relative;
+      
+      }
+      .people-count-faq{
+        position: relative;
+        width: 32px;
+      height: 34px;
+      top: -20px;
+      margin-left: 14px;
+      font-family: 'Matter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 33.6px;
+      text-align: center;
+      color: #1B3C74;
+      
+      }
+      .happy-patient{
+        position: relative;
+        width: 90px;
+      height: 28px;
+      top: -40px;
+      margin-left: 18px;
+      font-family: 'Matter', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 15px;
+      text-align: center;
+      color: #77829D;
+      
+      }
+    
+      .hand-heart,
+      .smile-emoji {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    
+      .people-count-faq {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    
+      .happy-patient {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    .faq {
+      top: 150px;
+    }
+    .heading {
+      width: auto;
+      left: 0;
+      font-size: 40px;
+      line-height: 30px;
+      top:100px;
+      position: relative;
+    }
+  
+    .faq-container {
+      grid-template-columns: 1fr;
+      margin-left: 0;
+    }
+  
+    .faq-left{
+      width: 100%;
+      padding: 0;
+    }
+    .faq-right {
+  max-width: 80%;
+      width: 100%;
+      padding: 0;
+      top: 100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+  
+    .faq-image-doctor {
+      width: 80%;
+      height: auto;
+      left: 10%;
+      top: 15%;
+      margin-bottom: 20px;
+    }
+  
+    .faq-question {
+      width: auto;
+      left: 0;
+      font-size: 16px;
+    }
+  
+    .faq-answer {
+      font-size: 14px;
+    }
+  
+
+  }
+
+  @media (min-width:915px) and (max-width: 1023px) {
+
+   .heart-hands-container {
+      width: 80px;
+      height:80px ;
+          top: -200px;
+          left: 275%;
+        }
+        .hand-heart{
+          width: 80px;
+      height:50px ;
+      margin-top: -5%;
+     
+        }
+      .smile-emoji-container {
+        width: 100%;
+        max-width: 30%;
+        height: 80px;
+        left: 0;
+        top: -20%;
+      }
+      .smile-emoji{
+        width: 28px;
+      height: 28px;
+      top: 31.29px;
+      left: 15px;
+      position: relative;
+      
+      }
+      .people-count-faq{
+        position: relative;
+        width: 32px;
+      height: 34px;
+      top: -20px;
+      margin-left: 14px;
+      font-family: 'Matter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 33.6px;
+      text-align: center;
+      color: #1B3C74;
+      
+      }
+      .happy-patient{
+        position: relative;
+        width: 90px;
+      height: 28px;
+      top: -40px;
+      margin-left: 18px;
+      font-family: 'Matter', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 15px;
+      text-align: center;
+      color: #77829D;
+      
+      }
+    
+      .hand-heart,
+      .smile-emoji {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    
+      .people-count-faq {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    
+      .happy-patient {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    .faq {
+      top: -200px;
+    }
+    .heading {
+      width: auto;
+      left: 0;
+      font-size: 40px;
+      line-height: 30px;
+      top:100px;
+      position: relative;
+    }
+  
+    .faq-container {
+      grid-template-columns: 1fr;
+      margin-left: 0;
+    }
+  
+    .faq-left{
+      width: 100%;
+      padding: 0;
+    }
+    .faq-right {
+  max-width: 80%;
+      width: 100%;
+      padding: 0;
+      top: 100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+  
+    .faq-image-doctor {
+      width: 60%;
+      height: auto;
+      left: 10%;
+      top: 15%;
+      margin-bottom: 20px;
+    }
+  
+    .faq-question {
+      width: auto;
+      left: 0;
+      font-size: 16px;
+    }
+  
+    .faq-answer {
+      font-size: 14px;
+    }
+    .faq-question span {
+      position: relative;
+      color: #2AA7FF;
+      font-family: 'Matter', sans-serif;
+      font-size: 30px;
+      font-weight: 900;
+      line-height: 18px;
+      text-align: right;
+      
+      width: 30;
+      height: 30px;
+      top: 7px;
+      left: -30%;
+      
+    }
+  
+
+  }
+
+
+  @media (min-width:1024px) and (max-width: 1100px) {
+    .faq {
+      top: -100px;
+      height: auto;
+    }
+    .faq-container {
+      grid-template-columns: 1fr;
+      margin-left: 0;
+    }
+  
+    .faq-left{
+      width: 100%;
+      padding: 0;
+      top: -65%;
+    }
+    .faq-right {
+  max-width: 80%;
+      width: 100%;
+      padding: 0;
+      top: 5%;
+    }
+  
+  
+    .faq-image-doctor {
+      width: 80%;
+      height: auto;
+      left: 10%;
+      top: 40%;
+      margin-bottom: 20px;
+    }
+  
+    .faq-question {
+      width: auto;
+      left: 10%;
+      font-size: 20px;
+    }
+  
+    .faq-answer {
+      font-size: 14px;
+    }
+  
+   
+    .heading {
+      
+      width: 681px;
+    height: 67px;
+    top: -100px;
+left: 10%;
+    font-family: 'Matter', sans-serif;
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 67px;
+
+    color: #1B3C74;
+      position: relative;
+
+    }
+    .faq-question span {
+      font-size: 30px;
+      font-weight: 900;
+      line-height: 18px;
+      text-align: left;
+      width: 30;
+      height: 30px;
+      top: 7px;
+      left: -5%;
+      
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding-top 0.3s ease;
+      color: #333333;
+      padding-top: 0;
+      text-align: left;
+      margin-left: 85px;
+    }
+    .hand-heart,
+    .smile-emoji {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .heart-hands-container {
+      width: 80;
+      height:80px ;
+          top: -280px;
+          left: 355%;
+        }
+        .hand-heart{
+          width: 80px;
+      height:40px ;
+      margin-top: 0%;
+        }
+
+        .smile-emoji-container{
+    
+        top: -40px;
+  
+        
+        }
+        .smile-emoji{
+          width: 44px;
+        height: 44px;
+        top: 31.29px;
+        left: 22px;
+        position: relative;
+        
+        }
+        .people-count-faq{
+          position: relative;
+          width: 62px;
+        height: 34px;
+        top: -25px;
+        left: 81px;
+        font-family: 'Matter', sans-serif;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 33.6px;
+        text-align: center;
+        color: #1B3C74;
+        
+        }
+        .happy-patient{
+          position: relative;
+          width: 129px;
+        height: 28px;
+        top: -40px;
+        left: 78px;
+        font-family: 'Matter', sans-serif;
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 28px;
+        text-align: center;
+        color: #77829D;
+        
+        }
+  }
+
+  @media (min-width:1101px) and (max-width: 1439px) {
+    .faq {
+      top: -100px;
+    }
+    .faq-left{
+      width: 100%;
+ left:-10%;
+    }
+    .faq-right {
+      max-width: 80%;
+          width: 100%;
+          left: 10%;
+        }
+        .heading {
+      
+          width: 681px;
+        height: 67px;
+        top: 15px;
+  left: 0%;
+        font-family: 'Matter', sans-serif;
+        font-size: 48px;
+        font-weight: 600;
+        line-height: 67px;
+
+        color: #1B3C74;
+          position: relative;
+          margin-left: auto;
+          margin-right: auto;
+
+
+        }
+        .hand-heart,
+        .smile-emoji {
+          margin-left: auto;
+          margin-right: auto;
+        }
+      
+  }
+  @media (min-width:1441px) and (max-width: 4086px) {
+.faq {
+
+  top: 750px;
+}
+
+  }

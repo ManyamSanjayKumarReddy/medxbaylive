@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Matter:wght@400;500;600;700&display=swap');
+
+.accepted-area{
+    position: relative;
+top:-200px;
+
+
+}
+.accepted-section{
+  position: relative;
+  top:-1170px;
+}
+.accepted-section h2{
+  position: relative;
+    font-family: 'Matter', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 25px;
+    text-align: center;
+    margin-top: 50px;
+    top: -40px;
+}
+
+.insurance-logo {
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+
+  
+
+
+  .aetna{
+    width: 138px;
+    height: 34px;
+  }
+
+  .Blue-Cross{
+    width: 105px;
+    height: 86px;
+  }
+
+  .Anthem{
+    width: 185px;
+    height: 41px;
+  }
+
+  .humana{
+    width: 132px;
+    height: 28px;
+  }
+
+  @media(max-width:412px){
+
+.accepted-section{
+    top:-70px;
+  }
+  .accepted-section h2{
+      line-height: 45px;
+  }
+  .insurance-logo {
+    margin-bottom: 40px;
+    margin-top: 20px;
+  }
+
+  .accepted-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .aetna,
+  .Blue-Cross,
+  .Anthem,
+  .humana {
+    width: 138px;
+    height: auto; 
+  }
+
+  
+}
+@media (min-width:413px) and (max-width: 600px) {
+  .accepted-section{
+    top:1100px;
+  }
+  .accepted-section h2{
+      line-height: 45px;
+  }
+  .insurance-logo {
+    margin-bottom: 40px;
+    margin-top: 20px;
+  }
+
+  .accepted-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .aetna,
+  .Blue-Cross,
+  .Anthem,
+  .humana {
+    width: 138px;
+    height: auto; 
+  }
+}
+@media (min-width:601px) and (max-width: 676px) {
+
+  .accepted-section{
+    top:-200px;
+  }
+}
+@media (min-width:678px) and (max-width: 914px) {
+
+.accepted-section{
+    top:-220px;
+  }
+  .accepted-section h2{
+      line-height: 45px;
+  }
+  .insurance-logo {
+    margin-bottom: 40px;
+    margin-top: 20px;
+  }
+  
+  .accepted-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .accepted-row .col-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .aetna,
+  .Blue-Cross,
+  .Anthem,
+  .humana {
+    width: 138px;
+    height: auto; 
+  }
+}
+  
+@media (min-width:915px) and (max-width: 1023px) {
+
+  .accepted-section{
+    top:-600px;
+  }
+  .accepted-section h2{
+    line-height: 45px;
+}
+.insurance-logo {
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+
+.accepted-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.accepted-row .col-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aetna,
+.Blue-Cross,
+.Anthem,
+.humana {
+  width: 138px;
+  height: auto; 
+}
+}
+@media (min-width:1024px) and (max-width: 1439px) {
+  
+.accepted-area{
+  position: relative;
+top:-100px;
+
+
+}
+.accepted-section{
+  position: relative;
+  top:-600px;
+}
+}
+
+
+@media (min-width:1441px) and (max-width: 4086px) {
+  .accepted-section{
+
+    top:300px;
+  }
+}

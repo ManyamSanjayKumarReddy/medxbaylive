@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './login.css';
+// import './login.css';
 import { Modal, Button, Form } from 'react-bootstrap';
 import schedule from '../Assets/schedule.svg'
 import meds from '../../assests/img/meds.svg';
@@ -18,6 +18,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const ChangePassword = () => {
+  useEffect(() => {
+    import('./login.css');
+  }, []);
   const navigate = useNavigate();
   const typedElement = useRef(null);
   const typedElementTwo = useRef(null);

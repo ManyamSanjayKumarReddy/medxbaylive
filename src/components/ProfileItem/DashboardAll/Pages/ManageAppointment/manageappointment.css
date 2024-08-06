@@ -1,0 +1,374 @@
+.dashboard-appointments{
+    padding: 0px 20px;
+  }
+  .dashboard-appointments h2 {
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 28.8px;
+  color: #272848;
+  display: inline-block;
+  padding:20px 10px 0 5px;
+  margin-bottom: 20px;
+  }
+
+.dashboard-tabs-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    width: 100%;
+    border-bottom: 4px solid #f0f0f5;
+}
+
+.dashboard-tabs-container .tabs-button {
+    display: flex;
+    gap: 10px;
+}
+
+.dashboard-tabs-container .tabs-button .tab-side {
+    font-weight: 700;
+    line-height: 28.8px;
+    text-align: left;
+    padding: 15px 30px;
+    font-size: 17px;
+    color: #000000;
+    border: none;
+    background: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.dashboard-tabs-container .tabs-button .tab-side.active::after {
+    content: '';
+    display: block;
+    margin: auto;
+    height: 3px;
+    width: 100%;
+    border-bottom: 4px solid #1e90ff;
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+}
+
+.dashboard-calendar-button {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 7px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0167ff;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.manage-appointments-table-container {
+    overflow-y: auto;
+    height:calc(100vh - 270px);
+  }
+  
+  .manage-appointments-table-container::-webkit-scrollbar {
+    width: 0px;
+  }
+  
+
+.manage-appointments-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.manage-appointments-table thead tr {
+    background: #fbfbfb;
+    color: #272848;
+    border: 1px solid #0000001a;
+}
+
+.manage-appointments-table thead tr th {
+    padding: 5px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #272848;
+}
+
+.manage-appointments-table tbody tr td {
+    color: #272848;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 15px;
+    border-bottom: 4px solid #f0f0f5;
+}
+
+
+
+.manage-appointments-table tbody .status-dot {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+}
+
+.manage-appointments-table tbody .status-dot.approved {
+    background-color: green;
+}
+
+.manage-appointments-table tbody .status-dot.pending {
+    background-color: orange;
+}
+
+.manage-appointments-table tbody .status-dot.cancelled {
+    background-color: red;
+}
+
+.manage-appointments-table .select-container {
+    position: relative;
+    display: inline-block; /* the container wraps around select and icon */
+}
+
+.manage-appointments-table .select-container .status-select {
+    border: 1px solid #78798d;
+    font-weight: 600;
+    padding: 5px 30px 5px 20px;
+    border-radius: 4px;
+    -webkit-appearance: none; /* For Chrome */
+    -moz-appearance: none; /* For Firefox */
+    appearance: none; /* For modern browsers */
+    outline: none;
+    width: 150px;
+}
+
+.manage-appointments-table .select-container .arrow-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-45%);
+    font-size: 20px;
+    color: #2AA7FF;
+    pointer-events: none; /* Ensure icon does not interfere with select */
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+    .dashboard-appointments h2 {
+        font-size: 22px;
+        margin-left: 20px;
+        margin-bottom: 15px;
+    }
+
+    .dashboard-tabs-container .tabs-button .tab-side {
+        padding: 10px 20px;
+        font-size: 15px;
+    }
+
+    .dashboard-calendar-button {
+        font-size: 14px;
+        padding: 5px 15px;
+    }
+
+    .manage-appointments-table thead tr th,
+    .manage-appointments-table tbody tr td {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .manage-appointments-table-container {
+        height: calc(100vh - 240px); /* Adjust height for smaller screens */
+    }
+}
+
+@media (max-width: 991px) {
+    .dashboard-appointments h2 {
+        font-size: 20px;
+        margin-left: 15px;
+        margin-bottom: 10px;
+    }
+
+    .dashboard-tabs-container .tabs-button .tab-side {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    .dashboard-tabs-container .tabs-button {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .dashboard-calendar-button {
+        font-size: 13px;
+        padding: 5px 10px;
+        margin-right: 0;
+    }
+
+    
+
+    .manage-appointments-table thead tr th,
+    .manage-appointments-table tbody tr td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .manage-appointments-table .select-container .status-select {
+        width: 100px;
+        padding: 5px 20px 5px 10px;
+    }
+
+    .manage-appointments-table .select-container .arrow-icon {
+        right: 5px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-appointments h2 {
+        font-size: 18px;
+        margin-left: 10px;
+        margin-bottom: 8px;
+    }
+
+    .dashboard-tabs-container .tabs-button .tab-side {
+        padding: 8px 15px;
+        font-size: 13px;
+    }
+
+    .dashboard-calendar-button {
+        font-size: 12px;
+        padding: 5px 8px;
+    }
+
+    .manage-appointments-table thead tr th,
+    .manage-appointments-table tbody tr td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    
+
+    .manage-appointments-table .select-container .status-select {
+        width: 80px;
+        padding: 5px 15px 5px 5px;
+    }
+
+    .manage-appointments-table .select-container .arrow-icon {
+        right: 3px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .dashboard-appointments h2 {
+        font-size: 18px;
+        margin-left: 10px;
+        margin-bottom: 8px;
+    }
+
+    .dashboard-tabs-container .tabs-button .tab-side {
+        padding: 8px 5px;
+        font-size: 12px;
+    }
+
+    .dashboard-calendar-button {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+
+    .manage-appointments-table thead tr th,
+    .manage-appointments-table tbody tr td {
+        font-size: 10px;
+        padding: 5px;
+    }
+
+    .manage-appointments-table .select-container .status-select {
+        width: 80px;
+        padding: 5px 15px 5px 5px;
+    }
+
+    .manage-appointments-table .select-container .arrow-icon {
+        right: 3px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-appointments{
+        padding: 0px 0px;
+      }
+    .dashboard-appointments h2 {
+        font-size: 16px;
+        margin-left: 5px;
+        margin-bottom: 6px;
+    }
+    .dashboard-tabs-container{
+        margin-bottom: 15px;
+        border-bottom: 2px solid #f0f0f5;
+    }
+
+    .dashboard-tabs-container .tabs-button .tab-side {
+        padding: 5px 4px;
+        font-size: 9px;
+    }
+
+    .dashboard-calendar-button {
+        font-size: 8px;
+        border-radius:3px;
+        padding: 3px 5px 2px 5px;
+    }
+
+    .manage-appointments-table thead tr th,
+    .manage-appointments-table tbody tr td {
+        font-size: 8px;
+        padding: 4px;
+    }
+    .manage-appointments-table-container {
+        height: calc(100vh - 210px); /* Adjust height for smaller screens */
+    }
+
+    .manage-appointments-table .select-container .status-select {
+        width: 60px;
+        padding: 3px 10px 3px 3px;
+    }
+
+    .manage-appointments-table .select-container .arrow-icon {
+        right: 2px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 320px) {
+    .dashboard-appointments h2 {
+        font-size: 14px;
+        margin-left: 5px;
+        margin-bottom: 4px;
+    }
+
+    .dashboard-tabs-container .tabs-button .tab-side {
+        padding: 3px 2px;
+        font-size: 6px;
+    }
+
+    .dashboard-calendar-button {
+        font-size: 8px;
+        padding: 2px 5px;
+    }
+
+    .manage-appointments-table thead tr th,
+    .manage-appointments-table tbody tr td {
+        font-size: 6px;
+        padding: 2px;
+    }
+
+    .manage-appointments-table-container {
+        height: calc(100vh - 200px);
+    }
+
+    .manage-appointments-table .select-container .status-select {
+        width: 50px;
+        padding: 3px 8px 3px 3px;
+    }
+
+    .manage-appointments-table .select-container .arrow-icon {
+        right: 1px;
+        font-size: 10px;
+    }
+}

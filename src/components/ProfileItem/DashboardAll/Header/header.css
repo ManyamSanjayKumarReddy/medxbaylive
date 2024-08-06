@@ -1,0 +1,189 @@
+.header-head {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    border-top-right-radius: 60px; 
+    border-top-left-radius: 60px;
+    padding: 1.2rem 3rem 10px 1.5rem;
+}
+
+.header-head .search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F3F6FF;
+    padding: 5px;
+    border-radius: 20px 5px 20px 5px;
+    width: 280px;
+    height: 50px;
+    transition: width 0.3s ease;
+}
+
+.header-head .search-bar input::placeholder {
+    color: #7979B2;
+}
+
+.search-bar input {
+    border: none;
+    background: none;
+    outline: none;
+    color: #7979B2;
+    width: 80%;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;    
+}
+
+.header-head .search-bar .icon-style {
+    color: #42427D;
+    width: 18.01px;
+    height: 18.01px;
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-container .icons-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-container .icon-container .icon {
+    color: #42427D;
+}
+
+.profile-container .icon-container {
+    background: #F3F6FF;
+    width: 50px;
+    height: 50px;
+    border-radius: 20px 5px 20px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-container .image-container {
+    width: 50px;
+    height: 50px;
+    border-radius: 20px 5px 20px 5px;
+    overflow: hidden;
+}
+
+.profile-container .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Responsive Styles */
+
+@media (max-width: 1200px) {
+    .header-head .search-bar {
+        width: 250px;
+    }
+}
+
+@media (max-width: 992px) {
+    .header-head {
+        justify-content: flex-end;
+    }
+
+    .header-head .search-bar {
+        width: 220px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-head {
+        padding: 20px 30px;
+    }
+}
+
+@media (max-width: 576px) {
+    .header-head {
+        padding: 20px 10px;
+    }
+
+    .header-head .search-bar {
+        width: 80%;
+        height: 45px;
+        border-radius: 5px 15px 5px 15px;
+        padding:1px ;
+    }
+
+    .search-bar input {
+        font-size: 12px;   
+    }
+
+    .header-head .search-bar .icon-style {
+        color: #42427D;
+        width: 16.1px;
+        height: 16.1px;
+    }
+
+    .profile-container {
+        width: 50%;
+    }
+
+    .profile-container .icons-container {
+        gap: 10px;
+    }
+
+    .profile-container .icon-container {
+        width: 45px;
+        height: 45px;
+        border-radius:50%;
+    }
+
+    .profile-container .image-container {
+        width: 45px;
+        height: 45px;
+        border-radius:50%;
+    }
+}
+
+@media (max-width: 380px) {
+    .header-head .search-bar {
+        width: 100%;
+        height: 40px;
+    }
+    .search-bar input {
+        font-size: 10px;  
+    }
+
+    .profile-container .icon-container {
+        width: 40px;
+        height: 40px;
+    }
+
+    .profile-container .image-container {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/*min small view so not important just responsive in small view  */
+@media (max-width: 340px) {
+    .header-head .search-bar {
+        width: 100%;
+        height: 35px;
+    }
+    .search-bar input {
+        font-size: 8px;  
+    }
+
+    .profile-container .icon-container {
+        width: 40px;
+        height: 40px;
+    }
+
+    .profile-container .image-container {
+        width: 40px;
+        height: 40px;
+    }
+}

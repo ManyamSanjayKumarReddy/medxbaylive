@@ -1,0 +1,33 @@
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #F7FAFF;
+}
+
+.main-content {
+  flex-grow: 1;
+  width: calc(100% - 270px);
+  transition: width 0.3s;
+  margin: 20px 20px 0px 0px;
+  border-top-right-radius: 60px; 
+  border-top-left-radius: 60px;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content .content-area {
+  flex-grow: 1;
+  height: 100%;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 0px 10px;
+    margin: 15px 15px 0px 0px;
+    border-top-right-radius: 30px; 
+    border-top-left-radius: 30px;
+    margin-left: 60px;
+  }
+}

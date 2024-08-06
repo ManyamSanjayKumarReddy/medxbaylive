@@ -1,0 +1,253 @@
+.custom-modal .modal-dialog {
+    max-width: none;
+    width: 80%; 
+    margin: auto; 
+  
+  height: auto;
+  
+  }
+  .modal-body-scrollable {
+    max-height: auto; 
+    overflow-y: auto;
+  }
+  .custom-modal .modal-content {
+    border-radius: 10px;
+    border: none;
+    border-bottom: none;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    height: 90vh; 
+    font-family: 'Matter', sans-serif;
+ 
+  }
+  .custom-modal .modal-header {
+    border: none;
+    border-bottom: none;
+  }
+
+  .custom-modal .model-header{
+    width: 187px;
+    height: 22px;
+    top: 0px;
+    left: 20%;
+    font-family: 'Matter', sans-serif;
+    font-size:26px;
+    font-weight: 600;
+    line-height: 19.2px;
+    text-align: center;
+  position: relative;
+  color: #272848;
+    display: flex;
+    border: none;
+  
+  
+  }
+
+  .form-overall-container{
+    position: relative;
+    top: 0px;
+    border: none;
+  
+  }
+  .custom-modal .modal-title {
+    width: 366px;
+height: 60px;
+top: 20px;
+
+    font-family: 'Matter', sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    width: 100%;
+    position: relative;
+    left: 0px;
+    justify-content: center;
+  }
+
+  .custom-modal .modal-body {
+    padding: 3rem;
+  }
+  
+  .custom-modal .form-label {
+    
+    font-family: Matter;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22.5px;
+    text-align: left;
+    
+    color: #333;
+    display: block;
+    margin-bottom: 0.5rem;
+
+  }
+  .custom-modal .form-control-custom {
+    border-radius: 12px;
+    padding: 0.5rem;
+    box-shadow: none;
+    transition: border-color 0.3s ease;
+    font-family: 'Matter', sans-serif;
+    width: 90%;
+    margin-left: 0;
+    border: 1px solid #A9A9A9
+  }
+  .custom-modal .form-control-custom:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    font-family: 'Matter', sans-serif;
+  
+  }
+  .custom-modal-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none !important;
+    padding: 1.5rem;
+  }
+  .custom-modal  .adjust-form{
+    width: 60%;
+    left: 3%;
+    position: relative;
+
+  }
+  .custom-modal  .adjust-form-icon-one{
+    width: 9%;
+    border: 1px solid #0167FF;
+    cursor: pointer;
+    position: relative;
+    left: 2%;
+    
+  }
+  .custom-modal  .adjust-form-icon-two{
+    width: 9%;
+    border: 1px solid #FF7F50;
+    cursor: pointer;
+  }
+
+  .custom-modal  .adjust-form-icon-one-add{
+    width: 5%;
+    border: 1px solid #0167FF;
+    cursor: pointer;
+    position: relative;
+    left: 3%;
+    
+  }
+  .custom-modal  .adjust-form-icon-two-add{
+    width: 5%;
+    border: 1px solid #FF7F50;
+    cursor: pointer;
+    left: 3.5%;
+    position: relative;
+  }
+  .custom-modal  .adjust-form-icon-address-one{
+    width: 5%;
+    border: 1px solid #0167FF;
+    cursor: pointer;
+    
+  }
+  .custom-modal  .adjust-form-icon-address-two{
+    width: 5%;
+    border: 1px solid #FF7F50;
+    cursor: pointer;
+  }
+  .row-container{
+    gap: 20px;
+  }
+  .plus-edit-doctor{
+    width: 17.5px;
+    height: 17.5px;
+   position: relative;
+    left: 6.25px;
+    color: #0167FF;
+    
+  }
+  .delete-edit-profile{
+    position: relative;
+    width: 17.5px;
+    height: 22.5px;
+    left: 6.25px;
+    color: #FF7F50;
+  }
+  .custom-modal .address-field{
+    width: 12%;
+    left: 1.5%;
+    position: relative;
+  }
+
+  .address-field-container{
+    gap: 10px;
+  }
+  .address-field-container-overall{
+    gap: 20px;
+    position: relative;
+    left: 2.5%;
+  }
+  .btn-close-custom {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+   
+    color: #000;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+  }
+  
+  .btn-close-custom:hover {
+    color: #ff0000;
+  }
+  .profile-edit-outter{
+    width: 300px;
+height: 300px;
+padding: 30px 12px 0px 11px;
+border-radius: 500px ;
+position: relative;
+border: 1px solid #D5D5D5;
+left: 34%;
+top: -5%;
+overflow: hidden;
+  }
+  .doctoreditimage-edit{
+    width: 300px;
+    height: 300px;
+top: 0px;
+left: 0px;
+position: absolute;
+object-fit: cover;
+
+
+  }
+  .choose-file{
+    width: 300px;
+height: 45px;
+top: -10px;
+left: 35%;
+justify-content: center;
+padding: 11px 99px 11px 98px;
+position: relative;
+border-radius: 12px ;
+border: none;
+background: #0167FF;
+font-family: Matter;
+font-size: 18px;
+font-weight: 400;
+line-height: 22.5px;
+text-align: left;
+color: #FFFFFF;
+cursor: pointer;
+
+  }
+  .profile-picture-edit{
+    width: 151px;
+height: 23px;
+left:42%;
+top: -6%;
+position: relative;
+font-family: Matter;
+font-size: 22px;
+font-weight: 500;
+line-height: 22.5px;
+text-align: left;
+color: #000000;
+
+  }
+  

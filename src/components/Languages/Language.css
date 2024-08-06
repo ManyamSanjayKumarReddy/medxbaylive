@@ -1,0 +1,110 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Matter:wght@400;500;600;700&display=swap');
+
+
+.languages-container {
+    padding: 20px;
+    position: relative;
+    top: -1060px;
+  }
+
+  .languages-container h2 {
+    position: relative;
+    font-family: 'Matter', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 25px;
+    color: #272848;
+top: 15px;
+  }
+  
+  .language-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .language-item img {
+    margin-right: 10px;
+    width: 15px;
+    height: 15px;
+  }
+
+  .languages-column {
+    margin: 50px 70px;
+  }
+
+  .language-text{
+    font-family: 'Matter', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 25px;
+  }
+  @media(max-width:412px){
+    
+.languages-container {
+
+  top: 0px;
+}
+
+.languages-column-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.languages-column {
+  margin: 40px 0px;
+}
+  }
+
+  @media (min-width:413px) and (max-width: 600px) {
+        
+.languages-container {
+
+  top: 0px;
+}
+
+.languages-column-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.languages-column {
+  margin: 40px 0px;
+}
+  }
+  @media (min-width:601px) and (max-width: 767px) {
+    .languages-container {
+
+      top: -150px;
+    }
+  }
+
+  @media (min-width:768px) and (max-width: 914px) {
+    .languages-container {
+
+      top: -80px;
+    }
+    
+  }
+  @media (min-width:915px) and (max-width: 1023px) {
+    .languages-container {
+
+      top: -300px;
+    }
+    
+  }
+
+  @media (min-width:1024px) and (max-width: 1439px) {
+    .languages-container {
+      padding: 20px;
+      position: relative;
+      top: -300px;
+    }
+  }
+  @media (min-width:1441px) and (max-width: 4086px) {    .languages-container {
+      padding: 20px;
+      position: relative;
+      top: 500px;
+    }
+  }

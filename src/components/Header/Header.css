@@ -1,0 +1,22 @@
+/* src/components/Header.css */
+.fixed-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Adjust as needed to ensure the header is above other content */
+    background-color: white; /* Ensure the header has a background to cover content below */
+  }
+  
+  /* src/App.css */
+  body, html, #root {
+    height: 100%;
+    margin: 0;
+  }
+  
+  .main-content {
+    padding-top: 120px; /* Adjust this value based on the height of your header */
+    height: calc(100% - 120px); /* Subtract the height of the header from 100% */
+    overflow-y: auto; /* Allow vertical scrolling if content overflows */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  }
+  

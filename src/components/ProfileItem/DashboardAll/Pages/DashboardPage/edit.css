@@ -1,0 +1,75 @@
+/* Laptop view: 1280px to 1440px */
+/* @media (max-width: 1440px) {
+  .dashboard-gird-layout {
+    grid-template-areas: 
+      "insight-patient income-head profiles-head"
+      "consultation booking-rate booking-rate"
+      "reviews booking-rate booking-rate"
+      "schedule schedule schedule";
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 330px 340px auto;
+    gap: 20px;
+  }
+
+  .insight-patient, .income-head, .profiles-head, .consultation, .booking-rate, .reviews, .schedule {
+    width: 100%;
+  }
+
+  .booking-rate {
+    width: 100%;
+  }
+  
+  .reviews {
+    width: 100%;
+  }
+
+  .schedule {
+    width: 100%;
+  }
+} */
+
+/* Tablet view: 768px to 1280px */
+/* @media (max-width: 1280px) {
+  .dashboard-gird-layout {
+    grid-template-areas: 
+      "insight-patient"
+      "income-head"
+      "profiles-head"
+      "consultation"
+      "booking-rate"
+      "reviews"
+      "schedule";
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(7, auto);
+    gap: 20px;
+  }
+
+  .insight-patient, .income-head, .profiles-head, .consultation, .booking-rate, .reviews, .schedule {
+    width: 100%;
+  }
+} */
+
+/* Mobile view: 0px to 768px */
+/* @media (max-width: 768px) {
+  .dashboard-gird-layout {
+    grid-template-areas: 
+      "insight-patient"
+      "income-head"
+      "profiles-head"
+      "consultation"
+      "booking-rate"
+      "reviews"
+      "schedule";
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(7, auto);
+    gap: 15px;
+  }
+
+  .insight-patient, .income-head, .profiles-head, .consultation, .booking-rate, .reviews, .schedule {
+    width: 100%;
+    padding: 15px;
+  }
+} */
+
+
+

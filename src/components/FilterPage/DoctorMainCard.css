@@ -1,0 +1,489 @@
+
+  body{
+    background-color: #eef4ff;
+  }
+  .doc-card-header h4{
+    font-size: 30px;
+    text-wrap: nowrap;
+    font-weight: 600;
+    color: #272848;
+  }
+  .doc-card-header p{
+    text-wrap: nowrap;
+    margin-left: 3px;
+    color: #999ba8;
+    font-size: 14.5px;
+  }
+ 
+ .sort-by {
+  text-wrap: nowrap;
+  font-size: 13px;
+  position: relative;
+  display: flex;
+  /* align-items: end; */
+  width: 100%;
+  margin-bottom: 0 !important;
+  padding-right: 0;
+}
+
+.sort-by .form-group {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  margin-top: -10px;
+  margin-bottom: 10px !important;
+
+}
+
+.sort-by .form-group select,
+.sort-by .form-group input {
+  border: 1px solid #78798d;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 8px 12px 8px 8px;
+  border-radius: 4px;
+  -webkit-appearance: none; /* For Chrome */
+  -moz-appearance: none; /* For Firefox */
+  appearance: none; /* For modern browsers */
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  color: #272848;
+  background: transparent;
+}
+
+.sort-by .form-group label {
+  margin-right: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #272848;
+  white-space: nowrap;
+}
+
+.sort-by .form-group .arrow-icon-filter {
+  position: absolute;
+  top: 25%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #FF7F50;
+  pointer-events: none;
+}
+
+ .sort-by .form-group .date-input-container {
+  position: relative;
+}
+
+
+  .doctor-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    overflow: hidden;
+    transition: width 0.5s ease-in-out, font-size 0.5s ease-in-out, margin 0.5s ease-in-out;
+}
+  
+  .doctor-info {
+    display: flex;
+  }
+  
+  .doctor-photo {
+    width: 120px;
+    height: 120px;
+    border: #ff7f50 solid 2.5px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .doctor-details {
+    transition: font-size 0.5s ease-in-out, margin-left 0.5s ease-in-out;
+    max-width: 400px;
+  }
+  
+  .doctor-details h2 {
+    color: #007bff;
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  
+  .doctor-details p {
+    margin: 5px 0;
+  }
+  .speciality{
+    color: #999ba8;
+    font-size: 14px;
+  }
+  .experience{
+    color: #999ba8;
+    font-size: 14px;
+  }
+  .location{
+    color: #000000;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .clinic{
+    font-size: 14px;
+    /* text-wrap: nowrap; */
+  }
+  .consultation-type {
+    font-size: 15px;
+    padding-bottom: 8px;
+    border-bottom: #e1dede dashed 1px;
+  }
+  .consultation-type img{
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+  }
+  .percentage-data{
+    margin-top: 15px;
+    font-size: 15px;
+  }
+  .percentage-data span{
+    font-size: 15px;
+    font-weight: 700;
+    color: #000000;
+  }
+  .liked{
+    display: flex;
+    justify-content: center;
+    background-color: #00a500;
+    padding: 3px 5px;
+    width: 70px;
+    margin-right: 10px;
+    border-radius: 5px;
+  }
+  .liked img{
+    width: 18px;
+    height: 18px;
+    margin-right: 3px;
+  }
+  .liked span{
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .rating span {
+    margin-right: 10px;
+  }
+  
+  .consultation-type span {
+    font-size: 14px;
+    margin-right: 20px;
+  }
+  .rating-stars{
+    margin-bottom: 80px;
+  }
+  .appointment {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  .book-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  .distance{
+    font-size: 12px;
+    margin: 0;
+  }
+  .availability{
+    font-size: 15px;
+    color: #00a500;
+    font-weight: 500;
+  }
+  .distance-div{
+    margin-left: 35px;
+  }
+
+ 
+
+/* Date navigator styles */
+.date-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  /* margin-bottom: 20px;
+  padding-bottom: 10px; */
+}
+
+/* Arrow button styles */
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+  color: orange;
+}
+.arrow:disabled {
+  color: orange;
+  cursor: not-allowed;
+}
+
+/* Date carousel styles */
+.date-carousel {
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  flex-grow: 1;
+}
+
+.date-item {
+  padding: 10px 20px;
+  cursor: pointer;
+  text-align: center;
+  flex: 1;
+  /* border-bottom: 2px solid #eee; */
+  transition: border-bottom 0.3s;
+}
+
+.date-item.active {
+  /* border-bottom: 2px solid #007bff; */
+  color: #000000;
+}
+.date-item.active h3{
+  color: #000000;
+  font-weight: bold;
+}
+.underline {
+  position: relative;
+  height: 5px;
+  background-color: #F0F0F5;
+  margin: 0 100px;
+}
+
+.underline-active {
+  position: absolute;
+  height: 5px;
+  background-color: #2AA7FF;
+  transition: left 0.3s, width 0.3s;
+}
+  
+.date-item h3 {
+  margin: 5px 0;
+  font-size: 15px;
+}
+
+.date-item .slots-available {
+  color: green;
+  font-size: 14px;
+}
+
+/* Time slots group styles */
+.time-slots-group {
+  margin-bottom: 20px;
+  border-bottom: #e6f7ff solid 1px;
+  padding-bottom: 20px;
+}
+.time-slots-group h6{
+  font-size: 14px;
+  margin: 10px 30px 10px 10px;
+  font-weight: 400;
+}
+
+/* Time slots container styles */
+.time-slots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+/* Individual time slot button styles */
+.time-slot {
+  background: white;
+  border: 1px solid #37adff;
+  border-radius: 5px;
+  padding: 5px 20px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #37adff;
+}
+
+.time-slot:hover {
+  background: #e6f7ff;
+  border-color: #007bff;
+}
+.time-slot.selected {
+  background-color: #007bff; /* Change to your desired color */
+  color: #fff;
+  border: none; /* Optionally remove border */
+}
+
+.doctor-card-date{
+  margin-top: 20px;
+  border-top: #eee solid 1px;
+}
+
+.sponsored-text {
+  display: flex;
+  align-items: center;  
+  /* margin: 10px 0; */
+}
+
+.sponsored-text p {
+  flex-grow: 1; /* Allow the paragraph to take up available space */
+  margin: 0 0 0 0 !important; /* Remove default margin for better alignment */
+  padding-left: 8px; /* Optional: Add padding for spacing */
+  font-weight: 100;
+  font-size: 14px;
+  opacity: 0.5;
+}
+.result-card p{
+  opacity: 0.6;
+}
+
+.container.expanded-map {
+  max-width: 70%;
+}
+
+/* .doctor-card-container {
+  background-color: #ffffff;
+  padding: 20px;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+} */
+
+  /* .appointment-slots {
+    width: 100%;
+  }
+   */
+  /* .slots {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .slot-button {
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+   */
+
+   /* DoctorMainCard.css */
+   @media (max-width: 1000px) {
+    
+   }
+@media (max-width: 768px) {
+  .container {
+      flex-direction: column;
+  }
+  .doc-card-header {
+      flex-direction: column;
+  }
+  .sort-by {
+      width: 100%;
+      margin-top: 10px;
+  }
+  .doctor-card {
+      flex-direction: column;
+  }
+  .doctor-info, .appointment {
+      width: 100%;
+      text-align: center;
+  }
+  .doctor-details {
+      margin-top: 10px;
+  }
+  .doctor-photo {
+      width: 80px;
+      height: 80px;
+  }
+  .book-button {
+      width: 100%;
+      margin-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .doctor-card {
+      padding: 10px;
+  }
+  .doctor-photo {
+      width: 60px;
+      height: 60px;
+  }
+  .doctor-details h2 {
+      font-size: 16px;
+  }
+  .doctor-details p {
+      font-size: 12px;
+  }
+  .book-button {
+      font-size: 14px;
+  }
+}
+
+
+/* MAPEXPANDED */
+.mapExpanded-doctor-card{
+  width: 100%;
+}
+.mapExpanded-button{
+  font-size: 12px;
+  padding: 10px 20px;
+}
+.mapExpanded-percentage-data{
+  display: none !important;
+}
+.mapExpanded-location{
+  font-size: 13.5px;
+}
+.mapExpanded-clinic{
+  font-size: 13px;
+}
+.mapExpanded-consultation-type span{
+  font-size: 13px;
+}
+.mapExpanded-appointment {
+  display: flex;
+  flex-direction: column;
+  align-items:center !important;
+  margin-top: 10px; 
+  margin-left: 18px;
+}
+.mapExpanded-sponsor-rating-stars{
+  margin-left: 30px;
+}
+.mapExpanded-sponsor-distance-div{
+  margin-left: 20px;
+}
+.mapExpanded-doc-card-header h4{
+  font-size: 27px;
+  text-wrap: nowrap;
+}
+.mapExpanded-doc-card-header p{
+  font-size: 13px;
+  margin: 5px 0 0 3px;
+  text-wrap: nowrap;
+}
+.mapExpanded-sort-by {
+  display: none !important;
+}
+.mapExpanded-sponsor-card{
+  margin: 20px 0 !important;
+}

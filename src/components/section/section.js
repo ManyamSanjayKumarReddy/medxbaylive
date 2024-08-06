@@ -28,8 +28,8 @@ function Section() {
       <TestimonialSlider/>
       <MidPartTwo/>
       <Footerr />
-      <Footer />
-
+  
+      
 
     </div>
   );

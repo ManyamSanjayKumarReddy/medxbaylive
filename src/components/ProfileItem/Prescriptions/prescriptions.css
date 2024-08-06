@@ -1,0 +1,185 @@
+.prescriptions-container {
+  background-color: #ffffff;
+  padding: 20px 20px;
+  width: 100%;
+  border-radius: 10px;
+}
+  
+.prescriptions-container h2 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28.8px;
+  color: #272848;
+  display: inline-block;
+  padding: 20px 10px 0px 10px;
+}
+  
+.prescriptions-table-container {
+  max-height: calc(100vh - 310px); /* Adjust the height calculation as needed */
+  overflow-y: auto;
+  margin-top: 40px;
+}
+  
+.prescriptions-table-container::-webkit-scrollbar {
+  width: 14px;
+}
+  
+.prescriptions-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+ 
+}
+  
+.prescriptions-table thead tr {
+  background: #fbfbfb;
+  color: #272848;
+  border: 1px solid #0000001a;
+}
+  
+.prescriptions-table thead tr th {
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #272848;
+}
+  
+.prescriptions-table tbody tr td {
+  color: #272848;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 15px;
+  border-bottom: 4px solid #f0f0f5;
+}
+  
+
+.view-button {
+  background-color: #0067FF;
+  border: 2px solid #14BEF0;
+  border-radius: 4px;
+  color: #FFFFFF;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-weight: 500;
+}
+  
+.view-all-button {
+  display: block;
+  margin: 30px auto;
+  border-radius: 5px;
+  background-color: #0067FF;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 19.2px;
+  letter-spacing: 0.02em;
+}
+  
+  /* Media Queries for Tablet View */
+  @media (max-width: 768px) {
+    .prescriptions-container {
+      padding: 10px 10px;
+    }
+  
+    .prescriptions-container h2 {
+      font-size: 20px;
+      padding: 10px 5px;
+    }
+  
+    .prescriptions-table-containerr {
+      max-height: calc(95vh - 200px);
+    }
+  
+    .prescriptions-table  thead tr th {
+      font-size: 14px;
+    }
+  
+    .prescriptions-table  tbody tr td {
+      font-size: 10px;
+      padding: 10px;
+    }
+  
+    .view-button {
+      padding: 3px 5px;
+      font-size: 10px;
+    }
+  
+    .view-all-button {
+      padding: 7px 15px;
+      font-size: 14px;
+    }
+  }
+  
+  /* Media Queries for Mobile View */
+  @media (max-width: 480px) {
+    .prescriptions-container {
+      padding: 5px 5px;
+    }
+  
+    .prescriptions-container h2 {
+      font-size: 18px;
+      padding: 5px 5px;
+    }
+  
+    .prescriptions-table-container {
+      max-height: calc(95vh - 150px);
+    }
+  
+    .prescriptions-table  thead tr th {
+      font-size: 12px;
+    }
+  
+    .prescriptions-table tbody tr td {
+      font-size: 8px;
+      padding: 5px;
+    }
+  
+    .view-button {
+      padding: 2px 3px;
+      font-size: 8px;
+    }
+  
+    .view-all-button {
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+  }
+  
+  /* Media Queries for Extra Small Mobile View */
+  @media (max-width: 300px) {
+    .prescriptions-container {
+      padding: 5px 5px;
+    }
+  
+    .prescriptions-container h2 {
+      font-size: 16px;
+      padding: 5px 5px;
+    }
+  
+    .prescriptions-table-container {
+      max-height: calc(95vh - 130px);
+    }
+  
+    .prescriptions-table  thead tr th {
+      font-size: 10px;
+    }
+  
+    .prescriptions-table  tbody tr td {
+      font-size: 6px;
+      padding: 5px;
+    }
+  
+    .view-button {
+      padding: 2px 3px;
+      font-size: 6px;
+    }
+  
+    .view-all-button {
+      padding: 5px 10px;
+      font-size: 10px;
+    }
+  }
+  

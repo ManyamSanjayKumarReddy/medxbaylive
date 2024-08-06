@@ -1,0 +1,16 @@
+.card {
+    border:none;
+    border-radius: 8px;
+    padding: 20px;
+    height: auto;
+    width: auto;
+  }
+  
+  .card h2 {
+    margin-top: 0;
+  }
+  
+  .card p {
+    margin-bottom: 0;
+  }
+  

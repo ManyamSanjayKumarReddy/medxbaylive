@@ -1,0 +1,166 @@
+.sidebar-filter {
+    width: 280px;
+    height: auto;
+    background: #FFFFFF;
+    border: 1px solid #0000001A;
+    padding:20px;
+    border-radius: 15px;
+    color: #272848;
+    font-size: 14px;
+    margin: 118px 25px 0 10px;
+   
+}
+  
+.filter-heading-reset {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+  
+.sidebar-filter .filter-heading-reset h5 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+  
+.sidebar-filter .filter-heading-reset button {
+    background: none;
+    border: none;
+    color: #272848;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+  
+.sidebar-filter .select-container-filter {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 25px;
+    
+}
+  
+.sidebar-filter .form-group select,
+.sidebar-filter .form-group input {
+    border: 1px solid #E2E2E2;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 8px 12px 8px 8px;
+    border-radius: 4px;
+    -webkit-appearance: none; /* For Chrome */
+    -moz-appearance: none; /* For Firefox */
+    appearance: none; /* For modern browsers */
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    color: #272848;
+}
+  
+input[type="date"] {
+    padding-right: 40px;
+    position: relative;
+    z-index: 1;
+}
+  
+input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    color: black;
+    background: none;
+    z-index: 2;
+}
+
+/*defult icons removeing in date icons*/
+input[type="date"]::-webkit-clear-button,
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="date"]::-moz-clear-button,
+input[type="date"]::-moz-inner-spin-button,
+input[type="date"]::-moz-calendar-picker-indicator,
+input[type="date"]::-ms-clear,
+input[type="date"]::-ms-expand {
+  display: none;
+}
+  
+.sidebar-filter .select-container-filter .form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #272848;
+}
+.options{
+    padding: 40px !important;
+}
+  
+.sidebar-filter .select-container-filter .form-group .arrow-icon-filter {
+    position: absolute;
+    top: 60%;
+    right: 25px;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #FF7F50;
+    pointer-events: none;
+}
+  
+.sidebar-filter .select-container-filter .form-group .date-input-container {
+    position: relative;
+}
+  
+.sidebar-filter .select-container-filter .form-group .date-input-container input {
+    padding-right: 40px;
+}
+  
+.sidebar-filter .select-container-filter .form-group .custom-calendar-icon {
+    position: absolute;
+    top: 50%;
+    right:25px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #FF7F50;
+    pointer-events: none;
+    z-index:10; 
+}
+
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .sidebar-filter {
+        max-width: 250px;
+        height: 550px;
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar-filter {
+        max-width: 170px;
+        height: 500px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar-filter {
+        max-width: 150px;
+        height: 450px;
+    }
+}
+
+@media (max-width: 576px) {
+    .sidebar-filter {
+        max-width: 120px;
+        height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar-filter {
+        max-width: 100px;
+        height: 350px;
+    }
+}

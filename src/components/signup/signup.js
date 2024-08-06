@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import './signup.css';
+// import './signup.css';
 import schedule from '../Assets/schedule.svg'
 import meds from '../../assests/img/meds.svg';
 import stethoscope from '../../assests/img/stethoscope.svg';
@@ -18,6 +18,10 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const SignupCard = ({ show, handleClose }) => {
+  useEffect(() => {
+    import('./signup.css');
+  }, []);
+
   const typedElement = useRef('');
   const typedElementTwo = useRef('');
   const [name, setName] = useState('');

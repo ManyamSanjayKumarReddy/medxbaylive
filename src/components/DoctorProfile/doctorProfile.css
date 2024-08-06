@@ -1,0 +1,2583 @@
+.doctor-profile{
+  width: 100%;
+    max-width: 100%;
+height: 4400px;
+    background: linear-gradient(180deg, #EDF3FF 0%, #FFFFFF 100%);
+overflow: hidden;
+
+}
+
+.doctor-profile-container{
+    width: 1307px;
+height: 1756px;
+top: 3%;
+left: 72px;
+position: relative;
+display: flex;
+}
+/* .doctor-details {
+    flex: 1;
+  }
+   */
+.doctor-profile-img{
+    width: 311px;
+height: 341px;
+top:-70px;
+
+
+border-radius: 53px 0px 53px 0px;
+
+background: #D9D9D9;
+box-shadow: 0px 11px 26.9px 9px #4254784D inset;
+background: url('../../assests/img/doctorprofileimage1.jpeg') center no-repeat;
+background-size: cover;
+position: relative;
+  
+/* background-size: 135% 135%;
+background-position:50% top;  */
+}
+.doctorname{
+    width: 318px;
+height: 28px;
+top: -50px;
+left: 50px;
+
+font-family: Matter;
+font-size: 36px;
+font-weight: 600;
+line-height: 28px;
+text-align: left;
+color: #272848;
+position: relative;
+
+}
+.education{
+    display: flex;
+    top: -50px;
+    position: relative;
+    margin-left: 22px;
+}
+.degree{
+    position: relative;
+    width: 270px;
+    height: 28px;
+   left: 10px;
+    
+    font-family: Matter;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 28px;
+    text-align: left;
+    color: #272848;
+        
+}
+.doctor-discription{
+    position: relative;
+display: flex;
+margin-left: 10%;
+top:-30px;
+}
+
+.inperson{
+
+    width: 122px;
+height: 20px;
+font-family: Matter;
+font-size: 14px;
+font-weight: 400;
+line-height: 19.6px;
+text-align: left;
+color: #414146;
+display: flex;
+position: relative;
+
+}
+.inperson svg{
+
+    margin-right: 3px;   
+}
+.videoconsultation{
+    width: 182px;
+    height: 20px;
+    font-family: Matter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19.6px;
+    text-align: left;
+    color: #414146;
+    position: relative;
+    display: flex;
+}
+.videoconsultation svg{
+    margin-top: 3px;
+    margin-right: 2px;
+}
+   
+
+.onlineprescription{
+    width: 182px;
+    height: 20px;
+    font-family: Matter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19.6px;
+    text-align: left;
+    color: #414146;
+    position: relative;
+}
+.doctor-discription-icon{
+    color: #37ADFF;
+}
+
+.doctor-objective{
+    position: relative;
+    width: 488px;
+height: 40px;
+top: 0px;
+left: 10%;
+gap: 0px;
+
+font-family: Matter;
+font-size: 14px;
+font-weight: 400;
+line-height: 19.6px;
+text-align: left;
+color: #414146;
+
+}
+.share-box{
+    width: 1432px;
+height: 179px;
+top:11%;
+left: 4px;
+gap: 0px;
+border: 1px 0px 0px 0px;
+position: relative;
+background: #E4EDFF;
+border: 1px solid #0000001A
+}
+
+.share-icon{
+    position: relative;
+    width: 18px;
+height: 24.96px;
+top: 96px;
+left: 778px;
+color: #37ADFF;
+
+    background :url("../../assests/img/Vector-4.svg");
+}
+.share-text{
+    position: relative;
+    width: 38px;
+height: 20px;
+top: 73px;
+left: 803px;;
+font-family: Matter;
+font-size: 14px;
+font-weight: 600;
+line-height: 19.6px;
+text-align: left;
+color: #414146;
+
+}
+
+.save-icon{
+    position: relative;
+    width: 19px;
+height: 17px;
+top: 39px;
+left: 857px;;
+color: #37ADFF;
+ background: url("../../assests/img/Vector-5.svg");
+}
+
+.save-text{
+    position: relative;
+    width: 31px;
+height: 20px;
+top: 20px;
+left: 886px;
+font-family: Matter;
+font-size: 14px;
+font-weight: 600;
+line-height: 19.6px;
+text-align: left;
+color: #414146;
+
+}
+
+.Appointment-container{
+    position: relative;
+    width: 440px;
+height: 409px;
+top: -204%;
+left: 939px;
+border-radius: 15px;
+background: #ffffff;
+border: 1px solid #0000001A;
+z-index: 1; 
+
+}
+
+.book-appointment{
+    width: 238px;
+height: 20px;
+top: 31px;
+left: 24px;
+font-family: 'Matter', sans-serif;
+font-size: 24px;
+font-weight: 400;
+line-height: 19.6px;
+text-align: left;
+position: relative;
+}
+.Appointment-container-box{
+    display: flex;
+}
+
+.book-appointment-inperson{
+    width: 182px;
+    height: 39px;
+    top: 34px;
+    left: 24px;
+    padding: 7px 20px 7px 20px;
+    gap: 10px;
+    border-radius: 5px ;
+    background: #0167FF;
+    position: relative;
+    display: flex;
+
+      
+}
+.book-appointment-inperson-icon{
+    width: 15.36px;
+    height: 15.04px;
+  margin-top: 4px;
+  margin-left: 20px;
+    background: url('../../assests/img/Vector.svg') no-repeat;
+    color: #ffffff;
+
+
+}
+.book-appointment-inperson-container{
+    width: 71px;
+height: 22px;
+font-family: 'Matter', sans-serif;
+font-size: 16px;
+font-weight: 600;
+line-height: 25px;
+
+color: #FFFFFF;
+
+}
+.video-consultation-container{
+    display: flex;
+    width: 212px;
+height: 39px;
+top: 34px;
+left: 14px;
+padding: 7px 20px 7px 20px;
+gap: 10px;
+border-radius: 5px;
+border: 1px;
+position: relative;
+border: 1px solid #0167FF
+
+}
+.video-consultation-text{
+    position: relative;
+    width: 142px;
+height: 25px;
+font-family: 'Matter', sans-serif;
+font-size: 16px;
+font-weight: 600;
+line-height: 25px;
+text-align: left;
+color: #0167FF;
+}
+
+.video-consultation-container-icon{
+    width: 18px;
+height: 12px;
+color: #0167FF;
+background: url('../../assests/img/Vector-2.svg') no-repeat;
+margin-top: 5px;
+}
+.Appointment-select-place{
+    position: relative;
+width: 78px;
+height: 20px;
+top: 56px;
+left: 24px;
+font-family: 'Matter', sans-serif;
+font-size: 14px;
+font-weight: 400;
+line-height: 19.6px;
+text-align: left;
+color: #272848;
+
+}
+.Appointment-select-place-dropdown {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 361px;
+    height: 36px;
+    top: 66px;
+    left: 24px;
+    padding: 8px 12px 8px 8px;
+    gap: 62px;
+    border-radius: 4px;
+    border: 1px solid #E2E2E2;
+  }
+  
+  .Appointment-select-place-text {
+    width: 100%;
+    height: 20px;
+    font-family: Matter;
+font-size: 14px;
+font-weight: 400;
+line-height: 19.6px;
+text-align: left;
+
+    border: none;
+    outline: none;
+    background: transparent;
+    appearance: none; 
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+  }
+  
+  .dropdown-arrow {
+    width: 10.61px;
+    height: 6.48px;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    fill: #FF7F50;
+  }
+
+.select-insurance-plan{
+    position: relative;
+    width: 136px;
+height: 20px;
+top: 100px;
+left: 24px;
+
+font-family: 'Matter', sans-serif;
+font-size: 14px;
+font-weight: 400;
+line-height: 19.6px;
+text-align: left;
+color: #272848;
+
+}
+.insurance-plan-dropdown {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 361px;
+    height: 36px;
+    top: 110px;
+    left: 24px;
+    padding: 8px 12px 8px 8px;
+    gap: 62px;
+    border-radius: 4px;
+    border: 1px solid #E2E2E2;
+}
+
+
+.Appointment-select-insurance-text{
+width: 100%;
+height: 20px;
+font-family: 'Matter', sans-serif;
+font-size: 14px;
+font-weight: 400;
+line-height: 19.6px;
+text-align: left;
+
+border: none;
+outline: none;
+background: transparent;
+appearance: none; 
+-webkit-appearance: none;
+-moz-appearance: none; 
+}
+.dropdown-arrow-insurance{
+    width: 10.61px;
+    height: 6.48px;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    fill: #FF7F50;  
+}
+.Appointment-select-date-slot{
+    display: flex;
+}
+.Appointment-select-date{
+    position: relative;
+    width: 114px;
+height: 20px;
+top: 148px;
+left: 24px;
+font-family: 'Matter', sans-serif;
+font-size: 14px;
+font-weight: 400;
+line-height: 19.6px;
+text-align: left;
+color: #272848;
+
+}
+.Appointment-slot-drop-down{
+    position: relative;
+    width: 30px;
+height: 30px;
+top: 140px;
+left: 35px;
+gap: 0px;
+border-radius: 5px ;
+border: 1px ;
+
+border: 1px solid #E0E0E4
+}
+.Appointment-slot-drop-down-icon{
+   position: relative;
+   left: 8px; 
+}
+.Appointment-date-container {
+    position: relative;
+    display: flex;
+ 
+    margin-top: 30px; 
+    left: -300%;
+    
+  }
+  
+  .Appointment-today,
+  .Appointment-tomorrow,
+  .Appointment-day-after-tomorrow {
+    flex: 1; 
+    min-width: 100px; 
+    font-family: 'Matter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 22.4px;
+    text-align: center;
+    color: #272848;
+    margin-bottom: -1px;
+    margin-right: 27px;
+    margin-left: -8px;
+  }
+  
+  .Appointment-today-slots-available,
+  .Appointment-tomorrow-slots-available,
+  .Appointment-day-after-tomorrow-slots-available {
+    font-family: 'Matter', sans-serif;
+    font-size: 8px;
+    font-weight: 400;
+    line-height: 16.8px;
+    text-align: center;
+    color: #0067FF;
+margin-right: 16px;
+
+  }
+  
+  
+.Appointment-previous-box{
+    position: relative;
+    width: 35px;
+height: 35px;
+top: -40px;
+left:-498%;
+padding: 9px 10px 11px 10px;
+border-radius: 24px ;
+border: 1px ;
+border: 1px solid #E0E0E4
+}
+.Appointment-previous-box svg{
+    position: relative;
+top: -6px;
+left: -4px;
+}
+.Appointment-next-box{
+    position: relative;
+    width: 35px;
+height: 35px;
+top: -78px;
+left:244px;
+padding: 9px 10px 11px 10px;
+border-radius: 24px ;
+border: 1px ;
+border: 1px solid #E0E0E4
+}
+
+.Appointment-next-box svg{ 
+    position: relative;
+    top: -6px;
+    left: -4px; 
+}
+.Appointment-dots {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 340px;
+    right: 95px;
+
+  }
+  
+  .Appointment-dot {
+    position: relative;
+    height: 5px;
+    width: 340px;
+    /* margin-right: 0px;  */
+top:5px;
+    left: -7px;
+
+
+    background-color:  #F0F0F5;
+  }
+  
+  .Appointment-dot.active {
+    background-color:  #2AA7FF;
+
+  }
+  .morning{
+    position: relative;
+    width: 361px;
+height: 21px;
+top: -45px;
+left: -112px;
+border: 0px 0px 1px 0px;
+color: #272848;
+border-bottom: 1px solid #F0F0F5
+  }
+  .morning-text{
+    position: relative;
+    width: 53px;
+height: 20px;
+top: 0px;
+left: 0px;
+font-family: 'Matter', sans-serif;
+font-size: 14px;
+font-weight: 400;
+line-height: 19.6px;
+text-align: left;
+color: #272848;
+
+  }
+  .Appointment-morning-time-container {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 7px; 
+    right: 111px;
+    top:-35px;
+  }
+  
+  .Appointment-morning-time-row {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    gap: 7px;
+  }
+  
+  .morning-time {
+    position: relative;
+    width: 66px;
+    height: 20px;
+    padding: 1px 2.4px 2px 2px;
+    gap: 0px;
+    border-radius: 3px;
+    border: 1px solid #E0E0E4;
+  }
+  
+  .morning-time-text {
+    width: 61.6px;
+    height: 17px;
+    font-family: 'Matter', sans-serif;
+    font-size: 8px;
+    font-weight: 400;
+    line-height: 19.6px;
+    text-align: center;
+    color: #272848;
+  }
+  
+
+   .afternoon{
+    position: relative;
+    width: 361px;
+height: 21px;
+top: -25px;
+left: -112px;
+border: 0px 0px 1px 0px;
+color: #272848;
+border-bottom: 1px solid #F0F0F5
+  }
+  .afternoon-text{
+    position: relative;
+    width: 53px;
+height: 20px;
+top: 0px;
+left: 0px;
+font-family: 'Matter', sans-serif;
+font-size: 14px;
+font-weight: 400;
+line-height: 19.6px;
+text-align: left;
+color: #272848;
+
+  }
+  .Appointment-afternoon-time-container {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 7px; 
+    right: 111px;
+    top:-15px;
+  }
+  
+  .Appointment-afternoon-time-row {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    gap: 7px;
+  }
+  
+  .afternoon-time {
+    position: relative;
+    width: 66px;
+    height: 20px;
+    padding: 1px 2.4px 2px 2px;
+    gap: 0px;
+    border-radius: 3px;
+    border: 1px solid #E0E0E4;
+  }
+  
+  .afternoon-time-text {
+    width: 61.6px;
+    height: 17px;
+    font-family: 'Matter', sans-serif;
+    font-size: 8px;
+    font-weight: 400;
+    line-height: 19.6px;
+    text-align: center;
+    color: #272848;
+  }
+  
+
+  .evening{
+    position: relative;
+    width: 361px;
+height: 21px;
+top: -5px;
+left: -112px;
+border: 0px 0px 1px 0px;
+color: #272848;
+border-bottom: 1px solid #F0F0F5
+  }
+  .evening-text{
+    position: relative;
+    width: 53px;
+height: 20px;
+top: 0px;
+left: 0px;
+font-family: 'Matter', sans-serif;
+font-size: 14px;
+font-weight: 400;
+line-height: 19.6px;
+text-align: left;
+color: #272848;
+
+  }
+  .Appointment-evening-time-container {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 7px; 
+    right: 111px;
+    top:5px;
+  }
+  
+  .Appointment-evening-time-row {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    gap: 7px;
+  }
+  
+  .evening-time {
+    position: relative;
+    width: 66px;
+    height: 20px;
+    padding: 1px 2.4px 2px 2px;
+    gap: 0px;
+    border-radius: 3px;
+    border: 1px solid #E0E0E4;
+  }
+  
+  .evening-time-text {
+    width: 61.6px;
+    height: 17px;
+    font-family: 'Matter', sans-serif;
+    font-size: 8px;
+    font-weight: 400;
+    line-height: 19.6px;
+    text-align: center;
+    color: #272848;
+  }
+  .continue-booking{
+  position: relative;
+    width: 355px;
+height: 42px;
+top: 27px;
+left: -110px;
+padding: 10px 20px 10px 20px;
+gap: 10px;
+border-radius: 5px ;
+background: #80848B;
+border: none;
+color: #ffffff;
+  }
+
+
+  .doctor-details-header{
+    display: flex;
+    position: relative;
+    width: 743px;
+height: 48px;
+top: -1237px;
+text-align: center;
+justify-content: center;
+align-items: center;
+transition: transform 0.3s ease-in-out;
+left: 349px;
+border-radius: 8px ;
+background: #FFFFFF;
+border: 1px solid #0000001A
+
+
+
+  }
+  .doctor-details-header.moved {
+    transform: translate(-250px, -83px); 
+  }
+.doctor-details-header-Location{
+    position: relative;
+    width: 85.35px;
+    height: 14px;
+
+    left: -150px;
+    font-family: Matter;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 25px;
+    text-align: center;
+    color: #272848;
+        
+
+}
+.doctor-details-header-Insurances{
+    position: relative;
+    width: 105.37px;
+    height: 14px;
+
+    left: -80px;
+    font-family: Matter;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 25px;
+    text-align: center;
+    color: #272848;
+}
+.doctor-details-header-About{
+    position: relative;
+    width: 94.83px;
+    height: 14px;
+
+    left:-1px;
+    font-family: Matter;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 25px;
+    text-align: center;
+    color: #272848;
+}
+.doctor-details-header-Ratings{
+    position: relative;
+    width: 72.71px;
+    height: 14px;
+
+    left: 80px;
+    font-family: Matter;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 25px;
+    text-align: center;
+    color: #272848;
+        
+}
+.doctor-details-header-faq{
+    position: relative;
+    width: 53.74px;
+    height: 14px;
+
+    left: 150px;
+    font-family: Matter;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 25px;
+    text-align: center;
+    color: #272848;
+        
+}
+.doctor-appoinment-card-container{
+  position: relative;
+  width: 794px;
+height: 455px;
+top: -750px;
+left: 69px;
+border-radius: 15px;
+transition: transform 0.3s ease-in-out;
+
+}
+.doctor-appoinment-card-container.moved {
+  transform: translate(-250px, -50px);
+}
+.doctor-appoinment-card-one{
+  position: relative;
+  width: 860px;
+height: 214px;
+top: -452px;
+left: 230px;
+padding: 8px 12px 8px 8px;
+border-radius: 15px;
+border: 1px solid #E2E2E2
+}
+.doctor-appoinment-card-two{
+  position: relative;
+  width: 860px;
+height: 214px;
+top: -428px;
+left: 230px;
+padding: 8px 12px 8px 8px;
+border-radius: 15px;
+border: 1px solid #E2E2E2
+}
+.hospital-name-box{
+  display: flex;
+}
+.hospital-name-box img {
+  position: relative;
+  width: 19px;
+height: 20px;
+top:15px;
+left: 10px;
+
+}
+.hospital-name-text{
+  position: relative;
+  width: 237px;
+height: 15px;
+font-family: Matter;
+font-size: 20px;
+font-weight: 700;
+line-height: 24px;
+text-align: left;
+color: #0067FF;
+top:14px;
+left: 15px;
+
+}
+.hospital-today{
+  position: relative;
+width: 76px;
+height: 30px;
+font-family: Matter;
+font-size: 16px;
+font-weight: 600;
+line-height: 19.2px;
+text-align: left;
+color: #7A8EA0;
+top:17px;
+left: 43%;
+}
+.hospital-time{
+  position: relative;
+  width: 154px;
+height: 27px;
+font-family: Matter;
+font-size: 16px;
+font-weight: 500;
+line-height: 19.2px;
+text-align: left;
+color: #7F92A4;
+top:17px;
+left: 43%;
+}
+
+.hospital-name-icon{
+  position: relative;
+  width: 15px;
+height: 15px;
+padding: 5.14px 3.52px 5px 3.52px;
+top:8px;
+left: 37%;
+
+}
+.hospital-charge{
+  display: flex;
+}
+.hospital-charge-dollar{
+  width: 24px;
+height: 24px;
+padding: 3px 7px 3px 7px;
+
+}
+.hospital-charge-ammount{
+  position: relative;
+  width: 16px;
+height: 11px;
+top: 12px;
+left: 6px;
+
+}
+.hospital-charge-video{
+  position: relative;
+  width: 166px;
+height: 33px;
+font-family: Matter;
+font-size: 14px;
+font-weight: 600;
+line-height: 16.8px;
+text-align: left;
+color: #B0B9C2;
+top: 10px;
+left: 12px;
+}
+.hospital-name-logo-container{
+  display: flex;
+}
+
+.hospital-name-logo{
+  width: 59px;
+height: 60px;
+position: relative;
+border-radius: 15px ;
+top: 10px;
+left: 15px;
+}
+.hospital-name-logo-location{
+  position: relative;
+  width: 173px;
+height: 17px;
+font-family: Matter;
+font-size: 14px;
+font-weight: 600;
+line-height: 16.8px;
+text-align: left;
+color: #697B8C;
+left: 28px;
+top: 12px;
+
+}
+.hospital-name-logo-location-container{
+  display: flex;
+}
+.call-now{
+  position: relative;
+  width: 106px;
+  height: 31px;
+  font-family: Matter;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19.2px;
+  text-align: left;
+  color: #4F63E1;
+  top: 44px;
+  left: -144px;
+}
+.get-direction{
+  position: relative;
+  width: 162px;
+  height: 31px;
+  font-family: Matter;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19.2px;
+  text-align: left;
+  color: #4F63E1;
+  top: 44px;
+  left: -160px;
+}
+.hospital-charge-book-appoinment{
+  position: relative;
+  top:10px;
+  left: 110px;
+  width: 212px;
+height: 40px;
+padding: 11.62px 44.55px 11.38px 45.45px;
+border-radius: 4px ;
+background: #0067FF;
+border: 1px solid #14BEF0
+
+}
+.hospital-charge-book-appoinment-text{
+  width: 122px;
+height: 17px;
+top: 11.62px;
+left: 45.45px;
+font-family: Matter;
+font-size: 14px;
+font-weight: 500;
+line-height: 16.8px;
+text-align: center;
+color: #FFFFFF;
+
+}
+
+@media (max-width: 412px) {
+  .doctor-profile{
+    width: 100%;
+      max-width: 100%;
+  height: auto;
+ /* overflow: hidden;   */
+  
+  }
+  
+
+  .doctor-profile-container{
+    width: 100%;
+height: 1756px;
+top: 3%;
+left: 72px;
+flex-direction: column;
+position: relative;
+display: flex;
+
+}
+
+.doctorname{
+  width: 318px;
+height: 28px;
+top: -50px;
+left: 50px;
+font-size: 30px;
+
+}
+.education{
+  top: -50px;
+ 
+  margin-left: 22px;
+}
+.degree{
+
+  width: 270px;
+  height: 28px;
+ left: 10px;
+
+  
+
+  font-size: 18px;
+  font-weight: 600;
+ 
+      
+}
+.doctor-discription{
+  margin-top: 5%;
+margin-left: 10%;
+top:-30px;
+}
+.inperson{
+margin-left: 0px;
+
+}
+.inperson svg{
+  margin-left: 10px;
+}
+.videoconsultation{
+  margin-left: 20px;
+}
+.videoconsultation svg{
+  margin-left: 20px;
+}
+ 
+
+.onlineprescription{
+  margin-left: 30px;
+}
+
+.doctor-objective{
+top: 10px;
+width: 100%;
+max-width: 330px;
+padding: 20px;
+}
+
+.doctor-profile-img{
+  width: 211px;
+height: 241px;
+top:30px;
+border-radius: 53px 0px 53px 0px;
+display: flex;
+left: -20px;
+}
+.doctor-details{
+
+display: flex; 
+flex-direction: column;
+position: relative;
+left: -100px;
+top: 12%;
+}
+.Appointment-container{
+
+  display: flex; 
+  flex-direction: column;
+  left: 5%;
+  top:300%;
+  width: 100%;
+  max-width: 90%;
+}
+
+.book-appointment-inperson{
+  width: 112px;
+  height: 39px;
+}
+.book-appointment-inperson-icon{
+  width: 35.36px;
+  height: 15.04px;
+margin-top: 4px;
+margin-left: -50px;
+position: relative;
+left: 50px;
+
+}
+.book-appointment-inperson-container{
+  width: 201px;
+height: 22px;
+font-size: 12px;
+position: relative;
+left: 50px;
+
+
+}
+.video-consultation-container{
+  
+  width: 120px;
+height: 39px;
+top: 34px;
+left: 14px;
+
+}
+.video-consultation-text{
+  position: relative;
+  width: 142px;
+font-size: 12px;
+line-height: 15px;
+
+}
+
+.video-consultation-container-icon{
+  width: 18px;
+height: 12px;
+
+
+}
+.Appointment-select-place{
+  position: relative;
+width: 78px;
+height: 20px;
+top: 56px;
+left: 24px;
+font-family: 'Matter', sans-serif;
+font-size: 14px;
+font-weight: 400;
+line-height: 19.6px;
+text-align: left;
+color: #272848;
+
+}
+.Appointment-select-place-dropdown {
+
+  width: 261px;
+  height: 36px;
+ 
+
+
+}
+
+.Appointment-select-place-text {
+font-size: 12px;
+
+}
+
+
+
+.insurance-plan-dropdown {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 261px;
+  height: 36px;
+  top: 110px;
+  left: 24px;
+  padding: 8px 12px 8px 8px;
+  gap: 62px;
+  border-radius: 4px;
+  border: 1px solid #E2E2E2;
+}
+
+
+.Appointment-select-insurance-text{
+width: 100%;
+height: 20px;
+font-family: 'Matter', sans-serif;
+font-size: 14px;
+font-weight: 400;
+line-height: 19.6px;
+text-align: left;
+
+border: none;
+outline: none;
+background: transparent;
+appearance: none; 
+-webkit-appearance: none;
+-moz-appearance: none; 
+}
+.dropdown-arrow-insurance{
+  width: 10.61px;
+  height: 6.48px;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  fill: #FF7F50;  
+}
+.Appointment-dots {
+
+
+  width: 240px;
+  right: 105px;
+
+}
+
+.Appointment-dot {
+
+  height: 5px;
+  width: 240px;
+top:5px;
+  left: -7px;
+}
+.Appointment-today,
+.Appointment-tomorrow,
+.Appointment-day-after-tomorrow {
+
+  font-size: 10px;
+  margin-bottom: -1px;
+  margin-right: 15px;
+  margin-left: -30px;
+}
+
+.Appointment-today-slots-available,
+.Appointment-tomorrow-slots-available,
+.Appointment-day-after-tomorrow-slots-available {
+
+margin-right: 30px;
+
+}
+.Appointment-previous-box{
+  width: 25px;
+height: 25px;
+top: -40px;
+left:-498%;
+
+}
+
+.Appointment-previous-box svg{
+  position: relative;
+top: -11px;
+left: -9px
+}
+.Appointment-next-box{
+
+  width: 25px;
+height: 25px;
+top: -65px;
+left:124px;
+}
+
+.Appointment-next-box svg{ 
+
+  top: -10px;
+  left: -8px; 
+}
+
+.Appointment-morning-time-container {
+
+  grid-template-columns: repeat(5, 1fr); 
+  gap: 2px; 
+  right: 140px;
+  top:-35px;
+}
+
+.morning-time {
+  position: relative;
+  width: 54px;
+  height: 20px;
+ 
+
+}
+.doctor-appoinment-card-container{
+  position: relative;
+  width: 100%;
+  max-width: 90%;
+height: 455px;
+top: -750px;
+left: 4.5%;
+border-radius: 15px;
+transition: transform 0.3s ease-in-out;
+
+}
+
+
+.doctor-appoinment-card-one{
+
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+height: 414px;
+top: 190px;
+left: 0px;
+padding: 8px 12px 8px 8px;
+border-radius: 15px;
+border: 1px solid #E2E2E2;
+
+
+}
+.hospital-today{
+top:250px;
+left: -23%;
+}
+.hospital-time{
+width: 100%;
+top:250px;
+left: -17%;
+}
+.hospital-charge-book-appoinment {
+  position: absolute;
+  top: 330px;
+  left: 50%; 
+  transform: translateX(-50%); 
+  width: 200px; 
+}
+.hospital-name-icon{
+
+  top:240px;
+left: -50%;
+
+}
+.hospital-name-box{
+  display: flex;
+  width: 537px;
+}
+.hospital-name-text{
+  position: relative;
+  width: 337px;
+height: 15px;
+
+font-size: 14px;
+font-weight: 700;
+
+
+
+top:14px;
+left: 15px;
+
+}
+.doctor-appoinment-card-two{
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: 414px;
+top: 200px;
+left: 0px;
+padding: 8px 12px 8px 8px;
+border-radius: 15px;
+border: 1px solid #E2E2E2
+}
+.doctor-details-header{
+  display: flex;
+  position: relative;
+  width: 100%;
+  max-width: 310px;
+height: 48px;
+top: -1050px;
+left: 0px;
+justify-content: center;
+margin-left: auto;
+margin-right: auto;
+
+}
+.doctor-details-header-Location{
+  position: relative;
+  width: 65px;
+  height: 14px;
+  left: 0px;
+  font-size: 12px;
+  
+
+
+      
+
+}
+.doctor-details-header-Insurances{
+
+  width: 97px;
+  height: 14px;
+
+  left: 0px;
+
+  font-size: 12px;
+  font-weight: 500;
+
+}
+.doctor-details-header-About{
+
+  width: 64.83px;
+  height: 14px;
+
+  left:-1px;
+
+  font-size: 12px;
+
+
+}
+.doctor-details-header-Ratings{
+
+  width: 52.71px;
+  height: 14px;
+  left: 0px;
+  font-size: 12px;
+      
+}
+.doctor-details-header-faq{
+
+  width: 43.74px;
+  height: 12px;
+  left: 0px;
+  font-size: 12px;
+      
+}
+.share-box{
+  width: 100%;
+height: 179px;
+top:350px;
+left: 0px;
+}
+.share-icon{
+
+top: 140px;
+left: 100px;
+}
+.share-text{
+  top: 120px;
+  left: 130px;
+
+}
+
+.save-icon{
+  top: 86px;
+  left: 200px;
+}
+
+.save-text{
+
+  top: 67px;
+  left: 230px;
+}
+
+
+}
+
+@media (min-width:413px) and (max-width: 600px) {
+  .doctor-profile{
+    width: 100%;
+      max-width: 100%;
+  height: auto;
+ /* overflow: hidden;   */
+  
+  }
+  
+
+  .doctor-profile-container{
+    width: 100%;
+height: 1756px;
+top: 3%;
+left: 72px;
+flex-direction: column;
+position: relative;
+display: flex;
+
+}
+
+.doctorname{
+  width: 318px;
+height: 28px;
+top: -50px;
+left: 50px;
+font-size: 30px;
+
+}
+.education{
+  top: -50px;
+ 
+  margin-left: 22px;
+}
+.degree{
+
+  width: 270px;
+  height: 28px;
+ left: 10px;
+  
+
+  font-size: 18px;
+  font-weight: 600;
+ 
+      
+}
+.doctor-discription{
+margin-left: 10%;
+top:-30px;
+}
+.inperson{
+margin-left: 0px;
+
+}
+.inperson svg{
+  margin-left: 10px;
+}
+.videoconsultation{
+  margin-left: 20px;
+}
+.videoconsultation svg{
+  margin-left: 20px;
+}
+ 
+
+.onlineprescription{
+  margin-left: 30px;
+}
+
+.doctor-objective{
+top: 10px;
+width: 100%;
+max-width: 330px;
+padding: 20px;
+}
+
+.doctor-profile-img{
+  width: 211px;
+height: 241px;
+top:30px;
+border-radius: 53px 0px 53px 0px;
+display: flex;
+left: -20px;
+}
+.doctor-details{
+
+display: flex; 
+flex-direction: column;
+position: relative;
+left: -100px;
+top: 12%;
+}
+.Appointment-container{
+
+  display: flex; 
+  flex-direction: column;
+  left: 0%;
+  top:300%;
+  width: 100%;
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+
+.doctor-appoinment-card-container{
+  position: relative;
+  width: 100%;
+  max-width: 90%;
+height: 455px;
+top: -750px;
+left: 0%;
+border-radius: 15px;
+transition: transform 0.3s ease-in-out;
+margin-left: auto;
+margin-right: auto;
+}
+
+
+.doctor-appoinment-card-one{
+
+  position: relative;
+  width: 440px;
+height: 414px;
+top: 190px;
+left: 0px;
+padding: 8px 12px 8px 8px;
+border-radius: 15px;
+border: 1px solid #E2E2E2;
+
+
+}
+.hospital-today{
+top:250px;
+left: -23%;
+}
+.hospital-time{
+width: 100%;
+top:250px;
+left: -17%;
+}
+.hospital-charge-book-appoinment {
+  position: absolute;
+  top: 330px;
+  left: 50%; 
+  transform: translateX(-50%);
+  width: 200px; 
+}
+.hospital-name-icon{
+
+  top:240px;
+left: -50%;
+
+}
+.hospital-name-box{
+  display: flex;
+  width: 537px;
+}
+.hospital-name-text{
+  position: relative;
+  width: 337px;
+height: 15px;
+
+font-size: 14px;
+font-weight: 700;
+
+
+
+top:14px;
+left: 15px;
+
+}
+.doctor-appoinment-card-two{
+  position: relative;
+  width: 440px;
+  height: 414px;
+top: 200px;
+left: 0px;
+padding: 8px 12px 8px 8px;
+border-radius: 15px;
+border: 1px solid #E2E2E2
+}
+.doctor-details-header{
+  display: flex;
+  position: relative;
+  width: 100%;
+  max-width: 310px;
+height: 48px;
+top: -1100px;
+left: 0px;
+justify-content: center;
+margin-left: auto;
+margin-right: auto;
+
+}
+.doctor-details-header-Location{
+  position: relative;
+  width: 65px;
+  height: 14px;
+  left: 0px;
+  font-size: 12px;
+  
+
+
+      
+
+}
+.doctor-details-header-Insurances{
+
+  width: 97px;
+  height: 14px;
+
+  left: 0px;
+
+  font-size: 12px;
+  font-weight: 500;
+
+}
+.doctor-details-header-About{
+
+  width: 64.83px;
+  height: 14px;
+
+  left:-1px;
+
+  font-size: 12px;
+
+
+}
+.doctor-details-header-Ratings{
+
+  width: 52.71px;
+  height: 14px;
+  left: 0px;
+  font-size: 12px;
+      
+}
+.doctor-details-header-faq{
+
+  width: 43.74px;
+  height: 12px;
+  left: 0px;
+  font-size: 12px;
+      
+}
+.share-box{
+  width: 100%;
+height: 179px;
+top:350px;
+left: 0px;
+}
+.share-icon{
+
+top: 140px;
+left: 100px;
+}
+.share-text{
+  top: 120px;
+  left: 130px;
+
+}
+
+.save-icon{
+  top: 86px;
+  left: 200px;
+}
+
+.save-text{
+
+  top: 67px;
+  left: 230px;
+}
+
+
+}
+
+
+@media (min-width:600px) and (max-width: 914px) {
+  .doctor-profile{
+    width: 100%;
+      max-width: 100%;
+  height: auto;
+ /* overflow: hidden;   */
+  
+  }
+  
+
+  .doctor-profile-container{
+    width: 100%;
+height: 1756px;
+top: 3%;
+left: 0px;
+flex-direction: column;
+position: relative;
+display: flex;
+margin-left: auto;
+margin-right: auto;
+
+}
+.doctor-details{
+  margin-left: auto;
+margin-right: auto;
+left: 0;
+justify-content: center;
+display: flex; 
+flex-direction: column;
+top: 11%;
+position: relative;
+}
+
+.doctorname{
+  width: 318px;
+height: 28px;
+top: -50px;
+left: -90px;
+font-size: 30px;
+margin-left: auto;
+margin-right: auto;
+
+}
+.education{
+  top: -50px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-left: 0px;
+  left: 0;
+  text-align: center;
+}
+.degree{
+
+  width: 270px;
+  height: 28px;
+ left: 0px;
+ margin-left: auto;
+ margin-right: auto;
+ text-align: center;
+  
+
+  font-size: 18px;
+  font-weight: 600;
+ 
+      
+}
+.doctor-discription{
+  margin-left: auto;
+  margin-right: auto;
+top:-30px;
+left: 0;
+text-align: center;
+position: relative;
+text-align: left;
+top: -10px;
+}
+.doctor-objective{
+  left: 0%;
+}
+.inperson{
+margin-left: 0px;
+
+}
+.inperson svg{
+  margin-left: 10px;
+}
+.videoconsultation{
+  margin-left: 20px;
+}
+.videoconsultation svg{
+  margin-left: 20px;
+}
+ 
+
+.onlineprescription{
+  margin-left: 30px;
+}
+
+.doctor-objective{
+top: 10px;
+width: 100%;
+max-width: 330px;
+padding: 20px;
+}
+
+.doctor-profile-img{
+  width: 311px;
+  height: 341px;
+top:25px;
+border-radius: 53px 0px 53px 0px;
+display: flex;
+left: 0px;
+margin-left: auto;
+margin-right: auto;
+}
+
+.Appointment-container{
+
+  display: flex; 
+  flex-direction: column;
+  left: 0%;
+  top:260%;
+  width: 100%;
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+.doctor-appoinment-card-container{
+  position: relative;
+  width: 100%;
+  max-width: 90%;
+height: 455px;
+top: -700px;
+left: 4.5%;
+border-radius: 15px;
+transition: transform 0.3s ease-in-out;
+
+}
+
+.doctor-appoinment-card-container.moved {
+  transform: translate(-0px, -50px);
+}
+.doctor-details-header.moved {
+  transform: translate(-0px, -0px); 
+}
+.doctor-appoinment-card-one{
+
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 440px;
+ 
+height: 350px;
+top: 190px;
+left: 0px;
+padding: 8px 12px 8px 8px;
+border-radius: 15px;
+border: 1px solid #E2E2E2;
+
+
+}
+.hospital-today{
+top:220px;
+left: -23%;
+}
+.hospital-time{
+width: 100%;
+top:220px;
+left: -17%;
+}
+.hospital-charge-book-appoinment {
+  position: absolute;
+  top: 280px;
+  left: 45%; 
+  transform: translateX(-50%);
+  width: 200px; 
+}
+.hospital-name-icon{
+
+  top:210px;
+left: -50%;
+
+}
+.hospital-name-box{
+  display: flex;
+  width: 537px;
+}
+.hospital-name-text{
+  position: relative;
+  width: 337px;
+height: 15px;
+font-size: 14px;
+font-weight: 700;
+top:14px;
+left: 15px;
+
+}
+.doctor-appoinment-card-two{
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 440px;
+  height: 350px;
+top: 200px;
+left: 0px;
+padding: 8px 12px 8px 8px;
+border-radius: 15px;
+border: 1px solid #E2E2E2
+}
+.doctor-details-header{
+  display: flex;
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+height: 48px;
+top: -1000px;
+left: 0px;
+justify-content: center;
+margin-left: auto;
+margin-right: auto;
+
+}
+.doctor-details-header-Location{
+  position: relative;
+  width: 85px;
+  height: 14px;
+  left: 0px;
+  font-size: 14px;
+  
+
+
+      
+
+}
+.doctor-details-header-Insurances{
+
+  width: 130px;
+  height: 14px;
+
+  left: 0px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+}
+.doctor-details-header-About{
+
+  width: 90.83px;
+  height: 14px;
+
+  left:-1px;
+
+  font-size: 14px;
+
+
+}
+.doctor-details-header-Ratings{
+
+  width: 78.71px;
+  height: 14px;
+  left: 0px;
+  font-size: 14px;
+      
+}
+.doctor-details-header-faq{
+
+  width: 69.74px;
+  height: 12px;
+  left: 0px;
+  font-size: 14px;
+      
+}
+.share-box{
+  width: 100%;
+height: 179px;
+top:450px;
+left: 0px;
+}
+.share-icon{
+
+top: 140px;
+left: 100px;
+}
+.share-text{
+  top: 120px;
+  left: 130px;
+
+}
+
+.save-icon{
+  top: 86px;
+  left: 200px;
+}
+
+.save-text{
+
+  top: 67px;
+  left: 230px;
+}
+
+
+}
+
+@media (min-width:915px) and (max-width: 1023px) {
+  .doctor-profile-container{
+    width: 1307px;
+height: 1756px;
+top: 100px;
+left: 72px;
+position: relative;
+display: flex;
+}
+
+  .share-box{
+    width: 100%;
+height: 179px;
+top:450px;
+left: 4px;
+gap: 0px;
+border: 1px 0px 0px 0px;
+position: relative;
+background: #E4EDFF;
+border: 1px solid #0000001A
+}
+  .Appointment-container{
+
+    display: flex; 
+    flex-direction: column;
+    left: 25%;
+    top:120%;
+    width: 100%;
+    max-width: 45%;
+  }
+  .doctor-details-header.moved {
+    transform: translate(-100px, -83px); 
+  }
+  .doctor-appoinment-card-container{
+    position: relative;
+    width: 794px;
+  height: 455px;
+  top: -300px;
+  left:0%;
+  border-radius: 15px;
+  transition: transform 0.3s ease-in-out;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  }
+  .doctor-appoinment-card-one{
+    position: relative;
+    width: 860px;
+  height: 214px;
+  top: -452px;
+  left: -4%;
+  justify-content: center;
+
+
+  }
+  .doctor-appoinment-card-two{
+    position: relative;
+    width: 860px;
+  height: 214px;
+  top: -428px;
+  left: -4%;
+  justify-content: center;
+  }
+
+  .doctor-appoinment-card-container.moved {
+    transform: translate(0px, 0px);
+  }
+
+.doctor-details-header{
+width: 743px;
+height: 48px;
+top: -1270px;
+left: 130px;
+}
+.doctor-profile{
+height: 100%;
+}
+
+.share-icon{
+  position: relative;
+  width: 18px;
+height: 24.96px;
+top: 96px;
+left: 478px;
+}
+.share-text{
+  position: relative;
+  width: 38px;
+height: 20px;
+top: 73px;
+left: 508px;;
+
+
+}
+
+.save-icon{
+  position: relative;
+  width: 19px;
+height: 17px;
+top: 39px;
+left: 557px;;
+
+}
+
+.save-text{
+  position: relative;
+  width: 31px;
+height: 20px;
+top: 20px;
+left: 586px;
+
+
+}
+
+
+}
+
+@media (min-width:1024px) and (max-width: 1439px) {
+  .doctor-profile-container{
+    width: 1307px;
+height: 1756px;
+top: 100px;
+left: 72px;
+position: relative;
+display: flex;
+}
+
+  .share-box{
+    width: 100%;
+height: 179px;
+top:450px;
+left: 4px;
+gap: 0px;
+border: 1px 0px 0px 0px;
+position: relative;
+background: #E4EDFF;
+border: 1px solid #0000001A
+}
+  .Appointment-container{
+
+    display: flex; 
+    flex-direction: column;
+    left: 0%;
+    top:120%;
+    width: 440px;
+margin-left: auto;
+margin-right: auto;
+  }
+  .doctor-details-header.moved {
+    transform: translate(-100px, -83px); 
+  }
+  .doctor-appoinment-card-container{
+    justify-content: center !important;
+    position: relative;
+    width: 794px;
+  height: 455px;
+  top: -300px;
+  left:0%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 15px;
+  transition: transform 0.3s ease-in-out;
+  justify-content: center;
+  }
+
+  .doctor-appoinment-card-container.moved {
+    transform: translate(0px, 0px);
+  }
+  .doctor-appoinment-card-one{
+    position: relative;
+    width: 860px;
+  height: 214px;
+  top: -452px;
+  left: 0%;
+
+
+
+  }
+  .doctor-appoinment-card-two{
+    position: relative;
+    width: 860px;
+  height: 214px;
+  top: -428px;
+  left: 0%;
+
+  }
+.doctor-details-header{
+width: 743px;
+height: 48px;
+top: -1270px;
+left: 0px;
+margin-left: auto;
+margin-right: auto;
+}
+.doctor-profile{
+height: 100%;
+}
+
+.share-icon{
+  position: relative;
+  width: 18px;
+height: 24.96px;
+top: 96px;
+left: 478px;
+}
+.share-text{
+  position: relative;
+  width: 38px;
+height: 20px;
+top: 73px;
+left: 508px;;
+
+
+}
+
+.save-icon{
+  position: relative;
+  width: 19px;
+height: 17px;
+top: 39px;
+left: 557px;;
+
+}
+
+.save-text{
+  position: relative;
+  width: 31px;
+height: 20px;
+top: 20px;
+left: 586px;
+
+
+}
+
+
+}
+@media (min-width:1441px) and (max-width: 2000px) {
+  .doctor-profile-container{
+    width: 100%;
+height: auto;
+top: 3%;
+left: 0px;
+position: relative;
+display: flex;
+margin-left: auto;
+margin-right: auto;
+}
+.doctor-details{
+  left: 20.5%;
+  position: relative;
+  transform: translateX(-50%);
+
+}
+  .doctor-profile-img{
+    /* margin-left: auto;
+    margin-right: auto; */
+    transform: translateX(-50%);
+    left: 15.5%;
+  }
+  .share-box{
+    width: 100%;
+height: 179px;
+
+}
+
+.doctor-details-header{
+
+  width: 743px;
+height: 48px;
+top: 185px;
+margin-left: auto;
+margin-right: auto;
+left: 0px;
+
+}
+.doctor-appoinment-card-container{
+
+top: 680px;
+left: 0px;
+margin-left: auto;
+margin-right: auto;
+
+
+}
+.doctor-appoinment-card-one{
+
+top: -452px;
+left: 0px;
+
+}
+.doctor-appoinment-card-two{
+  
+top: -428px;
+left: 0px;
+
+}
+.Appointment-container{
+
+  
+  width: 440px;
+height: 409px;
+top: -204%;
+left: 950px;
+border-radius: 15px;
+background: #ffffff;
+border: 1px solid #0000001A;
+z-index: 1; 
+left: 80%;
+transform: translateX(-50%);
+}
+}
+
+
+
+@media (min-width:2001px) and (max-width: 4086px) {
+  .doctor-profile-container{
+    width: 100%;
+height: auto;
+top: 3%;
+left: 0px;
+position: relative;
+display: flex;
+margin-left: auto;
+margin-right: auto;
+}
+.doctor-details{
+  left: 30%;
+  position: relative;
+  transform: translateX(-50%);
+
+}
+  .doctor-profile-img{
+    /* margin-left: auto;
+    margin-right: auto; */
+    transform: translateX(-50%);
+    left: 24%;
+  }
+  .share-box{
+    width: 100%;
+height: 179px;
+
+}
+
+.doctor-details-header{
+
+  width: 743px;
+height: 48px;
+top: 185px;
+margin-left: auto;
+margin-right: auto;
+left: 0px;
+
+}
+.doctor-appoinment-card-container{
+
+top: 680px;
+left: 0px;
+margin-left: auto;
+margin-right: auto;
+
+
+}
+.doctor-appoinment-card-one{
+
+top: -452px;
+left: 0px;
+
+}
+.doctor-appoinment-card-two{
+  
+top: -428px;
+left: 0px;
+
+}
+.Appointment-container{
+
+  
+  width: 440px;
+height: 409px;
+height: 409px;
+top: -204%;
+left: 950px;
+border-radius: 15px;
+background: #ffffff;
+border: 1px solid #0000001A;
+z-index: 1; 
+left: 72%;
+transform: translateX(-50%);
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .doctor-profile{
+  width: 1445px;
+height: 4400px;
+  background: linear-gradient(180deg, #EDF3FF 0%, #FFFFFF 100%);
+
+
+} */

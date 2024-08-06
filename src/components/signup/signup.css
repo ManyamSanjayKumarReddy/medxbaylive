@@ -64,7 +64,7 @@ color: #272848;
 }
 .form-overall-container{
   position: relative;
-  top: -180px;
+  top: -60px;
 
 
 }
@@ -124,7 +124,7 @@ left: 46%;
 .custom-modal .btn-custom {
   width: 306px;
   height: 49px;
-  top: 7px;
+  top: 20px;
 
   border: 0.5px solid #FFFFFF;
   border-radius: 22px;
@@ -375,7 +375,7 @@ position: relative;
 .or-sign-up-container{
   display: flex;
   position: relative;
-  top: -45px;
+  top: 85px;
 }
 .end-line-sign-up{
 width: 116px;

@@ -1,0 +1,822 @@
+@import url('https://fonts.googleapis.com/css2?family=Matter:wght@400;500;600;700&display=swap');
+
+.main-section-review {
+    position: relative;
+    /* background: #FFFFFF; */
+    top:-800px;
+    left: 30px;
+   
+}
+
+.review-section {
+    padding: 20px;
+}
+  
+.review-section h5 {
+    font-size: 18px;
+    font-family: 'Matter', sans-serif;
+    font-weight: 600;
+    line-height: 21.6px;
+    margin-top: 180px;
+    margin-left: -30px;
+    color: #5E6282;
+}
+  
+.review-section h1 {
+    position: relative;
+    width: 409px;
+    height: 151.91px;
+    top: 2px;
+    left: -30px;
+    color: #272848;
+    font-family: 'Matter', sans-serif;
+font-size: 50px;
+font-weight: 700;
+line-height: 60px;
+text-align: left;
+
+}
+  
+.card-review {
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 180px;
+    margin-left: 10px;
+    width: 450px;
+    height: 286.29px;
+    background: #FFFFFF;
+    z-index: 1;
+    position: relative;
+
+
+    box-shadow: 0px 1.85px 3.15px 0px #00000001;
+
+    box-shadow: 0px 8.15px 6.52px 0px #00000002;
+    
+    box-shadow: 0px 20px 13px 0px #00000003;
+    
+    box-shadow: 0px 38.52px 25.48px 0px #00000003;
+    
+    box-shadow: 0px 64.81px 46.85px 0px #00000004;
+    
+    box-shadow: 0px 100px 80px 0px #00000005;
+    
+}
+  
+.shadow-card {
+  padding: 40px;
+    position: absolute;
+    top: 265px;
+    left: 60px;
+    width: 450px;
+    height: 250.29px;
+
+    border-radius: 10px;
+    z-index: 0;
+    border: 2px solid #F7F7F7
+}
+  
+.review-content {
+    font-family: 'Matter', sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 32px;
+    color: #5E6282;
+}
+  
+.review img {
+
+    width: 68px;
+height: 79.46px;
+border-radius: 50px;
+    margin-right: 5px;
+    margin-top: -50px;
+    margin-left: -50px;
+}
+  
+.ml-3 {
+    margin-left: 1rem;
+}
+  
+.location {
+    font-family: 'Matter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 10.8px;
+    color: #5E6282;
+ 
+}
+
+.reviwer-name {
+    font-family: 'Matter', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 21.6px;
+    color: #5E6282;
+}
+
+.up-arrow {
+    margin-left: 570px;
+    margin-top: -290px;
+    cursor: pointer;
+}
+
+.down-arrow-review {
+    margin-left: 570px;
+    margin-top: -200px;
+    cursor: pointer;
+}
+
+.star {
+    color: #37ADFF;
+    font-size: 10px;
+    gap: 1px;
+}
+
+.swipe-up-out {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.swipe-up-in {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+
+@media (max-width:412px){
+.main-section-review {
+
+    top:-100px;
+    left: 0px;
+   
+}
+.review-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+
+}
+.review-section h5 {
+    font-size: 12px;
+
+}
+.review-section h1 {
+    position: relative;
+    width:300px;
+    height: 151.91px;
+    top: 2px;
+    left: -80%;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 40px;
+text-align: center;
+
+}
+.card-review{
+    width: 100%;
+    margin: 10px 0;
+    left: 0;
+    top: 0;
+}
+.shadow-card {
+    width: 100%;
+    height: auto;
+    margin: 10px 0;
+    left: 10%;
+    top: 10%;
+}
+
+.review img {
+    width: 50px;
+    height: 50px;
+    margin-top: 0;
+    margin-left: 0;
+}
+
+.up-arrow,
+.down-arrow-review 
+{
+    position: absolute;
+  right: 50%; 
+  transform: translateX(50%); 
+}
+
+.up-arrow {
+  top: 450px; 
+}
+
+.down-arrow-review {
+  top: 550px; 
+}
+.review-content {
+    position: relative;
+    font-family: 'Matter', sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 32px;
+    color: #5E6282;
+    width: 100%;
+    margin-top: 40%;
+    left: -70%;
+}
+.location {
+    font-family: 'Matter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 10.8px;
+    color: #5E6282;
+    left: -70%;
+    position: relative;
+ 
+}
+
+.reviwer-name {
+    font-family: 'Matter', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 21.6px;
+    color: #5E6282;
+    left: -70%;
+    position: relative;
+}
+}
+
+
+@media (min-width:413px) and (max-width: 600px) {
+    .main-section-review {
+    
+        top:-100px;
+        left: 0px;
+       
+    }
+    .review-section{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0px;
+    
+    }
+    .review-section h5 {
+        font-size: 12px;
+    
+    }
+    .review-section h1 {
+        position: relative;
+        width:300px;
+        height: 151.91px;
+        top: 2px;
+        left: -80%;
+        font-size: 30px;
+        font-weight: 700;
+        line-height: 40px;
+    text-align: center;
+    
+    }
+    .card-review{
+        width: 100%;
+        margin: 10px 0;
+        left: 0;
+        top: 0;
+    }
+    .shadow-card {
+        width: 100%;
+        height: auto;
+        margin: 10px 0;
+        left: 10%;
+        top: 10%;
+    }
+    
+    .review img {
+        width: 50px;
+        height: 50px;
+        margin-top: 0;
+        margin-left: 0;
+    }
+    
+    .up-arrow,
+    .down-arrow-review 
+    {
+        position: absolute;
+      right: 50%;
+      transform: translateX(50%);
+    }
+    
+    .up-arrow {
+      top: 450px; 
+    }
+    
+    .down-arrow-review {
+      top: 550px; 
+    }
+    .review-content {
+        position: relative;
+        font-family: 'Matter', sans-serif;
+        font-size: 17px;
+        font-weight: 500;
+        line-height: 32px;
+        color: #5E6282;
+        width: 100%;
+        margin-top: 40%;
+        left: -70%;
+    }
+    .location {
+        font-family: 'Matter', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 10.8px;
+        color: #5E6282;
+        left: -70%;
+        position: relative;
+     
+    }
+    
+    .reviwer-name {
+        font-family: 'Matter', sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 21.6px;
+        color: #5E6282;
+        left: -70%;
+        position: relative;
+    }
+    
+    }
+
+    @media (min-width:601px) and (max-width: 767px) {
+        .main-section-review {
+    
+            top:-180px;
+            left: 0px;
+           
+        }
+        .review-section{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0px;
+        
+        }
+        .review-section h5 {
+            font-size: 16px;
+            left: 0;
+            top: -20px;
+            position: relative;
+        
+        }
+        .review-section h1 {
+            position: relative;
+            width:500px;
+            height: 151.91px;
+            top: 2px;
+            left: -80%;
+            font-size: 50px;
+            font-weight: 700;
+            line-height: 60px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        
+        }
+        .review-right{
+            position: relative;
+            left: -10%;
+        }
+        .card-review{
+            width: 100%;
+            margin: 10px 0;
+            left: 0;
+            top: 0;
+        }
+        .shadow-card {
+            width: 100%;
+            height: auto;
+            margin: 10px 0;
+            left: 10%;
+            top: 10%;
+        }
+        
+        .review img {
+            width: 50px;
+            height: 50px;
+            margin-top: 0;
+            margin-left: 0;
+        }
+        
+        .up-arrow,
+        .down-arrow-review 
+        {
+            position: absolute;
+          right: -0%;
+          left: -45%;
+          transform: translateX(50%);
+        }
+        
+        .up-arrow {
+          top: 450px; 
+        }
+        
+        .down-arrow-review {
+          top: 550px; 
+        }
+        .review-content {
+            position: relative;
+            font-family: 'Matter', sans-serif;
+            font-size: 17px;
+            font-weight: 500;
+            line-height: 32px;
+            color: #5E6282;
+            width: 100%;
+            margin-top: 40%;
+            left: -20%;
+        }
+        .location {
+            font-family: 'Matter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 10.8px;
+            color: #5E6282;
+            left: -20%;
+            position: relative;
+         
+        }
+        
+        .reviwer-name {
+            font-family: 'Matter', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 21.6px;
+            color: #5E6282;
+            left: -20%;
+            position: relative;
+        }
+    }
+    
+    @media (min-width:768px) and (max-width: 914px) {
+        .main-section-review {
+    
+            top:50px;
+            left: 0px;
+           
+        }
+        .review-section{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0px;
+        
+        }
+        .review-section h5 {
+            font-size: 16px;
+            left: 0;
+            top: -20px;
+            position: relative;
+        
+        }
+        .review-section h1 {
+            position: relative;
+            width:500px;
+            height: 151.91px;
+            top: 2px;
+            left: -80%;
+            font-size: 50px;
+            font-weight: 700;
+            line-height: 60px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        
+        }
+        .review-right{
+            position: relative;
+            left: -10%;
+        }
+        .card-review{
+            width: 100%;
+            margin: 10px 0;
+            left: 0;
+            top: 0;
+        }
+        .shadow-card {
+            width: 100%;
+            height: auto;
+            margin: 10px 0;
+            left: 10%;
+            top: 10%;
+        }
+        
+        .review img {
+            width: 50px;
+            height: 50px;
+            margin-top: 0;
+            margin-left: 0;
+        }
+        
+        .up-arrow,
+        .down-arrow-review 
+        {
+            position: absolute;
+          right: -0%;
+          left: -45%;
+          transform: translateX(50%);
+        }
+        
+        .up-arrow {
+          top: 450px; 
+        }
+        
+        .down-arrow-review {
+          top: 550px; 
+        }
+        .review-content {
+            position: relative;
+            font-family: 'Matter', sans-serif;
+            font-size: 17px;
+            font-weight: 500;
+            line-height: 32px;
+            color: #5E6282;
+            width: 100%;
+            margin-top: 40%;
+            left: -20%;
+        }
+        .location {
+            font-family: 'Matter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 10.8px;
+            color: #5E6282;
+            left: -20%;
+            position: relative;
+         
+        }
+        
+        .reviwer-name {
+            font-family: 'Matter', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 21.6px;
+            color: #5E6282;
+            left: -20%;
+            position: relative;
+        }
+    }
+
+    @media (min-width:915px) and (max-width: 1023px) {
+        .main-section-review {
+    
+            top:-350px;
+            left: 0px;
+           
+        }
+        .review-section{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0px;
+        
+        }
+        .review-section h5 {
+            font-size: 16px;
+            left: 0;
+            top: -20px;
+            position: relative;
+        
+        }
+        .review-section h1 {
+            position: relative;
+            width:500px;
+            height: 151.91px;
+            top: 2px;
+            left: -40%;
+            font-size: 50px;
+            font-weight: 700;
+            line-height: 60px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        
+        }
+        .review-right{
+            position: relative;
+            left: -10%;
+        }
+        .card-review{
+            width: 100%;
+            margin: 10px 0;
+            left: 0;
+            top: 0;
+        }
+        .shadow-card {
+            width: 100%;
+            height: auto;
+            margin: 10px 0;
+            left: 10%;
+            top: 10%;
+        }
+        
+        .review img {
+            width: 50px;
+            height: 50px;
+            margin-top: 0;
+            margin-left: 0;
+        }
+        
+        .up-arrow,
+        .down-arrow-review 
+        {
+            position: absolute;
+          right: -0%;
+          left: 25%;
+          transform: translateX(50%);
+       
+        }
+        
+        .up-arrow {
+          top:300px; 
+        }
+        
+        .down-arrow-review {
+          top: 450px; 
+        }
+        .review-content {
+            position: relative;
+            font-family: 'Matter', sans-serif;
+            font-size: 17px;
+            font-weight: 500;
+            line-height: 32px;
+            color: #5E6282;
+            width: 100%;
+            margin-top: 10%;
+            left: -10%;
+        }
+        .location {
+            font-family: 'Matter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 10.8px;
+            color: #5E6282;
+            left: -10%;
+            position: relative;
+         
+        }
+        
+        .reviwer-name {
+            font-family: 'Matter', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 21.6px;
+            color: #5E6282;
+            left: -10%;
+            position: relative;
+        }
+    }
+    @media (min-width:1024px) and (max-width: 1439px) {
+        .main-section-review {
+            top:-380px;
+        }
+
+
+        .review-section h5 {
+            font-size: 16px;
+            font-family: 'Matter', sans-serif;
+            font-weight: 600;
+            line-height: 21.6px;
+            margin-top: 180px;
+            margin-left: -50px;
+            color: #5E6282;
+        }
+          
+        .review-section h1 {
+            position: relative;
+            width: 409px;
+            height: 151.91px;
+            top: 2px;
+            left: -50px;
+            color: #272848;
+            font-family: 'Matter', sans-serif;
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 60px;
+        text-align: left;
+        
+        }
+        .review-right{
+            position: relative;
+            left: -8%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+          
+        .card-review {
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 180px;
+            margin-left: 10px;
+            width: 450px;
+            height: 286.29px;
+            background: #FFFFFF;
+            z-index: 1;
+            position: relative;
+        
+        
+            box-shadow: 0px 1.85px 3.15px 0px #00000001;
+        
+            box-shadow: 0px 8.15px 6.52px 0px #00000002;
+            
+            box-shadow: 0px 20px 13px 0px #00000003;
+            
+            box-shadow: 0px 38.52px 25.48px 0px #00000003;
+            
+            box-shadow: 0px 64.81px 46.85px 0px #00000004;
+            
+            box-shadow: 0px 100px 80px 0px #00000005;
+            
+        }
+          
+        .shadow-card {
+          padding: 40px;
+            position: absolute;
+            top: 265px;
+            left: 60px;
+            width: 450px;
+            height: 250.29px;
+        
+            border-radius: 10px;
+            z-index: 0;
+            border: 2px solid #F7F7F7
+        }
+          
+        .review-content {
+            font-family: 'Matter', sans-serif;
+            font-size: 17px;
+            font-weight: 500;
+            line-height: 32px;
+            color: #5E6282;
+        }
+          
+        .review img {
+        
+            width: 68px;
+        height: 79.46px;
+        border-radius: 50px;
+            margin-right: 5px;
+            margin-top: -50px;
+            margin-left: -50px;
+        }
+          
+        .ml-3 {
+            margin-left: 1rem;
+        }
+          
+        .location {
+            font-family: 'Matter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 10.8px;
+            color: #5E6282;
+         
+        }
+        
+        .reviwer-name {
+            font-family: 'Matter', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 21.6px;
+            color: #5E6282;
+        }
+        
+        .up-arrow {
+            margin-left: 570px;
+            margin-top: -290px;
+            cursor: pointer;
+        }
+        
+        .down-arrow-review {
+            margin-left: 570px;
+            margin-top: -200px;
+            cursor: pointer;
+        }
+        
+        .star {
+            color: #37ADFF;
+            font-size: 10px;
+            gap: 1px;
+        }
+        
+        .swipe-up-out {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        
+        .swipe-up-in {
+          transform: translateY(0);
+          opacity: 1;
+        }
+    }
+    @media (min-width:1441px) and (max-width: 4086px) {        .main-section-review {
+            top:650px;
+
+        }
+        
+    }

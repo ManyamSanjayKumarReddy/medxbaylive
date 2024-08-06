@@ -1,0 +1,78 @@
+.filterpage-parent{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.filter-edit {
+  width: 20% !important; /* Adjust this value to your preferred width */
+  padding-right: 0 !important;
+}
+/* .filter-edit.col-3{
+  display: flex;
+  justify-content: center;
+  max-width: 24%;
+} */
+.doctorMainCard-edit.col-lg-6{
+  display: flex !important;
+  justify-content: start !important;
+}
+/* Adjust the width of other columns to balance the layout */
+.doctorMainCard-edit {
+  padding: 0;
+  width: 60%; /* Adjust this value accordingly */
+}
+.map-edit{
+  margin-top: 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  /* .container-fluid {
+    width: 90%;
+  } */
+}
+
+@media (max-width: 768px) {
+  .container-fluid {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .doctorMainCard-edit {
+    font-size: 14px;
+  }
+
+  .map-container {
+    width: 100%;
+    height: auto;
+  }
+
+  .filter-edit, .map-edit {
+    display: none;
+  }
+
+  .doctorMainCard-edit {
+    width: 100%;
+  }
+
+  .offcanvas {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container-fluid {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .doctorMainCard-edit {
+    font-size: 12px;
+  }
+
+  .map-container {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+  }
+}

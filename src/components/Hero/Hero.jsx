@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './hero.css'; 
-import Navbar from '../Navbar/Navbar';
+
 import doctorImage from '../Assets/doctorImage.png';
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { IoMdSearch } from "react-icons/io";
@@ -41,7 +41,7 @@ const Hero = () => {
     return (
         <>  
            <div className='hero-head container-fluid'>
-                <Navbar/>
+          
                 <div className='row hero-content align-items-center'>
                     <div className="col-md-6 col-12 hero-item">
                         <h5>Be Your Own Health Advocate</h5>
