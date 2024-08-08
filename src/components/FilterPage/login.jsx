@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { login } from '../../actions/api';
 
-const MyComponent = () => {
+const Login = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [data, setData] = useState(null);
   const [error, setError] = useState('');
 
   const handleLogin = async () => {
@@ -12,10 +11,8 @@ const MyComponent = () => {
       const loginResponse = await login(email, password);
       console.log('Login successful:', loginResponse);
 
-      // Fetch data after successful login
-      const doctorData = await fetch('http://localhost:5000/patient/bookings');
-      setData(doctorData);
-      console.log('Fetched doctor data:', doctorData);
+      // Call onLoginSuccess with login response (token, user data, etc.)
+      onLoginSuccess(loginResponse);
     } catch (error) {
       setError('Login failed. Please check your credentials.');
       console.error('Login failed:', error);
@@ -38,9 +35,8 @@ const MyComponent = () => {
       />
       <button onClick={handleLogin}>Login</button>
       {error && <div style={{ color: 'red' }}>{error}</div>}
-      {/* {data && <div>Data: {JSON.stringify(data)}</div>} */}
     </div>
   );
 };
 
-export default MyComponent;
+export default Login;

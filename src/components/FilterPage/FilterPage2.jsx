@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Nestednavbar from '../Nestednavbar2/Nestednavbar2'
+import Nestednavbar from '../Nestednavbar/Nestednavbar2'
 import DoctorMainCard from './DoctorMainCard'
 import Filter from './Filter'
 import './FilterPage.css'

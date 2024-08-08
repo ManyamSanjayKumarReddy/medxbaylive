@@ -318,7 +318,7 @@ color: #000000;
 
 
 }
-.faFacebook,.faEnvelope,.faInstagram,.faTwitter{
+.faFacebooks,.faEnvelope,.faInstagram,.faTwitter{
  background: #FF7F50;
  width: 32px;
 height: 32px;
@@ -326,11 +326,13 @@ top: 0x;
 left: 0px;
 position: relative;
 border-radius: 50px;
+
 }
-.faEnvelope-icon,.faInstagram-icon,.faTwitter-icon,.faFacebook-icon{
+.faEnvelope-icon,.faInstagram-icon,.faTwitter-icon,.faFacebooks-icon{
   position: relative;
   left: 8px;
   top: 4px;
+  color: #ffffff;
 }
 
 .edit-doctor-button{

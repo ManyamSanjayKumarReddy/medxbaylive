@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 //imported react-router-dom in NavLink using active chnages and Outlet using right side showing profileItem
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet ,useNavigate} from 'react-router-dom';
 
 //style.css
 import './profilelayout.css';
@@ -32,7 +32,7 @@ const languages = [
 const ProfileLayout = () => {
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
   const [notificationStatus, setNotificationStatus] = useState('Allow');
-
+  const navigate = useNavigate();
   const handleLanguageChange = (e) => {
     const selectedLang = languages.find(lang => lang.code === e.target.value);
     setSelectedLanguage(selectedLang);
@@ -41,7 +41,13 @@ const ProfileLayout = () => {
   const handleNotificationChange = (e) => {
     setNotificationStatus(e.target.value);
   };
-
+  const handleLogout = () => {
+    sessionStorage.removeItem('loggedIn');
+    sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('userEmail');
+    sessionStorage.removeItem('role');
+    navigate('/'); 
+  };
   return (
     <div className='layout-profile'>
       <div className='container'>
@@ -120,10 +126,10 @@ const ProfileLayout = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>
+                <button onClick={handleLogout} className='logout-button'>
                     <RiLogoutCircleRLine size='1.2rem' />
                     <span>Log Out</span>
-                  </NavLink>
+                  </button>
                 </li>
               </ul>
             </nav>

@@ -102,7 +102,46 @@
 }
 
 
+/* manageappointment.css */
 
+/* Status dot styles */
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+  }
+  
+  /* Color-coded status dots */
+  .status-dot.waiting {
+    background-color: #FF5C00;
+  }
+  
+  .status-dot.accepted {
+    background-color:#0FA958;
+ 
+  }
+  
+  .status-dot.rejected {
+    background-color: #FF0000;
+  }
+  
+  .status-dot.completed {
+    background-color: blue;
+  }
+  /* manageappointment.css */
+
+  .tick-icon {
+    color: green; /* or any color you prefer */
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .tick-icon:hover {
+    color: darkgreen;
+  }
+  
 .manage-appointments-table tbody .status-dot {
     display: inline-block;
     width: 11px;

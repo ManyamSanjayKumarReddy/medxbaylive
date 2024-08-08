@@ -34,8 +34,8 @@ const DoctorLayout = () => {
 
   const handleLogout = () => {
     sessionStorage.removeItem('loggedIn');
-    sessionStorage.removeItem('doctorId');
-    sessionStorage.removeItem('doctorEmail');
+    sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('userEmail');
     sessionStorage.removeItem('role');
     navigate('/'); 
   };

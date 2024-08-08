@@ -16,30 +16,34 @@ export const login = async (email, password) => {
     throw error;
   }
 };
+
 export const fetchFromPatient = async (endpoint, data = {}, method = 'GET') => {
   try {
-      let response;
-      if (method === 'POST') {
-          response = await api.post(`/patient${endpoint}`, data);
-      } else {
-          // Convert the data object to query string for GET requests
-          const queryString = new URLSearchParams(data).toString();
-          response = await api.get(`/patient${endpoint}?${queryString}`);
-      }
+    let response;
+    if (method === 'POST') {
+      response = await api.post(`/patient${endpoint}`, data);
+    } else {
+      // Convert the data object to query string for GET requests
+      const queryString = new URLSearchParams(data).toString();
+      response = await api.get(`/patient${endpoint}?${queryString}`);
+    }
 
-      return response.data;
+    // Log the response to inspect it
+    console.log('Response:', response);
 
-      // if (response.headers['content-type']?.includes('application/json')) {
-      //     return response.data;
-      // } else {
-      //     const responseText = await response.json();
-      //     throw new Error(`Received non-JSON response: ${responseText}`);
-      // }
+    // Return the response data
+    return response.data;
   } catch (error) {
-      console.error('Fetch patient data error:', error.response ? error.response.data : error.message);
-      throw error;
+    // Log error details
+    console.error('Fetch patient data error:', error.response ? error.response.data : error.message);
+
+    // If the error response has a status, log the headers
+    if (error.response && error.response.status) {
+      console.error('Error response headers:', error.response.headers);
+    }
+
+    throw error;
   }
 };
-
 
 export default api;

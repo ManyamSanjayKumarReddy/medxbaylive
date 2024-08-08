@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faBell } from '@fortawesome/free-solid-svg-icons'; // Import FontAwesome bell icon
+import { faChevronDown, faBell } from '@fortawesome/free-solid-svg-icons'; 
 import SignupCard from '../signup/signup';
 import LoginCard from '../login/login';
 import brand from '../Assets/medbrand.png';

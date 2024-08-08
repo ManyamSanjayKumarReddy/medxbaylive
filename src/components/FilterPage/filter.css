@@ -48,9 +48,9 @@
     font-weight: 400;
     padding: 8px 12px 8px 8px;
     border-radius: 4px;
-    -webkit-appearance: none; /* For Chrome */
-    -moz-appearance: none; /* For Firefox */
-    appearance: none; /* For modern browsers */
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    appearance: none; 
     outline: none;
     width: 100%;
     box-sizing: border-box;

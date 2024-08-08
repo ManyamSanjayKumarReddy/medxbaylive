@@ -3,8 +3,8 @@ import React, { useEffect, useState ,useRef} from 'react';
 
 import './doctoredit.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAward,faPlus ,faUserMd,faEnvelope} from '@fortawesome/free-solid-svg-icons';
-import { faInstagram, faTwitter, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faAward,faPlus ,faUserMd} from '@fortawesome/free-solid-svg-icons';
+import { faInstagram, faTwitter, faFacebook ,faLinkedin} from '@fortawesome/free-brands-svg-icons';
 
 import Articles from '../ArticleEdit/ArticleEdit';
 import Languages from '../LanguagesEdit/LanguageEdit';
@@ -172,17 +172,28 @@ function DoctorEdit() {
     </div>
     <div className='social-links-container'>
       <div className='faEnvelope'>
-    <FontAwesomeIcon icon={faEnvelope} className='faEnvelope-icon'  />
+      <a href={doctor ? doctor.linkedin : '#'} target="_blank" rel="noopener noreferrer">
+      <FontAwesomeIcon icon={faLinkedin} className='faEnvelope-icon' />
+      </a>
     </div>
-    <div className='faFacebook'>
-      <FontAwesomeIcon icon={faFacebook} className='faFacebook-icon'  />
-      </div>
-      <div className='faTwitter'>   
-          <FontAwesomeIcon icon={faTwitter} className='faTwitter-icon' />
-    </div>
+    <div className='faFacebooks'>
+  <a href={doctor ? doctor.facebook : '#'} target="_blank" rel="noopener noreferrer">
+    <FontAwesomeIcon icon={faFacebook} className='faFacebooks-icon' />
+  </a>
+
+</div>
+      <div className='faTwitter'>
+  <a href={doctor ? doctor.twitter : '#'} target="_blank" rel="noopener noreferrer">
+    <FontAwesomeIcon icon={faTwitter} className='faTwitter-icon' />
+  </a>
+
+</div>
     <div className='faInstagram'>
-    <FontAwesomeIcon icon={faInstagram}  className='faInstagram-icon' />
-    </div>
+  <a href={doctor ? doctor.instagram : '#'} target="_blank" rel="noopener noreferrer">
+    <FontAwesomeIcon icon={faInstagram} className='faInstagram-icon' />
+  </a>
+
+</div>
     </div>
 <button className='edit-doctor-button' onClick={handleShowEditPopup}>Edit profile</button>
 

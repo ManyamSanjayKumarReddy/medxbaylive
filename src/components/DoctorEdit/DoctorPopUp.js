@@ -25,7 +25,7 @@ const DoctorPopUp = ({ show, handleClose }) => {
     speciality: '',
     conditions: [''],
     languages: [''],
-    website: '',
+    facebook: '',
     twitter: '',
     linkedin: '',
     instagram: '',
@@ -109,6 +109,34 @@ const DoctorPopUp = ({ show, handleClose }) => {
       }));
     }
   }, []);
+
+
+  useEffect(() => {
+    document.title = "Doctor-Edit";
+    
+    const fetchDoctorDetails = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/doctor/profile/update', { withCredentials: true });
+        const formData = response.data;
+
+      
+        if (formData.dateOfBirth) {
+          const date = new Date(formData.dateOfBirth);
+          const formattedDate = `${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')}/${date.getFullYear()}`;
+          formData.dateOfBirth = formattedDate;
+        }
+
+        console.log("API Response:", formData);
+        setFormData(formData);
+      } catch (error) {
+        console.error("Error fetching doctor details:", error);
+      }
+    };
+
+    fetchDoctorDetails();
+  }, []);
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -421,8 +449,8 @@ const DoctorPopUp = ({ show, handleClose }) => {
               <Form.Group className="mb-3" controlId="formUsername">
                 <Form.Label>Website</Form.Label>
                 <Form.Control
-                    name="website"
-                    value={formData.website}
+                    name="facebook"
+                    value={formData.facebook}
                     onChange={handleChange}
                   type="text"
                   placeholder="Paste a URL"

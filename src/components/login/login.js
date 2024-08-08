@@ -40,23 +40,25 @@ const LoginCard = ({ show, handleClose }) => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const res = await axios.post('http://localhost:8000/auth/login', { email, password });
+        const res = await axios.post('http://localhost:8000/auth/login', { email, password },{ withCredentials: true });
         if (res.data.success) {
           const { user } = res.data;
-          const { role, _id: doctorId, email: doctorEmail } = user;
+          const { role, _id: userId, email: userEmail, subscriptionType, subscriptionVerification } = user;
   
-          // Store user info and login status in sessionStorage
-          sessionStorage.setItem('doctorId', doctorId);
-          sessionStorage.setItem('doctorEmail', doctorEmail);
-          sessionStorage.setItem('role', role); // Store the role to determine redirection
-          sessionStorage.setItem('loggedIn', 'true'); // Set logged-in status to true
+          sessionStorage.setItem('userId', userId);
+          sessionStorage.setItem('userEmail', userEmail);
+          sessionStorage.setItem('role', role);
+          sessionStorage.setItem('loggedIn', 'true');
+          sessionStorage.setItem('subscriptionType', subscriptionType);
+          sessionStorage.setItem('subscriptionVerification', subscriptionVerification);
+  
   
           switch (role) {
             case 'doctor':
               navigate('profile/doctorprofile/settings');
               break;
             case 'patient':
-              navigate('profile/userprofile/edit/profile');
+              navigate('filters');
               break;
             case 'admin':
               navigate('/admin/admin-home');
@@ -74,7 +76,6 @@ const LoginCard = ({ show, handleClose }) => {
       }
     }
   };
-  
   
   
   const forgetPassword = async (e) => {
@@ -168,10 +169,10 @@ const LoginCard = ({ show, handleClose }) => {
       return false;
     }
 
-    if (trimmedValue.length < 6) {
-      setPasswordError('Password should be at least 6 characters.');
-      return false;
-    }
+    // if (trimmedValue.length < 6) {
+    //   setPasswordError('Password should be at least 6 characters.');
+    //   return false;
+    // }
 
     setPasswordError('');
     return true;

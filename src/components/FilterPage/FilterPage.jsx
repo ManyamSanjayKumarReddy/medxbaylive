@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import Nestednavbar from '../Nestednavbar2/Nestednavbar2';
+// import Nestednavbar from '../Nestednavbar/Nestednavbar';
 import DoctorMainCard from './DoctorMainCard';
 import Filter from './Filter';
 import './FilterPage.css';
 import MidPartTwo from '../../MidPartTwo';
+import Footer from '../footer/footerrs';
 import Footerr from '../footer/footer';
 import MapContainer from './Mapcontainer';
 import './OffCanvas.css';
 import { fetchFromPatient } from '../../actions/api';
+import Navbar from '../Navbar/Navbar';
 
 const FilterPage = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -34,11 +36,9 @@ const FilterPage = () => {
     const fetchDoctors = async () => {
       try {
         const response = await fetchFromPatient(`/doctors`);
-        console.log('API response:', response);
-        setDoctors(response.doctors || []); 
+
+        setDoctors(response.doctors);
       } catch (error) {
-        console.error('Error fetching doctors:', error);
-        setDoctors([]); 
       }
     };
 
@@ -86,11 +86,6 @@ const FilterPage = () => {
   };
 
   const filterDoctors = (doctors) => {
-    if (!Array.isArray(doctors)) {
-      console.error("Doctors is not an array or is undefined");
-      return [];
-    }
-
     return doctors.filter((doctor) => {
       const getStringValue = (value) => (typeof value === 'string' ? value.toLowerCase() : '');
 
@@ -126,7 +121,8 @@ const FilterPage = () => {
 
   return (
     <>
-      <Nestednavbar />
+
+      <Navbar/>
       <div className='container-fluid mt-5'>
         <div className='filterpage-parent'>
           <button onClick={toggleFilterCanvas} className="btn btn-primary my-3 d-lg-none">
@@ -159,9 +155,10 @@ const FilterPage = () => {
             </div>
           </div>
         </div>
-
+    
         <MidPartTwo />
         <Footerr />
+        <Footer />
       </div>
     </>
   );
