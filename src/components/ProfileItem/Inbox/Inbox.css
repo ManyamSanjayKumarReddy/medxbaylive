@@ -1,0 +1,17 @@
+
+body{
+  font-family: 'Matter', sans-serif; 
+}
+
+.inbox-container {
+  display: flex;
+  height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .inbox-container {
+    flex-direction: column;
+  }
+}
+
+  

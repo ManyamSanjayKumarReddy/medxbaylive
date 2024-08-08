@@ -1,0 +1,59 @@
+.prescription-button {
+    font-size: 11px !important;
+    display: flex;
+    align-items: center;
+    width: 160px; /* Adjust the width as needed */
+    height: 40px; /* Adjust the height as needed */
+  }.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    margin-top: 20px;
+  }
+  
+  .actions {
+
+    display: flex;
+  }
+  
+  .button {
+    display: flex;
+    flex-direction: column;
+    gap: 8px  !important;
+    margin-right: 5px;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  .reduced-width {
+    width: 90% !important;
+    margin: 0 auto;
+  }
+  
+  .table-header {
+    background-color: #272848;
+    color: white !important; 
+    border-bottom: 1px solid #F0F1F5;
+  }
+  
+  .prescription-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .pagination-button {
+    margin: 0 5px;
+  }
+  .mypatients{
+    margin-left: 15px;
+  }

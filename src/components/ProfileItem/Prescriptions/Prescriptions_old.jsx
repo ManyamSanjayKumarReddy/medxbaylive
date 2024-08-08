@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { MdOutlineFileDownload } from "react-icons/md";
+import { fetchFromPatient } from '../../../../actions/api';
 import './prescriptions.css';
 
 const Prescriptions = () => {
-  const [visibleAppointments, setVisibleAppointments] = useState(5); // Default number of visible appointments
+  const [visibleAppointments, setVisibleAppointments] = useState(5);
   const [statuses, setStatuses] = useState([]);
 
   useEffect(() => {
     const fetchPrescriptions = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/patient/prescriptions',{withCredentials:true});
-        console.log('Fetched data:', response.data); 
-        if (Array.isArray(response.data)) {
-          setStatuses(response.data);
-        } else {
-          console.error('Fetched data is not an array:', response.data);
-          setStatuses([]); 
-        }
+        const data = await fetchFromPatient('/prescriptions');
+        setStatuses(data);
       } catch (error) {
         console.error('Error fetching prescriptions:', error);
       }
@@ -34,10 +28,9 @@ const Prescriptions = () => {
 
   const downloadPrescription = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:8000/patient/prescriptions/${id}/download`, {
+      const response = await fetchFromPatient(`/prescriptions/${id}/download`, {
         responseType: 'blob',
-        withCredentials : true
-      },);
+      });
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const a = document.createElement('a');
       a.href = url;
@@ -66,16 +59,16 @@ const Prescriptions = () => {
             </tr>
           </thead>
           <tbody>
-            {statuses.slice(0, visibleAppointments).map(({ _id, meetingDate, meetingTime, doctorName }) => (
-              <tr key={_id}>
-                <td>{_id}</td>
+            {Array.isArray(statuses) && statuses.slice(0, visibleAppointments).map(({ prescription_id, meetingDate, meetingTime, doctorName }) => (
+              <tr key={prescription_id}> {/* Ensure that `prescription_id` is unique */}
+                <td>{prescription_id}</td>
                 <td>{meetingDate}</td>
                 <td>{meetingTime}</td>
                 <td>{doctorName}</td>
                 <td>
                   <button
                     className="view-button"
-                    onClick={() => downloadPrescription(_id)}
+                    onClick={() => downloadPrescription(prescription_id)}
                   >
                     View Prescription <MdOutlineFileDownload />
                   </button>
@@ -85,7 +78,7 @@ const Prescriptions = () => {
           </tbody>
         </table>
       </div>
-      {statuses.length > 5 && (
+      {Array.isArray(statuses) && statuses.length > 5 && (
         <button className="view-all-button" onClick={toggleAppointmentsVisibility}>
           {visibleAppointments === 5 ? 'View All' : 'View Less'}
         </button>

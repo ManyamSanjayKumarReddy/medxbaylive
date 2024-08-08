@@ -1,0 +1,65 @@
+/* InboxMessageList.css */
+
+.message-list-container {
+  flex: 1;
+  padding: 20px;
+  background-color: #f9f9f9;
+  overflow-y: auto;
+}
+
+.message-item {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-message {
+  align-items: flex-end;
+}
+
+.doctor-message {
+  align-items: flex-start;
+}
+
+.message-bubble {
+  padding: 12px 20px;
+  border-radius: 50px 50px 50px 0px;
+  max-width: 60%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 13px;
+  color: #000;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.user-bubble {
+  background-color: #4f7efe;
+  border-radius: 50px 50px 0px 50px;
+  color: #fff;
+}
+
+.doctor-bubble {
+  background-color: #dce6ff;
+  border-radius: 50px 50px 50px 0px;
+}
+
+.message-timestamp {
+  font-size: 0.75em;
+  color: #888;
+  margin-top: 5px;
+}
+
+.user-time {
+  text-align: right;
+}
+
+.doctor-time {
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .message-bubble, .user-bubble, .doctor-bubble {
+    max-width: 80%;
+  }
+}

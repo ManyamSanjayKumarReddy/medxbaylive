@@ -1,0 +1,13 @@
+.chat-window-container {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: 'Matter', sans-serif;
+}
+
+@media (max-width: 768px) {
+  .chat-window-container {
+    width: 100%;
+  }
+}

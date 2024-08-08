@@ -120,6 +120,10 @@
 .status-dot.red {
   background-color: red;
 }
+.tick-mark {
+  width: 20px;
+  height: 20px;
+}
 
 .view-button {
   background-color: #0067FF;
@@ -145,6 +149,154 @@
   line-height: 19.2px;
   letter-spacing: 0.02em;
 }
+
+.add-review-button{
+  background-color: #0067FF;
+  border: 2px solid #14BEF0;
+  border-radius: 4px;
+  color: #FFFFFF;
+  padding: 5px 28.3px;
+  cursor: pointer;
+  font-weight: 500;
+;}
+
+
+/* Modal Styles */
+.view-appointment-modal {
+  position: fixed; 
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-overlay {
+  position: fixed; /* Ensure overlay covers the whole viewport */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.appointment-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.close-modal-button {
+  margin-top: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.close-modal-button:hover {
+  background-color: #0056b3;
+}
+
+.review-custom-modal{
+  position: fixed; 
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.review-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Styles for Add Review Modal */
+.review-custom-modal .review-modal-content {
+  padding: 20px;
+}
+
+.review-custom-modal .review-modal-content form div {
+  margin-bottom: 15px; 
+}
+
+.review-custom-modal .review-modal-content form label {
+  display: block; 
+  margin-bottom: 5px; 
+}
+
+.review-custom-modal .review-modal-content form input,
+.review-custom-modal .review-modal-content form textarea {
+  width: 100%; 
+  padding: 10px;
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+  box-sizing: border-box; 
+}
+
+.review-custom-modal .review-modal-content form input:focus,
+.review-custom-modal .review-modal-content form textarea:focus {
+  outline: none; 
+}
+
+.review-custom-modal .review-modal-content form .submit-review-button {
+  background-color: #007bff; 
+  color: white; 
+  padding: 10px 20px; 
+  border: none; 
+  cursor: pointer; 
+  border-radius: 4px; 
+  transition: background-color 0.3s;
+}
+
+.review-custom-modal .review-modal-content form .submit-review-button:hover {
+   background-color: #0056b3;
+}
+
+.review-custom-modal .review-modal-content form .close-modal-button {
+  background-color: #007bff; 
+  color: white; 
+  padding: 10px 20px; 
+  border: none; 
+  cursor: pointer;
+  border-radius: 4px; 
+  transition: background-color 0.3s; 
+  margin-left: 10px; 
+}
+
+.review-custom-modal .review-modal-content form .close-modal-button:hover {
+  background-color: #0056b3; 
+}
+
+.star-rating {
+  display: inline-flex; 
+  padding:10px 10px 10px 10px;
+}
+
+.star {
+  font-size: 24px; 
+  color: #ccc; 
+  cursor: pointer; 
+  transition: color 0.3s; 
+}
+
+.star.filled {
+  color: #FFD700; /* Color for filled stars */
+}
+
+
 
 /* Media Queries for Tablet View */
 @media (max-width: 768px) {

@@ -1,17 +1,31 @@
-import React from 'react';
-import '../Card.css';
+import React, { useState } from 'react';
+import Sidebar from './InboxSidebar';
+import ChatWindow from './ChatWindow';
+import './Inbox.css';
+// import LoginCard from '../Inbox/login'
 
 const Inbox = () => {
+  const [selectedChat, setSelectedChat] = useState(null);
+
+  const handleSelectChat = (chat) => {
+    console.log(chat);
+    
+    setSelectedChat(chat);
+  };
+
   return (
-    <div className="card">
-      <h2>Inbox</h2>
-      <p>This is the Notification page. Here you can manage your notifications.This is the Notification page. Here you can manage your notifications.This is the Notification page. Here you can manage your notifications.</p>
-      <p>This is the Notification page. Here you can manage your notifications.</p>
-      <p>This is the Notification page. Here you can manage your notifications.</p>
-      <p>This is the Notification page. Here you can manage your notifications.</p>
-      <p>This is the Notification page. Here you can manage your notifications.</p>
-      <p>This is the Notification page. Here you can manage your notifications.</p>
-      <p>This is the Notification page. Here you can manage your notifications.</p>    </div>
+    <div className="inbox-container">
+      {/* <LoginCard /> */}
+      <Sidebar onSelectChat={handleSelectChat} />
+      {selectedChat ? (
+        <ChatWindow
+          chatId={selectedChat.id}
+          doctorName={selectedChat.name}
+        />
+      ) : (
+        <div className="no-chat-selected">Select a chat to start messaging</div>
+      )}
+    </div>
   );
 };
 
