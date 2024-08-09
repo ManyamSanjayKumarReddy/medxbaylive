@@ -122,7 +122,7 @@ const FilterPage = () => {
   return (
     <>
 
-      <Navbar/>
+   
       <div className='container-fluid mt-5'>
         <div className='filterpage-parent'>
           <button onClick={toggleFilterCanvas} className="btn btn-primary my-3 d-lg-none">

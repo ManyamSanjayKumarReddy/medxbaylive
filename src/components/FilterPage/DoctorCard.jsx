@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import doctorProfile from '../../assests/img/Ellipse-30.png'; // Placeholder image
 import videoCall from '../../assests/img/video_call.svg';
+import videoCallwhite from '../../assests/img/video_call_white.svg';
 import MedicalService from '../../assests/img/medical_services.svg';
+import MedicalServiceWhite from '../../assests/img/medical_services_white.svg';
 import thumbsUp from '../../assests/img/ThumbsUp.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons'; // Filled star
@@ -12,37 +14,44 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'; // Filled star
 // import api from 'axios';
 import { fetchFromPatient } from '../../actions/api.js';
 import { Link } from 'react-router-dom';
+import moment from 'moment/moment.js';
 
 const bufferToBase64 = (buffer) => {
-    if (buffer.type === 'Buffer' && Array.isArray(buffer.data)) {
-        const binary = String.fromCharCode.apply(null, new Uint8Array(buffer.data));
-        return `data:image/jpeg;base64,${window.btoa(binary)}`;
+    if (buffer?.type === 'Buffer' && Array.isArray(buffer?.data)) {
+      const bytes = new Uint8Array(buffer.data);
+      let binary = '';
+      for (let i = 0; i < bytes.length; i++) {
+        binary += String.fromCharCode(bytes[i]);
+      }
+      return `data:image/jpeg;base64,${btoa(binary)}`;
+    } else {
+      console.error('Unexpected buffer type:', typeof buffer);
+      return '';
     }
-};
+  };
 
 const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
     const [startIndex, setStartIndex] = useState(0);
     const [selectedDate, setSelectedDate] = useState(0);
     const [showDoctorCard, setShowDoctorCard] = useState(false);
-    const [profilePictur, setProfilePicture] = useState(doctorProfile);
+    const [profilePicture, setProfilePicture] = useState(doctorProfile);
     const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
-    const [consultationType, setConsultationType] = useState('In-person'); 
+    const [consultationType, setConsultationType] = useState(''); // Default consultation type
+    const [showAllHospitals, setShowAllHospitals] = useState(false); // State to show all hospitals
 
     useEffect(() => {
         if (doctor.profilePicture && doctor.profilePicture.data) {
-            console.log('Profile picture data type:', typeof doctor.profilePicture.data);
-            console.log('Profile picture data:', doctor.profilePicture.data);
-            const base64String = bufferToBase64(doctor.profilePicture);
+            // console.log('Profile picture data type:', typeof doctor.profilePicture.data);
+            // console.log('Profile picture data:', doctor.profilePicture.data);
+            const base64String = bufferToBase64(doctor.profilePicture.data);
             setProfilePicture(base64String);
-        } else {
-            setProfilePicture(doctorProfile);
         }
 
 
     }, [doctor.profilePicture]);
 
- 
-    console.log(doctor.profilePicture);
+    // Default values for dates if doctor data is missing
+    // console.log(doctor.profilePicture);
 
     const timeSlots = doctor.timeSlots || [];
     const datesMap = timeSlots.reduce((acc, slot) => {
@@ -63,7 +72,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
         evening: []
     };
 
-   
+    // Group time slots into morning, afternoon, evening
     if (dates[selectedDate]) {
         dates[selectedDate].timeSlots.forEach(slot => {
             const hour = parseInt(slot.startTime.split(':')[0], 10);
@@ -98,7 +107,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
     const handleTimeSlotClick = (slot) => {
         setSelectedTimeSlot(slot);
     };
-
+    
     const handleBookAppointment = async () => {
         try {
             const bookingData = {
@@ -137,8 +146,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
     
     
 
-
-
+    
 
     const renderStars = (rating) => {
         const fullStars = Math.floor(rating);
@@ -158,6 +166,40 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
         return stars;
     };
 
+    const renderConsultationType = () => {
+        if (doctor.consultation === 'In-person') {
+            return (
+                <div className={`p-1 ${consultationType === "In-person" ? "consultationActiveColor" : ""}`}>
+                    {consultationType === "In-person" ? <img src={MedicalServiceWhite} alt="Video Consultation" />  : <img src={MedicalService} alt="In-Person" />}
+                    <span onClick={() => setConsultationType('In-person')}>In-person</span>
+                </div>
+            );
+        } else if (doctor.consultation === 'video call') {
+            return (
+                <div className={`p-1 ${consultationType === "video call" ? "consultationActiveColor" : ""}`}>
+                    {consultationType === "video call" ? <img src={videoCallwhite} alt="Video Consultation" />  : <img src={videoCall} alt="In-Person" />}
+                    {/* <img src={videoCall} alt="Video Consultation" style={{ color: "#37adff" }} /> */}
+                    <span onClick={() => setConsultationType('video call')}>Video Consultation</span>
+                </div>
+            );
+        } else if (doctor.consultation === 'Both') {
+            return (
+                <>
+                    <div className={`p-1 ${consultationType === "In-person" ? "consultationActiveColor" : ""}`}>
+                        {consultationType === "In-person" ? <img src={MedicalServiceWhite} alt="Video Consultation" />  : <img src={MedicalService} alt="In-Person" />}
+                        <span onClick={() => setConsultationType('In-person')}>In-Person</span>
+                    </div>
+                    <div className={`p-1 ${consultationType === "video call" ? "consultationActiveColor" : ""}`}>
+                        {consultationType === "video call" ? <img src={videoCallwhite} alt="Video Consultation" />  : <img src={videoCall} alt="In-Person" />}
+                        {/* <img src={videoCall} alt="Video Consultation" style={{ color: "#37adff" }} /> */}
+                        <span onClick={() => setConsultationType('video call')}>Video Consultation</span>
+                    </div>
+                </>
+            );
+        }
+        return null;
+    };
+
     return (
         <>
             <div className={`row doctor-card ${isMapExpanded ? 'mapExpanded-doctor-card' : ''}`}>
@@ -165,7 +207,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                     <div className="doctor-info">
                         <div>
                             <Link to={`/doctor/${doctor._id}`}>
-                                <img src={profilePictur || doctorProfile} alt={doctor.name || "Doctor"} className="doctor-photo" />
+                                <img src={profilePicture} alt={doctor.name || "Doctor"} className="doctor-photo" />
                             </Link>
                             <div className={` ${isMapExpanded ? 'mapExpanded-sponsor-rating-stars' : 'd-none'}`}>
                                 {doctor.rating !== undefined ? renderStars(doctor.rating) : renderStars(0)}
@@ -179,17 +221,30 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                         </div>
                         <div className="doctor-details">
                             <Link to={`/doctor/${doctor._id}`}>
-                                <h2>{doctor.name || "Dr. Shantanu Jambhekar"}</h2>
+                                <h2>{doctor.name}</h2>
                             </Link>
-                            <p className="speciality">{doctor.speciality || "Dentist"}</p>
+                            <p className="speciality">{doctor.speciality }</p>
                             <p className="experience">{doctor.experience || "16 years experience overall"}</p>
                             <p className={`location ${isMapExpanded ? 'mapExpanded-location' : ''}`}>{doctor.city || "Pare, Mumbai"}</p>
-                            <p className={`clinic ${isMapExpanded ? 'mapExpanded-clinic' : ''}`}>{doctor.clinic || "Smilesense Center for Advanced Dentistry + 1 more"}</p>
+                            <p className={`clinic ${isMapExpanded ? 'mapExpanded-clinic' : ''}`}>
+                                        {doctor.hospitals && doctor.hospitals.length > 0 ? (
+                                            <>
+                                                <p className="hospital-item">{doctor.hospitals[0].name}</p>
+                                                {showAllHospitals && doctor.hospitals.slice(1).map((hospital, index) => (
+                                                    <p key={index} className="hospital-item">{hospital.name}</p>
+                                                ))}
+                                                {doctor.hospitals.length > 1 && (
+                                                    <p style={{cursor:"pointer"}} onClick={() => setShowAllHospitals(!showAllHospitals)}>
+                                                        {showAllHospitals ? 'Show Less' : `+${doctor.hospitals.length - 1} more`}
+                                                    </p>
+                                                )}
+                                            </>
+                                        ) : (
+                                            <p>No hospitals available</p>
+                                        )}
+                            </p>
                             <div className={`consultation-type ${isMapExpanded ? 'mapExpanded-consultation-type' : ''}`}>
-                                <img src={MedicalService} alt="In-Person" />
-                                <span onClick={() => setConsultationType('inPerson')}>{doctor.consultationType?.inPerson || "In-person"}</span>
-                                <img src={videoCall} alt="Video Consultation" style={{ color: "#37adff" }} />
-                                <span onClick={() => setConsultationType('video')}>{doctor.consultationType?.video || "Video Consultation"}</span>
+                                {renderConsultationType()}
                             </div>
                             <div className={`percentage-data d-flex ${isMapExpanded ? 'mapExpanded-percentage-data' : ''}`}>
                                 <div className='liked'>

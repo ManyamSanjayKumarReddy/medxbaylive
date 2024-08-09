@@ -1,40 +1,22 @@
 import React, { useState } from 'react';
 import { FaStar } from "react-icons/fa6";
 import './Reviewpage.css';
+import tick from "../../assests/img/pic 2.png";
 
-const reviews = [
-  {
-    content: "Very happy with the service! The staff was attentive, and the care exceeded my expectations. Highly recommend!",
-    name: "Karthik Thiramdas",
-    location: "Hyderabad, India",
-    rating: 5,
-    img: "/images/reviewimg1.png"
-  },
-  {
-    content: "Great experience overall! The team was professional and courteous. Will definitely come back.Will definitely .",
-    name: "Chris Thomas",
-    location: "New York, USA",
-    rating: 4,
-    img: "/images/reviewimg1.png"
-  },
-  {
-    content: "Great experience overall! The team was professional and courteous. Will definitely come back.",
-    name: "Chris Thomas",
-    location: "New York, USA",
-    rating: 4,
-    img: "/images/reviewimg1.png"
-  }
-];
 
-const CustomerReview = () => {
+const CustomerReview = ({reviews}) => {
   const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  
+  if (!reviews || reviews.length === 0) {
+    return <div>No reviews available</div>;
+  }
 
   const handleUpClick = () => {
     if (isTransitioning) return;
     setIsTransitioning(true);
     setTimeout(() => {
-      setCurrentReviewIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : reviews.length - 1));
+      setCurrentReviewIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : reviews?.length - 1));
       setIsTransitioning(false);
     }, 300); // Duration of transition
   };
@@ -43,16 +25,16 @@ const CustomerReview = () => {
     if (isTransitioning) return;
     setIsTransitioning(true);
     setTimeout(() => {
-      setCurrentReviewIndex((prevIndex) => (prevIndex < reviews.length - 1 ? prevIndex + 1 : 0));
+      setCurrentReviewIndex((prevIndex) => (prevIndex < reviews?.length - 1 ? prevIndex + 1 : 0));
       setIsTransitioning(false);
     }, 300); // Duration of transition
   };
 
   const currentReview = reviews[currentReviewIndex];
-  const nextReview = reviews[(currentReviewIndex + 1) % reviews.length];
+  const nextReview = reviews[(currentReviewIndex + 1) % reviews?.length];
 
   return (
-    <div className="container main-section-review">
+    <div className="container main-section">
       <div className="review-section row">
         <div className="col-5 review-left">
           <h5 className="">CUSTOMER REVIEWS</h5>
@@ -62,46 +44,46 @@ const CustomerReview = () => {
           <div className={`shadow-card ${isTransitioning ? 'fade-out' : ''}`}>
             <div className="d-flex review">
               <img
-                src={nextReview.img}
+                src={tick}
                 alt="profile"
                 className="rounded-circle"
               />
               <div className="ml-3">
                 <div className="d-flex align-items-center mb-2">
                   <span className="star">
-                    {Array(nextReview.rating).fill().map((_, i) => (
+                    {Array(nextReview?.rating).fill().map((_, i) => (
                       <FaStar key={i} />
                     ))}
                   </span>
                 </div>
                 <p className="review-content">
-                  “{nextReview.content}”
+                  “{nextReview?.content}”
                 </p>
-                <p className="reviwer-name">{nextReview.name}</p>
-                <p className="location">{nextReview.location}</p>
+                <p className="reviwer-name">{nextReview?.name}</p>
+                <p className="location">{nextReview?.location}</p>
               </div>
             </div>
           </div>
           <div className={`card card-review border-0 ${isTransitioning ? 'swipe-up-in' : ''}`}>
             <div className="d-flex review">
               <img
-                src={currentReview.img}
+                src={tick}
                 alt="profile"
                 className="rounded-circle"
               />
               <div className="ml-3 review-container">
                 <div className="d-flex align-items-center mb-2">
                   <span className="star">
-                    {Array(currentReview.rating).fill().map((_, i) => (
+                    {Array(currentReview?.rating).fill().map((_, i) => (
                       <FaStar key={i} />
                     ))}
                   </span>
                 </div>
                 <p className="review-content">
-                  “{currentReview.content}”
+                  “{currentReview?.reviewText}”
                 </p>
-                <p className="reviwer-name">{currentReview.name}</p>
-                <p className="location">{currentReview.location}</p>
+                <p className="reviwer-name">{currentReview?.patientId.name}</p>
+                {/* <p className="location">{currentReview.location}</p> */}
               </div>
             </div>
           </div>
@@ -124,7 +106,7 @@ const CustomerReview = () => {
             viewBox="0 0 16 10"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className='down-arrow-review'
+            className='down-arrow'
             onClick={handleDownClick}
             role='button'
           >

@@ -45,5 +45,28 @@ export const fetchFromPatient = async (endpoint, data = {}, method = 'GET') => {
     throw error;
   }
 };
+export const fetchFromDoctor = async (endpoint, data = {}, method = 'GET') => {
+  try {
+      let response;
+      if (method === 'POST') {
+          response = await api.post(`/patient${endpoint}`, data);
+          console.log(response)
+      } else {
+          response = await api.get(`/patient${endpoint}`);
+      }
+
+      // return response.data;
+
+      if (response.headers['content-type']?.includes('application/json')) {
+          return response.data;
+      } else {
+          const responseText = await response.json();
+          throw new Error(`Received non-JSON response: ${responseText}`);
+      }
+  } catch (error) {
+      console.error('Fetch patient data error:', error.response ? error.response.data : error.message);
+      throw error;
+  }
+};
 
 export default api;

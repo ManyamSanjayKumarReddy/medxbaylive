@@ -31,7 +31,7 @@ function App() {
         <Route path="/admin/admin-home" element={<AdminWelcomePage />} />
         <Route path="/reset-password" element={<ChangePassword />} />
         <Route path="/Doctor/profile/Edit" element={<DoctorEdit />} />
-        <Route path="/Doctor/profile" element={<DoctorProfile />} />
+        <Route path="/doctor/:id" element={ <DoctorProfile/>}/>
         <Route path="/profile/*" element={<ProfileRoutes />} />
         <Route path="/doctorprofile/dashboardpage/*" element={<ConnectedRoutes />} />
         <Route path="/Filters" element={<FilterPage />} />

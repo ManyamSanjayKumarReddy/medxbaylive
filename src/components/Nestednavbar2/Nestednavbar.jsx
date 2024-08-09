@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './nestednavbar.css';
-import downarrowimage from '../Assets/down.gif';
+import downarrowimage from '../Assets/dwon.gif';
 import Navbar from '../Navbar/Navbar';
 import gwatrailer from '../Assets/gwa-trailer.mp4';
 

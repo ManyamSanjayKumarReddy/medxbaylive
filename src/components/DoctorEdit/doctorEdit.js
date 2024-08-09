@@ -20,6 +20,21 @@ import hanfheart from '../../assests/img/handheart.svg'
 import doctoreditimage from '../../assests/img/doctoreditimage.png'
 import DoctorPopUp from './DoctorPopUp';
 import axios from 'axios'; 
+import { encode } from 'base-64';
+
+const bufferToBase64 = (buffer) => {
+  if (buffer?.type === 'Buffer' && Array.isArray(buffer?.data)) {
+    const bytes = new Uint8Array(buffer.data);
+    let binary = '';
+    for (let i = 0; i < bytes.length; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    return `data:image/jpeg;base64,${btoa(binary)}`;
+  } else {
+    console.error('Unexpected buffer type:', typeof buffer);
+    return '';
+  }
+};
 function DoctorEdit() {
 
   const [doctor, setDoctor] = useState(null);
@@ -39,8 +54,14 @@ function DoctorEdit() {
     };
     const [selectedInsurance, setSelectedInsurancePlace] = useState('');
 
- 
+    const [profileimg,setProfileimage]=useState('')
 
+    const getProfile = (a) => {
+      if (a && a.data) {
+        const base64String = bufferToBase64(a?.data);
+        setProfileimage(base64String);
+      }
+    };
 
     const [selected, setSelected] = useState(null);
   
@@ -66,6 +87,7 @@ function DoctorEdit() {
           }
   
           console.log("API Response:", doctorData);
+          getProfile(doctorData?.profilePicture)
           setDoctor(doctorData);
         } catch (error) {
           console.error("Error fetching doctor details:", error);
@@ -109,7 +131,7 @@ function DoctorEdit() {
     <div className='doctor-profile-edit'>
       <div className='doctor-profile-edit-container'>
         <div className='doctor-profile-edit-img'>
-          <img src={doctoreditimage} alt='Doctor-edit' className='doctor-edit-profile-photo'></img>
+          <img src={profileimg||doctoreditimage} alt='Doctor-edit' className='doctor-edit-profile-photo'></img>
         </div>
         <div className='doctor-details-edit'>
     

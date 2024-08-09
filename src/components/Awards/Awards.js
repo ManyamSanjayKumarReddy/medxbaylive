@@ -4,13 +4,12 @@ import { BiSolidTrophy } from "react-icons/bi";
 
 
 
-const AwardsRecognition = () => {
-    const awards = [
-        { year: 2020, title: "America's 100 Best Doctors Award™" },
-        { year: 2020, title: "America's 100 Best Doctors Award™" },
-        { year: 2020, title: "America's 100 Best Doctors Award™" },
-        { year: 2020, title: "America's 100 Best Doctors Award™" }
-    ];
+const AwardsRecognition = ({Awards}) => {
+    const awards=Awards?.map((data)=>{
+        const year = data?.slice(data.length-4).trim();
+        const title=data?.slice(0, data.length-4).trim();
+return {year,title}
+    })
 
     return (
         <div className='award-section'>
@@ -18,7 +17,7 @@ const AwardsRecognition = () => {
             <div className='award-area'>
             <h2>Awards and Recognition</h2>
             <div className="doctor-cards-awards">
-                {awards.map((award, index) => (
+                {awards?.map((award, index) => (
                     <div  className='card-award-container' key={index} >
                         <div className="  card-award">
                             <div className="award-body">
