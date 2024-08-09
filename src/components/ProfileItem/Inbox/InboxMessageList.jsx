@@ -11,7 +11,7 @@ const MessageList = ({ messages }) => {
           className={`message-item ${msg.senderId === userId ? 'user-message' : 'doctor-message'}`}
         >
           <div
-            className={`message-bubble ${msg.senderId == userId ? 'user-bubble' : 'doctor-bubble'}`}
+            className={`message-bubble ${msg.senderId === userId ? 'user-bubble' : 'doctor-bubble'}`}
           >
             {msg.text}
             {msg.file && <img src={URL.createObjectURL(msg.file)} alt="attachment" />}

@@ -21,6 +21,7 @@ const Inbox = () => {
         <ChatWindow
           chatId={selectedChat.id}
           doctorName={selectedChat.name}
+          image={selectedChat.img}
         />
       ) : (
         <div className="no-chat-selected">Select a chat to start messaging</div>

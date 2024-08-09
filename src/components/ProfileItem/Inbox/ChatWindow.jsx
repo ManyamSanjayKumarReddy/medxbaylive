@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Header from './InboxHeader';
 import MessageList from './InboxMessageList';
 import MessageInput from './InboxMessageInput';
-import { fetchFromPatient } from '../../../actions/api.js';
 import './ChatWindow.css';
+import { fetchFromServer } from '../../../actions/api';
 
-const ChatWindow = ({ chatId, doctorName }) => {
+const ChatWindow = ({ chatId, doctorName ,image}) => {
   const [messages, setMessages] = useState([]);
   const [error, setError] = useState(null);
   const [patientId, setPatientId] = useState(null);
@@ -13,24 +13,28 @@ const ChatWindow = ({ chatId, doctorName }) => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const response = await fetchFromPatient(`/chat/${chatId}`);
-        console.log('Fetched messages:', response); // Debug output
+        const role = sessionStorage.getItem('role');
+        const response = await fetchFromServer(role, `/chat/${chatId}`);
+        console.log('Fetched messages:', response);
         setMessages(response.chat.messages);
-        setPatientId(response.chat.patientId); // Assuming the response includes patientId
+        setPatientId(response.chat.patientId);
       } catch (error) {
         setError(error.message);
       }
     };
 
-    if (chatId) { // Ensure chatId is valid
+    if (chatId) {
       fetchMessages();
     }
   }, [chatId]);
 
+  const userId = sessionStorage.getItem('userId');
+
   const handleSendMessage = async (message) => {
     try {
-      await fetchFromPatient(`/chats/${chatId}/send-message`, { message },'POST');
-      setMessages([...messages, { text: message, timestamp: new Date(), senderId: patientId }]);
+      const role = sessionStorage.getItem('role');
+      await fetchFromServer(role, `/chats/${chatId}/send-message`, { message }, 'POST');
+      setMessages([...messages, { text: message, timestamp: new Date(), senderId: userId }]);
     } catch (error) {
       setError(error.message);
     }
@@ -42,7 +46,7 @@ const ChatWindow = ({ chatId, doctorName }) => {
 
   return (
     <div className="chat-window-container">
-      <Header doctorName={doctorName} />
+      <Header doctorName={doctorName} image={image} />
       <MessageList messages={messages} />
       <MessageInput onSendMessage={handleSendMessage} />
     </div>

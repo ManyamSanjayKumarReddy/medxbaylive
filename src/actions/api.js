@@ -69,4 +69,33 @@ export const fetchFromDoctor = async (endpoint, data = {}, method = 'GET') => {
   }
 };
 
+export const fetchFromServer = async (role, endpoint, data = {}, method = 'GET') => {
+  try {
+    let response;
+    const basePath = role === 'doctor' ? '/doctor' : '/patient';
+
+    if (method === 'POST') {
+      response = await api.post(`${basePath}${endpoint}`, data);
+    } else {
+      const queryString = new URLSearchParams(data).toString();
+      response = await api.get(`${basePath}${endpoint}?${queryString}`);
+    }
+
+    const contentType = response.headers['content-type'];
+
+    if (contentType && contentType.includes('application/json')) {
+      return response.data;
+    } else if (contentType && contentType.includes('text/html')) {
+      const responseText = await response.data;
+      throw new Error(`Received HTML instead of JSON. Response: ${responseText}`);
+    } else {
+      const responseText = await response.data;
+      throw new Error(`Received unexpected content type: ${contentType}. Response: ${responseText}`);
+    }
+  } catch (error) {
+    console.error(`Fetch data error: ${error.response ? error.response.data : error.message}`);
+    throw error;
+  }
+};
+
 export default api;

@@ -70,7 +70,14 @@ const SignupCard = ({ show, handleClose }) => {
     }
   }, [show]);
 
-
+  const handleGoogleSignIn = (role) => {
+    setIsLoading(true);
+    const url = role === 'patient'
+      ? 'http://localhost:8000/auth/google/patient'
+      : 'http://localhost:8000/auth/google/doctor';
+    
+    window.location.href = url;
+  };
 
   const register = (e) => {
     e.preventDefault();
@@ -272,7 +279,8 @@ const SignupCard = ({ show, handleClose }) => {
           <div className='end-line-sign-up'></div>
           <div className='end-line-sign-up-two'>
             <div className='button-sign-up-container'>
-            <button className='google-button-sign-up'><img src={google} alt='Google' className='google-sign-up-image'></img></button>
+            <button className='google-button-sign-up'>                  <img src={google} alt="Google" onClick={() => handleGoogleSignIn(isProvider ? 'doctor' : 'patient')} className="social-sign-up" />
+            </button>
             <button className='apple-button-sign-up'><img src={apple} alt='Apple' className='apple-sign-up-image'></img></button>
             </div>
 

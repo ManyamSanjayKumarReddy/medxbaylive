@@ -27,7 +27,6 @@ import axios from 'axios';
 import './patient.css';
 import { useNavigate } from 'react-router-dom';
 
-
 const PatientTable = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -158,10 +157,10 @@ const PatientTable = () => {
       <TableContainer component={Paper} className="table-container reduced-width">
         <Table>
           <TableHead>
-            <TableRow>
-              <TableCell padding="checkbox" className="table-header">
+            <TableRow className="table-header">
+              {/* <TableCell padding="checkbox" className="table-header">
                 <Checkbox />
-              </TableCell>
+              </TableCell> */}
               <TableCell className="table-header">Patient ID</TableCell>
               {!isMobile && (
                 <>
@@ -172,15 +171,15 @@ const PatientTable = () => {
                 </>
               )}
               <TableCell className="table-header">Prescription</TableCell>
-            </TableRow>
+            </TableRow >
           </TableHead>
           <TableBody>
             {displayData.map((row) => (
               <TableRow key={row._id}>
-                <TableCell className="table-data" padding="checkbox">
+                {/* <TableCell className="table-data" padding="checkbox">
                   <Checkbox />
-                </TableCell>
-                <TableCell>{row.patient?._id}</TableCell>
+                </TableCell> */}
+                <TableCell>{row.patient?._id.slice(-4)}</TableCell>
                 {!isMobile && (
                   <>
                     <TableCell className="table-data">{row.date}</TableCell>
@@ -223,7 +222,7 @@ const PatientTable = () => {
                       {index + 1}
                     </Button>
                   ))}
-                  <Button onClick={(event) => handleChangePage(event, page + 1)} disabled={page >= Math.ceil(bookings.length / rowsPerPage) - 1}>
+                  <Button  className="pagination-button"  onClick={(event) => handleChangePage(event, page + 1)} disabled={page >= Math.ceil(bookings.length / rowsPerPage) - 1}>
                     Next
                   </Button>
                 </div>
@@ -233,102 +232,83 @@ const PatientTable = () => {
         </Table>
       </TableContainer>
 
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+      {/* Dialog for adding prescription */}
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
         <DialogTitle>Add Prescription</DialogTitle>
         <DialogContent>
           <form>
             <TextField
               label="Patient Age"
-              type="number"
               fullWidth
               value={prescriptionData.patientAge}
               onChange={(e) => setPrescriptionData({ ...prescriptionData, patientAge: e.target.value })}
               margin="normal"
+              variant="outlined"
             />
             {prescriptionData.medicines.map((medicine, index) => (
-              <div key={index}>
-                <TextField
-                  label="Medicine Name"
-                  name="name"
-                  fullWidth
-                  value={medicine.name}
-                  onChange={(e) => handleChange(index, e)}
-                  margin="normal"
-                />
-                <TextField
-                  label="Dosage"
-                  name="dosage"
-                  fullWidth
-                  value={medicine.dosage}
-                  onChange={(e) => handleChange(index, e)}
-                  margin="normal"
-                />
-                <FormGroup row>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name="beforeFood"
-                        checked={medicine.beforeFood}
-                        onChange={(e) => handleChange(index, e)}
-                      />
-                    }
-                    label="Before Food"
+              <Grid container spacing={2} key={index} className="medicine-grid">
+                <Grid item xs={12} sm={4}>
+                  <TextField
+                    label="Medicine Name"
+                    name="name"
+                    fullWidth
+                    value={medicine.name}
+                    onChange={(e) => handleChange(index, e)}
+                    margin="normal"
+                    variant="outlined"
                   />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name="afterFood"
-                        checked={medicine.afterFood}
-                        onChange={(e) => handleChange(index, e)}
-                      />
-                    }
-                    label="After Food"
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <TextField
+                    label="Dosage"
+                    name="dosage"
+                    fullWidth
+                    value={medicine.dosage}
+                    onChange={(e) => handleChange(index, e)}
+                    margin="normal"
+                    variant="outlined"
                   />
-                </FormGroup>
-                <FormGroup row>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name="timing.morning"
-                        checked={medicine.timing.morning}
-                        onChange={(e) => handleChange(index, e)}
-                      />
-                    }
-                    label="Morning"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name="timing.afternoon"
-                        checked={medicine.timing.afternoon}
-                        onChange={(e) => handleChange(index, e)}
-                      />
-                    }
-                    label="Afternoon"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name="timing.night"
-                        checked={medicine.timing.night}
-                        onChange={(e) => handleChange(index, e)}
-                      />
-                    }
-                    label="Night"
-                  />
-                </FormGroup>
-              </div>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <FormGroup row>
+                    <FormControlLabel
+                      control={<Checkbox checked={medicine.beforeFood} onChange={(e) => handleChange(index, e)} name="beforeFood" />}
+                      label="Before Food"
+                    />
+                    <FormControlLabel
+                      control={<Checkbox checked={medicine.afterFood} onChange={(e) => handleChange(index, e)} name="afterFood" />}
+                      label="After Food"
+                    />
+                  </FormGroup>
+                </Grid>
+                <Grid item xs={12}>
+                  <FormGroup row>
+                    <FormControlLabel
+                      control={<Checkbox checked={medicine.timing.morning} onChange={(e) => handleChange(index, e)} name="timing.morning" />}
+                      label="Morning"
+                    />
+                    <FormControlLabel
+                      control={<Checkbox checked={medicine.timing.afternoon} onChange={(e) => handleChange(index, e)} name="timing.afternoon" />}
+                      label="Afternoon"
+                    />
+                    <FormControlLabel
+                      control={<Checkbox checked={medicine.timing.night} onChange={(e) => handleChange(index, e)} name="timing.night" />}
+                      label="Night"
+                    />
+                  </FormGroup>
+                </Grid>
+              </Grid>
             ))}
-            <Button variant="contained" color="primary" onClick={handleAddMedicine} fullWidth>
-              + Add Medicine
+            <Button onClick={handleAddMedicine} color="primary" variant="outlined">
+              Add More Medicine
             </Button>
           </form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} color="secondary" variant="outlined">
             Cancel
           </Button>
-          <Button onClick={handleSubmit} color="primary">
+          <Button onClick={handleSubmit} color="primary" variant="contained">
             Submit
           </Button>
         </DialogActions>

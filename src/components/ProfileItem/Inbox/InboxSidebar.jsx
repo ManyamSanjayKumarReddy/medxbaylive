@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { fetchFromPatient } from '../../../actions/api.js';
 import './InboxSidebar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { fetchFromServer } from '../../../actions/api';
 
 const Sidebar = ({ onSelectChat }) => {
   const [users, setUsers] = useState([]);
@@ -11,28 +11,24 @@ const Sidebar = ({ onSelectChat }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const data = await fetchFromPatient('/dashboard');
+        const role = sessionStorage.getItem('role'); // Fetch user role from session
+        const data = await fetchFromServer(role, '/dashboard');
         console.log('API Response:', data);
-
-        if (typeof data === 'string' && data.includes('<!DOCTYPE html>')) {
-          throw new Error('Received HTML instead of JSON. Please check the API endpoint.');
-        }
 
         if (!data || !data.chats) {
           throw new Error('Invalid response structure');
         }
 
-        // Map over the chats and construct the user list
         const usersList = data.chats.map(chat => {
-          const profilePicture = chat.doctorId.profilePicture || {};
-          console.log(chat)
-          const imgSrc = profilePicture.data 
-            ? `data:${profilePicture.contentType};base64,${profilePicture.data}`
+          const profilePicture = role === 'patient' ? chat.doctorId.profilePicture : chat.patientId?.profilePicture;
+
+          const imgSrc = profilePicture?.data 
+            ? `data:${profilePicture.contentType};base64,${profilePicture?.data}`
             : '/path/to/default/image.png'; // Use a default image if profilePicture is not available
 
           return {
             id: chat._id,
-            name: chat.doctorId.name,
+            name: role === 'patient' ? chat.doctorId.name : chat.patientId?.name,
             message: chat.messages[0]?.text || 'No messages yet',
             time: new Date(chat.updatedAt).toLocaleString(),
             img: imgSrc,
