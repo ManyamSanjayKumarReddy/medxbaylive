@@ -96,12 +96,12 @@ const ProfileLayout = () => {
                     <IoIosArrowForward />
                   </NavLink>
                 </li>
-                <li>
+                {/* <li>
                   <NavLink to="settings" className={({ isActive }) => isActive ? 'active' : ''}>
                     <IoSettingsOutline size='1.2rem' />
                     <span>Settings</span>
                   </NavLink>
-                </li>
+                </li> */}
                 <li>
                   <NavLink to="notification" className={({ isActive }) => isActive ? 'active' : ''}>
                     <LuBell size='1.2rem' />
@@ -113,7 +113,7 @@ const ProfileLayout = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="language" className={({ isActive }) => isActive ? 'active' : ''}>
+                  {/* <NavLink to="language" className={({ isActive }) => isActive ? 'active' : ''}>
                     <TbWorld size='1.2rem' />
                     <span>Language</span>
                     <select className="dropdown-language" value={selectedLanguage.code} onChange={handleLanguageChange}>
@@ -123,7 +123,7 @@ const ProfileLayout = () => {
                         </option>
                       ))}
                     </select>
-                  </NavLink>
+                  </NavLink> */}
                 </li>
                 <li>
                 <button onClick={handleLogout} className='logout-button'>

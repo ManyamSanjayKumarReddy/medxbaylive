@@ -30,17 +30,17 @@ const ProfileRoutes = () => {
           <Route path="inbox" element={<Inbox />} />
           <Route path="prescription" element={<Prescriptions />} />
           <Route path="reviews" element={<Reviews />} />
-          <Route path="settings" element={<Settings />} />
+          {/* <Route path="settings" element={<Settings />} /> */}
           <Route path="notification" element={<Notification />} />
-          <Route path="language" element={<Language />} />
+          {/* <Route path="language" element={<Language />} /> */}
         </Route>
         <Route path="/doctorprofile" element={<DoctorLayout />}>
-          <Route index element={<Navigate to="settings" />} />
-          <Route path="settings" element={<Settings />} />
+          <Route index element={<Notification to="notification" />} />
+          {/* <Route path="settings" element={<Settings />} /> */}
           <Route path="edit/profile" element={<Profileedit />} />
          
           <Route path="notification" element={<Notification />} />
-          <Route path="language" element={<Language />} />
+          {/* <Route path="language" element={<Language />} /> */}
         </Route>
         <Route path="/doctorprofile/dashboardpage/*" element={<ConnectedRoutes />} />
       </Routes>
