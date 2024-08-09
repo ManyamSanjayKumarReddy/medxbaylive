@@ -68,8 +68,8 @@ const Prescriptions = () => {
           <tbody>
             {statuses.slice(0, visibleAppointments).map(({ _id, meetingDate, meetingTime, doctorName }) => (
               <tr key={_id}>
-                <td>{_id}</td>
-                <td>{meetingDate}</td>
+                <td>{_id.slice(-4)}</td>
+                <td>{meetingDate.slice(0, 10)}</td>
                 <td>{meetingTime}</td>
                 <td>{doctorName}</td>
                 <td>

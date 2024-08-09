@@ -146,10 +146,10 @@ const ManageAppointments = () => {
           <button className={`tab ${activeTab === 'Completed' ? 'active' : ''}`} onClick={() => setActiveTab('Completed')}>Completed</button>
           <button className={`tab ${activeTab === 'Cancelled' ? 'active' : ''}`} onClick={() => setActiveTab('Cancelled')}>Cancelled</button>
         </div>
-        <button className="calendar-button">
+        {/* <button className="calendar-button">
           <MdOutlineCalendarToday />
           Calendar
-        </button>
+        </button> */}
       </div>
       <div className="appointments-table-container">
         <table className="appointments-table">
@@ -169,7 +169,7 @@ const ManageAppointments = () => {
                 <td>{new Date(date).toLocaleDateString()}</td>
                 <td>{time}</td>
                 <td><span className={`status-dot ${getStatusClass(status)}`}>
-                  {status.toLowerCase() === 'completed' && <img className='tick-mark' src={tick} alt='tick'/>}
+                  {status.toLowerCase() === 'completed'}
                 </span></td>
                 <td>
                   {activeTab === 'Completed' ? (
@@ -200,7 +200,7 @@ const ManageAppointments = () => {
         className="view-appointment-modal"
         overlayClassName="custom-overlay"
       >
-        <div className="modal-content">
+        <div className="appointment-modal-content">
   <h2>Appointment Details</h2>
   {selectedAppointment ? (
     <>
@@ -209,11 +209,11 @@ const ManageAppointments = () => {
       <p><strong>Time:</strong> {selectedAppointment.time}</p>
       <p><strong>Status:</strong> {selectedAppointment.status}</p>
       {selectedAppointment.consultationType === 'In-person' ? (
-        <div>
+        <div className="appointment-modal-content">
         <strong>Doctor Location:</strong>
-        <ul>
+        <ul className="appointment-modal-content">
           {selectedAppointment.doctor.hospitals.map((hospital, index) => (
-            <li key={index}>
+            <li key={index} className="appointment-modal-content">
               {hospital.street}, {hospital.city}, {hospital.state}, {hospital.country}
             </li>
           ))}

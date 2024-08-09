@@ -21,6 +21,7 @@ const SignupCard = ({ show, handleClose }) => {
   useEffect(() => {
     import('./signup.css');
   }, []);
+  const [isLoading, setIsLoading] = useState(false); // New state for loading
 
   const typedElement = useRef('');
   const typedElementTwo = useRef('');
@@ -97,12 +98,21 @@ const SignupCard = ({ show, handleClose }) => {
   };
 
   const handleProviderClick = () => {
-    setIsProvider(true);
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsProvider(true);
+      setIsLoading(false);
+    }, 500); // Simulate loading effect
   };
 
   const handlePatientClick = () => {
-    setIsProvider(false);
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsProvider(false);
+      setIsLoading(false);
+    }, 500); // Simulate loading effect
   };
+
 
   const validateName = (value) => {
     const trimmedValue = value.trim();
@@ -217,7 +227,7 @@ const SignupCard = ({ show, handleClose }) => {
     <Modal show={show} onHide={handleClose} centered className="custom-modal">
       <Modal.Title>
         <span className="model-header">Sign up</span>{' '}
-        <span className="model-header-sub"> Sign up to your account.</span>
+        <span className="model-header-sub"> Sign up as {isProvider ? 'Doctor' : 'Patient'}</span>
       </Modal.Title>
       <button type="button" className="btn-close-custom" aria-label="Close" onClick={handleClose}>
         x
@@ -249,7 +259,13 @@ const SignupCard = ({ show, handleClose }) => {
           </p>
       
         </div>
-      
+        {isLoading ? (
+        <div className="loading-container">
+          <div className="spinner"></div>
+          <p className="loading-text">Loading...</p>
+        </div>
+      ) : (
+        <>
         <div className='or-sign-up-container'>
        
        <div className='or-sign-up'>OR</div>
@@ -267,23 +283,24 @@ const SignupCard = ({ show, handleClose }) => {
 
             </div>
             <div className='provider-option-container'>
-          <div className='account-sign-up-provider'>
-            {isProvider ? 'Are you a patient?' : 'Are you a provider?'}
+              
+              <div className="account-sign-up-provider">
+                {isProvider ? 'Are you a patient?' : 'Are you a provider?'}
+              </div>
+              <button
+                className="provider-link-signup"
+                onClick={isProvider ? handlePatientClick : handleProviderClick}
+              >
+                {isProvider ? 'Sign Up Here' : 'Sign Up here'}
+              </button>
+            </div>
           </div>
-          <button
-            className='provider-link-signup'
-            onClick={() => setIsProvider(!isProvider)}
-          >
-            {isProvider ? 'Sign Up Here' : 'Sign Up here'}
-          </button>
-        </div>
 
-     </div>
 
      <div className='sign-up-button-container'></div>
         <Form onSubmit={register} className="form-overall-container">
-          <Form.Group className="mb-3" controlId="formUsername">
-            <Form.Label>Name</Form.Label>
+        <Form.Group className={`form-container ${!isProvider ? 'form-container-visible' : 'form-container-hidden'}`}>
+        <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter your Name"
@@ -338,7 +355,9 @@ const SignupCard = ({ show, handleClose }) => {
           <Button variant="primary" type="submit" className="btn-custom"    >
 Sign Up
           </Button>
-        </Form>
+          </Form>
+        </>
+      )}
       </Modal.Body>
     </Modal>
   );

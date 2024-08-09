@@ -190,6 +190,10 @@
   align-items: center;
 }
 
+.appointment-modal-content h2{
+  color:#007bff;
+}
+
 .close-modal-button {
   margin-top: 20px;
   background-color: #007bff;
