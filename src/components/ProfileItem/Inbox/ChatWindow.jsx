@@ -16,7 +16,7 @@ const ChatWindow = ({ chatId, doctorName }) => {
         const response = await fetchFromPatient(`/chat/${chatId}`);
         console.log('Fetched messages:', response); // Debug output
         setMessages(response.chat.messages);
-        setPatientId(response.patientId); // Assuming the response includes patientId
+        setPatientId(response.chat.patientId); // Assuming the response includes patientId
       } catch (error) {
         setError(error.message);
       }
@@ -43,7 +43,7 @@ const ChatWindow = ({ chatId, doctorName }) => {
   return (
     <div className="chat-window-container">
       <Header doctorName={doctorName} />
-      <MessageList messages={messages} userId={patientId} />
+      <MessageList messages={messages} />
       <MessageInput onSendMessage={handleSendMessage} />
     </div>
   );

@@ -5,7 +5,8 @@ import DashboardPage from '../Pages/DashboardPage/DashboardPage';
 import ManageAppointment from '../Pages/ManageAppointment/ManageAppointment';
 import Schedule from '../Pages/Schedule/Schedule';
 import Patient from '../Pages/Patient/Patient';
-import Inbox from '../Pages/Inbox/Inbox';
+import Inbox from '../../Inbox/Inbox';
+
 import Reviews from '../Pages/Reviews/Reviews';
 import Blog from '../Pages/Blog/Blog';
 

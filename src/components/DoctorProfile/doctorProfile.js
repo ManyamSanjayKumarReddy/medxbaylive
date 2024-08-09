@@ -21,12 +21,16 @@ import { fetchFromDoctor } from "../../actions/api";
 import moment from "moment";
 
 const bufferToBase64 = (buffer) => {
-  if (buffer.type === 'Buffer' && Array.isArray(buffer.data)) {
-      const binary = String.fromCharCode.apply(null, new Uint8Array(buffer.data));
-      return `data:image/jpeg;base64,${window.btoa(binary)}`;
+  if (buffer?.type === 'Buffer' && Array.isArray(buffer?.data)) {
+    const bytes = new Uint8Array(buffer.data);
+    let binary = '';
+    for (let i = 0; i < bytes.length; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    return `data:image/jpeg;base64,${btoa(binary)}`;
   } else {
-      console.error('Unexpected buffer type:', typeof buffer);
-      return '';
+    console.error('Unexpected buffer type:', typeof buffer);
+    return '';
   }
 };
 

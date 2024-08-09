@@ -1,15 +1,8 @@
-import React, { useState } from 'react';
-
-//imported react-router-dom in NavLink using active chnages and Outlet using right side showing profileItem
-import { NavLink, Outlet ,useNavigate} from 'react-router-dom';
-
-//style.css
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import './profilelayout.css';
-
-//Using image aslo and imported
 import profileimg from '../Assets/profileimg.png';
-
-//imported react-icons
 import { BsCardHeading } from "react-icons/bs";
 import { FiUser } from "react-icons/fi";
 import { MdOutlineInbox } from "react-icons/md";
@@ -30,24 +23,51 @@ const languages = [
 ];
 
 const ProfileLayout = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
   const [notificationStatus, setNotificationStatus] = useState('Allow');
+  const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
+  const [userData, setUserData] = useState({ name: '', email: '', profileImage: profileimg });
+
   const navigate = useNavigate();
-  const handleLanguageChange = (e) => {
-    const selectedLang = languages.find(lang => lang.code === e.target.value);
-    setSelectedLanguage(selectedLang);
-  };
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/patient/profile", { withCredentials: true })
+      .then(response => {
+        const {patient} = response.data;
+
+        // Log the response data to check what's being received
+        console.log('Fetched user data:', response.data);
+
+        setUserData({
+          name: patient.name,
+          email: patient.email,
+          profileImage: patient.profileImage || profileimg
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching user data:', error);
+      });
+  }, []);
 
   const handleNotificationChange = (e) => {
     setNotificationStatus(e.target.value);
   };
-  const handleLogout = () => {
-    sessionStorage.removeItem('loggedIn');
-    sessionStorage.removeItem('userId');
-    sessionStorage.removeItem('userEmail');
-    sessionStorage.removeItem('role');
-    navigate('/'); 
+
+  const handleLanguageChange = (e) => {
+    const selected = languages.find(lang => lang.code === e.target.value);
+    setSelectedLanguage(selected);
   };
+
+  const handleLogout = () => {
+    axios.post("http://localhost:8000/auth/logout",{withCredentials:true})
+      .then(() => {
+        sessionStorage.clear();
+        // navigate('/'); // Redirect to the login page after logout
+      })
+      .catch(error => {
+        console.error('Error during logout:', error);
+      });
+  };
+
   return (
     <div className='layout-profile'>
       <div className='container'>
@@ -55,10 +75,10 @@ const ProfileLayout = () => {
         <div className="container-profile-head"> 
           <div className="profile-card">
             <div className="profile-content">
-              <img src={profileimg} className='profileimg' alt="Profile" />
+              <img src={userData.profileImage} className='profileimg' alt="Profile" />
               <div className='hold-content'>
-                <p className="name">Your name</p>
-                <p className="email">yourname@gmail.com</p>
+                <p className="name">{userData.name}</p>
+                <p className="email">{userData.email}</p>
               </div>
             </div>
             <nav>
@@ -96,40 +116,25 @@ const ProfileLayout = () => {
                     <IoIosArrowForward />
                   </NavLink>
                 </li>
-                {/* <li>
-                  <NavLink to="settings" className={({ isActive }) => isActive ? 'active' : ''}>
-                    <IoSettingsOutline size='1.2rem' />
-                    <span>Settings</span>
-                  </NavLink>
-                </li> */}
                 <li>
                   <NavLink to="notification" className={({ isActive }) => isActive ? 'active' : ''}>
                     <LuBell size='1.2rem' />
                     <span>Notification</span>
-                    <select className="dropdown-notification" value={notificationStatus} onChange={handleNotificationChange}>
+                    <select
+                      className="dropdown-notification"
+                      value={notificationStatus}
+                      onChange={handleNotificationChange}
+                    >
                       <option value="Allow">Allow</option>
                       <option value="Not Allow">Not Allow</option>
                     </select>
                   </NavLink>
                 </li>
                 <li>
-                  {/* <NavLink to="language" className={({ isActive }) => isActive ? 'active' : ''}>
-                    <TbWorld size='1.2rem' />
-                    <span>Language</span>
-                    <select className="dropdown-language" value={selectedLanguage.code} onChange={handleLanguageChange}>
-                      {languages.map((lang, index) => (
-                        <option key={index} value={lang.code}>
-                          {selectedLanguage.code === lang.code ? lang.code : `${lang.name} `}
-                        </option>
-                      ))}
-                    </select>
-                  </NavLink> */}
-                </li>
-                <li>
-                <button onClick={handleLogout} className='logout-button'>
+                  <NavLink to="logout" onClick={handleLogout} className={({ isActive }) => isActive ? 'active' : ''}>
                     <RiLogoutCircleRLine size='1.2rem' />
                     <span>Log Out</span>
-                  </button>
+                  </NavLink>
                 </li>
               </ul>
             </nav>

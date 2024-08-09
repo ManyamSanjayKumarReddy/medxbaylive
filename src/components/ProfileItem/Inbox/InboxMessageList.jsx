@@ -1,7 +1,8 @@
 import React from 'react';
 import './InboxMessageList.css';
 
-const MessageList = ({ messages, userId }) => {
+const MessageList = ({ messages }) => {
+  const userId=sessionStorage.getItem('userId')
   return (
     <div className="message-list-container">
       {messages.map((msg, index) => (
@@ -10,7 +11,7 @@ const MessageList = ({ messages, userId }) => {
           className={`message-item ${msg.senderId === userId ? 'user-message' : 'doctor-message'}`}
         >
           <div
-            className={`message-bubble ${msg.senderId === userId ? 'user-bubble' : 'doctor-bubble'}`}
+            className={`message-bubble ${msg.senderId == userId ? 'user-bubble' : 'doctor-bubble'}`}
           >
             {msg.text}
             {msg.file && <img src={URL.createObjectURL(msg.file)} alt="attachment" />}
