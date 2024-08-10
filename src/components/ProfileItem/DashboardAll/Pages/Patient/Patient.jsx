@@ -157,11 +157,9 @@ const PatientTable = () => {
       <TableContainer component={Paper} className="table-container reduced-width">
         <Table>
           <TableHead>
-            <TableRow className="table-header">
-              {/* <TableCell padding="checkbox" className="table-header">
-                <Checkbox />
-              </TableCell> */}
-              <TableCell className="table-header">Patient ID</TableCell>
+            <TableRow>
+              <TableCell className="table-header">S.No</TableCell> {/* Serial Number Header */}
+              {/* <TableCell className="table-header">Patient ID</TableCell> */}
               {!isMobile && (
                 <>
                   <TableCell className="table-header">Date Check In</TableCell>
@@ -171,18 +169,18 @@ const PatientTable = () => {
                 </>
               )}
               <TableCell className="table-header">Prescription</TableCell>
-            </TableRow >
+            </TableRow>
           </TableHead>
           <TableBody>
-            {displayData.map((row) => (
+            {displayData.map((row, index) => (
               <TableRow key={row._id}>
-                {/* <TableCell className="table-data" padding="checkbox">
-                  <Checkbox />
-                </TableCell> */}
-                <TableCell>{row.patient?._id.slice(-4)}</TableCell>
+                <TableCell className="table-data">{page * rowsPerPage + index + 1}</TableCell> {/* Serial Number */}
+                {/* <TableCell className="table-data">{row.patient?._id.slice(-4)}</TableCell> */}
                 {!isMobile && (
                   <>
-                    <TableCell className="table-data">{row.date}</TableCell>
+                    <TableCell className="table-data">
+                      {new Date(row.date).toLocaleDateString()} 
+                    </TableCell>
                     <TableCell className="table-data">{row.patient?.name}</TableCell>
                     <TableCell className="table-data">{row.patient?.email}</TableCell>
                     <TableCell className="table-data">{row.consultationType}</TableCell>
@@ -251,9 +249,9 @@ const PatientTable = () => {
                   <TextField
                     label="Medicine Name"
                     name="name"
-                    fullWidth
                     value={medicine.name}
                     onChange={(e) => handleChange(index, e)}
+                    fullWidth
                     margin="normal"
                     variant="outlined"
                   />
@@ -262,9 +260,9 @@ const PatientTable = () => {
                   <TextField
                     label="Dosage"
                     name="dosage"
-                    fullWidth
                     value={medicine.dosage}
                     onChange={(e) => handleChange(index, e)}
+                    fullWidth
                     margin="normal"
                     variant="outlined"
                   />
@@ -272,43 +270,76 @@ const PatientTable = () => {
                 <Grid item xs={12} sm={4}>
                   <FormGroup row>
                     <FormControlLabel
-                      control={<Checkbox checked={medicine.beforeFood} onChange={(e) => handleChange(index, e)} name="beforeFood" />}
+                      control={
+                        <Checkbox
+                          checked={medicine.beforeFood}
+                          onChange={(e) => handleChange(index, e)}
+                          name="beforeFood"
+                          color="primary"
+                        />
+                      }
                       label="Before Food"
                     />
                     <FormControlLabel
-                      control={<Checkbox checked={medicine.afterFood} onChange={(e) => handleChange(index, e)} name="afterFood" />}
+                      control={
+                        <Checkbox
+                          checked={medicine.afterFood}
+                          onChange={(e) => handleChange(index, e)}
+                          name="afterFood"
+                          color="primary"
+                        />
+                      }
                       label="After Food"
                     />
                   </FormGroup>
-                </Grid>
-                <Grid item xs={12}>
                   <FormGroup row>
                     <FormControlLabel
-                      control={<Checkbox checked={medicine.timing.morning} onChange={(e) => handleChange(index, e)} name="timing.morning" />}
+                      control={
+                        <Checkbox
+                          checked={medicine.timing.morning}
+                          onChange={(e) => handleChange(index, e)}
+                          name={`timing.morning`}
+                          color="primary"
+                        />
+                      }
                       label="Morning"
                     />
                     <FormControlLabel
-                      control={<Checkbox checked={medicine.timing.afternoon} onChange={(e) => handleChange(index, e)} name="timing.afternoon" />}
+                      control={
+                        <Checkbox
+                          checked={medicine.timing.afternoon}
+                          onChange={(e) => handleChange(index, e)}
+                          name={`timing.afternoon`}
+                          color="primary"
+                        />
+                      }
                       label="Afternoon"
                     />
                     <FormControlLabel
-                      control={<Checkbox checked={medicine.timing.night} onChange={(e) => handleChange(index, e)} name="timing.night" />}
+                      control={
+                        <Checkbox
+                          checked={medicine.timing.night}
+                          onChange={(e) => handleChange(index, e)}
+                          name={`timing.night`}
+                          color="primary"
+                        />
+                      }
                       label="Night"
                     />
                   </FormGroup>
                 </Grid>
               </Grid>
             ))}
-            <Button onClick={handleAddMedicine} color="primary" variant="outlined">
-              Add More Medicine
-            </Button>
           </form>
+          <Button variant="outlined" color="primary" onClick={handleAddMedicine} className="add-medicine-button">
+            + Add Another Medicine
+          </Button>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="secondary" variant="outlined">
+          <Button onClick={handleClose} color="secondary">
             Cancel
           </Button>
-          <Button onClick={handleSubmit} color="primary" variant="contained">
+          <Button onClick={handleSubmit} color="primary">
             Submit
           </Button>
         </DialogActions>

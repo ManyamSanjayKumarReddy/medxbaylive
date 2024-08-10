@@ -58,7 +58,7 @@ const LoginCard = ({ show, handleClose }) => {
   
           switch (role) {
             case 'doctor':
-              navigate('profile/doctorprofile/settings');
+              navigate('/Doctor/profile/Edit');
               break;
             case 'patient':
               navigate('profile/userprofile/');

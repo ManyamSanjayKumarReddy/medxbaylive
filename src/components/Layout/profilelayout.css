@@ -1,6 +1,10 @@
 .layout-profile {
     padding-top: 6rem;
 }
+.container-padding{
+    padding-left: 100px !important;
+    padding-right: 10px !important;
+}
 
 .layout-profile h1 {
     font-size: 32px;

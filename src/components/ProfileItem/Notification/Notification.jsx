@@ -59,10 +59,12 @@ const Notification = () => {
               <span className="time">{notification.timeAgo}</span>
               <p style={{ color: notification.statusColor }}>{notification.status}</p>
             </div>
-            {!notification.read && (
-              <button className='btn btn-primary' onClick={() => handleMarkAsRead(notification._id)}>Mark as Read</button>
-            )}
-            <button className='btn btn-primary' onClick={() => handleDelete(notification._id)}>Delete</button>
+            <div className="buttons">
+              {!notification.read && (
+                <button className='btn-primary' onClick={() => handleMarkAsRead(notification._id)}>Mark as Read</button>
+              )}
+              <button className='btn-secondary' onClick={() => handleDelete(notification._id)}>Delete</button>
+            </div>
           </div>
         ))}
       </div>

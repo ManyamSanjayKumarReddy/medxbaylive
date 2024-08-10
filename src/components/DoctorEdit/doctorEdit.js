@@ -134,12 +134,16 @@ function DoctorEdit() {
           <img src={profileimg||doctoreditimage} alt='Doctor-edit' className='doctor-edit-profile-photo'></img>
         </div>
         <div className='doctor-details-edit'>
-    
+    <div className='edit-left'>
         <div className='doctor-edit-name'>{doctor ? doctor.name : 'Loading...'}</div>
       
                  <div className='edit-profile-degree'>{doctor ? doctor.title : 'Loading...'}</div>
         <div className='edit-profile-discription'>{doctor ? doctor.aboutMe : 'Loading...'}</div>
-        <div className='date-location-edit-container'>
+  
+
+    </div>
+    <div className='edit-right'>
+    {/* <div className='date-location-edit-container'>
           <div className='doctor-edit-calender'>
           <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M0.916748 25.7087C0.916748 28.1878 2.81258 30.0837 5.29175 30.0837H25.7084C28.1876 30.0837 30.0834 28.1878 30.0834 25.7087V14.042H0.916748V25.7087ZM25.7084 3.83366H22.7917V2.37533C22.7917 1.50033 22.2084 0.916992 21.3334 0.916992C20.4584 0.916992 19.8751 1.50033 19.8751 2.37533V3.83366H11.1251V2.37533C11.1251 1.50033 10.5417 0.916992 9.66675 0.916992C8.79175 0.916992 8.20841 1.50033 8.20841 2.37533V3.83366H5.29175C2.81258 3.83366 0.916748 5.72949 0.916748 8.20866V11.1253H30.0834V8.20866C30.0834 5.72949 28.1876 3.83366 25.7084 3.83366Z" fill="#0167FF"/>
@@ -153,7 +157,7 @@ function DoctorEdit() {
 </svg>
           </div>
           <div className='doctor-edit-location-text'> {doctor ? doctor.cities : 'Loading...'}</div>
-        </div>
+        </div> */}
     <div className='speciality-container'>
       <div className='award-logo-container'>
       <FontAwesomeIcon icon={faAward} className='award-logo'/>
@@ -181,10 +185,11 @@ function DoctorEdit() {
   ) : (
     'Loading...'
   )}
+  </div>
 </div>
 
 
-    </div>
+
     <div className='video-consult-container'>
       <div className='edit-person-icon'>
       <FontAwesomeIcon icon={faUserMd} className='faUserMd-icon'/>
@@ -218,7 +223,7 @@ function DoctorEdit() {
 </div>
     </div>
 <button className='edit-doctor-button' onClick={handleShowEditPopup}>Edit profile</button>
-
+</div>
         </div>
     
 

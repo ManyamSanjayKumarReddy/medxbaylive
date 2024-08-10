@@ -19,13 +19,13 @@
 
 .notification {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   border: 1px solid #eee;
   border-radius: 5px;
   padding: 10px;
   background-color: #FFFFFF;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  flex-wrap: wrap; /* Ensures content wraps on smaller screens */
+  flex-wrap: wrap;
 }
 
 .notification img {
@@ -33,7 +33,7 @@
   margin-right: 15px;
   width: 100px; /* Adjust width as needed */
   height: 100px; /* Adjust height as needed */
-  object-fit: cover; /* Ensures the image covers the area without distortion */
+  object-fit: cover;
 }
 
 .details {
@@ -52,19 +52,20 @@
   margin: 5px 0;
   color: #666;
   max-width: 250px; /* Set a maximum width for the specialization field */
-  overflow-wrap: break-word; /* Ensures text wraps within the max-width */
+  overflow-wrap: break-word;
+}
+
+.status {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .time {
   font-size: 0.9em;
   color: #aaa;
-  margin-left: 150px;
-}
-
-.status {
-  margin-left: 10px;
-  font-size: 14px;
-  font-weight: 400;
+  margin-bottom: 10px; /* Add spacing between time and buttons */
 }
 
 .status p {
@@ -72,96 +73,26 @@
   font-weight: bold;
 }
 
-/* Custom scrollbar styling */
-.notification-card::-webkit-scrollbar {
-  width: 8px;
-}
-
-.notification-card::-webkit-scrollbar-thumb {
-  background-color: #0167FF;
-  border-radius: 5px;
-}
-
-.notification-card::-webkit-scrollbar-track {
-  background-color: #f1f1f1;
-  border-radius: 5px;
-}
-
-/* Filter Container */
-.filter-container {
-  position: relative;
-  margin-bottom: 10px;
-  width: 90%; /* Ensure full width */
-}
-
-/* Filter Button */
-.filter-button {
-  width: 90px; /* Default full width */
-  background-color: #0167FF;
+/* Button styles */
+.btn-primary {
+  background-color: #0167FF; /* Blue color for 'Mark as Read' */
   color: #fff;
   border: none;
   border-radius: 5px;
-  padding: 8px 12px; /* Adjust padding for better fit on smaller screens */
-  font-size: 0.9em; /* Adjust font size */
+  padding: 8px 12px;
+  font-size: 0.9em;
   cursor: pointer;
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  line-height: 1.5; /* Adjust line-height */
+  margin-right: 10px; /* Gap between buttons */
 }
 
-/* Filter Dropdown */
-.filter-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  color: black;
-  background-color: #fff;
-  border: 1px solid #ddd;
+.btn-secondary {
+  background-color: #FF8C00; /* Orange color for 'Delete' */
+  color: #fff;
+  border: none;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  z-index: 1000;
-}
-
-/* Filter Option */
-.filter-option {
-  padding: 6px 12px; /* Padding for dropdown options */
+  padding: 8px 12px;
+  font-size: 0.9em;
   cursor: pointer;
-}
-
-/* Filter Option Hover */
-.filter-option:hover {
-  background-color: #f0f0f0;
-}
-
-/* Responsive Design for Large Screens */
-@media (min-width: 992px) {
-  .filter-button {
-    width: 80%; /* Decrease width for large screens by 20% */
-    max-width: 150px; /* Adjust max-width accordingly */
-  }
-}
-
-/* Responsive Design for Medium Screens */
-@media (max-width: 768px) {
-  .filter-button {
-    width: 80%; /* Decrease width for medium screens */
-    max-width: 250px; /* Set maximum width */
-    padding: 8px 15px; /* Increase padding for better touch targets */
-    font-size: 1em; /* Slightly larger font size */
-  }
-}
-
-/* Responsive Design for Small Screens */
-@media (max-width: 480px) {
-  .filter-button {
-    width: 90%; /* Decrease width for small screens */
-    max-width: 200px; /* Set maximum width */
-    font-size: 1em; /* Ensure text is readable on very small screens */
-    padding: 10px 15px; /* More padding for easier touch interaction */
-  }
 }
 
 /* Responsive Design */
@@ -179,16 +110,16 @@
 
   .details p {
     margin-bottom: -5px;
-    max-width: 100%; /* Ensure text wraps properly on small screens */
-  }
-
-  .time {
-    margin-left: 1px;
+    max-width: 100%;
   }
 
   .status {
+    align-items: flex-start;
     margin-top: 10px;
-    margin-left: 0px;
+  }
+
+  .time {
+    margin-bottom: 10px; /* Adjust spacing for small screens */
   }
 }
 
@@ -196,7 +127,6 @@
   .notification img {
     width: 40px;
     height: 40px;
-    margin-bottom: 10px;
   }
 
   .details h2 {
@@ -210,10 +140,6 @@
 
   .time {
     font-size: 0.8em;
-    margin-left: 3px;
-  }
-
-  .status {
-    margin-left: -1px;
+    margin-bottom: 10px; /* Ensure time has spacing on small screens */
   }
 }

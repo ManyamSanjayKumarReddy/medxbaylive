@@ -10,13 +10,18 @@ const Prescriptions = () => {
   useEffect(() => {
     const fetchPrescriptions = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/patient/prescriptions',{withCredentials:true});
-        console.log('Fetched data:', response.data); 
+        const response = await axios.get('http://localhost:8000/patient/prescriptions', { withCredentials: true });
+        console.log('Fetched data:', response.data);
         if (Array.isArray(response.data)) {
-          setStatuses(response.data);
+          const startingSerial = 10001;
+          const prescriptionsWithSerials = response.data.map((prescription, index) => ({
+            ...prescription,
+            serialNumber: startingSerial + index,
+          }));
+          setStatuses(prescriptionsWithSerials);
         } else {
           console.error('Fetched data is not an array:', response.data);
-          setStatuses([]); 
+          setStatuses([]);
         }
       } catch (error) {
         console.error('Error fetching prescriptions:', error);
@@ -36,8 +41,8 @@ const Prescriptions = () => {
     try {
       const response = await axios.get(`http://localhost:8000/patient/prescriptions/${id}/download`, {
         responseType: 'blob',
-        withCredentials : true
-      },);
+        withCredentials: true
+      });
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const a = document.createElement('a');
       a.href = url;
@@ -58,7 +63,7 @@ const Prescriptions = () => {
         <table className="prescriptions-table">
           <thead>
             <tr>
-              <th>Prescription ID</th>
+              <th>S.NO</th>
               <th>Date</th>
               <th>Time Slot</th>
               <th>Doctor</th>
@@ -66,9 +71,9 @@ const Prescriptions = () => {
             </tr>
           </thead>
           <tbody>
-            {statuses.slice(0, visibleAppointments).map(({ _id, meetingDate, meetingTime, doctorName }) => (
+            {statuses.slice(0, visibleAppointments).map(({ _id, meetingDate, meetingTime, doctorName, serialNumber }) => (
               <tr key={_id}>
-                <td>{_id.slice(-4)}</td>
+                <td>{serialNumber}</td>
                 <td>{meetingDate.slice(0, 10)}</td>
                 <td>{meetingTime}</td>
                 <td>{doctorName}</td>

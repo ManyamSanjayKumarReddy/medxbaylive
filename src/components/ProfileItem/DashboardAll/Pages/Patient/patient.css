@@ -1,63 +1,28 @@
-.prescription-button {
-  font-size: 11px !important;
-  display: flex;
-  align-items: center;
-  width: 160px; /* Adjust the width as needed */
-  height: 40px; /* Adjust the height as needed */
-}.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-  margin-top: 20px;
-}
-
-.actions {
-
-  display: flex;
-}
-
-.button {
-  display: flex;
-  flex-direction: column;
-  gap: 8px  !important;
-  margin-right: 5px;
-}
-
-.table-container {
-  overflow-x: auto;
-}
-
-.reduced-width {
-  width: 90% !important;
-  margin: 0 auto;
+.table-header, .table-data {
+  text-align: center !important;
+  vertical-align: middle !important;
 }
 
 .table-header {
   background-color: #272848;
   color: white !important; 
   border-bottom: 1px solid #F0F1F5;
-  display: flex;
-  align-items: center !important;  /* Centers vertically */
-  justify-content: center!important; /* Centers horizontally */
-  padding: 10px;  /* Adjust padding to control header size */
-  white-space: nowrap; /* Prevent text from wrapping */
-  font-weight: bold !important; /* Ensure the text is bold */
-  font-size: 16px; /* Increase font size for better alignment */
-}
-.table-headers{
-  display: flex;
-  align-items: center !important;  /* Centers vertically */
-  justify-content: center!important; /* Centers horizontally */
+  padding: 10px;
+  white-space: nowrap;
+  font-weight: bold !important;
+  font-size: 16px;
 }
 
-
-
+.table-data {
+  padding: 10px;
+  font-size: 14px;
+}
 
 .prescription-button {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 .pagination {
@@ -69,14 +34,19 @@
 .pagination-button {
   margin: 0 5px;
 }
-.mypatients{
-  color:#272848 ;
+
+.mypatients {
+  color: #272848;
   margin-left: 15px;
-}  
-.actions{
+}
+
+.actions {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  margin-top: -40px;
+}
 
- 
+.medicine-grid {
+  margin-bottom: 20px;
 }

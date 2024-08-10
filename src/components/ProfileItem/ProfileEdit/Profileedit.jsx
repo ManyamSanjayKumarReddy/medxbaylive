@@ -53,7 +53,11 @@ const ProfileEdit = () => {
         const response = await axios.get("http://localhost:8000/patient/profile",{withCredentials:true});
         const { patient } = response.data;
   console.log(patient)
-        setProfileImage(patient.profileImage || profileimg);
+        const profileImageData = patient.profilePicture
+        ? `data:image/jpeg;base64,${patient.profilePicture.data}` // Update the prefix if the image is not JPEG
+        : profileimg;
+
+        setProfileImage(profileImageData);
         setName(patient.name || "");
         setEmail(patient.email || "");
         setMobileNumber(patient.phoneNumber || "");
