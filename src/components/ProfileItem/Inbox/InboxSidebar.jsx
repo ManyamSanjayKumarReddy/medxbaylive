@@ -3,6 +3,7 @@ import './InboxSidebar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { fetchFromServer } from '../../../actions/api';
+import profileimg from "../../Assets/profileimg.png";
 
 const Sidebar = ({ onSelectChat }) => {
   const [users, setUsers] = useState([]);
@@ -11,7 +12,7 @@ const Sidebar = ({ onSelectChat }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const role = sessionStorage.getItem('role'); // Fetch user role from session
+        const role = sessionStorage.getItem('role'); 
         const data = await fetchFromServer(role, '/dashboard');
         console.log('API Response:', data);
 
@@ -20,15 +21,15 @@ const Sidebar = ({ onSelectChat }) => {
         }
 
         const usersList = data.chats.map(chat => {
-          const profilePicture = role === 'patient' ? chat.doctorId.profilePicture : chat.patientId?.profilePicture;
+          const profilePicture = role === 'patient' ? chat.doctorId.profilePicture : chat.patientId.profilePicture;
 
           const imgSrc = profilePicture?.data 
-            ? `data:${profilePicture.contentType};base64,${profilePicture?.data}`
-            : '/path/to/default/image.png'; // Use a default image if profilePicture is not available
+            ? `data:${profilePicture.contentType};base64,${profilePicture.data}`
+            : profileimg
 
           return {
             id: chat._id,
-            name: role === 'patient' ? chat.doctorId.name : chat.patientId?.name,
+            name: role === 'patient' ? chat.doctorId.name : chat.patientId.name,
             message: chat.messages[0]?.text || 'No messages yet',
             time: new Date(chat.updatedAt).toLocaleString(),
             img: imgSrc,

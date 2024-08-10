@@ -13,10 +13,3 @@
     margin: 0;
   }
   
-  .main-content {
-    padding-top: 120px; /* Adjust this value based on the height of your header */
-    height: calc(100% - 120px); /* Subtract the height of the header from 100% */
-    overflow-y: auto; /* Allow vertical scrolling if content overflows */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-  }
-  
