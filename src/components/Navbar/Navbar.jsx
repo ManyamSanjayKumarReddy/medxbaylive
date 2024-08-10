@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faBell } from '@fortawesome/free-solid-svg-icons'; 
+import { faChevronDown, faBell } from '@fortawesome/free-solid-svg-icons';
 import SignupCard from '../signup/signup';
 import LoginCard from '../login/login';
 import brand from '../Assets/medbrand.png';
@@ -13,6 +13,7 @@ const Navbar = () => {
   const [isCorporateDropdownOpen, setCorporateDropdownOpen] = useState(false);
   const [isProvidersDropdownOpen, setProvidersDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState('');
 
   const navigate = useNavigate();
   const corporateDropdownRef = useRef(null);
@@ -28,6 +29,12 @@ const Navbar = () => {
   const handleCloseLoginPopup = () => setShowLoginPopup(false);
   const handleShowPopup = () => setShowPopup(true);
   const handleClosePopup = () => setShowPopup(false);
+
+  const handleCloseRegister = () => setShowPopup(false);
+  const handleShowRegister = () => setShowPopup(true);
+
+  const handleShowLogin = () => setShowLoginPopup(true);
+  const handleCloseLogin = () => setShowLoginPopup(false);
 
   const handleClickOutside = (event) => {
     if (corporateDropdownRef.current && !corporateDropdownRef.current.contains(event.target)) {
@@ -67,7 +74,9 @@ const Navbar = () => {
 
   useEffect(() => {
     const loggedIn = sessionStorage.getItem('loggedIn') === 'true';
+    const role = sessionStorage.getItem('role');
     setIsLoggedIn(loggedIn);
+    setUserRole(role);
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
@@ -103,6 +112,7 @@ const Navbar = () => {
                   <FontAwesomeIcon icon={faChevronDown} className="ml-2" />
                 </Link>
               </li>
+             
             </ul>
             {!isLoggedIn && (
               <ul className="navbar-nav ml-auto mr-md-2">
@@ -116,7 +126,11 @@ const Navbar = () => {
             )}
             {isLoggedIn && (
               <ul className="navbar-nav ml-auto mr-md-2">
-              
+               {userRole === 'doctor' && (
+                  <li className="nav-item active ml-md-4">
+                    <Link className="nav-dashbord nav-link nav-link-style" to="/doctorprofile/dashboardpage/">Dashboard</Link>
+                  </li>
+                )}
                 <li className="nav-item ml-md-4">
                   <div className='dashboard-setting-bell'>
                   <button type="button" className="btn nav-notification-button">
@@ -124,23 +138,30 @@ const Navbar = () => {
                   </button>
                   </div>
                 </li>
+                {/* <li className="nav-item ml-md-4">
+                  <button type="button" className="btn nav-signout-button" onClick={handleLogout}>Logout</button>
+                </li> */}
               </ul>
             )}
           </div>
         </nav>
         {isSignInClicked && (
           <div className="blur-background">
-            <LoginCard onClose={handleCloseSignupCard} onSwitchToSignup={handleRegisterClick} />
+            <LoginCard onClose={handleCloseSignupCard} onSwitchToSignup={handleRegisterClick}
+               handleClose={handleCloseLogin} /> 
           </div>
         )}
         {isRegisterClicked && (
           <div className="blur-background">
-            <SignupCard onCloseSignupCard={handleCloseLoginCard} onSwitchToLogin={handleSignInClick} />
+            <SignupCard onCloseSignupCard={handleCloseLoginCard} onSwitchToLogin={handleSignInClick}
+               handleClose={handleCloseRegister} />
           </div>
         )}
       </header>
-      <SignupCard show={showPopup} handleClose={handleClosePopup} />
-      <LoginCard show={showLoginPopup} handleClose={handleCloseLoginPopup} />
+      <SignupCard show={showPopup} handleClose={handleClosePopup} 
+       openLoginModal={handleShowLogin}/>
+      <LoginCard show={showLoginPopup} handleClose={handleCloseLoginPopup}    
+       openRegisterModal={handleShowRegister}/>
     </>
   );
 }

@@ -17,11 +17,11 @@ import Typed from 'typed.js';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const SignupCard = ({ show, handleClose }) => {
+const SignupCard = ({ show, handleClose,openLoginModal }) => {
   useEffect(() => {
     import('./signup.css');
   }, []);
-  const [isLoading, setIsLoading] = useState(false); // New state for loading
+  const [isLoading, setIsLoading] = useState(false); 
 
   const typedElement = useRef('');
   const typedElementTwo = useRef('');
@@ -53,6 +53,8 @@ const SignupCard = ({ show, handleClose }) => {
     }
   }, [show]);
 
+  
+
   useEffect(() => {
     if (typedElementTwo.current) {
       const optionsTwo = {
@@ -73,11 +75,12 @@ const SignupCard = ({ show, handleClose }) => {
   const handleGoogleSignIn = (role) => {
     setIsLoading(true);
     const url = role === 'patient'
-      ? 'http://localhost:8000/auth/google/patient'
-      : 'http://localhost:8000/auth/google/doctor';
-    
+      ? `http://localhost:8000/auth/google/patient?state=${JSON.stringify({ role })}`
+      : `http://localhost:8000/auth/google/doctor?state=${JSON.stringify({ role })}`;
+  
     window.location.href = url;
   };
+  
 
   const register = (e) => {
     e.preventDefault();
@@ -98,7 +101,7 @@ const SignupCard = ({ show, handleClose }) => {
         });
     }
   };
-  const [isProvider, setIsProvider] = useState(false); // New state to track user type
+  const [isProvider, setIsProvider] = useState(false);
 
   const validateForm = () => {
     return validateName(name) && validateEmail(email) && validateMobile(mobile) && validatePassword(password);
@@ -109,7 +112,7 @@ const SignupCard = ({ show, handleClose }) => {
     setTimeout(() => {
       setIsProvider(true);
       setIsLoading(false);
-    }, 500); // Simulate loading effect
+    }, 500); 
   };
 
   const handlePatientClick = () => {
@@ -117,7 +120,7 @@ const SignupCard = ({ show, handleClose }) => {
     setTimeout(() => {
       setIsProvider(false);
       setIsLoading(false);
-    }, 500); // Simulate loading effect
+    }, 500);
   };
 
 
@@ -287,7 +290,13 @@ const SignupCard = ({ show, handleClose }) => {
           </div>
           <div className='login-option-container'>
 <div className='account-sign-up'>Have an account?</div>
-<Link className='login-link-signup'>Log In</Link>
+
+<Link className='login-link-signup' to="#" onClick={() => {
+              handleClose(); // Close the login modal
+              openLoginModal(); // Open the registration modal
+            }}>
+                Sign In
+                </Link>
 
             </div>
             <div className='provider-option-container'>

@@ -2,7 +2,7 @@
     width: 100%;
 
     position: relative;
-    top: 150px;
+    top: 0px;
     background: linear-gradient(180deg, #E4EDFF -17.3%, rgba(253, 254, 255, 0.0763343) 72.99%, rgba(255, 255, 255, 0) 80.46%);
     /* background: url('../Assets/Siri.svg') no-repeat; */
     display: flex;

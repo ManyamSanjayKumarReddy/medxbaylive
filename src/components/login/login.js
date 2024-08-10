@@ -17,13 +17,14 @@ import Typed from 'typed.js';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const LoginCard = ({ show, handleClose }) => {
+const LoginCard = ({ show, handleClose,openRegisterModal }) => {
   useEffect(() => {
     import('./login.css');
   }, []);
   const navigate = useNavigate();
   const typedElement = useRef('');
   const typedElementTwo = useRef('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const [email, setEmail] = useState('');
   
@@ -31,7 +32,8 @@ const LoginCard = ({ show, handleClose }) => {
 
   const [isForgotPassword, setIsForgotPassword] = useState(false);
 
-  
+  const [isProvider, setIsProvider] = useState(false); 
+
   const [emailError, setEmailError] = useState('');
 
 
@@ -106,7 +108,15 @@ const LoginCard = ({ show, handleClose }) => {
   };
 
 
-
+  const handleGoogleSignIn = (role) => {
+    setIsLoading(true);
+    const url = role === 'patient'
+      ? `http://localhost:8000/auth/google/patient?state=${JSON.stringify({ role })}`
+      : `http://localhost:8000/auth/google/doctor?state=${JSON.stringify({ role })}`;
+  
+    window.location.href = url;
+  };
+  
 
   const validateForm = () => {
     return   validateEmail(email) && validatePassword(password);
@@ -236,7 +246,8 @@ const LoginCard = ({ show, handleClose }) => {
           <div className='end-line-sign-up'></div>
           <div className='end-line-sign-up-two'>
             <div className='button-sign-up-container'>
-            <button className='google-button-sign-up'><img src={google} alt='Google' className='google-sign-up-image'></img></button>
+            <button className='google-button-sign-up'>
+            <img src={google} alt="Google" onClick={() => handleGoogleSignIn(isProvider ? 'doctor' : 'patient')} className="social-sign-up" />            </button>
             <button className='apple-button-sign-up'><img src={apple} alt='Apple' className='apple-sign-up-image'></img></button>
             </div>
 
@@ -244,8 +255,12 @@ const LoginCard = ({ show, handleClose }) => {
           <div className='login-option-container'>
 <div className='account-sign-up'>Don't have an account?</div>
 
-<Link className='login-link-signup-login'>Sign Up</Link>
-
+<Link className='login-link-signup-login' to="#" onClick={() => {
+              handleClose(); // Close the login modal
+              openRegisterModal(); // Open the registration modal
+            }}>
+                Sign Up
+                </Link>
             </div>
   
 

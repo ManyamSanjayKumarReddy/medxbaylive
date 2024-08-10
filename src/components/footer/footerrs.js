@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { RiSendPlaneFill } from "react-icons/ri";
-import brand from '../Assets/brand-logo.png';
+import brand from '../Assets/medbrand.png';
 import './footerrs.css';
 
 const Footer = () => {
@@ -42,7 +42,7 @@ const Footer = () => {
               <li>Site Map</li>
             </ul>
           </div>
-          <div className="custom-footer-column">
+          {/* <div className="custom-footer-column">
             <h4>Subscribe</h4>
             <p className='para'>Subscribe to get the latest news  from us</p>
             <div className="custom-subscribe-form">
@@ -52,7 +52,7 @@ const Footer = () => {
   
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="custom-footer-bottom">

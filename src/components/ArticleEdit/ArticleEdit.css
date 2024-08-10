@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Matter:wght@400;500;600;700&display=swap');
 
-.main-article {
+.main-article-edit-profile {
     position: relative;
     /* background: linear-gradient(180deg, #EDF3FF 0%, #FFFFFF 100%); */
-    top: -650px;
+    top: -950px;
 }
 
 .background-article {

@@ -7,19 +7,6 @@ import axios from "axios";
 import { encode } from "base-64";
 // import '../DoctorEdit/DoctorPopUp.css'
 
-const bufferToBase64 = (buffer) => {
-  if (buffer?.type === 'Buffer' && Array.isArray(buffer?.data)) {
-    const bytes = new Uint8Array(buffer.data);
-    let binary = '';
-    for (let i = 0; i < bytes.length; i++) {
-      binary += String.fromCharCode(bytes[i]);
-    }
-    return `data:image/jpeg;base64,${btoa(binary)}`;
-  } else {
-    console.error('Unexpected buffer type:', typeof buffer);
-    return '';
-  }
-};
 
 const DoctorPopUp = ({ show, handleClose }) => {
   useEffect(() => {
@@ -126,7 +113,9 @@ const DoctorPopUp = ({ show, handleClose }) => {
 
   const getProfile = (a) => {
     if (a && a.data) {
-      const base64String = bufferToBase64(a.data);
+      const base64String = a?.data
+        ? `data:${a.contentType};base64,${a.data}`
+        : profileimg;
       setProfileimage(base64String);
     }
   };
@@ -161,15 +150,21 @@ const DoctorPopUp = ({ show, handleClose }) => {
         );
         const formData = response.data;
 
-        if (formData.dateOfBirth) {
+        if (formData.doctor.dateOfBirth) {
           const date = new Date(formData.dateOfBirth);
-          const formattedDate = `${String(date.getDate()).padStart(2, "0")}-${String(date.getMonth() + 1).padStart(2, "0")}-${date.getFullYear()}`;
-          formData.dateOfBirth = formattedDate;
+          const formattedDate = `${String(date.getDate()).padStart(
+            2,
+            "0"
+          )}-${String(date.getMonth() + 1).padStart(
+            2,
+            "0"
+          )}-${date.getFullYear()}`;
+          formData.doctor.dateOfBirth = formattedDate;
         }
         
         console.log(formData,'advshadjha')
-        getProfile(formData.profilePicture)
-        setFormData(formData);
+        getProfile(formData?.doctor.profilePicture)
+        setFormData(formData.doctor);
       } catch (error) {
         console.error("Error fetching doctor details:", error);
       }

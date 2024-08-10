@@ -27,7 +27,7 @@ function App() {
       <Route path="/" element={<Defult><Section /></Defult>} />
     
 
-        <Route path="/patient/patient-index" element={<PatientWelcomePage />} />
+        <Route path="/patient/patient-index" element={<Defult><PatientWelcomePage /> </Defult>} />
         <Route path="/doctor/doctor-index" element={<DoctorWelcomePage />} />
         <Route path="/admin/admin-home" element={<AdminWelcomePage />} />
         <Route path="/reset-password" element={<ChangePassword />} />

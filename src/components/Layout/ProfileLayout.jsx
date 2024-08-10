@@ -65,7 +65,7 @@ const ProfileLayout = () => {
     axios.post("http://localhost:8000/auth/logout",{withCredentials:true})
       .then(() => {
         sessionStorage.clear();
-        // navigate('/'); // Redirect to the login page after logout
+        navigate('/'); 
       })
       .catch(error => {
         console.error('Error during logout:', error);
@@ -74,7 +74,7 @@ const ProfileLayout = () => {
 
   return (
     <div className='layout-profile'>
-      <div className='container'>
+      <div className='container-padding'>
         <h1>User Profile</h1>
         <div className="container-profile-head"> 
           <div className="profile-card">

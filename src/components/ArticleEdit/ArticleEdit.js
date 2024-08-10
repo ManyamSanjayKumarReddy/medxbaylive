@@ -3,7 +3,21 @@ import './ArticleEdit.css';
 import { Link } from 'react-router-dom';
 import { BsArrowRight } from "react-icons/bs";
 
-function Articles() {
+const bufferToBase64 = (buffer) => {
+    if (buffer?.type === 'Buffer' && Array.isArray(buffer?.data)) {
+      const bytes = new Uint8Array(buffer.data);
+      let binary = '';
+      for (let i = 0; i < bytes.length; i++) {
+        binary += String.fromCharCode(bytes[i]);
+      }
+      return `data:image/jpeg;base64,${btoa(binary)}`;
+    } else {
+      console.error('Unexpected buffer type:', typeof buffer);
+      return '';
+    }
+  };
+
+function Articles({blogs}) {
     const [selectedCard, setSelectedCard] = useState(null);
 
     const cards = [
@@ -24,22 +38,26 @@ function Articles() {
         setSelectedCard((prev) => (prev === 1 ? cards.length : prev - 1));
     };
 
+    const getBase = (data) => {
+        return bufferToBase64(data.data);
+    };
+
     return (
-        <div className='main-article'>
+        <div className='main-article-edit-profile '>
         <div className='container article-area'>
             <div className='background-article'>
                 <h1 className='articles-doctor'>Articles</h1>
                 <div className="card-align">
-                    {cards.map((card) => (
-                        <div className="card-align-gap" key={card.id} onClick={() => handleCardClick(card.id)}>
-                            <div className={`  card-article ${selectedCard === card.id ? 'selected' : ''}`}>
-                                <img src={card.img} className="card-img-top" alt="..." />
-                                {selectedCard === card.id && (
-                                    <img src="/images/selectcardimg.png" className="overlay-img" alt="..." />
+                    {blogs.map((card) => (
+                        <div className="card-align-gap" key={card._id} onClick={() => handleCardClick(card._id)}>
+                            <div className={`  card-article ${selectedCard === card._id ? 'selected' : ''}`}>
+                                <img src={getBase(card.image)} className="card-img-top" alt="..." />
+                                {selectedCard === card._id && (
+                                    <img src={getBase(card.image)} className="overlay-img" alt="..." />
                                 )}
                                 <div className=" card-content">
-                                    <img src={card.logo} className={`cardlogo ${selectedCard === card.id ? 'hidden' : ''}`} alt="..." />
-                                    <h5 className="Telemedicine">TELEMEDICINE</h5>
+                                    {/* <img src={getBase(card.image)} className={`cardlogo ${selectedCard === card._id ? 'hidden' : ''}`} alt="..." /> */}
+                                    <h5 className="Telemedicine">{card.categories[0]||'TeleMedicine'}</h5>
                                     <h2 className='date '>5 Jun 2024 . <span className='time text-muted'>2 min read</span></h2>
                                     <h5 className="Maintitle">{card.title}</h5>
                                     <p className="description">{card.description}</p>

@@ -13,19 +13,19 @@ import Language from '../ProfileItem/Language/Language';
 import ProfileLayout from '../Layout/ProfileLayout';
 import DoctorLayout from '../Layout/DoctorLayout';
 import ConnectedRoutes from '../ProfileItem/DashboardAll/ConnectedRoutes/ConnectedRoutes';
+import Defult from '../../Default';
 
 const ProfileRoutes = () => {
   const location = useLocation();
 
-  // Check if the current path is under /doctorprofile/dashboardpage
   const isConnectedRoute = location.pathname.startsWith('/doctorprofile/dashboardpage');
 
   return (
     <div className={!isConnectedRoute ? 'profile-content-background-color' : ''}>
       <Routes>
-        <Route path="/userprofile" element={<ProfileLayout />}>
+        <Route path="/userprofile" element={<Defult><ProfileLayout />  </Defult>}>
           <Route index element={<Navigate to="edit/profile" />} />
-          <Route path="manage/appointments" element={<ManageAppointments />} />
+          <Route path="manage/appointments" element={<ManageAppointments />  } />
           <Route path="edit/profile" element={<Profileedit />} />
           <Route path="inbox" element={<Inbox />} />
           <Route path="prescription" element={<Prescriptions />} />

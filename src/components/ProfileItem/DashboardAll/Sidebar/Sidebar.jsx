@@ -125,7 +125,7 @@ const Sidebar = () => {
          onMouseEnter={() => setActiveItem('/doctorprofile/dashboardpage/Logout')}
          onMouseLeave={() => setActiveItem(location.pathname)}
         >
-          <Link to="/doctorprofile/dashboardpage/Logout" className="menu-link">
+          <Link to="/" className="menu-link">
             <div className="sidebar-icon"><RiLogoutCircleRLine /></div>
             <span>Logout</span>
           </Link>
