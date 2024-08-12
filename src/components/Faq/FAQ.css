@@ -856,7 +856,7 @@ max-width: 80%;
 
   @media (min-width:1024px) and (max-width: 1100px) {
     .faq {
-      top: -100px;
+      top: 1100px;
       height: auto;
     }
     .faq-container {
@@ -994,7 +994,7 @@ left: 10%;
 
   @media (min-width:1101px) and (max-width: 1439px) {
     .faq {
-      top: -100px;
+      top: 1000px;
     }
     .faq-left{
       width: 100%;

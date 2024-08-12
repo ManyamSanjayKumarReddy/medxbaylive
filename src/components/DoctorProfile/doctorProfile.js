@@ -4,7 +4,7 @@ import "../DoctorProfile/doctorProfile.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePrescription } from "@fortawesome/free-solid-svg-icons";
 import Reviewpage from "../../components/Reviewpage/Reviewpage";
-import Articles from "../Article/Article";
+// import Articles from "../Article/Article";
 import Languages from "../Languages/Language";
 import AwardsRecognition from "../Awards/Awards";
 import AcceptedInsurances from "../Insurance/Acceptedinsurance";
@@ -470,15 +470,15 @@ const handleConsultationTypeChange = (type) => {
         </div>
       </div>
       <div className="doctor-profile-container">
-        <div className="doctor-profile-img">
+        <div className="doctor-profile-img-con">
           <img src={profile} alt={doctorData.name || "Doctor"} className="doctor-profile-img"/>
         </div>
         <div className="doctor-details">
           <p className="doctorname">{doctorData.name}</p>
 
           <div className="education">
-            <StarRating totalStars={doctorData.rating} />
-            <div className="degree">{doctorData.title}</div>
+            <StarRating totalStars={doctorData.rating} className="doctor-star"/>
+            <span className="degree">{doctorData.title}</span>
           </div>
           <div className="doctor-discription">
             <div className="inperson">
@@ -624,10 +624,10 @@ const handleConsultationTypeChange = (type) => {
       <AwardsRecognition Awards={doctorData.awards} />
       </div>
       <Languages Languages={doctorData.languages} />
-      <Articles  blogs={blogs}/>
-      <div ref={reviewRef}>
+      {/* <Articles  blogs={blogs}/> */}
+      {/* <div ref={reviewRef}>
         <Reviewpage reviews={doctorData.reviews}/>
-      </div>
+      </div> */}
 
       <div className="faq " ref={faqRef}>
         <h2 className="heading">Frequently Asked Questions</h2>

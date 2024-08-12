@@ -4,7 +4,7 @@
 .award-section{
     /* background: linear-gradient(180deg, #EDF3FF 0%, #FFFFFF 100%); */
     position: relative;
-    top:-1060px
+    top:-860px
 
 }
 
@@ -16,10 +16,7 @@
 
 .award-area h2 {
     position: relative;
-    width: 408px;
-    height: 25px;
     top: -60px;
-    left: 406px;
     font-family: 'Matter', sans-serif;
     font-size: 36px;
     font-weight: 700;
@@ -386,7 +383,7 @@ left: 0;
 @media (min-width:1024px) and (max-width: 1439px) {
     .award-section{
 
-        top:-350px
+        top:850px
     
     }
 

@@ -22,7 +22,7 @@ display: flex;
 .doctor-profile-img{
     width: 311px;
 height: 341px;
-top:-70px;
+top:-150px;
 
 
 border-radius: 53px 0px 53px 0px;
@@ -38,7 +38,7 @@ background-position:50% top;  */
 .doctorname{
     width: 318px;
 height: 28px;
-top: -50px;
+top: -140px;
 left: 50px;
 
 font-family: Matter;
@@ -52,25 +52,27 @@ position: relative;
 }
 .education{
     display: flex;
-    top: -50px;
+    top: -140px;
     position: relative;
     margin-left: 22px;
 }
+
 .degree{
     position: relative;
     width: 270px;
     height: 28px;
    left: 10px;
-    
+    margin-top:16px ;
     font-family: Matter;
     font-size: 20px;
     font-weight: 600;
-    line-height: 28px;
+    /* line-height: 28px; */
     text-align: left;
     color: #272848;
         
 }
 .doctor-discription{
+    margin-top: -100px;
     position: relative;
 display: flex;
 margin-left: 10%;
@@ -218,7 +220,12 @@ border: 1px solid #0000001A;
 z-index: 1; 
 
 }
-
+.doctor-card-date{
+  margin-left: -70px;
+}
+.arrow{
+  font-size: 30px;
+}
 .book-appointment{
     width: 238px;
 height: 20px;
@@ -228,6 +235,7 @@ font-family: 'Matter', sans-serif;
 font-size: 24px;
 font-weight: 400;
 line-height: 19.6px;
+margin-bottom: 15px;
 text-align: left;
 position: relative;
 }
@@ -834,10 +842,10 @@ border: 1px solid #0000001A
 }
 .doctor-appoinment-card-container{
   position: relative;
-  width: 794px;
-height: 455px;
-top: -750px;
-left: 69px;
+  width: 100% !important;
+height: 100% !important;
+top: -1200px !important;
+left: 289px !important;
 border-radius: 15px;
 transition: transform 0.3s ease-in-out;
 
@@ -846,11 +854,13 @@ transition: transform 0.3s ease-in-out;
   transform: translate(-250px, -50px);
 }
 .doctor-appoinment-card-one{
+  margin-top: 20px;
+  gap:20px;
   position: relative;
   width: 860px;
 height: 214px;
-top: -452px;
-left: 230px;
+top: 0px !important;
+left: 0px !important;
 padding: 8px 12px 8px 8px;
 border-radius: 15px;
 border: 1px solid #E2E2E2
@@ -2204,12 +2214,14 @@ left: 586px;
 
 @media (min-width:1024px) and (max-width: 1439px) {
   .doctor-profile-container{
-    width: 1307px;
-height: 1756px;
-top: 100px;
-left: 72px;
+    width: 100%;
+height: auto;
+top: 3%;
+left: 10%;
 position: relative;
 display: flex;
+margin-left: auto;
+margin-right: auto;
 }
 
   .share-box{
@@ -2227,8 +2239,8 @@ border: 1px solid #0000001A
 
     display: flex; 
     flex-direction: column;
-    left: 0%;
-    top:120%;
+    left: 0% !important;
+    top:70%;
     width: 440px;
 margin-left: auto;
 margin-right: auto;
@@ -2236,18 +2248,14 @@ margin-right: auto;
   .doctor-details-header.moved {
     transform: translate(-100px, -83px); 
   }
+
+
   .doctor-appoinment-card-container{
-    justify-content: center !important;
-    position: relative;
-    width: 794px;
-  height: 455px;
-  top: -300px;
-  left:0%;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 15px;
-  transition: transform 0.3s ease-in-out;
-  justify-content: center;
+    top:600px !important;
+    left: 0% !important;
+ 
+ 
+
   }
 
   .doctor-appoinment-card-container.moved {
@@ -2257,8 +2265,11 @@ margin-right: auto;
     position: relative;
     width: 860px;
   height: 214px;
-  top: -452px;
-  left: 0%;
+  top: 0px;
+  left: 0% !important;
+  justify-content: center !important;
+  margin-left: auto;
+  margin-right: auto;
 
 
 
@@ -2278,9 +2289,6 @@ top: -1270px;
 left: 0px;
 margin-left: auto;
 margin-right: auto;
-}
-.doctor-profile{
-height: 100%;
 }
 
 .share-icon{
@@ -2342,7 +2350,7 @@ margin-right: auto;
     /* margin-left: auto;
     margin-right: auto; */
     transform: translateX(-50%);
-    left: 15.5%;
+    left: 80.5%;
   }
   .share-box{
     width: 100%;
@@ -2362,7 +2370,7 @@ left: 0px;
 }
 .doctor-appoinment-card-container{
 
-top: 680px;
+top:200px !important;
 left: 0px;
 margin-left: auto;
 margin-right: auto;
@@ -2371,7 +2379,7 @@ margin-right: auto;
 }
 .doctor-appoinment-card-one{
 
-top: -452px;
+top: 0px;
 left: 0px;
 
 }
