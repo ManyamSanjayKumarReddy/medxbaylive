@@ -62,7 +62,7 @@ const ChangePassword = () => {
     e.preventDefault();
     if (validatePassword(newPassword) && validatePassword(confirmPassword) && newPassword === confirmPassword) {
       try {
-        const res = await axios.post('https://medxbay-deploy-1-431103.uc.r.appspot.com/reset-password', { email });
+        const res = await axios.post('http://localhost:8000/reset-password', { email });
         if (res.data.success) {
           alert('Password reset email sent successfully.');
           setIsForgotPassword(false);

@@ -42,7 +42,7 @@ const Provider = ({ show, handleClose,openRegisterModal }) => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const res = await axios.post('https://medxbay-deploy-1-431103.uc.r.appspot.com/submit-lead', { email, name }, );
+        const res = await axios.post('http://localhost:8000/submit-lead', { email, name }, );
        
       } catch (err) {
         console.error('Error during login:', err);

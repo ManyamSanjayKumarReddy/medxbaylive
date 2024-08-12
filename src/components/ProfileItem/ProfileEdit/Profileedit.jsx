@@ -50,7 +50,7 @@ const ProfileEdit = () => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get("https://medxbay-deploy-1-431103.uc.r.appspot.com/patient/profile",{withCredentials:true});
+        const response = await axios.get("https://gwa-50021392542.development.catalystappsail.in/patient/profile",{withCredentials:true});
         const { patient } = response.data;
   console.log(patient)
         const profileImageData = patient.profilePicture
@@ -132,7 +132,7 @@ const ProfileEdit = () => {
   formData.append("policyNumber", policyNumber);
 
   try {
-    await axios.post("https://medxbay-deploy-1-431103.uc.r.appspot.com/patient/profile/update", formData, {
+    await axios.post("https://gwa-50021392542.development.catalystappsail.in/patient/profile/update", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

@@ -61,15 +61,20 @@ function DoctorEdit() {
   useEffect(() => {
     document.title = "Doctor-Edit";
 
+
     const fetchDoctorDetails = async () => {
       try {
+        const token = sessionStorage.getItem('authToken'); // Get the JWT token from sessionStorage
         const response = await axios.get(
-          "https://medxbay-deploy-1-431103.uc.r.appspot.com/doctor/profile/update",
-          { withCredentials: true }
+          "http://localhost:8000/doctor/profile/update",
+          {
+            headers: {
+              Authorization: `Bearer ${token}` // Include the token in the Authorization header
+            }
+          }
         );
         const doctorData = response.data;
-
-        console.log(doctorData);
+    
         if (doctorData.doctor.dateOfBirth) {
           const date = new Date(doctorData.doctor.dateOfBirth);
           const formattedDate = `${String(date.getDate()).padStart(
@@ -81,7 +86,7 @@ function DoctorEdit() {
           )}-${date.getFullYear()}`;
           doctorData.doctor.dateOfBirth = formattedDate;
         }
-
+    
         console.log("API Response:", doctorData);
         getProfile(doctorData?.doctor.profilePicture);
         setDoctor(doctorData.doctor);
@@ -91,7 +96,6 @@ function DoctorEdit() {
         console.error("Error fetching doctor details:", error);
       }
     };
-
     fetchDoctorDetails();
   }, []);
 

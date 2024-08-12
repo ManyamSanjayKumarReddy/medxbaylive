@@ -30,7 +30,7 @@ const ProfileLayout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("https://medxbay-deploy-1-431103.uc.r.appspot.com/patient/profile", { withCredentials: true })
+    axios.get("http://localhost:8000/patient/profile", { withCredentials: true })
       .then(response => {
         const {patient} = response.data;
 
@@ -62,7 +62,7 @@ const ProfileLayout = () => {
   };
 
   const handleLogout = () => {
-    axios.post("https://medxbay-deploy-1-431103.uc.r.appspot.com/auth/logout",{withCredentials:true})
+    axios.post("http://localhost:8000/auth/logout",{withCredentials:true})
       .then(() => {
         sessionStorage.clear();
         navigate('/'); 

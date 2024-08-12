@@ -133,7 +133,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
             };
             console.log('Booking data:', bookingData);
     
-            const response = await fetch('https://medxbay-deploy-1-431103.uc.r.appspot.com/patient/book', {
+            const response = await fetch('http://localhost:8000/patient/book', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
