@@ -6,6 +6,7 @@ import { faChevronDown, faBell } from '@fortawesome/free-solid-svg-icons';
 import SignupCard from '../signup/signup';
 import LoginCard from '../login/login';
 import brand from '../Assets/medbrand.png';
+import Provider from './Provider';
 
 const Navbar = () => {
   const [isSignInClicked, setIsSignInClicked] = useState(false);
@@ -44,7 +45,11 @@ const Navbar = () => {
       setProvidersDropdownOpen(false);
     }
   };
+  
+  const [showProviderModal, setShowProviderModal] = useState(false);
 
+
+  const toggleProviderModal = () => setShowProviderModal(!showProviderModal);
   const handleSignInClick = () => {
     setIsSignInClicked(true);
     setIsRegisterClicked(false);
@@ -101,17 +106,28 @@ const Navbar = () => {
                 <Link className="about-nav nav-link nav-link-style " to="#">About</Link>
               </li>
               <li className="nav-item dropdown active ml-md-4" ref={corporateDropdownRef}>
-                <Link className="for-corporates nav-link nav-link-style dropdown-toggle" to="#" role="button" onClick={toggleCorporateDropdown}>
-                  For Corporates
-                  <FontAwesomeIcon icon={faChevronDown} className="ml-2" />
-                </Link>
-              </li>
+          <Link 
+            className="for-corporates nav-link nav-link-style dropdown-toggle" 
+            to="#" 
+            role="button" 
+            onClick={toggleProviderModal}
+          >
+            For Corporates
+            <FontAwesomeIcon icon={faChevronDown} className="ml-2" />
+          </Link>
+        </li>
               <li className="nav-item dropdown active ml-md-4" ref={providersDropdownRef}>
-                <Link className="for-providers nav-link nav-link-style dropdown-toggle" to="#" role="button" onClick={toggleProvidersDropdown}>
-                  For Providers
-                  <FontAwesomeIcon icon={faChevronDown} className="ml-2" />
-                </Link>
-              </li>
+  <Link 
+    className="for-providers nav-link nav-link-style dropdown-toggle" 
+    to="https://mxb-providerslaunch.zoholandingpage.com/zoho-marketing-automation-workspace/Prelaunch%20-%20Providers/" 
+    role="button" 
+    onClick={toggleProvidersDropdown}
+  >
+    For Providers
+    <FontAwesomeIcon icon={faChevronDown} className="ml-2" />
+  </Link>
+</li>
+
              
             </ul>
             {!isLoggedIn && (
@@ -162,6 +178,10 @@ const Navbar = () => {
        openLoginModal={handleShowLogin}/>
       <LoginCard show={showLoginPopup} handleClose={handleCloseLoginPopup}    
        openRegisterModal={handleShowRegister}/>
+         <Provider 
+        show={showProviderModal} 
+        handleClose={() => setShowProviderModal(false)} 
+      />
     </>
   );
 }

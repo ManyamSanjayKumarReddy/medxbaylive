@@ -113,25 +113,18 @@ const ProfileLayout = () => {
                     <IoIosArrowForward />
                   </NavLink>
                 </li>
-                <li>
+                {/* <li>
                   <NavLink to="reviews" className={({ isActive }) => isActive ? 'active' : ''}>
                     <FaRegStar size='1.2rem' />
                     <span>Reviews</span>
                     <IoIosArrowForward />
                   </NavLink>
-                </li>
+                </li> */}
                 <li>
                   <NavLink to="notification" className={({ isActive }) => isActive ? 'active' : ''}>
                     <LuBell size='1.2rem' />
                     <span>Notification</span>
-                    <select
-                      className="dropdown-notification"
-                      value={notificationStatus}
-                      onChange={handleNotificationChange}
-                    >
-                      <option value="Allow">Allow</option>
-                      <option value="Not Allow">Not Allow</option>
-                    </select>
+                 
                   </NavLink>
                 </li>
                 <li>

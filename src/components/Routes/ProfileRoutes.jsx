@@ -29,7 +29,7 @@ const ProfileRoutes = () => {
           <Route path="edit/profile" element={<Profileedit />} />
           <Route path="inbox" element={<Inbox />} />
           <Route path="prescription" element={<Prescriptions />} />
-          <Route path="reviews" element={<Reviews />} />
+          {/* <Route path="reviews" element={<Reviews />} /> */}
           {/* <Route path="settings" element={<Settings />} /> */}
           <Route path="notification" element={<Notification />} />
           {/* <Route path="language" element={<Language />} /> */}

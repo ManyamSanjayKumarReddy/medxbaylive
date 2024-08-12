@@ -20,6 +20,7 @@ import axios from 'axios';
 const LoginCard = ({ show, handleClose,openRegisterModal }) => {
   useEffect(() => {
     import('./login.css');
+    // import ('../signup/signup.css')
   }, []);
   const navigate = useNavigate();
   const typedElement = useRef('');

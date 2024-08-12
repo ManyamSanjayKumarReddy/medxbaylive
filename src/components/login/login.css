@@ -1,6 +1,6 @@
 .form-overall-container-login{
   position: relative;
-  top: 60px;
+  top: -60px;
 
 }
 
@@ -39,7 +39,7 @@ color: #272848;
 .or-sign-up-container-login{
   display: flex;
   position: relative;
-  top: 20px;
+  top: -80px;
 }
 .login-link-signup-login{
   width: 40px;

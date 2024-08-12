@@ -635,7 +635,7 @@ const handleConsultationTypeChange = (type) => {
           <div className="faq-left">
             <img src={faqimage} alt="faq" className="faq-image-doctor"></img>
             <div className="smile-emoji-container">
-              <img src={smilee} alt="smile" className="smile-emoji"></img>
+              <img src={smilee} alt="smile" className="smile-emoji-faq"></img>
               <p className="people-count-faq">84k+</p>
               <p className="happy-patient">Happy Patients</p>
               <div className="heart-hands-container">
