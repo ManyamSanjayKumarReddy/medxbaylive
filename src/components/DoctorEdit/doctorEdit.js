@@ -10,7 +10,7 @@ import {
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 
-import Articles from "../ArticleEdit/ArticleEdit";
+// import Articles from "../ArticleEdit/ArticleEdit";
 import Languages from "../LanguagesEdit/LanguageEdit";
 
 import AcceptedInsurances from "../InsuranceEdit/InsuranceEdit";
@@ -194,24 +194,25 @@ function DoctorEdit() {
               </div>
             </div>
             <div className="edit-profile-disease-container">
-              <div className="plus-icon-container">
-                <FontAwesomeIcon icon={faPlus} className="plus-icon" />
-              </div>
-              <div className="edit-profile-disease">
-                {doctor
-                  ? doctor.conditions && doctor.conditions.length > 0
-                    ? doctor.conditions.map((condition, index) => (
-                        <React.Fragment key={index}>
-                          <span>{condition}</span>
-                          {index < doctor.conditions.length - 1 && (
-                            <span className="date-edit-vector-two"> </span>
-                          )}
-                        </React.Fragment>
-                      ))
-                    : "No conditions available"
-                  : "Loading..."}
-              </div>
-            </div>
+  <div className="plus-icon-container">
+    <FontAwesomeIcon icon={faPlus} className="plus-icon" />
+  </div>
+  <div className="edit-profile-disease">
+    {doctor
+      ? doctor.conditions && doctor.conditions.length > 0
+        ? doctor.conditions.map((condition, index) => (
+            <React.Fragment key={index}>
+              <span className="condition-item">{condition}</span>
+              {index < doctor.conditions.length - 1 && (
+                <span className="date-edit-vector-two"></span> /* Add separator */
+              )}
+            </React.Fragment>
+          ))
+        : "No conditions available"
+      : "Loading..."}
+  </div>
+</div>
+
       
             <div className="video-consult-container">
               <div className="edit-person-icon">
@@ -281,10 +282,10 @@ function DoctorEdit() {
         </div>
         </div>
         <div className="Locations-edit-doc-profile">Locations</div>
-        <div className={`doctor-appoinment-card-container `}>
+        <div className={`doctor-appoinment-card-container-edit `}>
           {doctor.hospitals?.map((data) =>{
             return(
-          <div className="doctor-appoinment-card-one">
+          <div className="doctor-appoinment-card-one-edit">
             <div className="hospital-name-box">
               <img src={hospitalimage} atl="hospital"></img>
               <p className="hospital-name-text">{data.name}</p>
@@ -356,7 +357,7 @@ function DoctorEdit() {
         </div>
         <AcceptedInsurances insurance={insurance} />
         <Languages Languages={doctor.languages}/>
-        <Articles blogs={blogs}/>
+        {/* <Articles blogs={blogs}/> */}
 
         <div className="faq " ref={faqRef}>
           <h2 className="heading">Frequently Asked Questions</h2>

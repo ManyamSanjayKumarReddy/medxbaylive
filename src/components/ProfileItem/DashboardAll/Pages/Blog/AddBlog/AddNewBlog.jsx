@@ -1,222 +1,243 @@
 import React, { useRef, useState } from "react";
-import Quill from "quill";
-import BlogInput from "./BlogInput";
+import "./addnewblog.css";
+import Blog from "../Blog";
 import Editor from "./Editor";
-import Blog from '../Blog'
+
 const AddNewBlog = () => {
-  const [showAddNewBlog, setShowAddNewBlog] = useState(false); 
-  
-  const handleAddClick = () => {
-    setShowAddNewBlog(true); 
-  };
-
-  const handleCancel = () => {
-    setShowAddNewBlog(false); 
-  };
-
-  const [iscurrentFocus, setIscurrentFocus] = useState(null);
-  const [newBlogdata, setNewBlogdata] = useState({
+  const [showAddNewBlog, setShowAddNewBlog] = useState(false);
+  const [newBlog, setNewBlog] = useState({
     title: "",
-    author: "",
+    authorName: "",
     category: "",
     subCategory: "",
     tags: "",
     status: "",
     description: "",
     image: null,
+    save: false,
   });
-
-  const [errors, setErrors] = useState({});
-
-  console.log(iscurrentFocus, newBlogdata);
-
-  const Delta = Quill.import("delta");
-  
-  const quillRef = useRef();
+  const quillRef = useRef(null);
   const fileInputRef = useRef(null);
 
-  const validate = () => {
-    let tempErrors = {};
-    if (!newBlogdata.title) tempErrors.title = "Title is required *";
-    if (!newBlogdata.author) tempErrors.author = "Author is required *";
-    if (!newBlogdata.category) tempErrors.category = "Category is required *";
-    if (!newBlogdata.subCategory) tempErrors.subCategory = "Sub-category is required *";
-    if (!newBlogdata.tags) tempErrors.tags = "Tags are required *";
-    if (!newBlogdata.status) tempErrors.status = "Status is required *";
-    if (!newBlogdata.description) tempErrors.description = "Description is required *";
-    if (!newBlogdata.image) tempErrors.image = "Image is required *";
-    return tempErrors;
+  const handleAddClick = () => {
+    setShowAddNewBlog(true);
+  };
+
+  const handleCancel = () => {
+    setShowAddNewBlog(false);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission logic here
+    console.log("Blog submitted:", newBlog);
+  };
+
+  // Example options for the select boxes
+  const categories = ["Technology", "Health", "Travel", "Food", "Lifestyle"];
+  const subCategories = {
+    Technology: ["AI", "Blockchain", "Cybersecurity"],
+    Health: ["Nutrition", "Mental Health", "Fitness"],
+    Travel: ["Adventure", "Culture", "Guides"],
+    Food: ["Recipes", "Reviews", "Nutrition"],
+    Lifestyle: ["Fashion", "Home Decor", "Wellness"],
   };
 
   const handlePublish = () => {
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length === 0) {
-      // Submit form
-      console.log("Form submitted", newBlogdata);
-    } else {
-      setErrors(validationErrors);
-    }
-  };
+    alert("Blog Publish");
+  }
 
   return (
     <>
-    {showAddNewBlog ? (
-      <Blog onCancel={handleCancel} /> 
-    ) : (
-        <div className="create-blog-cnt">
-          <div className="blog-details-cnt">
-            <BlogInput
-              currentFocus={iscurrentFocus}
-              setcurrentFocus={(label) => setIscurrentFocus(label)}
-              updateValue={(value) =>
-                setNewBlogdata({ ...newBlogdata, title: value })
-              }
-              value={newBlogdata.title}
-              label="title"
-              placeholder={"Blog Title"}
-            />
-            {errors.title && <p className="error">{errors.title}</p>}
-
-            <BlogInput
-              currentFocus={iscurrentFocus}
-              setcurrentFocus={(label) => setIscurrentFocus(label)}
-              updateValue={(value) =>
-                setNewBlogdata({ ...newBlogdata, author: value })
-              }
-              value={newBlogdata.author}
-              label="author"
-              placeholder={"Author Name"}
-            />
-            {errors.author && <p className="error">{errors.author}</p>}
-
-            <BlogInput
-              currentFocus={iscurrentFocus}
-              setcurrentFocus={(label) => setIscurrentFocus(label)}
-              updateValue={(value) =>
-                setNewBlogdata({ ...newBlogdata, category: value })
-              }
-              value={newBlogdata.category}
-              label="category"
-              placeholder={"Blog Category"}
-            />
-            {errors.category && <p className="error">{errors.category}</p>}
-
-            <BlogInput
-              currentFocus={iscurrentFocus}
-              setcurrentFocus={(label) => setIscurrentFocus(label)}
-              updateValue={(value) =>
-                setNewBlogdata({ ...newBlogdata, subCategory: value })
-              }
-              value={newBlogdata.subCategory}
-              label="subCategory"
-              placeholder={"Blog Sub Category"}
-            />
-            {errors.subCategory && <p className="error">{errors.subCategory}</p>}
-
-            <BlogInput
-              currentFocus={iscurrentFocus}
-              setcurrentFocus={(label) => setIscurrentFocus(label)}
-              updateValue={(value) =>
-                setNewBlogdata({ ...newBlogdata, tags: value })
-              }
-              value={newBlogdata.tags}
-              label="tags"
-              placeholder={"Tags (separated with a comma)"}
-            />
-            {errors.tags && <p className="error">{errors.tags}</p>}
-
-            <div className="status-input-cnt">
-              <p
-                className="input-placeholder"
-                style={{ position: "relative", paddingLeft: 0 }}
-              >
-                Blog status <span style={{ color: "red" }}> *</span>
+      {showAddNewBlog ? (
+        <Blog onCancel={handleCancel} />
+      ) : (
+        <div className="publish-blog-container" onSubmit={handleSubmit}>
+          <h2 className="blog-title">Blogs</h2>
+          <form className="publish-blog-gap">
+            <div className="publish-blog-header">
+              <input
+                type="text"
+                value={newBlog.title}
+                className="publish-blog-input"
+                onChange={(e) =>
+                  setNewBlog({ ...newBlog, title: e.target.value })
+                }
+              />
+              <p className="publish-blog-placeholder">
+                Blog Title
+                <span style={{ color: "red" }}> *</span>
               </p>
+            </div>
 
-              <div className="select-option-cnt">
-                <label htmlFor="check-active" className="checkbox-cnt">
+            <div className="publish-blog-header">
+              <input
+                type="text"
+                value={newBlog.authorName}
+                className="publish-blog-input"
+                onChange={(e) =>
+                  setNewBlog({ ...newBlog, authorName: e.target.value })
+                }
+              />
+              <p className="publish-blog-placeholder">
+                Author Name
+                <span style={{ color: "red" }}> *</span>
+              </p>
+            </div>
+
+            <div className="publish-blog-header">
+              <select
+                value={newBlog.category}
+                className="publish-blog-input"
+                onChange={(e) =>
+                  setNewBlog({ ...newBlog, category: e.target.value })
+                }
+              >
+                <option value="" disabled hidden>
+                  Choose Blog Category
+                </option>
+                {categories.map((category, index) => (
+                  <option key={index} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+              <p className="publish-blog-placeholder">
+                Blog Category
+                <span style={{ color: "red" }}> *</span>
+              </p>
+            </div>
+
+            <div className="publish-blog-header">
+              <select
+                value={newBlog.subCategory}
+                className="publish-blog-input"
+                onChange={(e) =>
+                  setNewBlog({ ...newBlog, subCategory: e.target.value })
+                }
+              >
+                <option value="" disabled hidden>
+                  Choose Blog Sub Category
+                </option>
+                {newBlog.category &&
+                  subCategories[newBlog.category].map((subCategory, index) => (
+                    <option key={index} value={subCategory}>
+                      {subCategory}
+                    </option>
+                  ))}
+              </select>
+              <p className="publish-blog-placeholder">
+                Blog Sub Category
+                <span style={{ color: "red" }}> *</span>
+              </p>
+            </div>
+
+            <div className="publish-blog-header">
+              <input
+                type="text"
+                value={newBlog.tags}
+                className="publish-blog-input"
+                onChange={(e) =>
+                  setNewBlog({ ...newBlog, tags: e.target.value })
+                }
+              />
+              <p className="publish-blog-placeholder">
+                Tags (separated with a comma)
+                <span style={{ color: "red" }}> *</span>
+              </p>
+            </div>
+
+            <div className="publish-blog-header">
+              <p className="publish-blog-placeholder-status">
+                Blog Status
+                <span style={{ color: "red" }}> *</span>
+              </p>
+              <div className="publish-blog-check-aina">
+                <div className="radio-input-label">
                   <input
-                    type="checkbox"
+                    type="radio"
                     id="check-active"
                     className="checkbox"
-                    checked={newBlogdata.status === "active"}
+                    checked={newBlog.status === "active"}
                     onChange={() =>
-                      setNewBlogdata({ ...newBlogdata, status: "active" })
+                      setNewBlog({
+                        ...newBlog,
+                        status:
+                          newBlog.status === "active"
+                            ? "notActive"
+                            : "active",
+                      })
                     }
                   />
-                  <p>Active</p>
-                </label>
-                <label htmlFor="check-inactive" className="checkbox-cnt">
+                  <label htmlFor="check-active" className="radio-label">
+                    Active
+                  </label>
+                </div>
+                <div className="radio-input-label">
                   <input
-                    type="checkbox"
+                    type="radio"
                     id="check-inactive"
                     className="checkbox"
-                    checked={newBlogdata.status === "notActive"}
+                    checked={newBlog.status === "notActive"}
                     onChange={() =>
-                      setNewBlogdata({ ...newBlogdata, status: "notActive" })
+                      setNewBlog({
+                        ...newBlog,
+                        status:
+                          newBlog.status === "notActive"
+                            ? "active"
+                            : "notActive",
+                      })
                     }
                   />
-                  <p>In Active</p>
-                </label>
+                  <label htmlFor="check-active" className="radio-label">
+                    Inactive
+                  </label>
+                </div>
               </div>
-              {errors.status && <p className="error">{errors.status}</p>}
+            </div>
+          </form>
+          <div className="editor-and-file-container">
+            <div className="editor-box">
+              <Editor
+                ref={quillRef}
+                defaultText="Description"
+                onTextChange={(content) => {
+                  setNewBlog({ ...newBlog, description: content });
+                }}
+              />
+            </div>
+
+            <div className="publish-blog-header-file">
+              <input
+                type="file"
+                ref={fileInputRef}
+                className="publish-file-input"
+                onChange={(e) =>
+                  setNewBlog({ ...newBlog, image: e.target.files[0] })
+                }
+              />
+              <p className="publish-file-name">{newBlog?.image?.name}</p>
+
+              <div className="choose-file-publish" onClick={() => fileInputRef.current.click()}>
+                <span>Choose File</span>
+              </div>
+              <p className="publish-blog-placeholder">
+                Image
+                <span style={{ color: "red" }}> *</span>
+              </p>
             </div>
           </div>
-          
-          <div className="text-editor-cnt">
-          {errors.description && <p className="error">{errors.description}</p>}
-            <Editor
-              ref={quillRef}
-              onTextChange={(value) =>
-                setNewBlogdata({ ...newBlogdata, description: value })
-              }
-            />
 
-          </div>
-
-          <div className="blog-long-input-cnt">
-            <input
-              type="file"
-              ref={fileInputRef}
-              className="file-input"
-              onChange={(e) =>
-                setNewBlogdata({ ...newBlogdata, image: e.target.files[0] })
-              }
-            />
-            
-            <p className="absolute-file-name">{newBlogdata?.image?.name}</p>
-            {errors.image && <p className="error">{errors.image}</p>}
-
-            <div
-
-              className="choose-file-label"
-              onClick={() => fileInputRef.current.click()}
-            >
-
-              <p>Choose File</p>
+          <div className="publish-button">
+            <div className="publish-button-inside" onClick={handlePublish}>
+              <span>Publish Blog</span>
             </div>
-            <p
-              className="input-placeholder"
-              style={{
-                top: newBlogdata.image ? "-0.8rem" : null,
-              }}
-            >
-              Image
-              <span style={{ color: "red" }}> *</span>
-            </p>
-          </div>
-          <div className="btns-cnt">
-            <div className="action-btn" onClick={handlePublish}>
-              <p>Publish Blog</p>
-            </div>
-            <div
-              className="action-btn"
-              style={{ background: "#3334480D", color: "black" }}
-              onClick={handleAddClick}
-            >
-              <p>Cancel</p>
+            <div className="publish-button-inside" onClick={handleAddClick} 
+            style={{ background: "#3334480D", color: "black" }} >
+              <span>Cancel</span>
             </div>
           </div>
+
         </div>
       )}
     </>

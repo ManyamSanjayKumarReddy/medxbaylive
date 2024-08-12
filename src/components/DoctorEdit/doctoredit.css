@@ -238,10 +238,11 @@ top: 90px;
   
 }
 
+
+
 .edit-profile-disease{
   display: flex;
-
-  min-width: 1038px;
+  width: 638px;
 height: 28px;
 top: 0px;
 left: 2%;
@@ -398,7 +399,7 @@ justify-content: center;
 color: #272848;
 
 }
-.doctor-appoinment-card-container{
+.doctor-appoinment-card-container-edit{
   position: relative;
   width: 100% !important;
 height: 100% !important;
@@ -409,10 +410,10 @@ transition: transform 0.3s ease-in-out;
 
 
 }
-.doctor-appoinment-card-container.moved {
+.doctor-appoinment-card-container-edit.moved {
   transform: translate(-250px, -50px);
 }
-.doctor-appoinment-card-one{
+.doctor-appoinment-card-one-edit{
   margin-top: 20px;
   gap:20px;
   position: relative;
@@ -707,7 +708,7 @@ top: 12%;
 
 
 
-.doctor-appoinment-card-container{
+.doctor-appoinment-card-container-edit{
   position: relative;
   width: 100%;
   max-width: 90%;
@@ -720,7 +721,7 @@ transition: transform 0.3s ease-in-out;
 }
 
 
-.doctor-appoinment-card-one{
+.doctor-appoinment-card-one-edit{
 
   position: relative;
   width: 100%;
@@ -973,7 +974,7 @@ top: 12%;
 }
 
 
-.doctor-appoinment-card-container{
+.doctor-appoinment-card-container-edit{
   position: relative;
   width: 100%;
   max-width: 90%;
@@ -987,7 +988,7 @@ margin-right: auto;
 }
 
 
-.doctor-appoinment-card-one{
+.doctor-appoinment-card-one-edit{
 
   position: relative;
   width: 440px;
@@ -1175,7 +1176,7 @@ margin-right: auto;
 
 
 
-.doctor-appoinment-card-container{
+.doctor-appoinment-card-container-edit{
   position: relative;
   width: 100%;
   max-width: 90%;
@@ -1187,13 +1188,13 @@ transition: transform 0.3s ease-in-out;
 
 }
 
-.doctor-appoinment-card-container.moved {
+.doctor-appoinment-card-container-edit.moved {
   transform: translate(-0px, -50px);
 }
 .doctor-details-header.moved {
   transform: translate(-0px, -0px); 
 }
-.doctor-appoinment-card-one{
+.doctor-appoinment-card-one-edit{
 
   position: relative;
   margin-left: auto;
@@ -1279,7 +1280,7 @@ display: flex;
   .doctor-details-header.moved {
     transform: translate(-100px, -83px); 
   }
-  .doctor-appoinment-card-container{
+  .doctor-appoinment-card-container-edit{
     position: relative;
     width: 794px;
   height: 455px;
@@ -1291,7 +1292,7 @@ display: flex;
   margin-right: auto;
   justify-content: center;
   }
-  .doctor-appoinment-card-one{
+  .doctor-appoinment-card-one-edit{
     position: relative;
     width: 860px;
   height: 214px;
@@ -1310,7 +1311,7 @@ display: flex;
   justify-content: center;
   }
 
-  .doctor-appoinment-card-container.moved {
+  .doctor-appoinment-card-container-edit.moved {
     transform: translate(0px, 0px);
   }
 
@@ -1332,6 +1333,22 @@ height: 100%;
 }
 
 @media (min-width:1024px) and (max-width: 1439px) {
+
+
+  .edit-left {
+    left:-15%; /* Optional: space between columns */
+    position: relative;
+    top: -1%;
+  
+  }
+  
+  
+  .edit-right {
+    left: -15%; /* Optional: space between columns */
+    position: relative;
+    top: 7%;
+  }
+  
   .doctor-profile-edit-container{
     width: 1307px;
 height: 1756px;
@@ -1344,12 +1361,12 @@ display: flex;
   .doctor-details-header.moved {
     transform: translate(-100px, -83px); 
   }
-  .doctor-appoinment-card-container{
+  .doctor-appoinment-card-container-edit{
     justify-content: center !important;
     position: relative;
     width: 794px;
   height: 455px;
-  top: -300px;
+  top: -900px !important;
   left:0%;
   margin-left: auto;
   margin-right: auto;
@@ -1358,10 +1375,10 @@ display: flex;
   justify-content: center;
   }
 
-  .doctor-appoinment-card-container.moved {
+  .doctor-appoinment-card-container-edit.moved {
     transform: translate(0px, 0px);
   }
-  .doctor-appoinment-card-one{
+  .doctor-appoinment-card-one-edit{
     position: relative;
     width: 860px;
   height: 214px;
@@ -1386,9 +1403,38 @@ height: 100%;
 
 
 
+.edit-profile-discription{
+  width: 400px;
+  max-width: 600px !important;
+height: 109px;
+top: 20px;
+left: 0px;
 
+font-family: Matter;
+font-size: 18px;
+font-weight: 400;
+line-height: 27.2px;
+text-align: justified;
+color: #515265;
+position: relative;
+}
 
+.Locations-edit-doc-profile{
+  position: relative;
+  width: 164px;
+height: 25px;
+left: 0px;
+top: -950px;
+font-family: Matter;
+font-size: 36px;
+font-weight: 700;
+line-height: 25px;
+margin-left: auto;
+margin-right: auto;
+justify-content: center;
+color: #272848;
 
+}
 }
 @media (min-width:1441px) and (max-width: 2000px) {
   .doctor-profile-edit-container{
@@ -1420,27 +1466,63 @@ height: 179px;
 }
 
 
-.doctor-appoinment-card-container{
+.doctor-appoinment-card-container-edit{
 
-top: 680px;
-left: 0px;
+  position: relative;
+  width: 100% !important;
+height: 100% !important;
+top: 250px !important;
+left: 9px !important;
+border-radius: 15px;
+transition: transform 0.3s ease-in-out;
+
+}
+.doctor-appoinment-card-one-edit{
+
+  margin-top: 20px;
+  gap:20px;
+  position: relative;
+  width: 860px;
+height: 214px;
+top: 0px !important;
+left: 0px !important;
 margin-left: auto;
 margin-right: auto;
-
+padding: 8px 12px 8px 8px;
+border-radius: 15px;
+border: 1px solid #E2E2E2
 
 }
-.doctor-appoinment-card-one{
-
-top: -452px;
+.Locations-edit-doc-profile{
+  position: relative;
+  width: 164px;
+height: 25px;
 left: 0px;
+top: 200px;
+font-family: Matter;
+font-size: 36px;
+font-weight: 700;
+line-height: 25px;
+margin-left: auto;
+margin-right: auto;
+justify-content: center;
+color: #272848;
 
 }
-.doctor-appoinment-card-two{
-  
-top: -428px;
-left: 0px;
+.edit-left {
+  left:-15%; /* Optional: space between columns */
+  position: relative;
+  top: -1%;
 
 }
+
+
+.edit-right {
+  left: 46%; /* Optional: space between columns */
+  position: relative;
+  top: -58%;
+}
+
 
 }
 
@@ -1476,7 +1558,7 @@ height: 179px;
 }
 
 
-.doctor-appoinment-card-container{
+.doctor-appoinment-card-container-edit{
 
 top: 680px;
 left: 0px;
@@ -1485,7 +1567,7 @@ margin-right: auto;
 
 
 }
-.doctor-appoinment-card-one{
+.doctor-appoinment-card-one-edit{
 
 top: -452px;
 left: 0px;
