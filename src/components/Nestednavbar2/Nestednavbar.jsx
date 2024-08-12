@@ -1,95 +1,76 @@
-import React, { useEffect, useRef, useState } from 'react';
-import './nestednavbar.css';
-import downarrowimage from '../Assets/dwon.gif';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../Nestednavbar2/nestednavbar.css';
+
+import axios from 'axios';
 import Navbar from '../Navbar/Navbar';
-import gwatrailer from '../Assets/gwa-trailer.mp4';
-
-const Nestednavbar = () => {
-  const [isNestedVisible, setIsNestedVisible] = useState(false);
-  const videoRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const arrowSection = document.querySelector('.down-arrow');
-      const arrowSectionBottom = arrowSection.getBoundingClientRect().top;
-
-      if (arrowSectionBottom <= 0) {
-        setIsNestedVisible(true);
-      } else {
-        setIsNestedVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    const videoPlayer = videoRef.current;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            videoPlayer.classList.add('zoomed');
-            videoPlayer.classList.remove('zoomed-out');
+const Nestednavbaruserside = () => {
+    const [what, setWhat] = useState('');
+    const [where, setWhere] = useState('');
+    const navigate = useNavigate();
+  
+    const searchDoctors = async () => {
+      try {
+          const response = await axios.get(`http://localhost:8000/auth/search-doctors?what=${what}&where=${where}`, { withCredentials: true });
+          const data = response.data; // Access the data directly
+          // If you need to check content type, you can use the following (though it's usually unnecessary with axios):
+          const contentType = response.headers['content-type'];
+          if (contentType && contentType.includes('application/json')) {
+              console.log('Booking response:', data);
           } else {
-            videoPlayer.classList.add('zoomed-out');
-            videoPlayer.classList.remove('zoomed');
+              console.error('Unexpected response format:', data);
           }
-        });
-      },
-      { threshold: 0.5 } // Adjust the threshold as needed
-    );
-
-    observer.observe(videoPlayer);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
-  return (
-    <>
-      {isNestedVisible && (
+      } catch (error) {
+          console.error('Error fetching doctors:', error);
+      }
+  };
+  
+    useEffect(() => {
+      searchDoctors();
+    }, [what, where]);
+  
+  
+    return (
+      <>
         <div className="nested sticky-top">
           <div className="color-style">
             <Navbar />
           </div>
-          
+  
           <div className="navbar-back">
-            <form>
+                <form>
               <div className="form-control-one">
                 <label>What</label>
-                <input className="width-input" type="text" placeholder="Search Doctors, providers or conditions" />
+                
+                <input
+                  className="width-input"
+                  type="text"
+                  id="what"
+                  value={what}
+                  onChange={(e) => setWhat(e.target.value)}
+                  placeholder="Search Doctors, providers or conditions"
+                />
               </div>
               <div className="form-control-two">
                 <label>Where</label>
-                <input type="text" placeholder="United Arab Emirates" />
+                <input
+                  className="width-input"
+            type="text"
+            id="where"
+            value={where}
+            onChange={(e) => setWhere(e.target.value)}
+            placeholder="United Arab Emirates"
+            />
+                
               </div>
-              <button type="submit" className="btn button-color">
+              <button type="submit" className="btn button-color" onClick={searchDoctors}>
                 Find My Doctor
               </button>
-            </form>
+              </form>
           </div>
         </div>
-      )}
+      </>
+    )  
+}
 
-      <div className="down-arrow">
-        <img src={downarrowimage} className="image-arrow" alt="Map" />
-      </div>
-
-      <div className="video-wrapper">
-        <div ref={videoRef} className="video-player zoomed-out">
-          <video loop autoPlay muted controls className="video">
-            <source src={gwatrailer} type="video/mp4" />
-          </video>
-        </div>
-      </div>
-    </>
-  );
-};
-
-export default Nestednavbar;
+export default Nestednavbaruserside

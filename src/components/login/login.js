@@ -43,7 +43,9 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const res = await axios.post('https://medxbay-deploy-1-431103.uc.r.appspot.com/auth/login', { email, password }, { withCredentials: true });
+        const res = await axios.post('https://medxbay-deploy-1-431103.uc.r.appspot.com/auth/login', { email, password },
+          
+          { withCredentials: true });
         if (res.data.success) {
           const { user } = res.data;
           const { role, _id: userId, email: userEmail, subscriptionType, subscriptionVerification } = user;

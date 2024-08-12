@@ -14,6 +14,8 @@ import ProfileLayout from '../Layout/ProfileLayout';
 import DoctorLayout from '../Layout/DoctorLayout';
 import ConnectedRoutes from '../ProfileItem/DashboardAll/ConnectedRoutes/ConnectedRoutes';
 import Defult from '../../Default';
+import Nestednavbar from '../Nestednavbar2/Nestednavbar2';
+import Footer from '../footer/footerrs';
 
 const ProfileRoutes = () => {
   const location = useLocation();
@@ -23,7 +25,7 @@ const ProfileRoutes = () => {
   return (
     <div className={!isConnectedRoute ? 'profile-content-background-color' : ''}>
       <Routes>
-        <Route path="/userprofile" element={<Defult><ProfileLayout />  </Defult>}>
+        <Route path="/userprofile" element={[<Nestednavbar/>,<ProfileLayout/>,<Footer/>]}>
           <Route index element={<Navigate to="edit/profile" />} />
           <Route path="manage/appointments" element={<ManageAppointments />  } />
           <Route path="edit/profile" element={<Profileedit />} />
