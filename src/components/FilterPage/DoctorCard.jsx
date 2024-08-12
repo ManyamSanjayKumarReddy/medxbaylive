@@ -13,7 +13,7 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'; // Filled star
 // import { fetchFromPatient } from '../../actions/api';
 // import api from 'axios';
 import { fetchFromPatient } from '../../actions/api.js';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment/moment.js';
 
 const bufferToBase64 = (buffer) => {
@@ -38,6 +38,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
     const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
     const [consultationType, setConsultationType] = useState(''); // Default consultation type
     const [showAllHospitals, setShowAllHospitals] = useState(false); // State to show all hospitals
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (doctor.profilePicture && doctor.profilePicture.data) {
@@ -86,6 +87,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
         });
     }
 
+
     const showPrev = () => {
         if (startIndex > 0) {
             setStartIndex(startIndex - 1);
@@ -109,11 +111,24 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
     };
     
     const handleBookAppointment = async () => {
+        const user = sessionStorage.getItem('loggedIn');
+
+        if (!user) {
+      // If no user data in session storage, redirect to login page
+      alert('You need to log in to book an appointment.');
+        navigate('/login');
+        return;
+    }
         try {
+            const selectedDay = dates[selectedDate];
+            if(consultationType ==''){
+                alert('please select a consultation type')
+                return
+            }
             const bookingData = {
                 doctorId: doctor._id,
-                date: new Date(dates[selectedDate].day).toISOString(), 
-                startTime: selectedTimeSlot, 
+                date: moment(selectedDay.day).format('YYYY-MM-DD'),
+                startTime: selectedTimeSlot,
                 consultationType: consultationType
             };
             console.log('Booking data:', bookingData);
@@ -144,10 +159,6 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
         }
     };
     
-    
-
-    
-
     const renderStars = (rating) => {
         const fullStars = Math.floor(rating);
         const hasHalfStar = rating % 1 !== 0;
@@ -170,29 +181,73 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
         if (doctor.consultation === 'In-person') {
             return (
                 <div className={`p-1 ${consultationType === "In-person" ? "consultationActiveColor" : ""}`}>
-                    {consultationType === "In-person" ? <img src={MedicalServiceWhite} alt="Video Consultation" />  : <img src={MedicalService} alt="In-Person" />}
-                    <span onClick={() => setConsultationType('In-person')}>In-person</span>
+                    <div className="form-check">
+                        <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inPersonCheck"
+                            checked={consultationType === 'In-person'}
+                            onChange={() => setConsultationType('In-person')}
+                            />
+                            <img src={MedicalService} alt="In-Person" />
+                        <label className="form-check-label" htmlFor="inPersonCheck">
+                            In-Person
+                        </label>
+                    </div>
                 </div>
             );
-        } else if (doctor.consultation === 'video call') {
+        } else if (doctor.consultation === 'Video call') {
             return (
-                <div className={`p-1 ${consultationType === "video call" ? "consultationActiveColor" : ""}`}>
-                    {consultationType === "video call" ? <img src={videoCallwhite} alt="Video Consultation" />  : <img src={videoCall} alt="In-Person" />}
+                <div className={`p-1 ${consultationType === "Video call" ? "consultationActiveColor" : ""}`}>
                     {/* <img src={videoCall} alt="Video Consultation" style={{ color: "#37adff" }} /> */}
-                    <span onClick={() => setConsultationType('video call')}>Video Consultation</span>
+                    <div className="form-check">
+                        <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inPersonCheck"
+                            checked={consultationType === 'Video call'}
+                            onChange={() => setConsultationType('Video call')}
+                            />
+                            <img src={videoCall} alt="In-Person" />
+                        <label className="form-check-label" htmlFor="inPersonCheck">
+                            Video Consultation
+                        </label>
+                    </div>
                 </div>
             );
         } else if (doctor.consultation === 'Both') {
             return (
                 <>
                     <div className={`p-1 ${consultationType === "In-person" ? "consultationActiveColor" : ""}`}>
-                        {consultationType === "In-person" ? <img src={MedicalServiceWhite} alt="Video Consultation" />  : <img src={MedicalService} alt="In-Person" />}
-                        <span onClick={() => setConsultationType('In-person')}>In-Person</span>
+                        <div className="form-check">
+                        <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inPersonCheck"
+                            checked={consultationType === 'In-person'}
+                            onChange={() => setConsultationType('In-person')}
+                            />
+                            <img src={MedicalService} alt="In-Person" />
+                        <label className="form-check-label" htmlFor="inPersonCheck">
+                            In-Person
+                        </label>
                     </div>
-                    <div className={`p-1 ${consultationType === "video call" ? "consultationActiveColor" : ""}`}>
-                        {consultationType === "video call" ? <img src={videoCallwhite} alt="Video Consultation" />  : <img src={videoCall} alt="In-Person" />}
+                    </div>
+                    <div className={`p-1 ${consultationType === "Video call" ? "consultationActiveColor" : ""}`}>
                         {/* <img src={videoCall} alt="Video Consultation" style={{ color: "#37adff" }} /> */}
-                        <span onClick={() => setConsultationType('video call')}>Video Consultation</span>
+                        <div className="form-check">
+                        <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inPersonCheck"
+                            checked={consultationType === 'Video call'}
+                            onChange={() => setConsultationType('Video call')}
+                            />
+                            <img src={videoCall} alt="In-Person" />
+                        <label className="form-check-label" htmlFor="inPersonCheck">
+                            Video consultation
+                        </label>
+                    </div>
                     </div>
                 </>
             );
@@ -219,7 +274,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="doctor-details">
+                        <div className="doctor-details1">
                             <Link to={`/doctor/${doctor._id}`}>
                                 <h2>{doctor.name}</h2>
                             </Link>

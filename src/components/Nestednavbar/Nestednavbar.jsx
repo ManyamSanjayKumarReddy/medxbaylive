@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import './nestednavbar.css';
 import downarrowimage from '../Assets/dwon.gif';
 import Navbar from '../Navbar/Navbar';
-import gwatrailer from '../Assets/gwa-trailer.mp4';
+import gwa from '../Assets/gwa-trailer.mp4'
 
 const Nestednavbar = () => {
   const [isNestedVisible, setIsNestedVisible] = useState(false);
@@ -84,7 +84,7 @@ const Nestednavbar = () => {
       <div className="video-wrapper">
         <div ref={videoRef} className="video-player zoomed-out">
           <video loop autoPlay muted controls className="video">
-            <source src={gwatrailer} type="video/mp4" />
+            <source src={gwa} type="video/mp4" />
           </video>
         </div>
       </div>

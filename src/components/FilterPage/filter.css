@@ -129,6 +129,60 @@ input[type="date"]::-ms-expand {
 }
 
 
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkbox-item {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-item input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+}
+
+.checkbox-item input[type="checkbox"] + label {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+}
+
+.checkbox-item input[type="checkbox"] + label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #007bff;
+    background-color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.checkbox-item input[type="checkbox"]:checked + label::before {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.checkbox-item input[type="checkbox"]:checked + label::after {
+    content: '\f00c'; /* FontAwesome checkmark */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+}
+
 /* Responsive Design */
 @media (max-width: 1200px) {
     .sidebar-filter {

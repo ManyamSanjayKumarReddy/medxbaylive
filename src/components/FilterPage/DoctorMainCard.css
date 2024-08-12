@@ -92,27 +92,34 @@
     display: flex;
   }
   
-  .doctor-photo {
+  .sponsored-doctor-photo {
     width: 120px;
     height: 120px;
     border: #ff7f50 solid 2.5px;
     border-radius: 50%;
     margin-right: 20px;
   }
-  
-  .doctor-details {
+  .doctor-photo{
+    width: 120px;
+    height: 120px;
+    border: #007bff solid 2.5px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  .doctor-details1 {
     transition: font-size 0.5s ease-in-out, margin-left 0.5s ease-in-out;
     max-width: 400px;
+    /* margin-left: ; */
   }
   
-  .doctor-details h2 {
+  .doctor-details1 h2 {
     color: #007bff;
     margin: 0;
     font-size: 20px;
     font-weight: 600;
   }
   
-  .doctor-details p {
+  .doctor-details1 p {
     margin: 5px 0;
   }
   .speciality{
@@ -141,6 +148,9 @@
     width: 20px;
     height: 20px;
     margin-right: 4px;
+  }
+  .consultation-type input{
+    margin-top: 7px;
   }
   .percentage-data{
     margin-top: 15px;
@@ -406,12 +416,16 @@
       width: 100%;
       text-align: center;
   }
-  .doctor-details {
+  .doctor-details1 {
       margin-top: 10px;
   }
   .doctor-photo {
       width: 80px;
       height: 80px;
+  }
+  .sponsored-doctor-photo{
+    width: 80px;
+    height: 80px;
   }
   .book-button {
       width: 100%;
@@ -427,10 +441,14 @@
       width: 60px;
       height: 60px;
   }
-  .doctor-details h2 {
+  .sponsored-doctor-photo{
+    width: 60px;
+      height: 60px;
+  }
+  .doctor-details1 h2 {
       font-size: 16px;
   }
-  .doctor-details p {
+  .doctor-details1 p {
       font-size: 12px;
   }
   .book-button {

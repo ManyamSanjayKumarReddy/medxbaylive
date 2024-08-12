@@ -9,9 +9,11 @@ import Footerr from '../footer/footer';
 import MapContainer from './Mapcontainer';
 import './OffCanvas.css';
 import { fetchFromPatient } from '../../actions/api';
-import Navbar from '../Navbar/Navbar';
+import Nestednavbar from '../Nestednavbar2/Nestednavbar2';
+import { useLocation } from 'react-router-dom';
 
 const FilterPage = () => {
+  const location = useLocation();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isMapExpanded, setIsMapExpanded] = useState(false);
   const [searchInput, setSearchInput] = useState('');
@@ -32,12 +34,26 @@ const FilterPage = () => {
     consultation: ''
   });
 
+  useEffect(()=>{
+    if (location.state) {
+      const { doctors: fetchedDoctors, what, where } = location.state;
+      setDoctors(fetchedDoctors);
+      setFilters(prevFilters => ({
+        ...prevFilters,
+        what: what || '',
+        where: where || ''
+      }));
+    }
+  },[location.state])
   useEffect(() => {
+    
     const fetchDoctors = async () => {
       try {
         const response = await fetchFromPatient(`/doctors`);
 
         setDoctors(response.doctors);
+        // console.log(response.doctors);
+        
       } catch (error) {
       }
     };
@@ -86,43 +102,48 @@ const FilterPage = () => {
   };
 
   const filterDoctors = (doctors) => {
-    return doctors.filter((doctor) => {
-      const getStringValue = (value) => (typeof value === 'string' ? value.toLowerCase() : '');
+  if (!Array.isArray(doctors)) {
+    return [];
+  }
+  return doctors.filter((doctor) => {
+    const getStringValue = (value) => (typeof value === 'string' ? value.toLowerCase() : '');
 
-      const speciality = getStringValue(doctor.speciality);
-      const city = getStringValue(doctor.city);
-      const gender = getStringValue(doctor.gender);
-      const hospital = getStringValue(doctor.hospital);
-      const availability = getStringValue(doctor.availability);
-      const doctorConditions = doctor.conditions.map(getStringValue);
-      const doctorLanguages = doctor.languages.map(getStringValue);
+    const speciality = getStringValue(doctor.speciality || '');
+    const city = getStringValue(doctor.city || '');
+    const gender = getStringValue(doctor.gender || '');
+    const hospital = getStringValue(doctor.hospital || '');
+    const availability = getStringValue(doctor.availability || '');
+    const doctorConditions = (doctor.conditions || []).map(getStringValue);
+    const doctorLanguages = (doctor.languages || []).map(getStringValue);
 
-      const matchesCity = !filters.city || city === getStringValue(filters.city);
-      const matchesSpeciality = !filters.speciality || speciality === getStringValue(filters.speciality);
-      const matchesGender = !filters.gender || gender === getStringValue(filters.gender);
-      const matchesHospital = !filters.hospital || hospital === getStringValue(filters.hospital);
-      const matchesAvailability = !filters.availability || availability === getStringValue(filters.availability);
-      const matchesConditions = filters.conditions.length === 0 || filters.conditions.every(condition => doctorConditions.includes(getStringValue(condition)));
-      const matchesLanguages = filters.languages.length === 0 || filters.languages.every(language => doctorLanguages.includes(getStringValue(language)));
+    const matchesCity = !filters.city || city === getStringValue(filters.city);
+    const matchesSpeciality = !filters.speciality || speciality === getStringValue(filters.speciality);
+    const matchesGender = !filters.gender || gender === getStringValue(filters.gender);
+    const matchesHospital = !filters.hospital || hospital === getStringValue(filters.hospital);
+    const matchesAvailability = !filters.availability || availability === getStringValue(filters.availability);
+    const matchesConditions = filters.conditions.length === 0 || filters.conditions.every(condition => doctorConditions.includes(getStringValue(condition)));
+    const matchesLanguages = filters.languages.length === 0 || filters.languages.every(language => doctorLanguages.includes(getStringValue(language)));
 
-      return (
-        matchesCity &&
-        matchesSpeciality &&
-        matchesGender &&
-        matchesHospital &&
-        matchesAvailability &&
-        matchesConditions &&
-        matchesLanguages
-      );
-    });
-  };
+    return (
+      matchesCity &&
+      matchesSpeciality &&
+      matchesGender &&
+      matchesHospital &&
+      matchesAvailability &&
+      matchesConditions &&
+      matchesLanguages
+    );
+  });
+};
+
 
   const filteredDoctors = filterDoctors(doctors);
+  console.log(filteredDoctors);
+  
 
   return (
     <>
-
-   
+    <Nestednavbar/>
       <div className='container-fluid mt-5'>
         <div className='filterpage-parent'>
           <button onClick={toggleFilterCanvas} className="btn btn-primary my-3 d-lg-none">
