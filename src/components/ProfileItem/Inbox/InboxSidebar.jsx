@@ -27,11 +27,17 @@ const Sidebar = ({ onSelectChat }) => {
             ? `data:${profilePicture.contentType};base64,${profilePicture.data}`
             : profileimg
 
+          const latestMessage = chat.messages[0];
+          const timestamp = latestMessage ? new Date(latestMessage.timestamp) : null;
+          const time = timestamp && !isNaN(timestamp.getTime()) 
+            ? timestamp.toLocaleString() 
+            : 'Unknown time';
+
           return {
             id: chat._id,
             name: role === 'patient' ? chat.doctorId.name : chat.patientId.name,
-            message: chat.messages[0]?.text || 'No messages yet',
-            time: new Date(chat.updatedAt).toLocaleString(),
+            message: latestMessage?.text || 'No messages yet',
+            time: time,
             img: imgSrc,
           };
         });

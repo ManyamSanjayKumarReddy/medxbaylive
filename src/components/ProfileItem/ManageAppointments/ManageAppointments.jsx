@@ -107,7 +107,7 @@ const ManageAppointments = () => {
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:8000/patient/review/${selectedAppointment.doctor._id}/${selectedAppointment._id}`, reviewForm);
+      const response = await axios.post(`http://localhost:8000/patient/review/${selectedAppointment.doctor._id}/${selectedAppointment._id}`, reviewForm,{ withCredentials: true });
       console.log('Review submitted:', response.data);
       closeReviewModal();
     } catch (error) {

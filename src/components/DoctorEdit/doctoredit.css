@@ -186,7 +186,7 @@ position: relative;
 background-position:50% top;  */
 }
 .edit-profile-Heart-Specialist{
-  width: 156px;
+  width: 100%;
 height: 28px;
 position: relative;
 top: 3px;
@@ -240,7 +240,8 @@ top: 90px;
 
 .edit-profile-disease{
   display: flex;
-  width: 638px;
+
+  min-width: 1038px;
 height: 28px;
 top: 0px;
 left: 2%;
@@ -399,26 +400,30 @@ color: #272848;
 }
 .doctor-appoinment-card-container{
   position: relative;
-  width: 794px;
-height: 455px;
-top: -550px;
-left: 69px;
+  width: 100% !important;
+height: 100% !important;
+top: -1200px !important;
+left: 289px !important;
 border-radius: 15px;
 transition: transform 0.3s ease-in-out;
+
 
 }
 .doctor-appoinment-card-container.moved {
   transform: translate(-250px, -50px);
 }
 .doctor-appoinment-card-one{
+  margin-top: 20px;
+  gap:20px;
   position: relative;
   width: 860px;
 height: 214px;
-top: -452px;
-left: 230px;
+top: 0px !important;
+left: 0px !important;
 padding: 8px 12px 8px 8px;
 border-radius: 15px;
 border: 1px solid #E2E2E2
+
 }
 .doctor-appoinment-card-two{
   position: relative;
