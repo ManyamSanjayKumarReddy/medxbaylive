@@ -19,7 +19,7 @@ const ManageAppointments = () => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/patient/bookings', { withCredentials: true });
+        const response = await axios.get('https://medxbay-deploy-1-431103.uc.r.appspot.com/patient/bookings', { withCredentials: true });
         console.log('Fetched bookings response:', response.data);  // Log the entire response data
         if (Array.isArray(response.data.bookings)) {
           setBookings(response.data.bookings);

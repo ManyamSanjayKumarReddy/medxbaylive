@@ -50,7 +50,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 4rem; /* Adjusted for better padding */
-  top: -50px;
+  /* top: -50px; */
 }
 
 .hero-item {

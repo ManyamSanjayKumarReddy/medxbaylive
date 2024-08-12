@@ -75,8 +75,8 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
   const handleGoogleSignIn = (role) => {
     setIsLoading(true);
     const url = role === 'patient'
-      ? `http://localhost:8000/auth/google/patient?state=${JSON.stringify({ role })}`
-      : `http://localhost:8000/auth/google/doctor?state=${JSON.stringify({ role })}`;
+      ? `https://medxbay-deploy-1-431103.uc.r.appspot.com/auth/google/patient?state=${JSON.stringify({ role })}`
+      : `https://medxbay-deploy-1-431103.uc.r.appspot.com/auth/google/doctor?state=${JSON.stringify({ role })}`;
   
     window.location.href = url;
   };
@@ -86,8 +86,8 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
     e.preventDefault();
     const user = { name, email, mobile, password };
     const endpoint = isProvider 
-      ? "http://localhost:8000/auth/signup/doctor" 
-      : "http://localhost:8000/auth/signup/patient";
+      ? "https://medxbay-deploy-1-431103.uc.r.appspot.com/auth/signup/doctor" 
+      : "https://medxbay-deploy-1-431103.uc.r.appspot.com/auth/signup/patient";
     
     if (validateForm()) {
       axios.post(endpoint, user)

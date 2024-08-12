@@ -10,7 +10,7 @@ const Prescriptions = () => {
   useEffect(() => {
     const fetchPrescriptions = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/patient/prescriptions', { withCredentials: true });
+        const response = await axios.get('https://medxbay-deploy-1-431103.uc.r.appspot.com/patient/prescriptions', { withCredentials: true });
         console.log('Fetched data:', response.data);
         if (Array.isArray(response.data)) {
           const startingSerial = 10001;

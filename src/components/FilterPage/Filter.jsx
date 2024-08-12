@@ -20,13 +20,13 @@ const Filter = ({ onFilterChange, filters }) => {
         const fetchDropdownData = async () => {
             try {
                 const [countriesRes, statesRes, citiesRes, specialitiesRes, conditionsRes, languagesRes, hospitalsRes] = await Promise.all([
-                    axios.get('http://localhost:8000/auth/countries'),
-                    axios.get('http://localhost:8000/auth/states'),
-                    axios.get('http://localhost:8000/auth/cities'),
-                    axios.get('http://localhost:8000/auth/specialities'),
-                    axios.get('http://localhost:8000/auth/conditions'),
-                    axios.get('http://localhost:8000/auth/languages'),
-                    axios.get('http://localhost:8000/auth/hospitals')
+                    axios.get('https://medxbay-deploy-1-431103.uc.r.appspot.com/auth/countries'),
+                    axios.get('https://medxbay-deploy-1-431103.uc.r.appspot.com/auth/states'),
+                    axios.get('https://medxbay-deploy-1-431103.uc.r.appspot.com/auth/cities'),
+                    axios.get('https://medxbay-deploy-1-431103.uc.r.appspot.com/auth/specialities'),
+                    axios.get('https://medxbay-deploy-1-431103.uc.r.appspot.com/auth/conditions'),
+                    axios.get('https://medxbay-deploy-1-431103.uc.r.appspot.com/auth/languages'),
+                    axios.get('https://medxbay-deploy-1-431103.uc.r.appspot.com/auth/hospitals')
                 ]);
 
                 setDropdownData({

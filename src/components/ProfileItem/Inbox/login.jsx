@@ -13,7 +13,7 @@ const MyComponent = () => {
       console.log('Login successful:', loginResponse);
 
       // Fetch data after successful login
-      const doctorData = await fetch('http://localhost:8000/doctor/completed-bookings');
+      const doctorData = await fetch('https://medxbay-deploy-1-431103.uc.r.appspot.com/doctor/completed-bookings');
       setData(doctorData);
       console.log('Fetched doctor data:', doctorData);
     } catch (error) {

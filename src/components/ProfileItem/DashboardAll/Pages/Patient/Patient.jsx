@@ -42,7 +42,7 @@ const PatientTable = () => {
   const [rowsPerPage] = useState(10);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/doctor/completed-bookings', { withCredentials: true })
+    axios.get('https://medxbay-deploy-1-431103.uc.r.appspot.com/doctor/completed-bookings', { withCredentials: true })
       .then(response => {
         console.log('Bookings data:', response.data.bookings);
         setBookings(response.data.bookings || []);
@@ -60,7 +60,7 @@ const PatientTable = () => {
   const handleClickOpen = (booking) => {
     setSelectedBooking(booking);
     console.log('Opening dialog for booking:', booking);
-    axios.get(`http://localhost:8000/doctor/bookings/${booking._id}/prescription`, { withCredentials: true })
+    axios.get(`https://medxbay-deploy-1-431103.uc.r.appspot.com/doctor/bookings/${booking._id}/prescription`, { withCredentials: true })
       .then(response => {
         const { patientAge, medicines } = response.data;
         setPrescriptionData({
@@ -126,7 +126,7 @@ const PatientTable = () => {
   
     console.log('Submitting prescription with data:', prescriptionPayload);
   
-    axios.post('http://localhost:8000/doctor/prescriptions/upload', prescriptionPayload, { withCredentials: true })
+    axios.post('https://medxbay-deploy-1-431103.uc.r.appspot.com/doctor/prescriptions/upload', prescriptionPayload, { withCredentials: true })
       .then(response => {
         console.log('Prescription submitted successfully:', response.data);
         setOpen(false);
