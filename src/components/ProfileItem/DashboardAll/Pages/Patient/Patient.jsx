@@ -42,7 +42,7 @@ const PatientTable = () => {
   const [rowsPerPage] = useState(10);
 
   useEffect(() => {
-    axios.get('https://medxbay-deploy-1-431103.uc.r.appspot.com/doctor/completed-bookings', { withCredentials: true })
+    axios.get('http://localhost:8000/doctor/completed-bookings', { withCredentials: true })
       .then(response => {
         console.log('Bookings data:', response.data.bookings);
         setBookings(response.data.bookings || []);
