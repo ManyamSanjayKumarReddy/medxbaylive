@@ -43,9 +43,9 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const res = await axios.post('http://localhost:8000/auth/login', { email, password }, { withCredentials: true });
+        const res = await axios.post('https://medxbay-deploy-1-431103.uc.r.appspot.com/auth/login', { email, password }, { withCredentials: true });
         if (res.data.success) {
-          const { user ,token} = res.data;
+          const { user } = res.data;
           const { role, _id: userId, email: userEmail, subscriptionType, subscriptionVerification } = user;
   
           const userSubscriptionType = subscriptionType || 'none';
@@ -57,7 +57,7 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
           sessionStorage.setItem('loggedIn', 'true');
           sessionStorage.setItem('subscriptionType', userSubscriptionType);
           sessionStorage.setItem('subscriptionVerification', userSubscriptionVerification);
-          sessionStorage.setItem('authToken', token); 
+
 
   
           switch (role) {
