@@ -145,7 +145,7 @@ const DoctorPopUp = ({ show, handleClose }) => {
     const fetchDoctorDetails = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/doctor/profile/update",
+          "https://beta.medxbay.com/api/doctor/profile/update",
           { withCredentials: true }
         );
         const formData = response.data;
@@ -199,7 +199,7 @@ const DoctorPopUp = ({ show, handleClose }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/doctor/profile/update",
+        "https://beta.medxbay.com/api/doctor/profile/update",
         form,
         {
           withCredentials: true,

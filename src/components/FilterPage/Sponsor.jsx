@@ -132,7 +132,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
             };
             console.log('Booking data:', bookingData);
     
-            const response = await fetch('https://beta.medxbay.com/patient/book', {
+            const response = await fetch('https://beta.medxbay.com/api/patient/book', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

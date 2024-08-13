@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an Axios instance with a base URL and withCredentials option
 const api = axios.create({
-  baseURL: 'https://beta.medxbay.com',
+  baseURL: 'https://beta.medxbay.com/api',
   withCredentials: true,
 });
 

@@ -19,7 +19,7 @@ const ManageAppointments = () => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await axios.get('https://beta.medxbay.com/patient/bookings', { withCredentials: true });
+        const response = await axios.get('https://beta.medxbay.com/api/patient/bookings', { withCredentials: true });
         console.log('Fetched bookings response:', response.data);  // Log the entire response data
         if (Array.isArray(response.data.bookings)) {
           setBookings(response.data.bookings);
@@ -107,7 +107,7 @@ const ManageAppointments = () => {
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`https://beta.medxbay.com/patient/review/${selectedAppointment.doctor._id}/${selectedAppointment._id}`, reviewForm,{ withCredentials: true });
+      const response = await axios.post(`https://beta.medxbay.com/api/patient/review/${selectedAppointment.doctor._id}/${selectedAppointment._id}`, reviewForm,{ withCredentials: true });
       console.log('Review submitted:', response.data);
       closeReviewModal();
     } catch (error) {
