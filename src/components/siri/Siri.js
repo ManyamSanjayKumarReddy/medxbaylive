@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Siri.css';
-import Siriimge from '../Assets/Siri.svg';
-import GIF from '../Assets/GIF.gif';
+
+
 import Lottie from 'react-lottie';
 import animationData from '../Assets/lottie.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
