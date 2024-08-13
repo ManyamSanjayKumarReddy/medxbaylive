@@ -89,7 +89,7 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
     e.preventDefault();
     if (validateEmail(email)) {
       try {
-        const res = await axios.post('http://localhost:8000/auth/forgot-password', { email });
+        const res = await axios.post('https://medxbay-deploy-1-431103.uc.r.appspot.com/auth/forgot-password', { email });
         if (res.data.success) {
           alert('Password reset email sent successfully.');
           setIsForgotPassword(false);
@@ -113,8 +113,8 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
   const handleGoogleSignIn = (role) => {
     setIsLoading(true);
     const url = role === 'patient'
-      ? `http://localhost:8000/auth/google/patient?state=${JSON.stringify({ role })}`
-      : `http://localhost:8000/auth/google/doctor?state=${JSON.stringify({ role })}`;
+      ? `https://medxbay-deploy-1-431103.uc.r.appspot.com/auth/google/patient?state=${JSON.stringify({ role })}`
+      : `https://medxbay-deploy-1-431103.uc.r.appspot.com/auth/google/doctor?state=${JSON.stringify({ role })}`;
   
     window.location.href = url;
   };

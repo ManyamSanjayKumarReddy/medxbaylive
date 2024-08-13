@@ -66,7 +66,7 @@ function DoctorEdit() {
       try {
         const token = sessionStorage.getItem('authToken'); // Get the JWT token from sessionStorage
         const response = await axios.get(
-          "http://localhost:8000/doctor/profile/update",
+          "https://medxbay-deploy-1-431103.uc.r.appspot.com/doctor/profile/update",
           {
             headers: {
               Authorization: `Bearer ${token}` // Include the token in the Authorization header

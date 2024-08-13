@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an Axios instance with a base URL and withCredentials option
 const api = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: 'https://medxbay-deploy-1-431103.uc.r.appspot.com/',
   withCredentials: true,
 });
 

@@ -12,7 +12,7 @@ const Nestednavbar = () => {
 
   const searchDoctors = async () => {
     try {
-        const response = await axios.get(`http://localhost:8000/auth/search-doctors?what=${what}&where=${where}`, { withCredentials: true });
+        const response = await axios.get(`https://medxbay-deploy-1-431103.uc.r.appspot.com/auth/search-doctors?what=${what}&where=${where}`, { withCredentials: true });
         const data = response.data; // Access the data directly
         navigate('/Filters', { state: { doctors: data, what, where } });
         // If you need to check content type, you can use the following (though it's usually unnecessary with axios):
