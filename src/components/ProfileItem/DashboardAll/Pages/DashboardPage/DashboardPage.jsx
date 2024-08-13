@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import './Dashboard.css';
 import  reviewsImg from './Assets/reviewsImg.png';
 import consultationimg from './Assets/consultationimg.png';
@@ -13,9 +13,29 @@ import Yourincome from './Yourincome';
 import BookingRate from './BookingRate';
 import Schedule from './Schedule';
 import { RiArrowDownSLine } from "react-icons/ri";
-
+import { CiClock2 } from "react-icons/ci";
+import { RiListView } from "react-icons/ri";
 const DashboardPage = () => {
+  const [timePeriod, setTimePeriod] = useState('This Month');
 
+  // Dummy data for different time periods
+  const insightsData = {
+    'This Month': {
+      newPatients: '1,500+',
+      pendingRequests: '1,000+',
+      appointments: '200+',
+    },
+    'This Week': {
+      newPatients: '500+',
+      pendingRequests: '300+',
+      appointments: '50+',
+    },
+    'This Year': {
+      newPatients: '18,000+',
+      pendingRequests: '12,000+',
+      appointments: '2,400+',
+    },
+  };
   return (
     <div className='main-dashboard-page'>
       <h1>Dashboard</h1>
@@ -26,39 +46,46 @@ const DashboardPage = () => {
             <div className='dashboard-head-common'>
               <p>My Insights</p>
               <div className="select-container">
-                <select className="select-box-common">
-                  <option>This month</option>
+                <select
+                  className="select-box-common"
+                  value={timePeriod}
+                  onChange={(e) => setTimePeriod(e.target.value)}
+                >
+                  <option value="This Month">This Month</option>
+                  <option value="This Week">This Week</option>
+                  <option value="This Year">This Year</option>
                 </select>
-              <RiArrowDownSLine className="arrow-icon-filter" />
-              </div> 
-            </div>  
+                <RiArrowDownSLine className="arrow-icon-filter" />
+              </div>
+            </div>
+
             <div className="insight-item">
               <div className="insight-img-container blue-color">
-               <img src={Newpatient} className='image-insight'/>
+                <img src={Newpatient} alt="New Patients" className='image-insight' />
               </div>
               <div className="insight-info">
                 <h4>New patient</h4>
-                <p>1,500</p>
+                <p>{insightsData[timePeriod].newPatients}</p>
               </div>
             </div>
 
             <div className="insight-item">
               <div className="insight-img-container dark-blue-color">
-              <img src={surgery}  className='image-insight'/>
+                <CiClock2 className='image-insight text-light' />
               </div>
               <div className="insight-info">
-                <h4>Surgery</h4>
-                <p>1,000</p>
+                <h4>Pending Request</h4>
+                <p>{insightsData[timePeriod].pendingRequests}</p>
               </div>
             </div>
 
             <div className="insight-item">
               <div className="insight-img-container green-color">
-              <img src={experience}  className='image-insight'/>
+                <RiListView className='image-insight text-light' />
               </div>
               <div className="insight-info">
-                <h4>Experience</h4>
-                <p>10+ years</p>
+                <h4>Appointments</h4>
+                <p>{insightsData[timePeriod].appointments}</p>
               </div>
             </div>
           </div>
@@ -76,8 +103,8 @@ const DashboardPage = () => {
                 <div className='logo-background'>
                   <FaUserInjured className='profiles-icons' size='1.3rem'/>
                 </div>
-                <p className='logo-name'>Total Patients</p>
-                <p className='logo-count'>400 patients</p>
+                <p className='logo-name'>Patients</p>
+                <p className='logo-count'>400</p>
               </div>
               <div className='content-background'>
                 <div className='logo-background'>
@@ -90,7 +117,7 @@ const DashboardPage = () => {
                 <div className='logo-background'>
                   <IoIosMail className='profiles-icons' size='1.5rem' />
                 </div>
-                <p className='logo-name'>Chat</p>
+                <p className='logo-name'>Inbox</p>
                 <p className='logo-count'>24</p>
               </div>
             </div>

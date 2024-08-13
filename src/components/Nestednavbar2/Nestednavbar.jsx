@@ -28,7 +28,9 @@ const Nestednavbaruserside = () => {
     useEffect(() => {
       searchDoctors();
     }, [what, where]);
-  
+    const handleButtonClick = () => {
+      navigate('/Filters');
+    };
   
     return (
       <>
@@ -63,7 +65,7 @@ const Nestednavbaruserside = () => {
             />
                 
               </div>
-              <button type="submit" className="btn button-color" onClick={searchDoctors}>
+              <button type="submit" className="btn button-color" onClick={handleButtonClick}>
                 Find My Doctor
               </button>
               </form>

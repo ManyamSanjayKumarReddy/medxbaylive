@@ -6,10 +6,11 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { IoMdSearch } from "react-icons/io";
 import { getNames, getCode } from 'country-list';
 import countries from 'i18n-iso-countries';
-
+import { useNavigate } from 'react-router-dom';
 countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
 
 const Hero = () => {
+    const navigate = useNavigate();
     const [locations, setLocations] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState(null);
 
@@ -37,7 +38,9 @@ const Hero = () => {
         setSelectedLocation(selectedOption);
     };
 
-
+    const handleButtonClick = () => {
+        navigate('/Filters');
+      };
     return (
         <>  
            <div className='hero-head container-fluid'>
@@ -66,7 +69,9 @@ const Hero = () => {
                                 <input type="text" className='search-input' placeholder="Search Doctors" />
                                 <div className='simple-line-small'></div>
                                 <div className="outer">
-                                    <button className="search-button" onClick={handleShowPopup} >Find My Doctor</button>
+                                <button className="search-button" onClick={handleButtonClick}>
+      Find My Doctor
+    </button>
                                 </div>
                             </div>
                         </div>

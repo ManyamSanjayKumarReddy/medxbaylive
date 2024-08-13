@@ -141,6 +141,15 @@
   .tick-icon:hover {
     color: darkgreen;
   }
+
+  .sumbit-button-dashmange {
+    color: green;
+    font-size: 18px;
+    border:1px solid#0FA958 ;
+    padding:4px 20px;
+    border-radius: 4px;
+    background:none;
+  } 
   
 .manage-appointments-table tbody .status-dot {
     display: inline-block;
@@ -360,7 +369,7 @@
         padding: 4px;
     }
     .manage-appointments-table-container {
-        height: calc(100vh - 210px); /* Adjust height for smaller screens */
+        height: calc(100vh - 210px); 
     }
 
     .manage-appointments-table .select-container .status-select {

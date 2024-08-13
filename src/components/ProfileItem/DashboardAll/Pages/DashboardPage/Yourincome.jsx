@@ -97,7 +97,9 @@ const YourIncome = () => {
           <p>Your Income</p>
           <div className="select-container">
             <select className="select-box-common">
-              <option>This month</option>
+              <option>This Month</option>
+              <option>This Week</option>
+              <option>This Year</option>
             </select>
             <RiArrowDownSLine className="arrow-icon-filter" />
           </div>

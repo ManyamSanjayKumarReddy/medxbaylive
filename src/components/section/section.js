@@ -18,10 +18,10 @@ function Section() {
     <div className="Container">
       <Hero/>
       <Nestednavbar/>
-      <Siri/>
+  
       <Whyus/>
       <MiddlePart />
-    
+      <Siri/>
       <Insights />
       <TestimonialSlider/>
 
