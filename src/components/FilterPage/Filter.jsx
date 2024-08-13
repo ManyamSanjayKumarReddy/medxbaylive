@@ -20,13 +20,13 @@ const Filter = ({ onFilterChange, filters }) => {
         const fetchDropdownData = async () => {
             try {
                 const [countriesRes, statesRes, citiesRes, specialitiesRes, conditionsRes, languagesRes, hospitalsRes] = await Promise.all([
-                    axios.get('http://localhost:8000/auth/countries'),
-                    axios.get('http://localhost:8000/auth/states'),
-                    axios.get('http://localhost:8000/auth/cities'),
-                    axios.get('http://localhost:8000/auth/specialities'),
-                    axios.get('http://localhost:8000/auth/conditions'),
-                    axios.get('http://localhost:8000/auth/languages'),
-                    axios.get('http://localhost:8000/auth/hospitals')
+                    axios.get('https://beta.medxbay.com/auth/countries'),
+                    axios.get('https://beta.medxbay.com/auth/states'),
+                    axios.get('https://beta.medxbay.com/auth/cities'),
+                    axios.get('https://beta.medxbay.com/auth/specialities'),
+                    axios.get('https://beta.medxbay.com/auth/conditions'),
+                    axios.get('https://beta.medxbay.com/auth/languages'),
+                    axios.get('https://beta.medxbay.com/auth/hospitals')
                 ]);
 
                 setDropdownData({

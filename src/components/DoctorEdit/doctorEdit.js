@@ -65,7 +65,7 @@ function DoctorEdit() {
     const fetchDoctorDetails = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/doctor/profile/update",
+          "https://beta.medxbay.com/doctor/profile/update",
           { withCredentials: true }
         );
         const doctorData = response.data;
