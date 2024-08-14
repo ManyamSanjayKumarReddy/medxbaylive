@@ -1,25 +1,37 @@
 import React from 'react';
-import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
+import { FaFacebookF, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import { RiSendPlaneFill } from "react-icons/ri";
 import brand from '../Assets/medbrand.png';
 import './footerrs.css';
 
+import { useNavigate } from 'react-router-dom';
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const handleNavigation = () => {
+    navigate('/');
+  };
   return (
     <footer className="custom-footer">
       <div className="custom-footer-container">
         <div className="custom-footer-logo">
         <img className='gwaimage' src={brand} alt="Description of the image"/>
 
-          <div className="custom-footer-socials">
-            <div className="custom-social-icon">
-              <FaFacebookF />
+        <div className="custom-footer-socials">
+          <div className="custom-social-icon">
+              <a href="https://www.facebook.com/profile.php?id=61558154772271&mibextid=LQQJ4d" target="_blank" rel="noopener noreferrer">
+                <FaFacebookF />
+              </a>
             </div>
             <div className="custom-social-icon">
-              <FaTwitter />
+              <a href="https://www.linkedin.com/company/medxbay/" target="_blank" rel="noopener noreferrer">
+              <FaLinkedin />
+              </a>
             </div>
             <div className="custom-social-icon">
-              <FaInstagram />
+              <a href="https://www.instagram.com/medxbay?igsh=MWpiemdubG1ydHVv" target="_blank" rel="noopener noreferrer">
+                <FaInstagram />
+              </a>
             </div>
           </div>
         </div>
@@ -27,7 +39,8 @@ const Footer = () => {
           <div className="custom-footer-column">
             <h4 className='explore'>Explore</h4>
             <ul>
-              <li>Home Page</li>
+            <li onClick={handleNavigation} style={{ cursor: 'pointer' }}>Home Page</li>
+
               <li>About Us</li>
               <li>FAQs</li>
               <li>Contact</li>
@@ -42,7 +55,7 @@ const Footer = () => {
               <li>Site Map</li>
             </ul>
           </div>
-          {/* <div className="custom-footer-column">
+          <div className="custom-footer-column">
             <h4>Subscribe</h4>
             <p className='para'>Subscribe to get the latest news  from us</p>
             <div className="custom-subscribe-form">
@@ -52,11 +65,11 @@ const Footer = () => {
   
               </button>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
       <div className="custom-footer-bottom">
-        <p className='rights-reserved'>© 2024 Global Wellness Alliance. All Rights Reserved.</p>
+        <p className='rights-reserved'>© 2024 MedxBay. All Rights Reserved.</p>
       </div>
     </footer>
   );

@@ -10,7 +10,6 @@
   top: 43px;
   left: 80px;
   gap: 0px;
-  opacity: 0px;
   margin-top: 10px;
 }
 .nav-signin-button{
@@ -173,8 +172,7 @@ border: 4px solid #FFFFFF;
     height: 31px;
     top: 20px !important;
     left: 0px;
-    gap: 0px;
-    opacity: 0px;
+   
   }
 
   .find-doctor {
@@ -233,8 +231,7 @@ border: 4px solid #FFFFFF;
     height: 51px;
     top: 43px;
     left: 80px;
-    gap: 0px;
-    opacity: 0px;
+
     margin-top: 10px;
   }
 
@@ -280,8 +277,7 @@ border: 4px solid #FFFFFF;
     height: 51px;
     top: 43px;
     left: 80px;
-    gap: 0px;
-    opacity: 0px;
+
     margin-top: 10px;
   }
 

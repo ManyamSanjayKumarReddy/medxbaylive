@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import doctorProfile from '../../assests/img/Ellipse-30.png'; // Placeholder image
 import videoCall from '../../assests/img/video_call.svg';
-import videoCallwhite from '../../assests/img/video_call_white.svg';
+
 import MedicalService from '../../assests/img/medical_services.svg';
-import MedicalServiceWhite from '../../assests/img/medical_services_white.svg';
+
 import thumbsUp from '../../assests/img/ThumbsUp.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons'; // Filled star

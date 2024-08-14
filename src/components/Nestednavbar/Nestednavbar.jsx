@@ -3,10 +3,14 @@ import './nestednavbar.css';
 import downarrowimage from '../Assets/dwon.gif';
 import Navbar from '../Navbar/Navbar';
 import MxBay from '../Assets/MxBay.mp4'
-
+import { useNavigate } from 'react-router-dom';
 const Nestednavbar = () => {
   const [isNestedVisible, setIsNestedVisible] = useState(false);
   const videoRef = useRef(null);
+  const navigate = useNavigate();
+  const handleButtonClick = () => {
+    navigate('/Filters');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,7 +73,7 @@ const Nestednavbar = () => {
                 <label>Where</label>
                 <input type="text" placeholder="United Arab Emirates" />
               </div>
-              <button type="submit" className="btn button-color">
+              <button type="submit" className="btn button-color " onClick={handleButtonClick}>
                 Find My Doctor
               </button>
             </form>

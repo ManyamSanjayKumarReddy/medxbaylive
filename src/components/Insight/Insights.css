@@ -1,9 +1,9 @@
 .insight-background{
-
+position: relative;
     max-width: 100%;
     min-width: 100%;
     height: 853px;
-    top: 3401px;
+
     padding: 120px 0px 119.02px 80px;
     gap: 0px;
      opacity: 1;
@@ -11,6 +11,7 @@ background: #F4F7FC;
 display: flex;
 margin-top: 00px;
 overflow-x: hidden; 
+z-index: 4 !important;
 
 }
 .frame{

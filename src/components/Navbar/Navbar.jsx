@@ -48,8 +48,8 @@ const Navbar = () => {
   
   const [showProviderModal, setShowProviderModal] = useState(false);
 
-
   const toggleProviderModal = () => setShowProviderModal(!showProviderModal);
+
   const handleSignInClick = () => {
     setIsSignInClicked(true);
     setIsRegisterClicked(false);
@@ -74,7 +74,20 @@ const Navbar = () => {
     sessionStorage.removeItem('doctorEmail');
     sessionStorage.removeItem('role');
     setIsLoggedIn(false);
+    setIsSignInClicked(false);  // Hide sign-in modal
+    setIsRegisterClicked(false); // Hide register modal
     navigate('/'); // Redirect to home or login page after logout
+  };
+
+  const handleLogin = (role) => {
+    // Assuming login logic is handled here
+    sessionStorage.setItem('loggedIn', 'true');
+    sessionStorage.setItem('role', role);
+
+    setIsLoggedIn(true);
+    setUserRole(role);
+    setIsSignInClicked(false);  // Hide sign-in modal
+    setIsRegisterClicked(false); // Hide register modal
   };
 
   useEffect(() => {
@@ -93,7 +106,7 @@ const Navbar = () => {
     <>
       <header>
         <nav className="navbar navbar-expand-lg navbar-light navbar-head-style">
-          <a className="navbar-brand" href="#"><img src={brand} alt="Brand Logo" height="36px" className='brand-img' /></a>
+          <a className="navbar-brand" href="/"><img src={brand} alt="Brand Logo" height="36px" className='brand-img' /></a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -106,29 +119,27 @@ const Navbar = () => {
                 <Link className="about-nav nav-link nav-link-style " to="#">About</Link>
               </li>
               <li className="nav-item dropdown active ml-md-4" ref={corporateDropdownRef}>
-          <Link 
-            className="for-corporates nav-link nav-link-style dropdown-toggle" 
-            to="#" 
-            role="button" 
-            onClick={toggleProviderModal}
-          >
-            For Corporates
-            <FontAwesomeIcon icon={faChevronDown} className="ml-2" />
-          </Link>
-        </li>
+                <Link 
+                  className="for-corporates nav-link nav-link-style dropdown-toggle" 
+                  to="#" 
+                  role="button" 
+                  onClick={toggleProviderModal}
+                >
+                  For Corporates
+                  <FontAwesomeIcon icon={faChevronDown} className="ml-2" />
+                </Link>
+              </li>
               <li className="nav-item dropdown active ml-md-4" ref={providersDropdownRef}>
-  <Link 
-    className="for-providers nav-link nav-link-style dropdown-toggle" 
-    to="https://mxb-providerslaunch.zoholandingpage.com/zoho-marketing-automation-workspace/Prelaunch%20-%20Providers/" 
-    role="button" 
-    onClick={toggleProvidersDropdown}
-  >
-    For Providers
-    <FontAwesomeIcon icon={faChevronDown} className="ml-2" />
-  </Link>
-</li>
-
-             
+                <Link 
+                  className="for-providers nav-link nav-link-style dropdown-toggle" 
+                  to="https://mxb-providerslaunch.zoholandingpage.com/zoho-marketing-automation-workspace/Prelaunch%20-%20Providers/" 
+                  role="button" 
+                  onClick={toggleProvidersDropdown}
+                >
+                  For Providers
+                  <FontAwesomeIcon icon={faChevronDown} className="ml-2" />
+                </Link>
+              </li>
             </ul>
             {!isLoggedIn && (
               <ul className="navbar-nav ml-auto mr-md-2">
@@ -142,21 +153,19 @@ const Navbar = () => {
             )}
             {isLoggedIn && (
               <ul className="navbar-nav ml-auto mr-md-2">
-               {userRole === 'doctor' && (
+                {userRole === 'doctor' && (
                   <li className="nav-item active ml-md-4">
                     <Link className="nav-dashbord nav-link nav-link-style" to="/doctorprofile/dashboardpage/">Dashboard</Link>
                   </li>
                 )}
                 <li className="nav-item ml-md-4">
                   <div className='dashboard-setting-bell'>
-                  <button type="button" className="btn nav-notification-button">
-                    <FontAwesomeIcon icon={faBell} />
-                  </button>
+                    <button type="button" className="btn nav-notification-button">
+                      <FontAwesomeIcon icon={faBell} />
+                    </button>
                   </div>
                 </li>
-                {/* <li className="nav-item ml-md-4">
-                  <button type="button" className="btn nav-signout-button" onClick={handleLogout}>Logout</button>
-                </li> */}
+               
               </ul>
             )}
           </div>
@@ -164,7 +173,8 @@ const Navbar = () => {
         {isSignInClicked && (
           <div className="blur-background">
             <LoginCard onClose={handleCloseSignupCard} onSwitchToSignup={handleRegisterClick}
-               handleClose={handleCloseLogin} /> 
+               handleClose={handleCloseLogin} 
+               handleLogin={handleLogin} /> 
           </div>
         )}
         {isRegisterClicked && (
@@ -174,16 +184,11 @@ const Navbar = () => {
           </div>
         )}
       </header>
-      <SignupCard show={showPopup} handleClose={handleClosePopup} 
-       openLoginModal={handleShowLogin}/>
-      <LoginCard show={showLoginPopup} handleClose={handleCloseLoginPopup}    
-       openRegisterModal={handleShowRegister}/>
-         <Provider 
-        show={showProviderModal} 
-        handleClose={() => setShowProviderModal(false)} 
-      />
+      <SignupCard show={showPopup} handleClose={handleClosePopup} openLoginModal={handleShowLogin}/>
+      <LoginCard show={showLoginPopup} handleClose={handleCloseLoginPopup} openRegisterModal={handleShowRegister} handleLogin={handleLogin}/>
+      <Provider show={showProviderModal} handleClose={() => setShowProviderModal(false)} />
     </>
   );
-}
+};
 
 export default Navbar;

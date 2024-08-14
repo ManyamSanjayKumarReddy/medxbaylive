@@ -43,7 +43,7 @@ const UserFooter = () => {
               <li>Site Map</li>
             </ul>
           </div>
-          {/* <div className="custom-footer-column">
+          <div className="custom-footer-column">
             <h4>Subscribe</h4>
             <p className='para'>Subscribe to get the latest news  from us</p>
             <div className="custom-subscribe-form">
@@ -53,7 +53,7 @@ const UserFooter = () => {
   
               </button>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
       <div className="custom-footer-bottom">

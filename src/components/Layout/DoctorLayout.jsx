@@ -33,10 +33,14 @@ const DoctorLayout = () => {
   };
 
   const handleLogout = () => {
+    sessionStorage.clear();
     sessionStorage.removeItem('loggedIn');
     sessionStorage.removeItem('userId');
     sessionStorage.removeItem('userEmail');
     sessionStorage.removeItem('role');
+    sessionStorage.removeItem('subscriptionVerification');
+    sessionStorage.removeItem('subscriptionType');
+
     navigate('/'); 
   };
 

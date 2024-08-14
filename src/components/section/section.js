@@ -3,7 +3,7 @@
 import React from 'react';
 import Insights from '../Insight/Insights';
 import Footerr from '../footer/footer';
-
+import { useEffect, useState } from 'react';
 import MiddlePart from '../../MiddlePart';
 import Whyus from '../WhyUs/Whyus'
 import Nestednavbar from '../Nestednavbar/Nestednavbar'
@@ -14,6 +14,9 @@ import Siri from '../siri/Siri';
 // import Insights from '../section.6/Appp';
 
 function Section() {
+  useEffect(() => {
+    document.title = "Home";
+}, []);
   return (
     <div className="Container">
       <Hero/>

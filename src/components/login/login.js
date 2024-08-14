@@ -74,6 +74,7 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
               alert('Unexpected role.');
               break;
           }
+          handleClose();
         } else {
           alert(res.data.message || 'Login failed. Please try again.');
         }
