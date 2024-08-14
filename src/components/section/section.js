@@ -15,7 +15,7 @@ import Siri from '../siri/Siri';
 
 function Section() {
   useEffect(() => {
-    document.title = "Home";
+    document.title = "MedxBay";
 }, []);
   return (
     <div className="Container">
