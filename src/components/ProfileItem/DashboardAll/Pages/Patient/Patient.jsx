@@ -60,7 +60,7 @@ const PatientTable = () => {
   const handleClickOpen = (booking) => {
     setSelectedBooking(booking);
     console.log('Opening dialog for booking:', booking);
-    axios.get(`https://medxbay-deploy-1-431103.uc.r.appspot.com/doctor/bookings/${booking._id}/prescription`, { withCredentials: true })
+    axios.get(`http://localhost:8000/doctor/bookings/${booking._id}/prescription`, { withCredentials: true })
       .then(response => {
         const { patientAge, medicines } = response.data;
         setPrescriptionData({

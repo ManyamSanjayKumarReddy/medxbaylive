@@ -119,7 +119,7 @@ const ProfileEdit = () => {
   const formattedDob = new Date(dob).toISOString().split('T')[0]; // Convert back to YYYY-MM-DD
 
   const formData = new FormData();
-  formData.append("profileImage", profileImage);
+  formData.append("profilePicture", profileImage);
   formData.append("name", name);
   formData.append("email", email);
   formData.append("mobileNumber", mobileNumber);
@@ -132,7 +132,7 @@ const ProfileEdit = () => {
   formData.append("policyNumber", policyNumber);
 
   try {
-    await axios.post("https://gwa-50021392542.development.catalystappsail.in/patient/profile/update", formData, {
+    await axios.post("http://localhost:8000/patient/profile/update", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
