@@ -50,7 +50,7 @@ const ProfileEdit = () => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get("https://beta.medxbay.com/api/patient/profile",{withCredentials:true});
+        const response = await axios.get("http://localhost:8000/patient/profile",{withCredentials:true});
         const { patient } = response.data;
   console.log(patient)
         const profileImageData = patient.profilePicture

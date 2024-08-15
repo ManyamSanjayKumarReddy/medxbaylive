@@ -43,7 +43,7 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const res = await axios.post('https://beta.medxbay.com/api/auth/login', { email, password }, { withCredentials: true });
+        const res = await axios.post('http://localhost:8000/auth/login', { email, password }, { withCredentials: true });
         if (res.data.success) {
           const { user } = res.data;
           const { role, _id: userId, email: userEmail, subscriptionType, subscriptionVerification } = user;
@@ -90,7 +90,7 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
     e.preventDefault();
     if (validateEmail(email)) {
       try {
-        const res = await axios.post('https://beta.medxbay.com/api/auth/forgot-password', { email });
+        const res = await axios.post('http://localhost:8000/auth/forgot-password', { email });
         if (res.data.success) {
           alert('Password reset email sent successfully.');
           setIsForgotPassword(false);
@@ -114,8 +114,8 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
   const handleGoogleSignIn = (role) => {
     setIsLoading(true);
     const url = role === 'patient'
-      ? `https://beta.medxbay.com/api/auth/google/patient?state=${JSON.stringify({ role })}`
-      : `https://beta.medxbay.com/api/auth/google/doctor?state=${JSON.stringify({ role })}`;
+      ? `http://localhost:8000/auth/google/patient?state=${JSON.stringify({ role })}`
+      : `http://localhost:8000/auth/google/doctor?state=${JSON.stringify({ role })}`;
   
     window.location.href = url;
   };

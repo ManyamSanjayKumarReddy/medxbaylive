@@ -75,8 +75,8 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
   const handleGoogleSignIn = (role) => {
     setIsLoading(true);
     const url = role === 'patient'
-      ? `https://beta.medxbay.com/api/auth/google/patient?state=${JSON.stringify({ role })}`
-      : `https://beta.medxbay.com/api/auth/google/doctor?state=${JSON.stringify({ role })}`;
+      ? `http://localhost:8000/auth/google/patient?state=${JSON.stringify({ role })}`
+      : `http://localhost:8000/auth/google/doctor?state=${JSON.stringify({ role })}`;
   
     window.location.href = url;
   };
@@ -86,8 +86,8 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
     e.preventDefault();
     const user = { name, email, mobile, password };
     const endpoint = isProvider 
-      ? "https://beta.medxbay.com/api/auth/signup/doctor" 
-      : "https://beta.medxbay.com/api/auth/signup/patient";
+      ? "http://localhost:8000/auth/signup/doctor" 
+      : "http://localhost:8000/auth/signup/patient";
     
     if (validateForm()) {
       axios.post(endpoint, user)
