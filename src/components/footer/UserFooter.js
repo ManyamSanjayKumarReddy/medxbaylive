@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
+import { FaFacebookF, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import { RiSendPlaneFill } from "react-icons/ri";
 import brand from '../Assets/medbrand.png';
 import './footerrs.css';
@@ -12,15 +12,21 @@ const UserFooter = () => {
         <div className="custom-footer-logo">
         <img className='gwaimage' src={brand} alt="Description of the image"/>
 
-          <div className="custom-footer-socials">
-            <div className="custom-social-icon">
-              <FaFacebookF />
+        <div className="custom-footer-socials">
+          <div className="custom-social-icon">
+              <a href="https://www.facebook.com/profile.php?id=61558154772271&mibextid=LQQJ4d" target="_blank" rel="noopener noreferrer">
+                <FaFacebookF />
+              </a>
             </div>
             <div className="custom-social-icon">
-              <FaTwitter />
+              <a href="https://www.linkedin.com/company/medxbay/" target="_blank" rel="noopener noreferrer">
+              <FaLinkedin />
+              </a>
             </div>
             <div className="custom-social-icon">
-              <FaInstagram />
+              <a href="https://www.instagram.com/medxbay?igsh=MWpiemdubG1ydHVv" target="_blank" rel="noopener noreferrer">
+                <FaInstagram />
+              </a>
             </div>
           </div>
         </div>
@@ -41,6 +47,7 @@ const UserFooter = () => {
               <li>Terms of Service</li>
               <li>Documentation</li>
               <li>Site Map</li>
+       
             </ul>
           </div>
           <div className="custom-footer-column">

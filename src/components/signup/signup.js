@@ -82,7 +82,7 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
   };
   
 
-  const register = (e) => {
+  const register = async (e) => {
     e.preventDefault();
     const user = { name, email, mobile, password };
     const endpoint = isProvider 
@@ -90,17 +90,26 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
       : `${process.env.REACT_APP_BASE_URL}/auth/signup/patient`;
     
     if (validateForm()) {
-      axios.post(endpoint, user)
-        .then(res => {
-          console.log(res.data);
-          alert("Registration successful");
-        })
-        .catch(err => {
-          console.error("Error during registration:", err);
+      try {
+        const res = await axios.post(endpoint, user);
+        console.log(res.data);
+        alert("Registration successful");
+        setName('');
+        setEmail('');
+        setMobile('');
+        setPassword('');
+        handleClose();
+      } catch (err) {
+        console.error("Error during registration:", err);
+        if (err.response && err.response.status === 400 && err.response.data.error) {
+          alert(err.response.data.error); 
+        } else {
           alert("Registration failed. Please try again.");
-        });
+        }
+      }
     }
   };
+  
   const [isProvider, setIsProvider] = useState(false);
 
   const validateForm = () => {

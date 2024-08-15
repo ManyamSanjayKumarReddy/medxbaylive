@@ -12,7 +12,7 @@ const ManageAppointments = () => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await fetch('${process.env.REACT_APP_BASE_URL}/doctor/bookings', {
+        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/doctor/bookings`, {
           credentials: 'include',
           headers: {
             'Accept': 'application/json'

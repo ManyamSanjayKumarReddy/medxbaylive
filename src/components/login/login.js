@@ -57,8 +57,6 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
           sessionStorage.setItem('loggedIn', 'true');
           sessionStorage.setItem('subscriptionType', userSubscriptionType);
           sessionStorage.setItem('subscriptionVerification', userSubscriptionVerification);
-
-
   
           switch (role) {
             case 'doctor':
@@ -74,6 +72,8 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
               alert('Unexpected role.');
               break;
           }
+          setEmail('');
+          setPassword('');
           handleClose();
         } else {
           alert(res.data.message || 'Login failed. Please try again.');
@@ -86,11 +86,12 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
   };
   
   
+  
   const forgetPassword = async (e) => {
     e.preventDefault();
     if (validateEmail(email)) {
       try {
-        const res = await axios.post('${process.env.REACT_APP_BASE_URL}/auth/forgot-password', { email });
+        const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/forgot-password`, { email });
         if (res.data.success) {
           alert('Password reset email sent successfully.');
           setIsForgotPassword(false);

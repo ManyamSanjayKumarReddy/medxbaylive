@@ -16,10 +16,11 @@ import apple from '../../assests/img/apple.png'
 import Typed from 'typed.js';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import './changepassword.css'
 const ChangePassword = () => {
   useEffect(() => {
     import('./login.css');
+    import('../signup/signup.css');
   }, []);
   const navigate = useNavigate();
   const typedElement = useRef(null);
@@ -60,23 +61,32 @@ const ChangePassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     if (validatePassword(newPassword) && validatePassword(confirmPassword) && newPassword === confirmPassword) {
       try {
-        const res = await axios.post('http://localhost:8000/reset-password', { email });
+        const token = new URLSearchParams(window.location.search).get('token');
+        
+        const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/reset-password`, { 
+          token, 
+          newPassword, 
+          confirmPassword 
+        });
+        
         if (res.data.success) {
-          alert('Password reset email sent successfully.');
-          setIsForgotPassword(false);
+          alert('Password reset successful.');
+          navigate('/'); 
         } else {
-          alert(res.data.message || 'Failed to send reset email. Please try again.');
+          alert(res.data.message || 'Failed to reset password. Please try again.');
         }
       } catch (err) {
         console.error('Error during password reset:', err);
-        alert('Failed to send reset email. Please try again.');
+        alert('Failed to reset password. Please try again.');
       }
     } else {
       alert('Please correct the errors in the form.');
     }
   };
+  
 
   useEffect(() => {
     if (typedElement.current) {
@@ -109,13 +119,13 @@ const ChangePassword = () => {
   }, []);
 
   return (
-    <Modal  centered className="custom-modal">
+    <div  centered className="custom-modal custom-modal-change">
       <Modal.Title>
-        <span className="model-header-login">Reset Password</span>{' '}
-        <span className="model-header-sub-login"> Change password to your account.</span>
+        <span className="model-header-change-password">Reset Password</span>{' '}
+        <span className="model-header-sub-change-password"> Change password to your account.</span>
       </Modal.Title>
       <button type="button" className="btn-close-custom" aria-label="Close" >
-        x
+    
       </button>
       <Modal.Body>
         <div className="smile-emoji">
@@ -143,7 +153,7 @@ const ChangePassword = () => {
           </p>
         </div>
 
-        <div className='or-sign-up-container-login'>
+        {/* <div className='or-sign-up-container-login'>
           <div className='or-sign-up'>OR</div>
           <div className='end-line-sign-up'></div>
           <div className='end-line-sign-up-two'>
@@ -156,7 +166,7 @@ const ChangePassword = () => {
             <div className='account-sign-up'>Don't have an account?</div>
             <Link className='login-link-signup-login'>Sign Up</Link>
           </div>
-        </div>
+        </div> */}
 
         <div className="sign-up-button-container"></div>
         <Form onSubmit={handleSubmit} className="form-overall-container-login">
@@ -197,7 +207,7 @@ const ChangePassword = () => {
           </div>
         </Form>
       </Modal.Body>
-    </Modal>
+    </div>
   );
 };
 

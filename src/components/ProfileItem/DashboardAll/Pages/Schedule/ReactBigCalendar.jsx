@@ -23,7 +23,7 @@ export default function ReactBigCalendar() {
     
     const fetchDoctorData = async () => {
       try {
-        const response = await axios.get('https://beta.medxbay.com/doctor/doctor-index',{
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}doctor/doctor-index`,{
           params: {
             email: "deivasigamani@gmail.com",
           },}, config); // Replace with your API endpoint

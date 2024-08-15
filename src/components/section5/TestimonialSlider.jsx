@@ -51,7 +51,7 @@ const TestimonialSlider = () => {
   return (
  
     <div className="testimonial-slider">
-      <div className='loremipsum'>LOREM IPSUM</div>
+      <div className='loremipsum'>Testimonials</div>
 
       <div className="title-testimonial">Our Patients Love Us</div>
       <Slider {...settings}>

@@ -5,7 +5,7 @@ import Filter from './Filter';
 import './FilterPage.css';
 
 import Footer from '../footer/footerrs';
-import Footerr from '../footer/footer';
+
 import MapContainer from './Mapcontainer';
 import './OffCanvas.css';
 import { fetchFromPatient } from '../../actions/api';
@@ -178,7 +178,7 @@ const FilterPage = () => {
         </div>
     
 
-        <Footerr />
+ 
         <Footer />
       </div>
     </>

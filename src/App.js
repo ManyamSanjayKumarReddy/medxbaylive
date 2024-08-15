@@ -16,6 +16,8 @@ import ProfileRoutes from './components/Routes/ProfileRoutes';
 import Defult from './Default';
 import ConnectedRoutes from './components/ProfileItem/DashboardAll/ConnectedRoutes/ConnectedRoutes';
 import FilterPage from './components/FilterPage/FilterPage';
+import VerifyLogin from './components/login/VerifyLogin';
+import Verification from './components/login/Verification';
 function App() {
   return (
    
@@ -33,7 +35,8 @@ function App() {
         <Route path="/profile/*" element={<ProfileRoutes />} />
         <Route path="/doctorprofile/dashboardpage/*" element={<ConnectedRoutes />} />
         <Route path="/Filters" element={<FilterPage />} />
-
+        <Route path="/verify/login" element={<VerifyLogin />} />
+        <Route path="/verify" element={<Verification />} />
 
       </Routes>
       {/* <Footer/> */}

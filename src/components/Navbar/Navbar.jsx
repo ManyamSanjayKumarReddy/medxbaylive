@@ -74,20 +74,19 @@ const Navbar = () => {
     sessionStorage.removeItem('doctorEmail');
     sessionStorage.removeItem('role');
     setIsLoggedIn(false);
-    setIsSignInClicked(false);  // Hide sign-in modal
-    setIsRegisterClicked(false); // Hide register modal
-    navigate('/'); // Redirect to home or login page after logout
+    setIsSignInClicked(false); 
+    setIsRegisterClicked(false); 
+    navigate('/'); 
   };
 
   const handleLogin = (role) => {
-    // Assuming login logic is handled here
     sessionStorage.setItem('loggedIn', 'true');
     sessionStorage.setItem('role', role);
 
     setIsLoggedIn(true);
     setUserRole(role);
-    setIsSignInClicked(false);  // Hide sign-in modal
-    setIsRegisterClicked(false); // Hide register modal
+    setIsSignInClicked(false); 
+    setIsRegisterClicked(false); 
   };
 
   useEffect(() => {
@@ -165,7 +164,6 @@ const Navbar = () => {
                     </button>
                   </div>
                 </li>
-               
               </ul>
             )}
           </div>
