@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an Axios instance with a base URL and withCredentials option
 const api = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: `${process.env.REACT_APP_BASE_URL}`,
   withCredentials: true,
 });
 

@@ -132,7 +132,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
             };
             console.log('Booking data:', bookingData);
     
-            const response = await fetch('http://localhost:8000/patient/book', {
+            const response = await fetch(`${process.env.REACT_APP_BASE_URL}/patient/book`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

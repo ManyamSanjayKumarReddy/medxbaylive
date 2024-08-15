@@ -10,7 +10,7 @@ const Prescriptions = () => {
   useEffect(() => {
     const fetchPrescriptions = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/patient/prescriptions', { withCredentials: true });
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/patient/prescriptions`, { withCredentials: true });
         console.log('Fetched data:', response.data);
         if (Array.isArray(response.data)) {
           const startingSerial = 10001;
@@ -39,7 +39,7 @@ const Prescriptions = () => {
 
   const downloadPrescription = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:8000/patient/prescriptions/${id}/download`, {
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/patient/prescriptions/${id}/download`, {
         responseType: 'blob',
         withCredentials: true
       });

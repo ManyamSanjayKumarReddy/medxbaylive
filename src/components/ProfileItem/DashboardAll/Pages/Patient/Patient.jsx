@@ -42,7 +42,7 @@ const PatientTable = () => {
   const [rowsPerPage] = useState(10);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/doctor/completed-bookings', { withCredentials: true })
+    axios.get(`${process.env.REACT_APP_BASE_URL}/doctor/completed-bookings`, { withCredentials: true })
       .then(response => {
         console.log('Bookings data:', response.data.bookings);
         setBookings(response.data.bookings || []);
@@ -60,7 +60,7 @@ const PatientTable = () => {
   const handleClickOpen = (booking) => {
     setSelectedBooking(booking);
     console.log('Opening dialog for booking:', booking);
-    axios.get(`http://localhost:8000/doctor/bookings/${booking._id}/prescription`, { withCredentials: true })
+    axios.get(`${process.env.REACT_APP_BASE_URL}/doctor/bookings/${booking._id}/prescription`, { withCredentials: true })
       .then(response => {
         const { patientAge, medicines } = response.data;
         setPrescriptionData({

@@ -50,7 +50,7 @@ const ProfileEdit = () => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/patient/profile",{withCredentials:true});
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/patient/profile`,{withCredentials:true});
         const { patient } = response.data;
   console.log(patient)
         const profileImageData = patient.profilePicture
@@ -132,7 +132,7 @@ const ProfileEdit = () => {
   formData.append("policyNumber", policyNumber);
 
   try {
-    await axios.post("http://localhost:8000/patient/profile/update", formData, {
+    await axios.post(`${process.env.REACT_APP_BASE_URL}/patient/profile/update`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

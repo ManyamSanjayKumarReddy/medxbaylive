@@ -12,7 +12,7 @@ const ManageAppointments = () => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await fetch('http://localhost:8000/doctor/bookings', {
+        const response = await fetch('${process.env.REACT_APP_BASE_URL}/doctor/bookings', {
           credentials: 'include',
           headers: {
             'Accept': 'application/json'
@@ -50,7 +50,7 @@ const ManageAppointments = () => {
     const newStatus = selectedStatus[id];
     if (window.confirm(`Are you sure you want to change the status to ${newStatus}?`)) {
       try {
-        const response = await fetch(`http://localhost:8000/doctor/bookings/${id}`, {
+        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/doctor/bookings/${id}`, {
           method: 'POST',
           credentials: 'include',
           headers: {
