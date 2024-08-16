@@ -57,15 +57,14 @@ const VerifyLogin = ({ show, handleClose,openRegisterModal }) => {
               sessionStorage.setItem('loggedIn', 'true');
               sessionStorage.setItem('subscriptionType', userSubscriptionType);
               sessionStorage.setItem('subscriptionVerification', userSubscriptionVerification);
-    
-    
       
+         
               switch (role) {
                 case 'doctor':
                   navigate('/Doctor/profile/Edit');
                   break;
                 case 'patient':
-                  navigate('profile/userprofile/');
+                  navigate('/profile/userprofile/');
                   break;
                 case 'admin':
                   navigate('/admin/admin-home');
