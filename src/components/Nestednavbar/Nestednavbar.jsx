@@ -45,7 +45,7 @@ const Nestednavbar = () => {
           }
         });
       },
-      { threshold: 0.5 } // Adjust the threshold as needed
+      { threshold: 0.5 } 
     );
 
     observer.observe(videoPlayer);

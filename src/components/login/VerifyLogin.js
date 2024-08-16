@@ -39,52 +39,58 @@ const VerifyLogin = ({ show, handleClose,openRegisterModal }) => {
     
     
       const [passwordError, setPasswordError] = useState('');
-      const login = async (e) => {
+      const verifylogin = async (e) => {
         e.preventDefault();
         if (validateForm()) {
-          try {
-            const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/login`, { email, password }, { withCredentials: true });
-            if (res.data.success) {
-              const { user } = res.data;
-              const { role, _id: userId, email: userEmail, subscriptionType, subscriptionVerification } = user;
-      
-              const userSubscriptionType = subscriptionType || 'none';
-              const userSubscriptionVerification = subscriptionVerification || 'not verified';
-      
-              sessionStorage.setItem('userId', userId);
-              sessionStorage.setItem('userEmail', userEmail);
-              sessionStorage.setItem('role', role);
-              sessionStorage.setItem('loggedIn', 'true');
-              sessionStorage.setItem('subscriptionType', userSubscriptionType);
-              sessionStorage.setItem('subscriptionVerification', userSubscriptionVerification);
-      
-         
-              switch (role) {
-                case 'doctor':
-                  navigate('/Doctor/profile/Edit');
-                  break;
-                case 'patient':
-                  navigate('/profile/userprofile/');
-                  break;
-                case 'admin':
-                  navigate('/admin/admin-home');
-                  break;
-                default:
-                  alert('Unexpected role.');
-                  break;
-              }
-              setEmail('');
-              setPassword('');
-              handleClose();
-            } else {
-              alert(res.data.message || 'Login failed. Please try again.');
+            try {
+                const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/login`, { email, password }, { withCredentials: true });
+                console.log('Login response:', res.data); // Log the response
+                
+                if (res.data.success) {
+                    console.log('Login was successful.');
+                    const { user } = res.data;
+                    const { role, _id: userId, email: userEmail, subscriptionType, subscriptionVerification } = user;
+    
+                    const userSubscriptionType = subscriptionType || 'none';
+                    const userSubscriptionVerification = subscriptionVerification || 'not verified';
+    
+                    sessionStorage.setItem('userId', userId);
+                    sessionStorage.setItem('userEmail', userEmail);
+                    sessionStorage.setItem('role', role);
+                    sessionStorage.setItem('loggedIn', 'true');
+                    sessionStorage.setItem('subscriptionType', userSubscriptionType);
+                    sessionStorage.setItem('subscriptionVerification', userSubscriptionVerification);
+    
+                    switch (role) {
+                        case 'doctor':
+                            navigate('/Doctor/profile/Edit');
+                            break;
+                        case 'patient':
+                            navigate('/profile/userprofile/');
+                            break;
+                        case 'admin':
+                            navigate('/admin/admin-home');
+                            break;
+                        default:
+                            alert('Unexpected role.');
+                            break;
+                    }
+    
+                    setEmail('');
+                    setPassword('');
+                    handleClose();
+                } else {
+                    console.error('Login failed response:', res.data);
+                    console.log('Login failed:', res.data.message);
+                    alert(res.data.message || 'Login failed. Please try again.');
+                }
+            } catch (err) {
+                console.error('Error during login:', err);
             }
-          } catch (err) {
-            console.error('Error during login:', err);
-            alert('Login failed. Please try again.');
-          }
         }
-      };
+    };
+    
+    
       
       
       const forgetPassword = async (e) => {
@@ -269,7 +275,7 @@ const VerifyLogin = ({ show, handleClose,openRegisterModal }) => {
      </div>
 
      <div className="sign-up-button-container"></div>
-        <Form onSubmit={isForgotPassword ? forgetPassword : login} className="form-overall-container-login">
+        <Form onSubmit={isForgotPassword ? forgetPassword : verifylogin} className="form-overall-container-login">
           <Form.Group className="mb-3" controlId="formEmail">
             <Form.Label>Email</Form.Label>
             <Form.Control

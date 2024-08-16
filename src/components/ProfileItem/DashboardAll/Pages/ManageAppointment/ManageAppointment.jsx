@@ -88,10 +88,10 @@ const ManageAppointments = () => {
           <button className={`tab-side ${activeTab === 'Rejected' ? 'active' : ''}`} onClick={() => setActiveTab('Rejected')}>Rejected</button>
           <button className={`tab-side ${activeTab === 'Completed' ? 'active' : ''}`} onClick={() => setActiveTab('Completed')}>Completed</button>
         </div>
-        <button className="dashboard-calendar-button">
+        {/* <button className="dashboard-calendar-button">
           <MdOutlineCalendarToday />
           Calendar
-        </button>
+        </button> */}
       </div>
       <div className='manage-appointments-table-container'>
         <table className="manage-appointments-table">

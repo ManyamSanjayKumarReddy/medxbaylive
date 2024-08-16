@@ -13,7 +13,7 @@ import Language from '../ProfileItem/Language/Language';
 import ProfileLayout from '../Layout/ProfileLayout';
 import DoctorLayout from '../Layout/DoctorLayout';
 import ConnectedRoutes from '../ProfileItem/DashboardAll/ConnectedRoutes/ConnectedRoutes';
-import Defult from '../../Default';
+
 
 import Nestednavbar from '../Nestednavbar2/Nestednavbar';
 import Footer from '../footer/footerrs';

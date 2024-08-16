@@ -31,15 +31,17 @@ const DoctorLayout = () => {
   const handleNotificationChange = (e) => {
     setNotificationStatus(e.target.value);
   };
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogout = () => {
-    sessionStorage.clear();
     sessionStorage.removeItem('loggedIn');
     sessionStorage.removeItem('userId');
     sessionStorage.removeItem('userEmail');
     sessionStorage.removeItem('role');
     sessionStorage.removeItem('subscriptionVerification');
     sessionStorage.removeItem('subscriptionType');
+
+    setIsLoggedIn(false);
 
     navigate('/'); 
   };

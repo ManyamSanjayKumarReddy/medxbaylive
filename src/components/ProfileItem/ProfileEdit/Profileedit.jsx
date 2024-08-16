@@ -52,7 +52,7 @@ const ProfileEdit = () => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/patient/profile", { withCredentials: true });
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/patient/profile`, { withCredentials: true });
         const { patient } = response.data;
         const profileImageData = patient.profilePicture
           ? `data:image/jpeg;base64,${patient.profilePicture.data}` // Update the prefix if the image is not JPEG
@@ -116,11 +116,20 @@ const ProfileEdit = () => {
 
   const handleSave = async (event) => {
     event.preventDefault();
-
-    const formattedDob = new Date(dob).toISOString().split('T')[0]; // Convert back to YYYY-MM-DD
-
+  
+    // Validate date
+    let formattedDob = '';
+    if (dob) {
+      const dateObj = new Date(dob);
+      if (!isNaN(dateObj.getTime())) {
+        formattedDob = dateObj.toISOString().split('T')[0]; // Convert back to YYYY-MM-DD
+      } else {
+        console.error('Invalid date:', dob);
+      }
+    }
+  
     const formData = new FormData();
-
+  
     if (profileImage && profileImage.startsWith('data:image')) {
       const [, base64Data] = profileImage.split(',');
       const blob = await fetch(profileImage).then(r => r.blob());
@@ -136,7 +145,7 @@ const ProfileEdit = () => {
     formData.append("bloodGroup", bloodGroup);
     formData.append("insuranceProvider", insuranceProvider);
     formData.append("policyNumber", policyNumber);
-
+  
     try {
       await axios.post("http://localhost:8000/patient/profile/update", formData, {
         headers: {
@@ -150,7 +159,7 @@ const ProfileEdit = () => {
       alert("Error updating profile. Please try again.");
     }
   };
-
+  
 
   return (
     <div className="userprofile-card">

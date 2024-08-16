@@ -115,7 +115,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
         if (!user) {
       // If no user data in session storage, redirect to login page
       alert('You need to log in to book an appointment.');
-        navigate('/login');
+        navigate('/verify/login');
         return;
     }
         try {

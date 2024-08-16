@@ -126,7 +126,7 @@ const PatientTable = () => {
   
     console.log('Submitting prescription with data:', prescriptionPayload);
   
-    axios.post('https://medxbay-deploy-1-431103.uc.r.appspot.com/doctor/prescriptions/upload', prescriptionPayload, { withCredentials: true })
+    axios.post(`${process.env.REACT_APP_BASE_URL}/doctor/prescriptions/upload`, prescriptionPayload, { withCredentials: true })
       .then(response => {
         console.log('Prescription submitted successfully:', response.data);
         setOpen(false);
@@ -148,9 +148,9 @@ const PatientTable = () => {
           <Button variant="contained" color="primary" className="button">
             + All Appointments
           </Button>
-          <Button variant="outlined" color="primary" className="button" onClick={() => navigate('/doctorprofile/dashboardpage/calendar')}>
+          {/* <Button variant="outlined" color="primary" className="button" onClick={() => navigate('/doctorprofile/dashboardpage/calendar')}>
             Calendar
-          </Button>
+          </Button> */}
         </div>
       </div>
 

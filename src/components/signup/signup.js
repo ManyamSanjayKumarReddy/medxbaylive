@@ -93,7 +93,7 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
       try {
         const res = await axios.post(endpoint, user);
         console.log(res.data);
-        alert("Registration successful");
+        alert("Registration successful please check your email and verify");
         setName('');
         setEmail('');
         setMobile('');
@@ -190,10 +190,10 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
       return false;
     }
 
-    if (!/^\d{10}$/.test(trimmedValue)) {
-      setMobileError('Please enter a valid 10-digit mobile number.');
-      return false;
-    }
+    // if (!/^\d{10}$/.test(trimmedValue)) {
+    //   setMobileError('Please enter a valid 10-digit mobile number.');
+    //   return false;
+    // }
 
     setMobileError('');
     return true;

@@ -2,7 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faBell } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown} from '@fortawesome/free-solid-svg-icons';
+import { SlBell } from "react-icons/sl";
+import { RiLogoutCircleRLine } from "react-icons/ri";
+import profile from '../Assets/profileimg.png';
 import SignupCard from '../signup/signup';
 import LoginCard from '../login/login';
 import brand from '../Assets/medbrand.png';
@@ -70,9 +73,12 @@ const Navbar = () => {
 
   const handleLogout = () => {
     sessionStorage.removeItem('loggedIn');
-    sessionStorage.removeItem('doctorId');
-    sessionStorage.removeItem('doctorEmail');
+    sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('userEmail');
     sessionStorage.removeItem('role');
+    sessionStorage.removeItem('subscriptionVerification');
+    sessionStorage.removeItem('subscriptionType');
+
     setIsLoggedIn(false);
     setIsSignInClicked(false); 
     setIsRegisterClicked(false); 
@@ -101,16 +107,17 @@ const Navbar = () => {
     };
   }, []);
 
+  const navbarClass = userRole === 'doctor' ? 'navbar navbar-expand-lg navbar-light navbar-doctor' : 'navbar navbar-expand-lg navbar-light navbar-default';
   return (
     <>
       <header>
-        <nav className="navbar navbar-expand-lg navbar-light navbar-head-style">
-          <a className="navbar-brand" href="/"><img src={brand} alt="Brand Logo" height="36px" className='brand-img' /></a>
+        <nav className={navbarClass}>
+          <a className="navbar-brand" href="/"><img src={brand} alt="Brand Logo"  className='brand-img' /></a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ml-auto nav-ul">
+            <ul className="navbar-nav ml-auto">
               <li className="nav-item active ml-md-4">
                 <Link className="find-doctor nav-link nav-link-style" to="/Filters">Find Doctor</Link>
               </li>
@@ -136,32 +143,46 @@ const Navbar = () => {
                   onClick={toggleProvidersDropdown}
                 >
                   For Providers
-                  <FontAwesomeIcon icon={faChevronDown} className="ml-2" />
+                  <FontAwesomeIcon icon={faChevronDown} className="ml-2"/>
                 </Link>
               </li>
             </ul>
             {!isLoggedIn && (
               <ul className="navbar-nav ml-auto mr-md-2">
                 <li className="nav-item ml-md-4">
-                  <button type="button" className="btn nav-signin-button" onClick={handleShowLoginPopup}>Sign In</button>
+                  <button type="button" className=" nav-signin-button" onClick={handleShowLoginPopup}>Sign In</button>
                 </li>
                 <li className="nav-item ml-md-3">
-                  <button type="button" className="btn nav-register-button" onClick={handleShowPopup}>Register</button>
+                  <button type="button" className="nav-register-button" onClick={handleShowPopup}>Register</button>
                 </li>
               </ul>
             )}
             {isLoggedIn && (
               <ul className="navbar-nav ml-auto mr-md-2">
+
                 {userRole === 'doctor' && (
                   <li className="nav-item active ml-md-4">
-                    <Link className="nav-dashbord nav-link nav-link-style" to="/doctorprofile/dashboardpage/">Dashboard</Link>
+                    <Link className="nav-link dashboard-text-button" to="/doctorprofile/dashboardpage/">Dashboard</Link>
                   </li>
                 )}
+
                 <li className="nav-item ml-md-4">
                   <div className='dashboard-setting-bell'>
-                    <button type="button" className="btn nav-notification-button">
-                      <FontAwesomeIcon icon={faBell} />
+                    <button type="button" className=" nav-notification-button">
+                      <SlBell className='notification-icon'/>
                     </button>
+                  </div>
+                </li>
+
+                <li className="nav-item ml-md-4">
+                  <div className="image-container">
+                    <img src={profile} alt="Profile" />
+                  </div>
+                </li>
+
+                <li className="nav-item ml-md-4">
+                  <div className='logout-container-button'>
+                    <button className ='logout-button'onClick={handleLogout}><RiLogoutCircleRLine size='1.1rem' /></button>
                   </div>
                 </li>
               </ul>

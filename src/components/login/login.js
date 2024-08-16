@@ -74,7 +74,7 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
           }
           setEmail('');
           setPassword('');
- 
+          handleClose();
         } else {
           alert(res.data.message || 'Login failed. Please try again.');
         }
