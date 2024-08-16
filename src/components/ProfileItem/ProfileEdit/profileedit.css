@@ -89,7 +89,23 @@
   text-align: right;
   border: 0;
 }
+.profile-group select{
+  line-height: 60px;
+  padding: 15px 0px !important;
 
+}
+.react-PH-input{
+  /* border: none; */
+  padding: 10px 0px 10px 50px;
+}
+.react-tel-input{
+  width: 27% !important;
+  background-color: transparent !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  
+}
 .profile-group .profile-input::placeholder {
   color: #4B5563;
   font-size: 14px;

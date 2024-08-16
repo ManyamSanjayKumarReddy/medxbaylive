@@ -3,6 +3,8 @@ import "./profileedit.css";
 import { FiEdit3 } from "react-icons/fi";
 import profileimg from "../../Assets/profileimg.png";
 import axios from "axios";
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 const ProfileEdit = () => {
   const [profileImage, setProfileImage] = useState(profileimg);
@@ -50,12 +52,11 @@ const ProfileEdit = () => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/patient/profile`,{withCredentials:true});
+        const response = await axios.get("http://localhost:8000/patient/profile", { withCredentials: true });
         const { patient } = response.data;
-  console.log(patient)
         const profileImageData = patient.profilePicture
-        ? `data:image/jpeg;base64,${patient.profilePicture.data}` // Update the prefix if the image is not JPEG
-        : profileimg;
+          ? `data:image/jpeg;base64,${patient.profilePicture.data}` // Update the prefix if the image is not JPEG
+          : profileimg;
 
         setProfileImage(profileImageData);
         setName(patient.name || "");
@@ -72,7 +73,7 @@ const ProfileEdit = () => {
         console.error("There was an error fetching the profile data!", error);
       }
     };
-  
+
     fetchProfileData();
   }, []);
 
@@ -93,7 +94,7 @@ const ProfileEdit = () => {
   useEffect(() => {
     setAge(calculateAge(dob));
   }, [dob]);
-  
+
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -114,36 +115,41 @@ const ProfileEdit = () => {
   };
 
   const handleSave = async (event) => {
-  event.preventDefault();
+    event.preventDefault();
 
-  const formattedDob = new Date(dob).toISOString().split('T')[0]; // Convert back to YYYY-MM-DD
+    const formattedDob = new Date(dob).toISOString().split('T')[0]; // Convert back to YYYY-MM-DD
 
-  const formData = new FormData();
-  formData.append("profilePicture", profileImage);
-  formData.append("name", name);
-  formData.append("email", email);
-  formData.append("mobileNumber", mobileNumber);
-  formData.append("address", address);
-  formData.append("dob", formattedDob);
-  formData.append("age", age);
-  formData.append("gender", gender);
-  formData.append("bloodGroup", bloodGroup);
-  formData.append("insuranceProvider", insuranceProvider);
-  formData.append("policyNumber", policyNumber);
+    const formData = new FormData();
 
-  try {
-    await axios.post(`${process.env.REACT_APP_BASE_URL}/patient/profile/update`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      withCredentials:true
-    });
-    alert("Profile updated successfully!");
-  } catch (error) {
-    console.error("There was an error updating the profile!", error);
-    alert("Error updating profile. Please try again.");
-  }
-};
+    if (profileImage && profileImage.startsWith('data:image')) {
+      const [, base64Data] = profileImage.split(',');
+      const blob = await fetch(profileImage).then(r => r.blob());
+      formData.append("profilePicture", blob, "profile.jpg");
+    }
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("phoneNumber", mobileNumber);
+    formData.append("address", address);
+    formData.append("dob", formattedDob);
+    formData.append("age", age);
+    formData.append("gender", gender);
+    formData.append("bloodGroup", bloodGroup);
+    formData.append("insuranceProvider", insuranceProvider);
+    formData.append("policyNumber", policyNumber);
+
+    try {
+      await axios.post("http://localhost:8000/patient/profile/update", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true
+      });
+      alert("Profile updated successfully!");
+    } catch (error) {
+      console.error("There was an error updating the profile!", error);
+      alert("Error updating profile. Please try again.");
+    }
+  };
 
 
   return (
@@ -211,6 +217,26 @@ const ProfileEdit = () => {
           </div>
           <div className="profile-group">
             <label className="profile-label" htmlFor="mobileNumber">Mobile Number</label>
+            <PhoneInput
+              country={'us'} // You can set the default country or make it dynamic based on user data
+              value={mobileNumber}
+              onChange={(value) => setMobileNumber(value)}
+              inputProps={{
+                id: 'mobileNumber',
+                ref: mobileNumberRef,
+                readOnly: !isEditing.mobileNumber,
+                className: 'react-PH-input',
+              }}
+            />
+            <FiEdit3
+              className="edit-icon"
+              size="1rem"
+              onClick={() => handleEditClick("mobileNumber", mobileNumberRef)}
+            />
+          </div>
+
+          {/* <div className="profile-group">
+            <label className="profile-label" htmlFor="mobileNumber">Mobile Number</label>
             <input
               className="profile-input"
               type="tel"
@@ -227,7 +253,7 @@ const ProfileEdit = () => {
               size="1rem"
               onClick={() => handleEditClick("mobileNumber", mobileNumberRef)}
             />
-          </div>
+          </div> */}
           <div className="profile-group">
             <label className="profile-label" htmlFor="location">Location</label>
             <input
@@ -301,7 +327,7 @@ const ProfileEdit = () => {
               onClick={() => handleEditClick("gender", genderRef)}
             />
           </div>
-          <div className="profile-group">
+          {/* <div className="profile-group">
             <label className="profile-label" htmlFor="bloodGroup">Blood Group</label>
             <input
               className="profile-input"
@@ -314,6 +340,34 @@ const ProfileEdit = () => {
               ref={bloodGroupRef}
               autoComplete="off"
             />
+            <FiEdit3
+              className="edit-icon"
+              size="1rem"
+              onClick={() => handleEditClick("bloodGroup", bloodGroupRef)}
+            />
+          </div> */}
+          <div className="profile-group">
+            <label className="profile-label" htmlFor="bloodGroup">Blood Group</label>
+            <select
+              className="profile-input"
+              id="bloodGroup"
+              value={bloodGroup}
+              onChange={(e) => setBloodGroup(e.target.value)}
+              readOnly={!isEditing.bloodGroup}
+              ref={bloodGroupRef}
+              autoComplete="off"
+              placeholder="Blood Group"
+            >
+              <option value="" disabled>Select Blood Group</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
             <FiEdit3
               className="edit-icon"
               size="1rem"
