@@ -115,7 +115,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
         if (!user) {
       // If no user data in session storage, redirect to login page
       alert('You need to log in to book an appointment.');
-        navigate('/verify/login');
+        navigate('/login');
         return;
     }
         try {
@@ -147,7 +147,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                 const result = await response.json();
                 console.log('Booking response:', result);
                 alert('Booking successful!');
-                navigate('/profile/userprofile/manage/appointments')
+                navigate('userprofile/manage-appointments')
             } else {
                 const responseText = await response.text();
                 console.error('Unexpected response format:', responseText);

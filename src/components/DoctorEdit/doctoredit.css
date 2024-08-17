@@ -6,7 +6,7 @@
 .edit-left {
   left:-15%;
   position: relative;
-  top: -1%;
+  top: -2.5%;
 
 }
 
@@ -34,9 +34,9 @@ margin-top: 23%;
 left: 0px;
 position: relative;
 display: flex;
-justify-content: center;
-margin-left: auto;
-margin-right: auto;
+/* justify-content: center;
+margin-left: auto; */
+/* margin-right: auto; */
 }
 .doctor-details-edit{
   position: relative;
@@ -172,7 +172,7 @@ position: relative;
   width: 350px;
   height: 337px;
   top: -105px;
-  left:-80px;
+  left:-40px;
   padding: 16px 35px 0px 35px;
   border-radius: 50%;
   background: linear-gradient(133.84deg, #E1F3FF 0%, #2AA7FF 100%);
@@ -184,6 +184,19 @@ position: relative;
   
 /* background-size: 135% 135%;
 background-position:50% top;  */
+}
+
+.doctor-edit-profile-photo{
+  width: 350px;
+  height: 337px;
+  top: -16px;
+  left:-35px;
+position: relative;
+border-radius: 50%;
+overflow: hidden; 
+margin-left: auto;
+margin-right: auto;
+object-fit: cover;
 }
 .edit-profile-Heart-Specialist{
   width: 100%;
@@ -199,18 +212,7 @@ text-align: left;
 color: #000000;
 
 }
-.doctor-edit-profile-photo{
-  width: 350px;
-  height: 337px;
-  top: -16px;
-  left:-35px;
-position: relative;
-border-radius: 50%;
-overflow: hidden; 
-margin-left: auto;
-margin-right: auto;
-object-fit: cover;
-}
+
 .edit-profile-disease-container{
 display: flex;
 position: relative;
@@ -1444,8 +1446,7 @@ top: 3%;
 left: 0px;
 position: relative;
 display: flex;
-margin-left: auto;
-margin-right: auto;
+
 }
 .doctor-details-edit{
   left: 20.5%;
@@ -1457,7 +1458,7 @@ margin-right: auto;
     /* margin-left: auto;
     margin-right: auto; */
     transform: translateX(-50%);
-    left: 15.5%;
+    left: 7.5%;
   }
   .share-box{
     width: 100%;
@@ -1510,15 +1511,15 @@ color: #272848;
 
 }
 .edit-left {
-  left:-15%; 
+  left:-25%; 
   position: relative;
-  top: -1%;
+  top: -2%;
 
 }
 
 
 .edit-right {
-  left: 46%; 
+  left: 32%; 
   position: relative;
   top: -58%;
 }

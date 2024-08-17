@@ -92,7 +92,7 @@ const YourIncome = () => {
 
   return (
     <>
-      <div className="income">
+       <div className="income">
         <div className='dashboard-head-common'>
           <p>Your Income</p>
           <div className="select-container">
@@ -104,9 +104,10 @@ const YourIncome = () => {
             <RiArrowDownSLine className="arrow-icon-filter" />
           </div>
         </div>
-      </div>
-      <div className='chart-area'>
-        <canvas ref={chartRef} id="incomeChart"></canvas>
+        <div className="chart-area">
+          <canvas ref={chartRef} id="incomeChart"></canvas>
+        </div>
+        <div className="coming-soon-overlay">Coming Soon</div>
       </div>
     </>
   );

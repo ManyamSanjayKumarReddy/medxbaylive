@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import DoctorMainCard from './DoctorMainCard';
 import Filter from './Filter';
 import './FilterPage.css';
-
+import MidPartTwo from '../../MidPartTwo';
 import Footer from '../footer/footerrs';
-
+import Footerr from '../footer/footer';
 import MapContainer from './Mapcontainer';
 import './OffCanvas.css';
 import { fetchFromPatient } from '../../actions/api';
@@ -28,7 +28,7 @@ const FilterPage = () => {
     conditions: [],
     languages: [],
     gender: '',
-    hospital: '',
+    hospital: "",
     availability: '',
     dateAvailability: '',
     consultation: ''
@@ -46,20 +46,24 @@ const FilterPage = () => {
     }
   },[location.state])
   useEffect(() => {
-    
     const fetchDoctors = async () => {
       try {
         const response = await fetchFromPatient(`/doctors`);
-
-        setDoctors(response.doctors);
-        // console.log(response.doctors);
-        
+        if (response && Array.isArray(response.doctors)) {
+          setDoctors(response.doctors);
+        } else {
+          console.error('Unexpected response format:', response);
+          setDoctors([]); // Default to an empty array in case of an unexpected response
+        }
       } catch (error) {
+        console.error('Error fetching doctors:', error);
+        setDoctors([]); // Ensure doctors is always an array
       }
     };
-
+  
     fetchDoctors();
   }, []);
+  
 
   const toggleFilterCanvas = () => {
     setIsFilterOpen(!isFilterOpen);
@@ -77,68 +81,68 @@ const FilterPage = () => {
     setFilters((prevFilters) => ({ ...prevFilters, what: searchInput }));
   };
 
-  const handleFilterChange = (filterName, filterValue) => {
-    setFilters((prevFilters) => ({ ...prevFilters, [filterName]: filterValue }));
+  const handleFilterChange = (filterData) => {
+    setFilters(filterData);
   };
-
+  
   const handleResetClick = () => {
     setIsMapExpanded(false);
     setSearchInput('');
-    setFilters({
-      what: '',
-      where: '',
-      country: '',
-      state: '',
-      city: '',
-      speciality: '',
-      conditions: [],
-      languages: [],
-      gender: '',
-      hospital: '',
-      availability: '',
-      dateAvailability: '',
-      consultation: ''
-    });
+    
   };
 
   const filterDoctors = (doctors) => {
-  if (!Array.isArray(doctors)) {
-    return [];
-  }
-  return doctors.filter((doctor) => {
-    const getStringValue = (value) => (typeof value === 'string' ? value.toLowerCase() : '');
+    if (!Array.isArray(doctors)) {
+      return []; // Return an empty array if doctors is not an array
+    }
+  
+    return doctors.filter((doctor) => {
+      const getStringValue = (value) => (typeof value === 'string' ? value.toLowerCase().replace(" ", "") : '');
+      console.log(filters)
 
-    const speciality = getStringValue(doctor.speciality || '');
-    const city = getStringValue(doctor.city || '');
-    const gender = getStringValue(doctor.gender || '');
-    const hospital = getStringValue(doctor.hospital || '');
-    const availability = getStringValue(doctor.availability || '');
-    const doctorConditions = (doctor.conditions || []).map(getStringValue);
-    const doctorLanguages = (doctor.languages || []).map(getStringValue);
+      const country = getStringValue(doctor.country || '');
+      const state = getStringValue(doctor.state || '');
+      const speciality = (doctor.speciality.length >0 ? doctor.speciality:[]).map(getStringValue);
+      const city = getStringValue(doctor.city || '');
+      const gender = getStringValue(doctor.gender || '');
+      const hospital = doctor.hospitals.length > 0 ? doctor.hospitals.map(hospital => getStringValue(hospital.name)):[];
+      const availability = getStringValue(doctor.availability || '');
+      const doctorConditions = (doctor.conditions || []).map(getStringValue);
+      const doctorLanguages = (doctor.languages || []).map(getStringValue);
+      const consultation = getStringValue(doctor.consultation || '');
 
-    const matchesCity = !filters.city || city === getStringValue(filters.city);
-    const matchesSpeciality = !filters.speciality || speciality === getStringValue(filters.speciality);
-    const matchesGender = !filters.gender || gender === getStringValue(filters.gender);
-    const matchesHospital = !filters.hospital || hospital === getStringValue(filters.hospital);
-    const matchesAvailability = !filters.availability || availability === getStringValue(filters.availability);
-    const matchesConditions = filters.conditions.length === 0 || filters.conditions.every(condition => doctorConditions.includes(getStringValue(condition)));
-    const matchesLanguages = filters.languages.length === 0 || filters.languages.every(language => doctorLanguages.includes(getStringValue(language)));
-
-    return (
-      matchesCity &&
-      matchesSpeciality &&
-      matchesGender &&
-      matchesHospital &&
-      matchesAvailability &&
-      matchesConditions &&
-      matchesLanguages
-    );
-  });
-};
+      const matchesCountry = !filters.country || country === getStringValue(filters.country);
+      const matchesState = !filters.state || state === getStringValue(filters.state);
+      const matchesCity = !filters.city || city === getStringValue(filters.city);
+      const matchesSpeciality = !filters.speciality || speciality.includes(getStringValue(filters.speciality));
+      const matchesGender = !filters.gender || gender === getStringValue(filters.gender);
+      const matchesHospital = !filters.hospital || hospital.includes(getStringValue(filters.hospital));
+      const matchesAvailability = !filters.availability || availability === getStringValue(filters.availability);
+      const matchesConditions = filters.conditions.length === 0 || filters.conditions.every(condition => doctorConditions.includes(getStringValue(condition)));
+      const matchesLanguages = filters.languages.length === 0 || filters.languages.every(language => doctorLanguages.includes(getStringValue(language)));
+      const matchesConsultation = !filters.consultation || consultation === getStringValue(filters.consultation);
+  
+      return (
+        matchesCountry &&
+        matchesState &&
+        matchesCity &&
+        matchesSpeciality &&
+        matchesGender &&
+        matchesHospital &&
+        matchesAvailability &&
+        matchesConditions &&
+        matchesLanguages &&
+        matchesConsultation
+      );
+    });
+  };
+  
+  
 
 
   const filteredDoctors = filterDoctors(doctors);
-  console.log(filteredDoctors);
+  console.log(filteredDoctors,"after")
+
   
 
   return (
@@ -159,7 +163,8 @@ const FilterPage = () => {
 
           <div className='row'>
             <div className="filter-edit col-3 d-none d-lg-block">
-              <Filter onFilterChange={handleFilterChange} filters={filters} />
+            <Filter onFilterChange={handleFilterChange} initialFilters={filters} />
+
             </div>
             <div className={`doctorMainCard-edit ${isMapExpanded ? 'col-4' : 'col-12 col-lg-6'}`}>
               <DoctorMainCard isMapExpanded={isMapExpanded} doctors={filteredDoctors} />
@@ -177,8 +182,8 @@ const FilterPage = () => {
           </div>
         </div>
     
-
- 
+        <MidPartTwo />
+        <Footerr />
         <Footer />
       </div>
     </>

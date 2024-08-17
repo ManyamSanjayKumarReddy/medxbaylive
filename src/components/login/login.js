@@ -36,31 +36,32 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
   const [isProvider, setIsProvider] = useState(false); 
 
   const [emailError, setEmailError] = useState('');
-
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
   const [passwordError, setPasswordError] = useState('');
   const login = async (e) => {
     e.preventDefault();
     if (validateForm()) {
+      setIsSubmitDisabled(true); // Disable the submit button
       try {
         const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/login`, { email, password }, { withCredentials: true });
         if (res.data.success) {
           const { user } = res.data;
           const { role, _id: userId, email: userEmail, subscriptionType, subscriptionVerification } = user;
-  
+
           const userSubscriptionType = subscriptionType || 'none';
           const userSubscriptionVerification = subscriptionVerification || 'not verified';
-  
+
           sessionStorage.setItem('userId', userId);
           sessionStorage.setItem('userEmail', userEmail);
           sessionStorage.setItem('role', role);
           sessionStorage.setItem('loggedIn', 'true');
           sessionStorage.setItem('subscriptionType', userSubscriptionType);
           sessionStorage.setItem('subscriptionVerification', userSubscriptionVerification);
-  
+
           switch (role) {
             case 'doctor':
-              navigate('/Doctor/profile/Edit');
+              navigate('/doctorprofile/dashboardpage/start-dashboard');
               break;
             case 'patient':
               navigate('profile/userprofile/');
@@ -72,6 +73,7 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
               alert('Unexpected role.');
               break;
           }
+          // Reset form and close modal
           setEmail('');
           setPassword('');
           handleClose();
@@ -81,6 +83,8 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
       } catch (err) {
         console.error('Error during login:', err);
         alert('Login failed. Please try again.');
+      } finally {
+        setIsSubmitDisabled(false); // Re-enable the submit button
       }
     }
   };
@@ -90,6 +94,7 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
   const forgetPassword = async (e) => {
     e.preventDefault();
     if (validateEmail(email)) {
+      setIsSubmitDisabled(true); // Disable the submit button
       try {
         const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/forgot-password`, { email });
         if (res.data.success) {
@@ -100,11 +105,9 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
         }
       } catch (err) {
         console.error('Error during password reset:', err);
-        if (err.response && err.response.data && err.response.data.message) {
-          alert(err.response.data.message);
-        } else {
-          alert('Failed to send reset email. Please try again.');
-        }
+        alert('Failed to send reset email. Please try again.');
+      } finally {
+        setIsSubmitDisabled(false); // Re-enable the submit button
       }
     } else {
       alert('Please enter a valid email address.');
@@ -306,9 +309,9 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
           <div className="d-grid gap-2">
             {!isForgotPassword ? (
               <>
-                <Button variant="primary" type="submit" className="btn-custom login-button-home">
-                  {isForgotPassword ? 'Reset Password' : 'Sign In'}
-                </Button>
+                <Button variant="primary" type="submit" className="btn-custom login-button-home" disabled={isSubmitDisabled}>
+              {isForgotPassword ? 'Reset Password' : 'Sign In'}
+            </Button>
                 {!isForgotPassword && !isForgotPassword && (
                   <Link to="#" onClick={() => setIsForgotPassword(true)} className="forgot-password-login">
                     Forgot Password?

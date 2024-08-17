@@ -24,13 +24,15 @@ const Provider = ({ show, handleClose,openRegisterModal }) => {
   const navigate = useNavigate();
   const typedElement = useRef('');
   const typedElementTwo = useRef('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const [nameError, setNameError] = useState('');
 
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
 
- 
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
+
 
   const [emailError, setEmailError] = useState('');
 
@@ -41,17 +43,23 @@ const Provider = ({ show, handleClose,openRegisterModal }) => {
   const provider = async (e) => {
     e.preventDefault();
     if (validateForm()) {
+      setIsSubmitDisabled(true);
       try {
-        const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/submit-lead`, { email, name }, );
-       
+        const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/submit-lead`, { email, name });
+        
+        if (res.status === 200) {
+          setSuccessMessage('Form submitted successfully!');
+        }
       } catch (err) {
-        console.error('Error during login:', err);
-        alert('Login failed. Please try again.');
+        console.error('Error during form submission:', err);
+        alert('Submission failed. Please try again.');
+      }
+      finally {
+        setIsSubmitDisabled(false); // Re-enable the submit button
       }
     }
   };
-
-
+  
 
 
   const validateForm = () => {
@@ -159,8 +167,8 @@ const Provider = ({ show, handleClose,openRegisterModal }) => {
   return (
     <Modal show={show} onHide={handleClose} centered className="custom-modal">
       <Modal.Title>
-        <span className="model-header-login"></span>{' '}
-        <span className="model-header-sub-login"> </span>
+        <span className="model-header-login">Thank You</span>{' '}
+        <span className="model-header-sub-login"> Please Enter Your Name and Email for more upadtes</span>
       </Modal.Title>
       <button type="button" className="btn-close-custom" aria-label="Close" onClick={handleClose}>
         x
@@ -230,7 +238,7 @@ const Provider = ({ show, handleClose,openRegisterModal }) => {
        
 
 
-                <Button variant="primary" type="submit" className="btn-custom login-button-home">
+                <Button variant="primary" type="submit" className="btn-custom login-button-home" disabled={isSubmitDisabled}>
              Submit
                 </Button>
               
@@ -239,6 +247,8 @@ const Provider = ({ show, handleClose,openRegisterModal }) => {
 
 
         </Form>
+        {successMessage && <p>{successMessage}</p>}
+
       </Modal.Body>
     </Modal>
   );

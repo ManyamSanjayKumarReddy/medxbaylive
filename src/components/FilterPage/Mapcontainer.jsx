@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './mapcontainer.css';
 import { IoSearch } from "react-icons/io5";
 import { RiArrowDownSLine } from "react-icons/ri";
 
 const MapContainer = ({ expanded, searchInput, onExpandToggle, onSearchInputChange, onSearchButtonClick, onResetClick }) => {
+    const [uniqueLocations, setUniqueLocations] = useState([]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -20,6 +21,43 @@ const MapContainer = ({ expanded, searchInput, onExpandToggle, onSearchInputChan
 
     const handleContainerClick = (event) => {
         event.stopPropagation();
+    };
+    const initMap = () => {
+        const map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: { lat: 20.5937, lng: 78.9629 }
+        });
+
+        const bounds = new google.maps.LatLngBounds();
+
+        uniqueLocations.forEach(location => {
+            const position = { lat: location.lat, lng: location.lng };
+
+            const marker = new google.maps.Marker({
+                position: position,
+                map: map,
+                title: 'Free Time Slot Location'
+            });
+
+            const infoWindow = new google.maps.InfoWindow({
+                content: `Lat: ${location.lat}, Lng: ${location.lng}`
+            });
+
+            marker.addListener('click', () => {
+                infoWindow.open(map, marker);
+            });
+
+            bounds.extend(position);
+        });
+
+        map.fitBounds(bounds);
+
+        const maxZoomLevel = 10;
+        map.addListener('bounds_changed', () => {
+            if (map.getZoom() > maxZoomLevel) {
+                map.setZoom(maxZoomLevel);
+            }
+        });
     };
 
     return (

@@ -10,8 +10,8 @@ import { TbStar } from 'react-icons/tb';
 import { PiUserListBold } from "react-icons/pi";
 import { ImBlogger2 } from 'react-icons/im';
 import { RiLogoutCircleRLine } from 'react-icons/ri';
-import { Link, useLocation } from 'react-router-dom';
-
+import { Link, useLocation ,useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import brandLogo from '../Assets/brand-logo-2.png';
 
 const Sidebar = () => {
@@ -31,6 +31,17 @@ const Sidebar = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    axios.post(`${process.env.REACT_APP_BASE_URL}/auth/logout`,{withCredentials:true})
+      .then(() => {
+        sessionStorage.clear();
+        navigate('/'); 
+      })
+      .catch(error => {
+        console.error('Error during logout:', error);
+      });
+  };
 
   useEffect(() => {
     setActiveItem(location.pathname);
@@ -125,7 +136,7 @@ const Sidebar = () => {
          onMouseEnter={() => setActiveItem('/doctorprofile/dashboardpage/Logout')}
          onMouseLeave={() => setActiveItem(location.pathname)}
         >
-          <Link to="/" className="menu-link">
+          <Link to="logout" onClick={handleLogout} className="menu-link">
             <div className="sidebar-icon"><RiLogoutCircleRLine /></div>
             <span>Logout</span>
           </Link>

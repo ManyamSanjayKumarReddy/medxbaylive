@@ -251,17 +251,23 @@
 /*======================insight-patient =========End======================*/
 
 /*======================your income =========start======================*/
-.income .dashboard-head-common{
+.income {
+  position: relative;
+}
+
+.income .dashboard-head-common {
   display: flex;
   justify-content: space-between;
-  align-items:start;
+  align-items: start;
 }
-.income .dashboard-head-common p{
+
+.income .dashboard-head-common p {
   font-size: 22px;
   font-weight: 600;
   line-height: 26.4px;
   color: #272848;
 }
+
 .income .dashboard-head-common .select-container .select-box-common {
   padding: 5px 50px 5px 10px;
   background: #f7faff;
@@ -271,19 +277,35 @@
   font-size: 12px;
   color: #272848;
   cursor: pointer;
-  -webkit-appearance: none; /* For Chrome */
-  -moz-appearance: none; /* For Firefox */
-  appearance: none; /* For modern browsers */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   outline: none;
 }
 
 .chart-area {
-  max-width:340px;
+  max-width: 340px;
   height: 200px;
-  margin-top:40px;
+  margin-top: 40px;
   position: relative;
   right: 15px;
 }
+
+.coming-soon-overlay {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 600;
+  color:#272848;
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.8)
+}  
 
 /*====================== your income end =========End======================*/
 

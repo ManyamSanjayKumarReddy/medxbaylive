@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown} from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { SlBell } from "react-icons/sl";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import profile from '../Assets/profileimg.png';
@@ -48,7 +48,7 @@ const Navbar = () => {
       setProvidersDropdownOpen(false);
     }
   };
-  
+
   const [showProviderModal, setShowProviderModal] = useState(false);
 
   const toggleProviderModal = () => setShowProviderModal(!showProviderModal);
@@ -80,12 +80,12 @@ const Navbar = () => {
     sessionStorage.removeItem('subscriptionType');
 
     setIsLoggedIn(false);
-    setIsSignInClicked(false); 
-    setIsRegisterClicked(false); 
+    setUserRole('');
     navigate('/'); 
   };
 
   const handleLogin = (role) => {
+    
     sessionStorage.setItem('loggedIn', 'true');
     sessionStorage.setItem('role', role);
 
@@ -93,6 +93,8 @@ const Navbar = () => {
     setUserRole(role);
     setIsSignInClicked(false); 
     setIsRegisterClicked(false); 
+    handleCloseLoginPopup(); 
+    handleClosePopup(); 
   };
 
   useEffect(() => {
@@ -103,16 +105,19 @@ const Navbar = () => {
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, []); // Ensure this effect runs only once on mount
+
+ 
 
   const navbarClass = userRole === 'doctor' ? 'navbar navbar-expand-lg navbar-light navbar-doctor' : 'navbar navbar-expand-lg navbar-light navbar-default';
+
   return (
     <>
       <header>
         <nav className={navbarClass}>
-          <a className="navbar-brand" href="/"><img src={brand} alt="Brand Logo"  className='brand-img' /></a>
+          <a className="navbar-brand" href="/"><img src={brand} alt="Brand Logo" className='brand-img' /></a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -122,7 +127,7 @@ const Navbar = () => {
                 <Link className="find-doctor nav-link nav-link-style" to="/Filters">Find Doctor</Link>
               </li>
               <li className="nav-item active ml-md-4">
-                <Link className="about-nav nav-link nav-link-style " to="#">About</Link>
+                <Link className="about-nav nav-link nav-link-style" to="#">About</Link>
               </li>
               <li className="nav-item dropdown active ml-md-4" ref={corporateDropdownRef}>
                 <Link 
@@ -147,64 +152,74 @@ const Navbar = () => {
                 </Link>
               </li>
             </ul>
-            {!isLoggedIn && (
+            {!isLoggedIn ? (
               <ul className="navbar-nav ml-auto mr-md-2">
-                <li className="nav-item ml-md-4">
-                  <button type="button" className=" nav-signin-button" onClick={handleShowLoginPopup}>Sign In</button>
-                </li>
-                <li className="nav-item ml-md-3">
-                  <button type="button" className="nav-register-button" onClick={handleShowPopup}>Register</button>
-                </li>
-              </ul>
-            )}
-            {isLoggedIn && (
-              <ul className="navbar-nav ml-auto mr-md-2">
-
-                {userRole === 'doctor' && (
-                  <li className="nav-item active ml-md-4">
-                    <Link className="nav-link dashboard-text-button" to="/doctorprofile/dashboardpage/">Dashboard</Link>
+                  <li className="nav-item ml-md-4">
+                      <button type="button" className="nav-signin-button" onClick={handleShowLoginPopup}>Sign In</button>
                   </li>
-                )}
-
-                <li className="nav-item ml-md-4">
-                  <div className='dashboard-setting-bell'>
-                    <button type="button" className=" nav-notification-button">
-                      <SlBell className='notification-icon'/>
-                    </button>
-                  </div>
-                </li>
-
-                <li className="nav-item ml-md-4">
-                  <div className="image-container">
-                    <img src={profile} alt="Profile" />
-                  </div>
-                </li>
-
-                <li className="nav-item ml-md-4">
-                  <div className='logout-container-button'>
-                    <button className ='logout-button'onClick={handleLogout}><RiLogoutCircleRLine size='1.1rem' /></button>
-                  </div>
-                </li>
+                  <li className="nav-item ml-md-3">
+                      <button type="button" className="nav-register-button" onClick={handleShowPopup}>Register</button>
+                  </li>
+              </ul>
+            ) : (
+              <ul className="navbar-nav ml-auto mr-md-2">
+                  {userRole === 'doctor' && (
+                      <li className="nav-item active ml-md-4">
+                          <Link className="nav-link dashboard-text-button" to="/doctorprofile/dashboardpage/">Dashboard</Link>
+                      </li>
+                  )}
+                  {isLoggedIn && userRole !== 'doctor' && (
+                      <li className="nav-item ml-md-4">
+                          <Link to='/profile/userprofile/notification'>
+                          <div className='dashboard-setting-bell'>
+                              <button type="button" className="nav-notification-button">
+                                  <SlBell className='notification-icon'/>
+                              </button>
+                          </div>
+                          </Link>
+                      </li>
+                  )}
+                  <li className="nav-item ml-md-4">
+                      <div className="image-container">
+                          <img src={profile} alt="Profile" />
+                      </div>
+                  </li>
+                  <li className="nav-item ml-md-4">
+                      <div className='logout-container-button'>
+                          <button className='logout-button' onClick={handleLogout}><RiLogoutCircleRLine size='1.1rem' /></button>
+                      </div>
+                  </li>
               </ul>
             )}
           </div>
         </nav>
         {isSignInClicked && (
           <div className="blur-background">
-            <LoginCard onClose={handleCloseSignupCard} onSwitchToSignup={handleRegisterClick}
-               handleClose={handleCloseLogin} 
-               handleLogin={handleLogin} /> 
+            <LoginCard 
+              onClose={handleCloseSignupCard} 
+              onSwitchToSignup={handleRegisterClick}
+              handleClose={handleCloseLogin} 
+              handleLogin={handleLogin} 
+            /> 
           </div>
         )}
         {isRegisterClicked && (
           <div className="blur-background">
-            <SignupCard onCloseSignupCard={handleCloseLoginCard} onSwitchToLogin={handleSignInClick}
-               handleClose={handleCloseRegister} />
+            <SignupCard 
+              onCloseSignupCard={handleCloseLoginCard} 
+              onSwitchToLogin={handleSignInClick}
+              handleClose={handleCloseRegister} 
+            />
           </div>
         )}
       </header>
       <SignupCard show={showPopup} handleClose={handleClosePopup} openLoginModal={handleShowLogin}/>
-      <LoginCard show={showLoginPopup} handleClose={handleCloseLoginPopup} openRegisterModal={handleShowRegister} handleLogin={handleLogin}/>
+      <LoginCard 
+        show={showLoginPopup} 
+        handleClose={handleCloseLoginPopup} 
+        openRegisterModal={handleShowRegister} 
+        handleLogin={handleLogin}
+      />
       <Provider show={showProviderModal} handleClose={() => setShowProviderModal(false)} />
     </>
   );

@@ -135,7 +135,7 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
     const fetchDoctor = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/doctor/profile/update",
+          `${process.env.REACT_APP_BASE_URL}/doctor/profile/update`,
           { withCredentials: true }
         );
         const formData = response.data;
@@ -203,7 +203,7 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
 
     try {
         const response = await axios.post(
-            "http://localhost:8000/doctor/profile/update",
+            `${process.env.REACT_APP_BASE_URL}/doctor/profile/update`,
             form,
             {
                 withCredentials: true,

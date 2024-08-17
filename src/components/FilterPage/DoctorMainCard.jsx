@@ -4,7 +4,7 @@ import { BsInfoCircle } from "react-icons/bs";
 import DoctorCard from './DoctorCard';
 import VerifiedImg from '../../assests/img/Verified-SVG.svg';
 import { RiArrowDownSLine } from "react-icons/ri";
-import Sponsor from './Sponsor'
+import Sponsor from './Sponsor';
 
 const DoctorMainCard = ({ isMapExpanded, doctors = [] }) => {
     const [sortOption, setSortOption] = useState('');
@@ -20,7 +20,7 @@ const DoctorMainCard = ({ isMapExpanded, doctors = [] }) => {
             case 'highestRated':
                 return [...doctors].sort((a, b) => (b.rating || 0) - (a.rating || 0));
             case 'mostReviewed':
-                return [...doctors].sort((a, b) => (b.reviews || 0) - (a.reviews || 0));
+                return [...doctors].sort((a, b) => (b.reviews.length || 0) - (a.reviews.length || 0));
             default:
                 return doctors;
         }
@@ -28,10 +28,19 @@ const DoctorMainCard = ({ isMapExpanded, doctors = [] }) => {
 
     useEffect(() => {
         const sorted = sortDoctors(doctors);
+        // Filter out doctors with empty time slots
+        const filteredDoctors = sorted.filter(doctor => doctor.timeSlots && doctor.timeSlots.length > 0);
 
         // Separate doctors into sponsored and non-sponsored categories
-        const sponsored = sorted.filter(doctor => doctor.subscriptionType === 'Premium' || doctor.subscriptionType === 'Enterprise' || doctor.subscriptionType === 'Standard');
-        const nonSponsored = sorted.filter(doctor => doctor.subscriptionType !== 'Premium' && doctor.subscriptionType !== 'Enterprise');
+        const sponsored = filteredDoctors.filter(doctor => 
+            doctor.subscriptionType === 'Premium' || 
+            doctor.subscriptionType === 'Enterprise' || 
+            doctor.subscriptionType === 'Standard'
+        );
+        const nonSponsored = filteredDoctors.filter(doctor => 
+            doctor.subscriptionType !== 'Premium' && 
+            doctor.subscriptionType !== 'Enterprise'
+        );
         
         setSponsoredDoctors(sponsored);
         setNonSponsoredDoctors(nonSponsored);
@@ -41,7 +50,7 @@ const DoctorMainCard = ({ isMapExpanded, doctors = [] }) => {
         <div className="container px-3">
             <div className="row doctor-main-card">
                 <div className={`col-7 ${isMapExpanded ? 'mapExpanded-doc-card-header' : 'doc-card-header'}`}>
-                    <h4>{doctors.length} doctor{doctors.length !== 1 ? 's' : ''} available</h4>
+                    <h4>{nonSponsoredDoctors.length + sponsoredDoctors.length} doctor{nonSponsoredDoctors.length + sponsoredDoctors.length !== 1 ? 's' : ''} available</h4>
                     <div className='d-flex'>
                         <img src={VerifiedImg} alt="Verified" style={{ width: "26px", height: "26px" }} />
                         <p>Book appointments with minimum wait-time & verified doctor details</p>

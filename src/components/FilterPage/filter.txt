@@ -1,225 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './filter.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import { RiArrowDownSLine } from "react-icons/ri";
-import { FiCalendar } from "react-icons/fi";
-
-const Filter = ({ onFilterChange }) => {
-  const [filters, setFilters] = useState({
-    specialty: 'All Specialty',
-    gender: '',
-    date: '',
-    hospital: '',
-    language: '',
-    consultation: '',
-    availability: '',
-    condition: '',
-  });
-
-  useEffect(() => {
-    onFilterChange(filters);
-  }, [filters, onFilterChange]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [name]: value,
-    }));
-  };
-
-  const handleReset = () => {
-    setFilters({
-      specialty: 'All Specialty',
-      gender: '',
-      date: '',
-      hospital: '',
-      language: '',
-      consultation: '',
-      availability: '',
-      condition: '',
-    });
-  };
-
-  return (
-    <>
-      <div className="sidebar-filter">
-        <div className='filter-heading-reset'>
-          <h5>Filter</h5>
-          <button onClick={handleReset}><i className="bi bi-arrow-counterclockwise"/> Reset Filter</button>
-        </div>
-
-        <div className="select-container-filter">
-          <div className="form-group">
-            <label htmlFor="what">What:</label>
-              <input type="text" id="what" name="what" value={filters.what} onChange={handleInputChange} placeholder="Search by name or speciality" />
-            <RiArrowDownSLine className="arrow-icon-filter" />
-          </div>
-        </div>
-
-        <div className="select-container-filter">
-          <div className="form-group">
-            <label htmlFor="where">Where:</label>
-            <input type="text" id="where" name="where" value={filters.where} onChange={handleInputChange} placeholder="Search by location" />
-            <RiArrowDownSLine className="arrow-icon-filter" />
-          </div>
-        </div>
-
-        <div className="select-container-filter">
-          <div className="form-group">
-            <label htmlFor="state">State:</label>
-             <select id="state" name="state" value={filters.state} onChange={handleInputChange}>
-                <option value="">Select State</option>
-                {dropdownData.states.map(state => (
-                    <option key={state} value={state}>{state}</option>
-                ))}
-            </select>
-            <RiArrowDownSLine className="arrow-icon-filter" />
-          </div>
-        </div>
-
-        <div className="select-container-filter">
-          <div className="form-group">
-            <label htmlFor="city">City:</label>
-             <select id="city" name="city" value={filters.city} onChange={handleInputChange}>
-                <option value="">Select City</option>
-                {dropdownData.cities.map(city => (
-                    <option key={city} value={city}>{city}</option>
-                ))}
-            </select>
-            <RiArrowDownSLine className="arrow-icon-filter" />
-          </div>
-        </div>
-
-        <div className="select-container-filter">
-          <div className="form-group">
-            <label htmlFor="dateAvailability">Date Availability:</label>
-            <div className="date-input-container">
-            <input type="date" id="dateAvailability" name="dateAvailability" value={filters.dateAvailability} onChange={handleInputChange} />
-              <FiCalendar className="custom-calendar-icon" />
-            </div>
-          </div>
-        </div>
-
-        <div className="select-container-filter">
-          <div className="form-group">
-            <label htmlFor="speciality">Speciality:</label>
-            <select id="speciality" name="speciality" value={filters.speciality} onChange={handleInputChange}>
-                <option value="">Select Speciality</option>
-                {dropdownData.specialities.map(speciality => (
-                    <option key={speciality} value={speciality}>{speciality}</option>
-                ))}
-            </select>
-            <RiArrowDownSLine className="arrow-icon-filter" />
-          </div>
-        </div>
-
-        <div className="select-container-filter">
-          <div className="form-group">
-            <label htmlFor="conditions">Conditions:</label>
-            <select id="conditions" name="conditions" multiple value={filters.conditions} onChange={handleInputChange}>
-                {dropdownData.conditions.map(condition => (
-                    <option key={condition} value={condition}>{condition}</option>
-                ))}
-            </select>
-            <RiArrowDownSLine className="arrow-icon-filter" />
-          </div>
-        </div>
-
-        <div className="select-container-filter">
-          <div className="form-group">
-            <label htmlFor="languages">Language Spoken:</label>
-            <select id="languages" name="languages" multiple value={filters.languages} onChange={handleInputChange}>
-                {dropdownData.languages.map(language => (
-                    <option key={language} value={language}>{language}</option>
-                ))}
-            </select>
-            <RiArrowDownSLine className="arrow-icon-filter" />
-          </div>
-        </div>
-
-        <div className="select-container-filter">
-          <div className="form-group">
-            <label htmlFor="gender">Gender:</label>
-            <select id="gender" name="gender" value={filters.gender} onChange={handleInputChange}>
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-            </select>
-            <RiArrowDownSLine className="arrow-icon-filter" />
-          </div>
-        </div>
-
-        <div className="select-container-filter">
-          <div className="form-group">
-            <label htmlFor="hospital">Hospital:</label>
-            <select id="hospital" name="hospital" value={filters.hospital} onChange={handleInputChange}>
-                <option value="">Select Hospital</option>
-                {dropdownData.hospitals.map(hospital => (
-                    <option key={hospital} value={hospital}>{hospital}</option>
-                ))}
-            </select>
-            <RiArrowDownSLine className="arrow-icon-filter" />
-          </div>
-        </div>
-
-        <div className="select-container-filter">
-          <div className="form-group">
-            <label htmlFor="availability">Available Now:</label>
-            <select id="availability" name="availability" value={filters.availability} onChange={handleInputChange}>
-                <option value="">Select Availability</option>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-            </select>
-            <RiArrowDownSLine className="arrow-icon-filter" />
-          </div>
-        </div>
-
-        <div className="select-container-filter">
-          <div className="form-group">
-            <label htmlFor="consultation">Consultation Type:</label>
-            <select id="consultation" name="consultation" value={filters.consultation} onChange={handleInputChange}>
-                <option value="">Select Consultation Type</option>
-                <option value="In-person">In-Person</option>
-                <option value="Video Call">Video Call</option>
-                <option value="Both">Both</option>
-            </select>
-            <RiArrowDownSLine className="arrow-icon-filter" />
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
-
-export default Filter;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './filter.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -241,21 +20,17 @@ const Filter = ({ onFilterChange, filters }) => {
         const fetchDropdownData = async () => {
             try {
                 const [
-                    countriesRes,
-                    statesRes,
-                    citiesRes,
-                    specialitiesRes,
-                    conditionsRes,
-                    languagesRes,
+                    countriesRes, statesRes, citiesRes, 
+                    specialitiesRes, conditionsRes, languagesRes, 
                     hospitalsRes
                 ] = await Promise.all([
-                    axios.get('/auth/countries'),
-                    axios.get('/auth/states'),
-                    axios.get('/auth/cities'),
-                    axios.get('/auth/specialities'),
-                    axios.get('/auth/conditions'),
-                    axios.get('/auth/languages'),
-                    axios.get('/auth/hospitals')
+                    axios.get('http://localhost:8000/auth/countries'),
+                    axios.get('http://localhost:8000/auth/states'),
+                    axios.get('http://localhost:8000/auth/cities'),
+                    axios.get('http://localhost:8000/auth/specialities'),
+                    axios.get('http://localhost:8000/auth/conditions'),
+                    axios.get('http://localhost:8000/auth/languages'),
+                    axios.get('http://localhost:8000/auth/hospitals')
                 ]);
 
                 setDropdownData({
@@ -275,8 +50,26 @@ const Filter = ({ onFilterChange, filters }) => {
         fetchDropdownData();
     }, []);
 
+    const handleCheckboxChange = (e) => {
+        const { name, value, checked } = e.target;
+        const updatedFilters = { ...filters };
+
+        if (!updatedFilters[name]) {
+            updatedFilters[name] = [];
+        }
+
+        if (checked) {
+            updatedFilters[name].push(value);
+        } else {
+            updatedFilters[name] = updatedFilters[name].filter(item => item !== value);
+        }
+
+        onFilterChange(name, updatedFilters[name]);
+    };
+    
     const handleInputChange = (e) => {
         const { name, value, selectedOptions } = e.target;
+
         if (name === 'conditions' || name === 'languages') {
             const options = Array.from(selectedOptions).map(option => option.value);
             onFilterChange(name, options);
@@ -298,48 +91,25 @@ const Filter = ({ onFilterChange, filters }) => {
                 </button>
             </div>
 
-            {/* Uncomment and adjust these if you want to use 'what' and 'where' filters */}
-            {/* 
+            {/* Country Dropdown */}
             <div className="select-container-filter">
                 <div className="form-group">
-                    <label htmlFor="what">What:</label>
-                    <input
-                        type="text"
-                        id="what"
-                        name="what"
-                        value={filters.what}
-                        onChange={handleInputChange}
-                        placeholder="Search by name or speciality"
-                    />
+                    <label htmlFor="country">Country:</label>
+                    <select id="country" name="country" value={filters.country} onChange={handleInputChange}>
+                        <option value="">Select Country</option>
+                        {dropdownData.countries.map(country => (
+                            <option key={country} value={country}>{country}</option>
+                        ))}
+                    </select>
                     <RiArrowDownSLine className="arrow-icon-filter" />
                 </div>
             </div>
 
-            <div className="select-container-filter">
-                <div className="form-group">
-                    <label htmlFor="where">Where:</label>
-                    <input
-                        type="text"
-                        id="where"
-                        name="where"
-                        value={filters.where}
-                        onChange={handleInputChange}
-                        placeholder="Search by location"
-                    />
-                    <RiArrowDownSLine className="arrow-icon-filter" />
-                </div>
-            </div> 
-            */}
-
+            {/* State Dropdown */}
             <div className="select-container-filter">
                 <div className="form-group">
                     <label htmlFor="state">State:</label>
-                    <select
-                        id="state"
-                        name="state"
-                        value={filters.state}
-                        onChange={handleInputChange}
-                    >
+                    <select id="state" name="state" value={filters.state} onChange={handleInputChange}>
                         <option value="">Select State</option>
                         {dropdownData.states.map(state => (
                             <option key={state} value={state}>{state}</option>
@@ -349,15 +119,11 @@ const Filter = ({ onFilterChange, filters }) => {
                 </div>
             </div>
 
+            {/* City Dropdown */}
             <div className="select-container-filter">
                 <div className="form-group">
                     <label htmlFor="city">City:</label>
-                    <select
-                        id="city"
-                        name="city"
-                        value={filters.city}
-                        onChange={handleInputChange}
-                    >
+                    <select id="city" name="city" value={filters.city} onChange={handleInputChange}>
                         <option value="">Select City</option>
                         {dropdownData.cities.map(city => (
                             <option key={city} value={city}>{city}</option>
@@ -367,31 +133,22 @@ const Filter = ({ onFilterChange, filters }) => {
                 </div>
             </div>
 
+            {/* Date Availability */}
             <div className="select-container-filter">
                 <div className="form-group">
                     <label htmlFor="dateAvailability">Date Availability:</label>
                     <div className="date-input-container">
-                        <input
-                            type="date"
-                            id="dateAvailability"
-                            name="dateAvailability"
-                            value={filters.dateAvailability}
-                            onChange={handleInputChange}
-                        />
+                        <input type="date" id="dateAvailability" name="dateAvailability" value={filters.dateAvailability} onChange={handleInputChange} />
                         <FiCalendar className="custom-calendar-icon" />
                     </div>
                 </div>
             </div>
 
+            {/* Speciality Dropdown */}
             <div className="select-container-filter">
                 <div className="form-group">
                     <label htmlFor="speciality">Speciality:</label>
-                    <select
-                        id="speciality"
-                        name="speciality"
-                        value={filters.speciality}
-                        onChange={handleInputChange}
-                    >
+                    <select id="speciality" name="speciality" value={filters.speciality} onChange={handleInputChange}>
                         <option value="">Select Speciality</option>
                         {dropdownData.specialities.map(speciality => (
                             <option key={speciality} value={speciality}>{speciality}</option>
@@ -401,51 +158,55 @@ const Filter = ({ onFilterChange, filters }) => {
                 </div>
             </div>
 
+            {/* Conditions Checkbox Group */}
             <div className="select-container-filter">
                 <div className="form-group">
-                    <label htmlFor="conditions">Conditions:</label>
-                    <select
-                        id="conditions"
-                        name="conditions"
-                        multiple
-                        value={filters.conditions}
-                        onChange={handleInputChange}
-                    >
+                    <label>Conditions:</label>
+                    <div className="checkbox-group">
                         {dropdownData.conditions.map(condition => (
-                            <option key={condition} value={condition}>{condition}</option>
+                            <div key={condition} className="checkbox-item">
+                                <input
+                                    type="checkbox"
+                                    id={`condition-${condition}`}
+                                    name="conditions"
+                                    value={condition}
+                                    checked={filters.conditions ? filters.conditions.includes(condition) : false}
+                                    onChange={handleCheckboxChange}
+                                />
+                                <label htmlFor={`condition-${condition}`}>{condition}</label>
+                            </div>
                         ))}
-                    </select>
-                    <RiArrowDownSLine className="arrow-icon-filter" />
+                    </div>
                 </div>
             </div>
 
+            {/* Language Spoken Checkbox Group */}
             <div className="select-container-filter">
                 <div className="form-group">
-                    <label htmlFor="languages">Language Spoken:</label>
-                    <select
-                        id="languages"
-                        name="languages"
-                        multiple
-                        value={filters.languages}
-                        onChange={handleInputChange}
-                    >
+                    <label>Language Spoken:</label>
+                    <div className="checkbox-group">
                         {dropdownData.languages.map(language => (
-                            <option key={language} value={language}>{language}</option>
+                            <div key={language} className="checkbox-item">
+                                <input
+                                    type="checkbox"
+                                    id={`language-${language}`}
+                                    name="languages"
+                                    value={language}
+                                    checked={filters.languages ? filters.languages.includes(language) : false}
+                                    onChange={handleCheckboxChange}
+                                />
+                                <label htmlFor={`language-${language}`}>{language}</label>
+                            </div>
                         ))}
-                    </select>
-                    <RiArrowDownSLine className="arrow-icon-filter" />
+                    </div>
                 </div>
             </div>
 
+            {/* Gender Dropdown */}
             <div className="select-container-filter">
                 <div className="form-group">
                     <label htmlFor="gender">Gender:</label>
-                    <select
-                        id="gender"
-                        name="gender"
-                        value={filters.gender}
-                        onChange={handleInputChange}
-                    >
+                    <select id="gender" name="gender" value={filters.gender} onChange={handleInputChange}>
                         <option value="">Select Gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
@@ -455,15 +216,11 @@ const Filter = ({ onFilterChange, filters }) => {
                 </div>
             </div>
 
+            {/* Hospital Dropdown */}
             <div className="select-container-filter">
                 <div className="form-group">
                     <label htmlFor="hospital">Hospital:</label>
-                    <select
-                        id="hospital"
-                        name="hospital"
-                        value={filters.hospital}
-                        onChange={handleInputChange}
-                    >
+                    <select id="hospital" name="hospital" value={filters.hospital} onChange={handleInputChange}>
                         <option value="">Select Hospital</option>
                         {dropdownData.hospitals.map(hospital => (
                             <option key={hospital} value={hospital}>{hospital}</option>
@@ -473,15 +230,11 @@ const Filter = ({ onFilterChange, filters }) => {
                 </div>
             </div>
 
+            {/* Availability Dropdown */}
             <div className="select-container-filter">
                 <div className="form-group">
                     <label htmlFor="availability">Available Now:</label>
-                    <select
-                        id="availability"
-                        name="availability"
-                        value={filters.availability}
-                        onChange={handleInputChange}
-                    >
+                    <select id="availability" name="availability" value={filters.availability} onChange={handleInputChange}>
                         <option value="">Select Availability</option>
                         <option value="true">Yes</option>
                         <option value="false">No</option>
@@ -490,19 +243,14 @@ const Filter = ({ onFilterChange, filters }) => {
                 </div>
             </div>
 
+            {/* Consultation Type Dropdown */}
             <div className="select-container-filter">
                 <div className="form-group">
                     <label htmlFor="consultation">Consultation Type:</label>
-                    <select
-                        id="consultation"
-                        name="consultation"
-                        value={filters.consultation}
-                        onChange={handleInputChange}
-                    >
+                    <select id="consultation" name="consultation" value={filters.consultation} onChange={handleInputChange}>
                         <option value="">Select Consultation Type</option>
                         <option value="In-person">In-Person</option>
-                        <option value="Video Call">Video Call</option>
-                        <option value="Both">Both</option>
+                        <option value="Video">Video</option>
                     </select>
                     <RiArrowDownSLine className="arrow-icon-filter" />
                 </div>
@@ -512,3 +260,39 @@ const Filter = ({ onFilterChange, filters }) => {
 };
 
 export default Filter;
+
+
+
+
+
+
+
+
+
+
+
+  {/*const sortDoctors = () => {
+        setFormData((prev) => ({
+            ...prev,
+            sortOption: document.getElementById('sortOptions').value,
+        }));
+        searchDoctors();
+    };
+    */}
+
+  {/* <div className="search-container">
+        <label htmlFor="what">What:</label>
+        <input type="text" id="what" placeholder="Search by name or speciality" value={formData.what} onChange={handleInputChange} />
+
+        <label htmlFor="where">Where:</label>
+        <input type="text" id="where" placeholder="Search by location" value={formData.where} onChange={handleInputChange} />
+
+        <button onClick={searchDoctors}>Search</button>
+
+        <label htmlFor="sortOptions">Sort by:</label>
+        <select id="sortOptions" onChange={sortDoctors} value={formData.sortOption}>
+          <option value="">Select</option>
+          <option value="highestRated">Highest Rated</option>
+          <option value="mostReviewed">Most Reviewed</option>
+        </select>
+      </div> */}

@@ -18,17 +18,17 @@ import moment from 'moment/moment.js';
 
 const bufferToBase64 = (buffer) => {
     if (buffer?.type === 'Buffer' && Array.isArray(buffer?.data)) {
-      const bytes = new Uint8Array(buffer.data);
-      let binary = '';
-      for (let i = 0; i < bytes.length; i++) {
-        binary += String.fromCharCode(bytes[i]);
-      }
-      return `data:image/jpeg;base64,${btoa(binary)}`;
+        const bytes = new Uint8Array(buffer.data);
+        let binary = '';
+        for (let i = 0; i < bytes.length; i++) {
+            binary += String.fromCharCode(bytes[i]);
+        }
+        return `data:image/jpeg;base64,${btoa(binary)}`;
     } else {
-      console.error('Unexpected buffer type:', typeof buffer);
-      return '';
+        console.error('Unexpected buffer type:', typeof buffer);
+        return '';
     }
-  };
+};
 
 const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
     const [startIndex, setStartIndex] = useState(0);
@@ -109,19 +109,19 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
     const handleTimeSlotClick = (slot) => {
         setSelectedTimeSlot(slot);
     };
-    
+
     const handleBookAppointment = async () => {
         const user = sessionStorage.getItem('loggedIn');
 
         if (!user) {
-      // If no user data in session storage, redirect to login page
-      alert('You need to log in to book an appointment.');
-        navigate('/verify/login');
-        return;
-    }
+            // If no user data in session storage, redirect to login page
+            alert('You need to log in to book an appointment.');
+            navigate('/login');
+            return;
+        }
         try {
             const selectedDay = dates[selectedDate];
-            if(consultationType ==''){
+            if (consultationType == '') {
                 alert('please select a consultation type')
                 return
             }
@@ -132,7 +132,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                 consultationType: consultationType
             };
             console.log('Booking data:', bookingData);
-    
+
             const response = await fetch(`${process.env.REACT_APP_BASE_URL}/patient/book`, {
                 method: 'POST',
                 headers: {
@@ -140,9 +140,9 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify(bookingData),
-                credentials: 'include' 
+                credentials: 'include'
             });
-    
+
             const contentType = response.headers.get('Content-Type');
             if (contentType && contentType.includes('application/json')) {
                 const result = await response.json();
@@ -158,7 +158,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
             alert('Error booking appointment. Please try again.');
         }
     };
-    
+
     const renderStars = (rating) => {
         const fullStars = Math.floor(rating);
         const hasHalfStar = rating % 1 !== 0;
@@ -188,8 +188,8 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                             id="inPersonCheck"
                             checked={consultationType === 'In-person'}
                             onChange={() => setConsultationType('In-person')}
-                            />
-                            <img src={MedicalService} alt="In-Person" />
+                        />
+                        <img src={MedicalService} alt="In-Person" />
                         <label className="form-check-label" htmlFor="inPersonCheck">
                             In-Person
                         </label>
@@ -207,8 +207,8 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                             id="inPersonCheck"
                             checked={consultationType === 'Video call'}
                             onChange={() => setConsultationType('Video call')}
-                            />
-                            <img src={videoCall} alt="In-Person" />
+                        />
+                        <img src={videoCall} alt="In-Person" />
                         <label className="form-check-label" htmlFor="inPersonCheck">
                             Video Consultation
                         </label>
@@ -220,34 +220,34 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                 <>
                     <div className={`p-1 ${consultationType === "In-person" ? "consultationActiveColor" : ""}`}>
                         <div className="form-check">
-                        <input
-                            className="form-check-input"
-                            type="checkbox"
-                            id="inPersonCheck"
-                            checked={consultationType === 'In-person'}
-                            onChange={() => setConsultationType('In-person')}
+                            <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="inPersonCheck"
+                                checked={consultationType === 'In-person'}
+                                onChange={() => setConsultationType('In-person')}
                             />
                             <img src={MedicalService} alt="In-Person" />
-                        <label className="form-check-label" htmlFor="inPersonCheck">
-                            In-Person
-                        </label>
-                    </div>
+                            <label className="form-check-label" htmlFor="inPersonCheck">
+                                In-Person
+                            </label>
+                        </div>
                     </div>
                     <div className={`p-1 ${consultationType === "Video call" ? "consultationActiveColor" : ""}`}>
                         {/* <img src={videoCall} alt="Video Consultation" style={{ color: "#37adff" }} /> */}
                         <div className="form-check">
-                        <input
-                            className="form-check-input"
-                            type="checkbox"
-                            id="inPersonCheck"
-                            checked={consultationType === 'Video call'}
-                            onChange={() => setConsultationType('Video call')}
+                            <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="inPersonCheck"
+                                checked={consultationType === 'Video call'}
+                                onChange={() => setConsultationType('Video call')}
                             />
                             <img src={videoCall} alt="In-Person" />
-                        <label className="form-check-label" htmlFor="inPersonCheck">
-                            Video consultation
-                        </label>
-                    </div>
+                            <label className="form-check-label" htmlFor="inPersonCheck">
+                                Video consultation
+                            </label>
+                        </div>
                     </div>
                 </>
             );
@@ -278,25 +278,25 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                             <Link to={`/doctor/${doctor._id}`}>
                                 <h2>{doctor.name}</h2>
                             </Link>
-                            <p className="speciality">{doctor.speciality }</p>
+                            <p className="speciality">{doctor.speciality}</p>
                             <p className="experience">{doctor.experience || "16 years experience overall"}</p>
-                            <p className={`location ${isMapExpanded ? 'mapExpanded-location' : ''}`}>{doctor.city || "Pare, Mumbai"}</p>
+                            <p className={`location ${isMapExpanded ? 'mapExpanded-location' : ''}`}>{doctor.city}</p>
                             <p className={`clinic ${isMapExpanded ? 'mapExpanded-clinic' : ''}`}>
-                                        {doctor.hospitals && doctor.hospitals.length > 0 ? (
-                                            <>
-                                                <p className="hospital-item">{doctor.hospitals[0].name}</p>
-                                                {showAllHospitals && doctor.hospitals.slice(1).map((hospital, index) => (
-                                                    <p key={index} className="hospital-item">{hospital.name}</p>
-                                                ))}
-                                                {doctor.hospitals.length > 1 && (
-                                                    <p style={{cursor:"pointer"}} onClick={() => setShowAllHospitals(!showAllHospitals)}>
-                                                        {showAllHospitals ? 'Show Less' : `+${doctor.hospitals.length - 1} more`}
-                                                    </p>
-                                                )}
-                                            </>
-                                        ) : (
-                                            <p>No hospitals available</p>
+                                {doctor.hospitals && doctor.hospitals.length > 0 ? (
+                                    <>
+                                        <p className="hospital-item">{doctor.hospitals[0].name}</p>
+                                        {showAllHospitals && doctor.hospitals.slice(1).map((hospital, index) => (
+                                            <p key={index} className="hospital-item">{hospital.name}</p>
+                                        ))}
+                                        {doctor.hospitals.length > 1 && (
+                                            <p style={{ cursor: "pointer" }} onClick={() => setShowAllHospitals(!showAllHospitals)}>
+                                                {showAllHospitals ? 'Show Less' : `+${doctor.hospitals.length - 1} more`}
+                                            </p>
                                         )}
+                                    </>
+                                ) : (
+                                    <p>No hospitals available</p>
+                                )}
                             </p>
                             <div className={`consultation-type ${isMapExpanded ? 'mapExpanded-consultation-type' : ''}`}>
                                 {renderConsultationType()}
@@ -334,74 +334,95 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                         <div className="date-nav">
                             <button className="arrow" onClick={showPrev} disabled={startIndex === 0}>‹</button>
                             <div className="date-carousel">
-                                {dates.slice(startIndex, startIndex + (isMapExpanded ? 2 : 3)).map((date, index) => (
-                                    <div
-                                        key={index}
-                                        className={`date-item ${index + startIndex === selectedDate ? 'active' : ''}`}
-                                        onClick={() => setSelectedDate(index + startIndex)}
-                                    >
-                                        <h3>{date.day}</h3>
-                                        <span className="slots-available">{date.slots} Slots Available</span>
-                                    </div>
-                                ))}
+                                {dates.length > 0 ? (
+                                    dates.slice(startIndex, startIndex + (isMapExpanded ? 2 : 3)).map((date, index) => (
+                                        <div
+                                            key={index}
+                                            className={`date-item ${index + startIndex === selectedDate ? 'active' : ''}`}
+                                            onClick={() => setSelectedDate(index + startIndex)}
+                                        >
+                                            <h3>{date.day}</h3>
+                                            <span className="slots-available">{date.slots} Slots Available</span>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p>No slots are available</p>
+                                )}
                             </div>
                             <button className="arrow" onClick={showNext} disabled={startIndex + 3 >= dates.length}>›</button>
                         </div>
-                        <div className="underline">
-                            <div
-                                className="underline-active"
-                                style={{
-                                    left: `calc(100% / ${isMapExpanded ? 2 : 3} * ${selectedDate - startIndex})`,
-                                    width: `calc(100% / ${isMapExpanded ? 2 : 3})`
-                                }}
-                            ></div>
-                        </div>
-                        {dates[selectedDate] && (
-                            <div className="container mt-3">
-                                <div className="time-slots-group d-flex flex-row">
-                                    <h6>Morning</h6>
-                                    <div className="time-slots">
-                                        {groupedSlots.morning.map((slot, index) => (
-                                            <button
-                                                key={`morning-${index}`}
-                                                className={`time-slot ${selectedTimeSlot === slot ? 'selected' : ''}`}
-                                                onClick={() => handleTimeSlotClick(slot)}
-                                            >
-                                                {slot}
-                                            </button>
-                                        ))}
-                                    </div>
+                        {dates.length > 0 && (
+                            <>
+                                <div className="underline">
+                                    <div
+                                        className="underline-active"
+                                        style={{
+                                            left: `calc(100% / ${isMapExpanded ? 2 : 3} * ${selectedDate - startIndex})`,
+                                            width: `calc(100% / ${isMapExpanded ? 2 : 3})`
+                                        }}
+                                    ></div>
                                 </div>
-                                <div className="time-slots-group d-flex flex-row">
-                                    <h6>Afternoon</h6>
-                                    <div className="time-slots">
-                                        {groupedSlots.afternoon.map((slot, index) => (
-                                            <button
-                                                key={`afternoon-${index}`}
-                                                className={`time-slot ${selectedTimeSlot === slot ? 'selected' : ''}`}
-                                                onClick={() => handleTimeSlotClick(slot)}
-                                            >
-                                                {slot}
-                                            </button>
-                                        ))}
+                                {dates[selectedDate] ? (
+                                    <div className="container mt-3">
+                                        <div className="time-slots-group d-flex flex-row">
+                                            <h6>Morning</h6>
+                                            <div className="time-slots">
+                                                {groupedSlots.morning.length > 0 ? (
+                                                    groupedSlots.morning.map((slot, index) => (
+                                                        <button
+                                                            key={`morning-${index}`}
+                                                            className={`time-slot ${selectedTimeSlot === slot ? 'selected' : ''}`}
+                                                            onClick={() => handleTimeSlotClick(slot)}
+                                                        >
+                                                            {slot}
+                                                        </button>
+                                                    ))
+                                                ) : (
+                                                    <p>No slots are available</p>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className="time-slots-group d-flex flex-row">
+                                            <h6>Afternoon</h6>
+                                            <div className="time-slots">
+                                                {groupedSlots.afternoon.length > 0 ? (
+                                                    groupedSlots.afternoon.map((slot, index) => (
+                                                        <button
+                                                            key={`afternoon-${index}`}
+                                                            className={`time-slot ${selectedTimeSlot === slot ? 'selected' : ''}`}
+                                                            onClick={() => handleTimeSlotClick(slot)}
+                                                        >
+                                                            {slot}
+                                                        </button>
+                                                    ))
+                                                ) : (
+                                                    <p>No slots are available</p>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className="time-slots-group d-flex flex-row">
+                                            <h6>Evening</h6>
+                                            <div className="time-slots">
+                                                {groupedSlots.evening.length > 0 ? (
+                                                    groupedSlots.evening.map((slot, index) => (
+                                                        <button
+                                                            key={`evening-${index}`}
+                                                            className={`time-slot ${selectedTimeSlot === slot ? 'selected btn-primary' : ''}`}
+                                                            onClick={() => handleTimeSlotClick(slot)}
+                                                        >
+                                                            {slot}
+                                                        </button>
+                                                    ))
+                                                ) : (
+                                                    <p>No slots are available</p>
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="time-slots-group d-flex flex-row">
-                                    <h6>Evening</h6>
-                                    <div className="time-slots">
-                                        {groupedSlots.evening.map((slot, index) => (
-                                            <button
-                                                key={`evening-${index}`}
-                                                className={`time-slot ${selectedTimeSlot === slot ? 'selected btn-primary' : ''}`}
-                                                onClick={() => handleTimeSlotClick(slot)}
-                                            >
-                                                {slot}
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-
+                                ) : (
+                                    <p>No slots are available</p>
+                                )}
+                            </>
                         )}
                         {selectedTimeSlot && (
                             <div className="book-now">
@@ -409,8 +430,8 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                             </div>
                         )}
                     </div>
-
                 )}
+
             </div>
         </>
     );

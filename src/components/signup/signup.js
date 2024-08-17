@@ -29,7 +29,7 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
   const [email, setEmail] = useState('');
   const [mobile, setMobile] = useState('');
   const [password, setPassword] = useState('');
-
+  const [isSubmitting, setIsSubmitting] = useState(false); 
   const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [mobileError, setMobileError] = useState('');
@@ -82,23 +82,26 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
   };
   
 
-  const register = async (e) => {
+ const register = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);  // Disable the button upon submission
     const user = { name, email, mobile, password };
     const endpoint = isProvider 
       ? `${process.env.REACT_APP_BASE_URL}/auth/signup/doctor`
       : `${process.env.REACT_APP_BASE_URL}/auth/signup/patient`;
-    
+
     if (validateForm()) {
       try {
         const res = await axios.post(endpoint, user);
         console.log(res.data);
-        alert("Registration successful please check your email and verify");
+        alert("Registration successful! Please check your email and verify.");
+        
+        // Clear the form data
         setName('');
         setEmail('');
         setMobile('');
         setPassword('');
-        handleClose();
+        handleClose(); // Close the modal
       } catch (err) {
         console.error("Error during registration:", err);
         if (err.response && err.response.status === 400 && err.response.data.error) {
@@ -106,7 +109,11 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
         } else {
           alert("Registration failed. Please try again.");
         }
+      } finally {
+        setIsSubmitting(false);  // Re-enable the button after response
       }
+    } else {
+      setIsSubmitting(false);  // Re-enable the button if validation fails
     }
   };
   
@@ -378,10 +385,14 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
             <Form.Control.Feedback type="invalid">{passwordError}</Form.Control.Feedback>
           </Form.Group>
 
-
-          <Button variant="primary" type="submit" className="btn-custom"    >
-Sign Up
-          </Button>
+          <Button
+              variant="primary"
+              type="submit"
+              className="btn-custom" 
+              disabled={isSubmitting}  
+            >
+              {isSubmitting ? 'Signing Up...' : 'Sign Up'}
+            </Button>
           </Form>
         </>
       )}
