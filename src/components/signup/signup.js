@@ -246,7 +246,7 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
     <Modal show={show} onHide={handleClose} centered className="custom-modal">
       <Modal.Title>
         <span className="model-header">Sign up</span>{' '}
-        <span className="model-header-sub"> Sign up as {isProvider ? 'Doctor' : 'Patient'}</span>
+        <span className="model-header-sub"> Sign up as {isProvider ? 'Provider' : 'Patient'}</span>
       </Modal.Title>
       <button type="button" className="btn-close-custom" aria-label="Close" onClick={handleClose}>
         x
@@ -291,7 +291,8 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
           <div className='end-line-sign-up'></div>
           <div className='end-line-sign-up-two'>
             <div className='button-sign-up-container'>
-            <button className='google-button-sign-up'>                  <img src={google} alt="Google" onClick={() => handleGoogleSignIn(isProvider ? 'doctor' : 'patient')} className="social-sign-up" />
+            <button className='google-button-sign-up'>                 
+               <img src={google} alt="Google" onClick={() => handleGoogleSignIn(isProvider ? 'doctor' : 'patient')} className="social-sign-up" />
             </button>
             <button className='apple-button-sign-up'><img src={apple} alt='Apple' className='apple-sign-up-image'></img></button>
             </div>

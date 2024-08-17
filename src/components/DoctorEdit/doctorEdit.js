@@ -24,6 +24,7 @@ import hanfheart from "../../assests/img/handheart.svg";
 import doctoreditimage from "../../assests/img/doctoreditimage.png";
 import DoctorPopUp from "./DoctorPopUp";
 import axios from "axios";
+import profileImage from "../Assets/profileimg.png";
 
 function DoctorEdit() {
   const [doctor, setDoctor] = useState([]);
@@ -43,14 +44,7 @@ function DoctorEdit() {
 
   const [profileimg, setProfileimage] = useState("");
 
-  const getProfile = (a) => {
-    if (a && a.data) {
-      const base64String = a?.data
-        ? `data:${a.contentType};base64,${a.data}`
-        : profileimg;
-      setProfileimage(base64String);
-    }
-  };
+ 
 
   const [selected, setSelected] = useState(null);
 
@@ -61,40 +55,41 @@ function DoctorEdit() {
   useEffect(() => {
     document.title = "Doctor-Edit";
 
-
-    const fetchDoctorDetails = async () => {
-      try {
-        const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/doctor/profile/update`,
-          { withCredentials: true }
-        );
-        const doctorData = response.data;
-
-        console.log(doctorData);
-        if (doctorData.doctor.dateOfBirth) {
-          const date = new Date(doctorData.doctor.dateOfBirth);
-          const formattedDate = `${String(date.getDate()).padStart(
-            2,
-            "0"
-          )}-${String(date.getMonth() + 1).padStart(
-            2,
-            "0"
-          )}-${date.getFullYear()}`;
-          doctorData.doctor.dateOfBirth = formattedDate;
-        }
-
-        console.log("API Response:", doctorData);
-        getProfile(doctorData?.doctor.profilePicture);
-        setDoctor(doctorData.doctor);
-        setInsurance(doctorData.insurances);
-        setBlogs(doctorData.blogs);
-      } catch (error) {
-        console.error("Error fetching doctor details:", error);
-      }
-    };
-
     fetchDoctorDetails();
   }, []);
+
+  const fetchDoctorDetails = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/doctor/profile/update",
+        { withCredentials: true }
+      );
+      const doctorData = response.data;
+
+      console.log(doctorData);
+      if (doctorData.doctor.dateOfBirth) {
+        const date = new Date(doctorData.doctor.dateOfBirth);
+        const formattedDate = `${String(date.getDate()).padStart(
+          2,
+          "0"
+        )}-${String(date.getMonth() + 1).padStart(
+          2,
+          "0"
+        )}-${date.getFullYear()}`;
+        doctorData.doctor.dateOfBirth = formattedDate;
+      }
+      var formData = doctorData.doctor
+      const profileImageData = formData?.profilePicture
+      ? `data:image/jpeg;base64,${formData.profilePicture.data}` 
+      : profileImage;
+      setProfileimage(profileImageData)
+      setDoctor(doctorData.doctor);
+      setInsurance(doctorData.insurances);
+      setBlogs(doctorData.blogs);
+    } catch (error) {
+      console.error("Error fetching doctor details:", error);
+    }
+  };
 
   const faqRef = useRef(null);
 
@@ -127,7 +122,7 @@ function DoctorEdit() {
         <div className="doctor-profile-edit-container">
           <div className="doctor-profile-edit-img">
             <img
-              src={profileimg || doctoreditimage}
+              src={profileimg}
               alt="Doctor-edit"
               className="doctor-edit-profile-photo"
             ></img>
@@ -394,7 +389,7 @@ function DoctorEdit() {
           </div>
         </div>
       </div>
-      <DoctorPopUp show={showEditPopup} handleClose={handleCloseEditPopup} />
+      <DoctorPopUp show={showEditPopup} handleClose={handleCloseEditPopup} fetchDoctorDetails={fetchDoctorDetails} />
     </>
   );
 }

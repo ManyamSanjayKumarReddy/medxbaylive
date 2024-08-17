@@ -1,76 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaStar } from 'react-icons/fa';
 import './reviews.css';
 
-const Reviews = () => {
-  const [reviews] = useState([
-    { 
-      id: 1,
-      day: 'Monday',
-      date: '10:30 AM, 31 Jun 2023',
-      text: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      rating: 5,
-    },
-    { 
-      id: 2,
-      day: 'Monday',
-      date: '10:30 AM, 31 Jun 2023',
-      text: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      rating: 3,
-    },
-    { 
-      id: 3,
-      day: 'Monday',
-      date: '10:30 AM, 31 Jun 2023',
-      text: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      rating: 4,
-    },
-    {
-      id: 4,
-      day: 'Monday',
-      date: '10:30 AM, 31 Jun 2023',
-      text: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      rating: 1,
-    },
-    {
-      id: 5,
-      day: 'Monday',
-      date: '10:30 AM, 31 Jun 2023',
-      text: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      rating: 2,
-    }
-  ]);
+const Reviews = ({ doctorId }) => {
+  const [reviews, setReviews] = useState([]);
+  const [doctorName, setDoctorName] = useState('');
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch(`/reviews/${doctorId}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch reviews');
+        }
+        const data = await response.json();
+        setReviews(data.reviews);
+        setDoctorName(data.doctor.name);        } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchReviews();
+  }, [doctorId]);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div className="dashboard-page-item-review-head">
-      <h2>Reviews</h2>
+      <h2>Reviews for Dr. {doctorName}</h2>
       <div className='review-scroll'>
-      {reviews.map((review) => (
-        <div className="review-container" key={review.id}>
-          <div className="review-header">
-            <p className='review-idnumber'>{review.id}.</p>
-            <div className="review-details-item">
-              <p className="review-day">{review.day}</p>
-              <p className="review-date-time">{review.date}</p>
+        {reviews.map((review) => (
+          <div className="review-container" key={review._id}>
+            <div className="review-header">
+              <p className='review-idnumber'>{review._id}.</p>
+              <div className="review-details-item">
+                <p className="review-day">{new Date(review.date).toLocaleDateString('en-US', { weekday: 'long' })}</p>
+                <p className="review-date-time">{new Date(review.date).toLocaleString()}</p>
+              </div>
+            </div>
+            <div className="line-code"></div>
+            <div className="review-body">
+              <p>{review.text}</p>
+            </div>
+            <div className="line-code"></div>
+            <div className="review-rating">
+              {[...Array(5)].map((_, i) => (
+                <FaStar
+                  key={i}
+                  color={i < review.rating ? '#ffc107' : '#e4e5e9'}
+                  className='rating-icon'
+                />
+              ))}
             </div>
           </div>
-          <div className="line-code"></div>
-          <div className="review-body">
-            <p>{review.text}</p>
-          </div>
-          <div className="line-code"></div>
-          <div className="review-rating">
-            {[...Array(5)].map((_, i) => (
-              <FaStar
-                key={i}
-                color={i < review.rating ? '#ffc107' : '#e4e5e9'}
-                className='rating-icon'
-              />
-            ))}
-          </div>
-        </div>
-      ))}
-        </div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -5,6 +5,9 @@ import profileimg from "../../Assets/profileimg.png";
 import axios from "axios";
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 const ProfileEdit = () => {
   const [profileImage, setProfileImage] = useState(profileimg);
@@ -12,12 +15,13 @@ const ProfileEdit = () => {
   const [email, setEmail] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [address, setaddress] = useState("");
-  const [dob, setDob] = useState("");
+  const [dob, setDob] = useState(null);
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
   const [bloodGroup, setBloodGroup] = useState("");
   const [insuranceProvider, setInsuranceProvider] = useState("");
   const [policyNumber, setPolicyNumber] = useState("");
+  
 
   const [isEditing, setIsEditing] = useState({
     profilePicture: false,
@@ -52,7 +56,7 @@ const ProfileEdit = () => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/patient/profile`, { withCredentials: true });
+        const response = await axios.get("http://localhost:8000/patient/profile", { withCredentials: true });
         const { patient } = response.data;
         const profileImageData = patient.profilePicture
           ? `data:image/jpeg;base64,${patient.profilePicture.data}` // Update the prefix if the image is not JPEG
@@ -108,11 +112,17 @@ const ProfileEdit = () => {
   };
 
   const handleEditClick = (field, ref) => {
-    setIsEditing((prev) => ({ ...prev, [field]: !prev[field] }));
-    if (ref.current) {
+    setIsEditing((prevState) => ({
+      ...prevState,
+      [field]: true,
+    }));
+  
+    // Ensure ref is current and focusable before calling focus()
+    if (ref.current && typeof ref.current.focus === 'function') {
       ref.current.focus();
     }
   };
+  
 
   const handleSave = async (event) => {
     event.preventDefault();
@@ -282,23 +292,31 @@ const ProfileEdit = () => {
             />
           </div>
           <div className="profile-group">
-            <label className="profile-label" htmlFor="dob">DOB</label>
-            <input
-              className="profile-input"
-              type="text"
-              id="dob"
-              value={dob}
-              onChange={(e) => setDob(e.target.value)}
-              readOnly={!isEditing.dob}
-              ref={dobRef}
-              autoComplete="bday"
-            />
-            <FiEdit3
-              className="edit-icon"
-              size="1rem"
-              onClick={() => handleEditClick("dob", dobRef)}
-            />
-          </div>
+  <label className="profile-label" htmlFor="dob">DOB</label>
+  <DatePicker
+  value={dob}
+  selected={dob}
+  onChange={(date) => setDob(date)}
+  dateFormat="yyyy-MM-dd"
+  className="profile-input"
+  placeholderText="Select date of birth"
+  ref={dobRef}
+  disabled={!isEditing.dob}
+  showPopperArrow={false}
+  autoComplete="bday"
+  popperPlacement="bottom-start"
+  showYearDropdown
+  showMonthDropdown
+  dropdownMode="select" // Optional: To use select instead of scrolling for month and year
+/>
+  <FiEdit3
+    className="edit-icon"
+    size="1rem"
+    onClick={() => handleEditClick("dob", dobRef)}
+  />
+</div>
+
+
           <div className="profile-group">
             <label className="profile-label" htmlFor="age">Age</label>
             <input
@@ -310,6 +328,7 @@ const ProfileEdit = () => {
               readOnly={!isEditing.age}
               ref={ageRef}
               autoComplete="bday"
+              placeholder="Age"
             />
             {/* <FiEdit3
               className="edit-icon"
@@ -319,17 +338,19 @@ const ProfileEdit = () => {
           </div>
           <div className="profile-group">
             <label className="profile-label" htmlFor="gender">Gender</label>
-            <input
+            <select
               className="profile-input"
-              type="text"
               id="gender"
               value={gender}
-              placeholder="Male"
               onChange={(e) => setGender(e.target.value)}
-              readOnly={!isEditing.gender}
+              disabled={!isEditing.gender}
               ref={genderRef}
-              autoComplete="sex"
-            />
+            >
+              <option value="" disabled>Select gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
             <FiEdit3
               className="edit-icon"
               size="1rem"

@@ -4,11 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import doctor from "../../assests/img/doctorprofile.jpeg";
 import axios from "axios";
-import { encode } from "base-64";
-// import '../DoctorEdit/DoctorPopUp.css'
+import profileImage from "../Assets/profileimg.png";
 
 
-const DoctorPopUp = ({ show, handleClose }) => {
+const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
   useEffect(() => {
     import("../DoctorEdit/DoctorPopUp.css");
   }, []);
@@ -96,29 +95,20 @@ const DoctorPopUp = ({ show, handleClose }) => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setFormData((prevData) => ({
-      ...prevData,
-      profilePicture: file,
-    }));
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setProfilePicturePreview(reader.result);
-    };
     if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setProfileimage(reader.result);
+        setFormData((prevData) => ({
+          ...prevData,
+          profilePicture: file, // Save the file object directly
+        }));
+      };
       reader.readAsDataURL(file);
     }
   };
 
   const [profileimg,setProfileimage]=useState('')
-
-  const getProfile = (a) => {
-    if (a && a.data) {
-      const base64String = a?.data
-        ? `data:${a.contentType};base64,${a.data}`
-        : profileimg;
-      setProfileimage(base64String);
-    }
-  };
 
   useEffect(() => {
     import("../DoctorEdit/DoctorPopUp.css");
@@ -142,91 +132,107 @@ const DoctorPopUp = ({ show, handleClose }) => {
   useEffect(() => {
     document.title = "Doctor-Edit";
 
-    const fetchDoctorDetails = async () => {
+    const fetchDoctor = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/doctor/profile/update`,
+          "http://localhost:8000/doctor/profile/update",
           { withCredentials: true }
         );
         const formData = response.data;
 
         if (formData.doctor.dateOfBirth) {
-          const date = new Date(formData.dateOfBirth);
-          const formattedDate = `${String(date.getDate()).padStart(
-            2,
-            "0"
-          )}-${String(date.getMonth() + 1).padStart(
-            2,
-            "0"
-          )}-${date.getFullYear()}`;
-          formData.doctor.dateOfBirth = formattedDate;
+          formData.doctor.dateOfBirth = formatDateForInput(formData.doctor.dateOfBirth);
         }
         
-        console.log(formData,'advshadjha')
-        getProfile(formData?.doctor.profilePicture)
+        var form = formData.doctor
+        const profileImageData = form?.profilePicture
+        ? `data:image/jpeg;base64,${form.profilePicture.data}` 
+        : profileImage;
+        setProfileimage(profileImageData)
         setFormData(formData.doctor);
       } catch (error) {
         console.error("Error fetching doctor details:", error);
       }
     };
 
-    fetchDoctorDetails();
+    fetchDoctor();
   }, []);
+
+  const formatDateForInput = (dateString) => {
+    if (!dateString) return "";
+    
+    const ddmmyyyy = /^(\d{2})-(\d{2})-(\d{4})$/;
+    if (ddmmyyyy.test(dateString)) {
+      const [day, month, year] = dateString.split("-");
+      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    }
+    const yyyymmdd = /^\d{4}-\d{2}-\d{2}$/;
+    if (yyyymmdd.test(dateString)) {
+      return dateString;
+    }
+    
+    const date = new Date(dateString);
+    if (!isNaN(date.getTime())) {
+      return date.toISOString().split('T')[0];
+    }
+    
+    return "";
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = new FormData();
 
     for (const key in formData) {
-      if (Array.isArray(formData[key])) {
-        formData[key].forEach((item, index) => {
-          if (typeof item === "object") {
-            for (const nestedKey in item) {
-              form.append(`${key}[${index}][${nestedKey}]`, item[nestedKey]);
-            }
-          } else {
-            form.append(`${key}[${index}]`, item);
-          }
-        });
-      } else {
-        form.append(key, formData[key]);
-      }
-    }
-
-    if (formData.profilePicture) {
-      form.append("profilePicture", formData.profilePicture);
+        if (key == "profilePicture" && formData.profilePicture) {
+            form.append(key, formData.profilePicture);
+        }else if (Array.isArray(formData[key])) {
+            formData[key].forEach((item, index) => {
+                if (typeof item === "object") {
+                    for (const nestedKey in item) {
+                        form.append(`${key}[${index}][${nestedKey}]`, item[nestedKey]);
+                    }
+                } else {
+                    form.append(`${key}[${index}]`, item);
+                }
+            });
+        }else {
+            form.append(key, formData[key]);
+        }
     }
 
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}doctor/profile/update`,
-        form,
-        {
-          withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data" },
+        const response = await axios.post(
+            "http://localhost:8000/doctor/profile/update",
+            form,
+            {
+                withCredentials: true,
+                headers: { "Content-Type": "multipart/form-data" },
+            }
+        );
+        if (response.data.success) {
+            console.log("Profile updated successfully:", response.data);
+            handleClose();
+            fetchDoctorDetails();
+        } else {
+            console.error("Failed to update profile:", response.data.message);
         }
-      );
-      if (response.data.success) {
-        console.log("Profile updated successfully:", response.data);
-      } else {
-        console.error("Failed to update profile:", response.data.message);
-      }
     } catch (error) {
-      console.error("An error occurred:", error);
+        console.error("An error occurred:", error);
     }
-  };
+};
 
   return (
     <Modal show={show} onHide={handleClose} centered className="custom-modal">
-      <Modal.Header>
+      <Modal.Header className="custom-modal-header">
         <Modal.Title className="model-header">Edit Your Profile</Modal.Title>
         <button
           type="button"
-          className="btn-close-custom"
+          className="btn-close"
           aria-label="Close"
           onClick={handleClose}
         >
-          x
+          &times;
         </button>
       </Modal.Header>
 
