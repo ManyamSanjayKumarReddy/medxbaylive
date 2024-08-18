@@ -5,7 +5,8 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 moment.locale("en-GB");
 const localizer = momentLocalizer(moment);
 
@@ -35,15 +36,15 @@ export default function ReactBigCalendar({ onScheduleChange }) {
     const user = sessionStorage.getItem("loggedIn");
 
     if (!user) {
-      alert("You need to log in to book an appointment.");
-      navigate("/login");
+      toast.error("You need to log in to book an appointment.");
+      navigate("/");
       return;
     }
 
     const fetchDoctorData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/doctor/manage-time-slots",
+          `${process.env.REACT_APP_BASE_URL}/doctor/manage-time-slots`,
           {
             // headers: {
             //   "Access-Control-Allow-Origin": "*",
@@ -254,6 +255,7 @@ export default function ReactBigCalendar({ onScheduleChange }) {
 
   return (
     <>
+            <ToastContainer />
       <style>{styles}</style>
       <Calendar
         views={["month", "day"]}

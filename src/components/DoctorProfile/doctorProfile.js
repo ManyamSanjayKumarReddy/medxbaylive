@@ -19,7 +19,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { fetchFromDoctor } from "../../actions/api";
 import moment from "moment";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const bufferToBase64 = (buffer) => {
   if (buffer?.type === 'Buffer' && Array.isArray(buffer?.data)) {
     const bytes = new Uint8Array(buffer.data);
@@ -274,11 +275,11 @@ const handleBookAppointment = async () => {
 
       // const result = await fetchFromPatient('/book', bookingData, 'POST');
       // console.log('Booking response JSON:', result);
-      alert('Booking successful!');
+      toast.success('Booking successful!');
   } catch (error) {
       console.error('Error booking appointment:', error.message);
-      alert('Error booking appointment. Please try again.');
-  }
+      toast.error('Error booking appointment. Please try again.');
+    }
 };
 
 const handleConsultationTypeChange = (type) => {
@@ -286,6 +287,8 @@ const handleConsultationTypeChange = (type) => {
 };
 
   return (
+    <>     
+       <ToastContainer />
     <div className="doctor-profile">
       <div className="share-box">
         <div className="share-icon"></div>
@@ -659,6 +662,7 @@ const handleConsultationTypeChange = (type) => {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

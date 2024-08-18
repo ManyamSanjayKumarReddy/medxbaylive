@@ -15,7 +15,8 @@ import curvedsigntwo from '../../assests/img/curvedsigntwo.svg';
 import Typed from 'typed.js';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Provider = ({ show, handleClose,openRegisterModal }) => {
   useEffect(() => {
     import('../login/login.css');
@@ -52,7 +53,7 @@ const Provider = ({ show, handleClose,openRegisterModal }) => {
         }
       } catch (err) {
         console.error('Error during form submission:', err);
-        alert('Submission failed. Please try again.');
+        toast.success('Submission failed. Please try again.');
       }
       finally {
         setIsSubmitDisabled(false); // Re-enable the submit button
@@ -165,6 +166,7 @@ const Provider = ({ show, handleClose,openRegisterModal }) => {
 
   
   return (
+    <>        <ToastContainer />
     <Modal show={show} onHide={handleClose} centered className="custom-modal">
       <Modal.Title>
         <span className="model-header-login">Thank You</span>{' '}
@@ -251,6 +253,7 @@ const Provider = ({ show, handleClose,openRegisterModal }) => {
 
       </Modal.Body>
     </Modal>
+    </>
   );
 };
 

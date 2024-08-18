@@ -27,7 +27,7 @@
 
 .mapContainer {
     width: 310px;
-    height: 700px;
+    height: 100vh;
     border-radius: 15px;
     /* border: 1px solid #e6e6e6; */
     position: relative;

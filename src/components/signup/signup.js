@@ -108,7 +108,6 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
       sessionStorage.setItem('subscriptionType', userSubscriptionType);
       sessionStorage.setItem('subscriptionVerification', userSubscriptionVerification);
       
-      // Optionally, you might want to remove the parameters from the URL
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, []);
@@ -117,7 +116,7 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
 
   const register = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);  // Disable the button upon submission
+    setIsSubmitting(true); 
     const user = { name, email, mobile, password };
     const endpoint = isProvider 
       ? `${process.env.REACT_APP_BASE_URL}/auth/signup/doctor`
@@ -131,12 +130,12 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
           position: "top-center"
         });
         
-        // Clear the form data
+
         setName('');
         setEmail('');
         setMobile('');
         setPassword('');
-        handleClose(); // Close the modal
+        handleClose(); 
       } catch (err) {
         console.error("Error during registration:", err);
         if (err.response) {
@@ -161,10 +160,10 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
           });
         }
       } finally {
-        setIsSubmitting(false);  // Re-enable the button after response
+        setIsSubmitting(false);  
       }
     } else {
-      setIsSubmitting(false);  // Re-enable the button if validation fails
+      setIsSubmitting(false);  
     }
   };
   
@@ -303,8 +302,9 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
 
   return (
     <>
-    <ToastContainer />
+   
     <Modal show={show} onHide={handleClose} centered className="custom-modal">
+    <ToastContainer />
       <Modal.Title>
         <span className="model-header">Sign up</span>{' '}
         <span className="model-header-sub"> Sign up as {isProvider ? 'Provider' : 'Patient'}</span>

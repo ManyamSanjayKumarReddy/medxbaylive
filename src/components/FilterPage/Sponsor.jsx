@@ -16,6 +16,8 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'; // Filled star
 import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment/moment.js';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const bufferToBase64 = (buffer) => {
     if (buffer?.type === 'Buffer' && Array.isArray(buffer?.data)) {
       const bytes = new Uint8Array(buffer.data);
@@ -112,16 +114,21 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
     const handleBookAppointment = async () => {
         const user = sessionStorage.getItem('loggedIn');
 
+    
         if (!user) {
-      // If no user data in session storage, redirect to login page
-      alert('You need to log in to book an appointment.');
-        navigate('/verify/login');
-        return;
-    }
+            toast.error('You need to log in to book an appointment.',{
+                position: "top-center"
+              });
+            setTimeout(() => {
+                navigate('/');
+            }, 2000); 
+            return;
+        }
+    
         try {
             const selectedDay = dates[selectedDate];
             if(consultationType ==''){
-                alert('please select a consultation type')
+                toast.warning('Please select a consultation type.');
                 return
             }
             const bookingData = {
@@ -146,16 +153,16 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
             if (contentType && contentType.includes('application/json')) {
                 const result = await response.json();
                 console.log('Booking response:', result);
-                alert('Booking successful!');
+                toast.success('Booking successful!');
                 navigate('/profile/userprofile/manage/appointments')
             } else {
                 const responseText = await response.text();
                 console.error('Unexpected response format:', responseText);
-                alert('Unexpected response from server. Please try again.');
+                toast.error('Unexpected response from server. Please try again.');
             }
         } catch (error) {
             console.error('Error booking appointment:', error.message);
-            alert('Error booking appointment. Please try again.');
+            toast.error('Error booking appointment. Please try again.');
         }
     };
     
@@ -261,6 +268,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
 
     return (
         <>
+                <ToastContainer />
             <div className={`row doctor-card ${isMapExpanded ? 'mapExpanded-doctor-card' : ''}`}>
                 <div className={`col-7 ${isMapExpanded ? 'col-12' : ''}`}>
                     <div className="doctor-info">

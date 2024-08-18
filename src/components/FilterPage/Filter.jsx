@@ -198,7 +198,7 @@ const Filter = ({ onFilterChange, initialFilters }) => {
 
     const searchDoctors = async () => {
         const query = new URLSearchParams(formData).toString();
-        const url = `${process.env.REACT_APP_BASE_URL}/search-doctors?${query}`;
+        const url = `${process.env.REACT_APP_BASE_URL}/auth/search-doctors?${query}`;
 
         try {
             const response = await fetch(url);
@@ -409,7 +409,7 @@ const Filter = ({ onFilterChange, initialFilters }) => {
                         <select id="consultation" onChange={handleInputChange} value={formData.consultation}>
                             <option value="">Select Consultation</option>
                             <option value="In-person">In-person</option>
-                            <option value="video call">Video</option>
+                            <option value="video call">video call</option>
                             <option value="Both">Both</option>
                         </select>
                         <RiArrowDownSLine className="arrow-icon-filter" />

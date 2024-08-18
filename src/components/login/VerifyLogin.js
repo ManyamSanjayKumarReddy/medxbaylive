@@ -17,6 +17,8 @@ import Typed from 'typed.js';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './changepassword.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const VerifyLogin = ({ show, handleClose,openRegisterModal }) => {
     useEffect(() => {
         import('./login.css');
@@ -26,7 +28,8 @@ const VerifyLogin = ({ show, handleClose,openRegisterModal }) => {
       const typedElement = useRef('');
       const typedElementTwo = useRef('');
       const [isLoading, setIsLoading] = useState(false);
-    
+      const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
+
       const [email, setEmail] = useState('');
       
       const [password, setPassword] = useState('');
@@ -44,7 +47,7 @@ const VerifyLogin = ({ show, handleClose,openRegisterModal }) => {
         if (validateForm()) {
             try {
                 const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/login`, { email, password }, { withCredentials: true });
-                console.log('Login response:', res.data); // Log the response
+                console.log('Login response:', res.data); 
                 
                 if (res.data.success) {
                     console.log('Login was successful.');
@@ -60,7 +63,10 @@ const VerifyLogin = ({ show, handleClose,openRegisterModal }) => {
                     sessionStorage.setItem('loggedIn', 'true');
                     sessionStorage.setItem('subscriptionType', userSubscriptionType);
                     sessionStorage.setItem('subscriptionVerification', userSubscriptionVerification);
-    
+                    toast.success("Your has been verified!", {
+                      position: "top-center"
+                    });
+                    setTimeout(() => {
                     switch (role) {
                         case 'doctor':
                             navigate('/Doctor/profile/Edit');
@@ -79,11 +85,13 @@ const VerifyLogin = ({ show, handleClose,openRegisterModal }) => {
                     setEmail('');
                     setPassword('');
                     handleClose();
+                  }, 1000); 
                 } else {
                     console.error('Login failed response:', res.data);
                     console.log('Login failed:', res.data.message);
-                    alert(res.data.message || 'Login failed. Please try again.');
-                }
+                    toast.error("Login failed. Please try again.", {
+                      position: "top-center"
+                    });                }
             } catch (err) {
                 console.error('Error during login:', err);
             }
@@ -93,30 +101,28 @@ const VerifyLogin = ({ show, handleClose,openRegisterModal }) => {
     
       
       
-      const forgetPassword = async (e) => {
-        e.preventDefault();
-        if (validateEmail(email)) {
-          try {
-            const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/forgot-password`, { email });
-            if (res.data.success) {
-              alert('Password reset email sent successfully.');
-              setIsForgotPassword(false);
-            } else {
-              alert(res.data.message || 'Failed to send reset email. Please try again.');
-            }
-          } catch (err) {
-            console.error('Error during password reset:', err);
-            if (err.response && err.response.data && err.response.data.message) {
-              alert(err.response.data.message);
-            } else {
-              alert('Failed to send reset email. Please try again.');
-            }
+    const forgetPassword = async (e) => {
+      e.preventDefault();
+      if (validateEmail(email)) {
+        setIsSubmitDisabled(true); 
+        try {
+          const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/forgot-password`, { email });
+          if (res.data.success) {
+            toast.success('Password reset email sent successfully.', { position: "top-center" });
+            setIsForgotPassword(false);
+          } else {
+            toast.error(res.data.message || 'Failed to send reset email. Please try again.', { position: "top-center" });
           }
-        } else {
-          alert('Please enter a valid email address.');
+        } catch (err) {
+          console.error('Error during password reset:', err);
+          toast.error('Failed to send reset email. Please try again.', { position: "top-center" });
+        } finally {
+          setIsSubmitDisabled(false); 
         }
-      };
-    
+      } else {
+        toast.error('Please enter a valid email address.', { position: "top-center" });
+      }
+    };
     
       const handleGoogleSignIn = (role) => {
         setIsLoading(true);
@@ -212,6 +218,8 @@ const VerifyLogin = ({ show, handleClose,openRegisterModal }) => {
       };
     
   return (
+    <>
+            <ToastContainer />
     <div  centered className="custom-modal custom-modal-change">
        <Modal.Title>
         <span className="model-header-login">Sign In</span>{' '}
@@ -307,12 +315,13 @@ const VerifyLogin = ({ show, handleClose,openRegisterModal }) => {
 
 
 
-          <div className="d-grid gap-2">
+     
+<div className="d-grid gap-2">
             {!isForgotPassword ? (
               <>
-                <Button variant="primary" type="submit" className="btn-custom login-button-home">
-                  {isForgotPassword ? 'Reset Password' : 'Sign In'}
-                </Button>
+                <Button variant="primary" type="submit" className="btn-custom login-button-home" disabled={isSubmitDisabled}>
+              {isForgotPassword ? 'Reset Password' : 'Sign In'}
+            </Button>
                 {!isForgotPassword && !isForgotPassword && (
                   <Link to="#" onClick={() => setIsForgotPassword(true)} className="forgot-password-login">
                     Forgot Password?
@@ -332,9 +341,11 @@ const VerifyLogin = ({ show, handleClose,openRegisterModal }) => {
           </div>
 
 
+
         </Form>
       </Modal.Body>
     </div>
+    </>
   );
 };
 

@@ -26,7 +26,7 @@ function Section() {
       <MiddlePart />
       <Siri/>
       <Insights />
-      <TestimonialSlider/>
+      {/* <TestimonialSlider/> */}
 
 
   

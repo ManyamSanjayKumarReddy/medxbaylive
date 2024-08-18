@@ -1,25 +1,123 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './mapcontainer.css';
 import { IoSearch } from "react-icons/io5";
 import { RiArrowDownSLine } from "react-icons/ri";
 
-const MapContainer = ({ expanded, searchInput, onExpandToggle, onSearchInputChange, onSearchButtonClick, onResetClick }) => {
+const MapContainer = ({
+    expanded,
+    searchInput,
+    onExpandToggle,
+    onSearchInputChange,
+    onSearchButtonClick,
+    onResetClick,
+    uniqueLocations
+}) => {
+    const [mapLoaded, setMapLoaded] = useState(false);
+    const apiKey = 'AIzaSyApr-nSbv28HGFJxddFfjhtNM-xtF2YfMA'; // Ensure this is correctly set
+
+    console.log('API Key:', apiKey); // Debugging line to check if API key is loaded
+
+    const loadGoogleMapsScript = () => {
+        return new Promise((resolve, reject) => {
+            if (document.querySelector(`script[src*="maps.googleapis.com"]`)) {
+                resolve(window.google.maps);
+                return;
+            }
+
+            if (window.google && window.google.maps) {
+                resolve(window.google.maps);
+                return;
+            }
+
+            window.initMap = () => {
+                if (window.google && window.google.maps) {
+                    resolve(window.google.maps);
+                } else {
+                    reject(new Error('Google Maps API not loaded'));
+                }
+            };
+
+            const script = document.createElement('script');
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&v=weekly`;
+            script.async = true;
+            script.defer = true;
+            script.onerror = (error) => {
+                reject(error);
+            };
+            document.head.appendChild(script);
+        });
+    };
 
     useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (expanded && !event.target.closest('.map-container-edit')) {
-                onExpandToggle();
-            }
-        };
+        loadGoogleMapsScript()
+            .then((googleMaps) => {
+                setMapLoaded(true);
+                if (uniqueLocations) {
+                    initMap(googleMaps);
+                } else {
+                    console.warn('uniqueLocations is not available');
+                }
+            })
+            .catch((error) => {
+                console.error('Error loading Google Maps:', error);
+            });
+    }, [uniqueLocations]);
 
-        document.addEventListener('click', handleClickOutside);
-        return () => {
-            document.removeEventListener('click', handleClickOutside);
-        };
-    }, [expanded, onExpandToggle]);
+    const initMap = (googleMaps) => {
+        if (!googleMaps) {
+            console.error('Google Maps API not loaded');
+            return;
+        }
+
+        const map = new googleMaps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: { lat: 20.5937, lng: 78.9629 } // Center map on India
+        });
+
+        if (!uniqueLocations || !Array.isArray(uniqueLocations)) {
+            console.error('uniqueLocations is not properly defined:', uniqueLocations);
+            return;
+        }
+
+        const bounds = new googleMaps.LatLngBounds();
+
+        uniqueLocations.forEach(location => {
+            if (!location.lat || !location.lng) {
+                console.error('Location data is incomplete:', location);
+                return;
+            }
+
+            const position = { lat: location.lat, lng: location.lng };
+
+            const marker = new googleMaps.Marker({
+                position: position,
+                map: map,
+                title: 'Free Time Slot Location'
+            });
+
+            const infoWindow = new googleMaps.InfoWindow({
+                content: `Lat: ${location.lat}, Lng: ${location.lng}`
+            });
+
+            marker.addListener('click', () => {
+                infoWindow.open(map, marker);
+            });
+
+            bounds.extend(position);
+        });
+
+        map.fitBounds(bounds);
+
+        const maxZoomLevel = 10;
+        map.addListener('bounds_changed', () => {
+            if (map.getZoom() > maxZoomLevel) {
+                map.setZoom(maxZoomLevel);
+            }
+        });
+    };
 
     const handleContainerClick = (event) => {
-        event.stopPropagation();
+        event.stopPropagation(); // Prevent click events from propagating outside the map container
     };
 
     return (
@@ -37,14 +135,12 @@ const MapContainer = ({ expanded, searchInput, onExpandToggle, onSearchInputChan
                             <RiArrowDownSLine className="map-arrow-icon-filter" />
                         </div>
                     </div>
-                    <iframe
-                        className="mapFrame"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509349!2d144.9631579153587!3d-37.81627974201782!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf5772d5fd411f07b!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1619929516970"
-                        allowFullScreen=""
-                        loading="lazy"
-                        title="Google Maps"
-                    ></iframe>
-                    {expanded ? (
+                    {mapLoaded ? (
+                        <div id="map" style={{ height: '100vh', width: '100%' }}></div>
+                    ) : (
+                        <div>Loading map...</div>
+                    )}
+                    {expanded ? ( 
                         <div className="searchInputContainer">
                             <input
                                 type="text"

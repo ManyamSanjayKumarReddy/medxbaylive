@@ -3,7 +3,8 @@ import "./addnewblog.css";
 import Blog from "../Blog";
 import Editor from "./Editor";
 import axios from "axios";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const AddNewBlog = ({loadBlogs}) => {
   const [showAddNewBlog, setShowAddNewBlog] = useState(false);
   const [newBlog, setNewBlog] = useState({
@@ -45,7 +46,7 @@ const AddNewBlog = ({loadBlogs}) => {
   };
 
   const handlePublish = () => {
-    alert("Blog Publish");
+    toast.success("Blog Publish");
     console.log("Blog submitted:", newBlog);
     try{
       const res= axios.post(`${process.env.REACT_APP_BASE_URL}/doctor/blog`,
@@ -70,6 +71,7 @@ const AddNewBlog = ({loadBlogs}) => {
 
   return (
     <>
+            <ToastContainer />
       {showAddNewBlog ? (
         <Blog onCancel={handleCancel} />
       ) : (

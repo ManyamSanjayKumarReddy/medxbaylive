@@ -14,7 +14,8 @@ import { BsInfoCircle } from "react-icons/bs";
 import DoctorCard from './DoctorCard'
 import Sponsor from './Sponsor'
 import doctorProfile from '../../assests/img/Ellipse-30.png'
-
+import videoCall from '../../assests/img/video_call.svg'
+import MedicalService from '../../assests/img/medical_services.svg'
 import thumbsUp from '../../assests/img/ThumbsUp.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane, faStar as fasStar } from '@fortawesome/free-solid-svg-icons'; // Filled star

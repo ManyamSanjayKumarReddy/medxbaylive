@@ -17,6 +17,8 @@ import Typed from 'typed.js';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './changepassword.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const ChangePassword = () => {
   useEffect(() => {
     import('./login.css');
@@ -73,17 +75,17 @@ const ChangePassword = () => {
         });
         
         if (res.data.success) {
-          alert('Password reset successful.');
+          toast.success('Password reset successful.');
           navigate('/'); 
         } else {
-          alert(res.data.message || 'Failed to reset password. Please try again.');
+          toast.error(res.data.message || 'Failed to reset password. Please try again.');
         }
       } catch (err) {
         console.error('Error during password reset:', err);
-        alert('Failed to reset password. Please try again.');
+        toast.error('Failed to reset password. Please try again.');
       }
     } else {
-      alert('Please correct the errors in the form.');
+      toast.error('Please correct the errors in the form.');
     }
   };
   
@@ -119,6 +121,8 @@ const ChangePassword = () => {
   }, []);
 
   return (
+    <>
+            <ToastContainer />
     <div  centered className="custom-modal custom-modal-change">
       <Modal.Title>
         <span className="model-header-change-password">Reset Password</span>{' '}
@@ -208,6 +212,7 @@ const ChangePassword = () => {
         </Form>
       </Modal.Body>
     </div>
+    </>
   );
 };
 

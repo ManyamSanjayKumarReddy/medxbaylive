@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import doctorProfile from '../../assests/img/Ellipse-30.png'; // Placeholder image
 import videoCall from '../../assests/img/video_call.svg';
-
 import MedicalService from '../../assests/img/medical_services.svg';
-
 import thumbsUp from '../../assests/img/ThumbsUp.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons'; // Filled star
@@ -12,6 +10,8 @@ import { faStarHalfAlt } from '@fortawesome/free-solid-svg-icons'; // Half-fille
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'; // Filled star
 // import { fetchFromPatient } from '../../actions/api';
 // import api from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { fetchFromPatient } from '../../actions/api.js';
 import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment/moment.js';
@@ -36,7 +36,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
     const [showDoctorCard, setShowDoctorCard] = useState(false);
     const [profilePicture, setProfilePicture] = useState(doctorProfile);
     const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
-    const [consultationType, setConsultationType] = useState(''); // Default consultation type
+    const [consultationType, setConsultationType] = useState('video call'); // Default consultation type
     const [showAllHospitals, setShowAllHospitals] = useState(false); // State to show all hospitals
     const navigate = useNavigate();
 
@@ -114,15 +114,18 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
         const user = sessionStorage.getItem('loggedIn');
 
         if (!user) {
-            // If no user data in session storage, redirect to login page
-            alert('You need to log in to book an appointment.');
-            navigate('/login');
+            toast.error('You need to log in to book an appointment.',{
+                position: "top-center"
+              });
+            setTimeout(() => {
+                navigate('/');
+            }, 2000); 
             return;
         }
         try {
             const selectedDay = dates[selectedDate];
             if (consultationType == '') {
-                alert('please select a consultation type')
+                toast.warning('Please select a consultation type.');
                 return
             }
             const bookingData = {
@@ -147,15 +150,15 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
             if (contentType && contentType.includes('application/json')) {
                 const result = await response.json();
                 console.log('Booking response:', result);
-                alert('Booking successful!');
+                toast.success('Booking successful!');
             } else {
                 const responseText = await response.text();
                 console.error('Unexpected response format:', responseText);
-                alert('Unexpected response from server. Please try again.');
+                toast.error('Unexpected response from server. Please try again.');
             }
         } catch (error) {
             console.error('Error booking appointment:', error.message);
-            alert('Error booking appointment. Please try again.');
+            toast.error('Error booking appointment. Please try again.');
         }
     };
 
@@ -196,17 +199,17 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                     </div>
                 </div>
             );
-        } else if (doctor.consultation === 'Video call') {
+        } else if (doctor.consultation === 'video call') {
             return (
-                <div className={`p-1 ${consultationType === "Video call" ? "consultationActiveColor" : ""}`}>
+                <div className={`p-1 ${consultationType === "video call" ? "consultationActiveColor" : ""}`}>
                     {/* <img src={videoCall} alt="Video Consultation" style={{ color: "#37adff" }} /> */}
                     <div className="form-check">
                         <input
                             className="form-check-input"
                             type="checkbox"
                             id="inPersonCheck"
-                            checked={consultationType === 'Video call'}
-                            onChange={() => setConsultationType('Video call')}
+                            checked={consultationType === 'video call'}
+                            onChange={() => setConsultationType('video call')}
                         />
                         <img src={videoCall} alt="In-Person" />
                         <label className="form-check-label" htmlFor="inPersonCheck">
@@ -233,15 +236,15 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                             </label>
                         </div>
                     </div>
-                    <div className={`p-1 ${consultationType === "Video call" ? "consultationActiveColor" : ""}`}>
+                    <div className={`p-1 ${consultationType === "video call" ? "consultationActiveColor" : ""}`}>
                         {/* <img src={videoCall} alt="Video Consultation" style={{ color: "#37adff" }} /> */}
                         <div className="form-check">
                             <input
                                 className="form-check-input"
                                 type="checkbox"
                                 id="inPersonCheck"
-                                checked={consultationType === 'Video call'}
-                                onChange={() => setConsultationType('Video call')}
+                                checked={consultationType === 'video call'}
+                                onChange={() => setConsultationType('video call')}
                             />
                             <img src={videoCall} alt="In-Person" />
                             <label className="form-check-label" htmlFor="inPersonCheck">
@@ -257,6 +260,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
 
     return (
         <>
+                <ToastContainer />
             <div className={`row doctor-card ${isMapExpanded ? 'mapExpanded-doctor-card' : ''}`}>
                 <div className={`col-7 ${isMapExpanded ? 'col-12' : ''}`}>
                     <div className="doctor-info">

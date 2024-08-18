@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import DoctorMainCard from './DoctorMainCard';
 import Filter from './Filter';
 import './FilterPage.css';
-
+import MidPartTwo from '../../MidPartTwo';
 import Footer from '../footer/footerrs';
-
+import Footerr from '../footer/footer';
 import MapContainer from './Mapcontainer';
 import './OffCanvas.css';
 import { fetchFromPatient } from '../../actions/api';
@@ -18,6 +18,7 @@ const FilterPage = () => {
   const [isMapExpanded, setIsMapExpanded] = useState(false);
   const [searchInput, setSearchInput] = useState('');
   const [doctors, setDoctors] = useState([]);
+  const [locations, setLocations] = useState([]);
   const [filters, setFilters] = useState({
     what: '',
     where: '',
@@ -48,12 +49,23 @@ const FilterPage = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const response = await fetchFromPatient(`/doctors`);
+        const response = await fetchFromPatient('/doctors');
         if (response && Array.isArray(response.doctors)) {
           setDoctors(response.doctors);
+          const extractedLocations = response.doctors
+            .filter(doctor => doctor.hospitals && Array.isArray(doctor.hospitals))
+            .flatMap(doctor =>
+              doctor.hospitals
+              .filter(hospital => hospital.lat && hospital.lng) 
+              .map(hospital => ({
+                lat: hospital.lat,
+                lng: hospital.lng
+              }))
+            );
+                    setLocations(extractedLocations);
         } else {
-          console.error('Unexpected response format:', response);
-          setDoctors([]); // Default to an empty array in case of an unexpected response
+          setDoctors([]);
+          setLocations([])
         }
       } catch (error) {
         console.error('Error fetching doctors:', error);
@@ -177,12 +189,12 @@ const FilterPage = () => {
                 onSearchInputChange={handleSearchInputChange}
                 onSearchButtonClick={handleSearchButtonClick}
                 onResetClick={handleResetClick}
+                uniqueLocations={locations}
               />
             </div>
           </div>
         </div>
     
- 
 
         <Footer />
       </div>

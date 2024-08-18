@@ -171,7 +171,7 @@ const ProfileEdit = () => {
      
     } catch (error) {
       console.error("There was an error updating the profile!", error);
-      alert("Error updating profile. Please try again.");
+      toast.error("Error updating profile. Please try again.");
     }
   };
   
