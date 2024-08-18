@@ -1,21 +1,14 @@
 import React from "react";
 
-const Categories = () => {
-  const categoriesData = [
-    { name: "Hydration or Moisturization", count: 10 },
-    { name: "Ophthalmology", count: 50 },
-    { name: "Blood Pressure", count: 24 },
-    { name: "Corona Virus", count: 32 },
-    { name: "Dental", count: 15 },
-  ];
+const Categories = ({ categories,handleCategories }) => {
   return (
     <div className="tags-widget-cnt">
       <div className="related-post-head">
         <h4>Categories</h4>
       </div>
       <div className="category-flex">
-        {categoriesData.map((category, index) => (
-          <div className="widget-category-cnt" key={index}>
+        {Object.entries(categories).map(([name, count], index) => (
+          <div className="widget-category-cnt" key={index} onClick={()=>handleCategories(name)}>
             <svg
               width="20"
               height="21"
@@ -33,7 +26,7 @@ const Categories = () => {
                 fill="#333448"
               />
             </svg>
-            <p>{category.name} ({category.count})</p>
+            <p>{name} ({count})</p>
           </div>
         ))}
       </div>

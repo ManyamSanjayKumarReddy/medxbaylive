@@ -16,7 +16,8 @@ import apple from '../../assests/img/apple.png'
 import Typed from 'typed.js';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const LoginCard = ({ show, handleClose,openRegisterModal }) => {
   useEffect(() => {
     import('./login.css');
@@ -48,43 +49,54 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
         if (res.data.success) {
           const { user } = res.data;
           const { role, _id: userId, email: userEmail, subscriptionType, subscriptionVerification } = user;
-
+  
           const userSubscriptionType = subscriptionType || 'none';
           const userSubscriptionVerification = subscriptionVerification || 'not verified';
-
+  
           sessionStorage.setItem('userId', userId);
           sessionStorage.setItem('userEmail', userEmail);
           sessionStorage.setItem('role', role);
           sessionStorage.setItem('loggedIn', 'true');
           sessionStorage.setItem('subscriptionType', userSubscriptionType);
           sessionStorage.setItem('subscriptionVerification', userSubscriptionVerification);
-
-          switch (role) {
-            case 'doctor':
-              navigate('/doctorprofile/dashboardpage/start-dashboard');
-              break;
-            case 'patient':
-              navigate('profile/userprofile/');
-              break;
-            case 'admin':
-              navigate('/admin/admin-home');
-              break;
-            default:
-              alert('Unexpected role.');
-              break;
-          }
-          // Reset form and close modal
-          setEmail('');
-          setPassword('');
-          handleClose();
+  
+          toast.success("Login successful!", {
+            position: "top-center"
+          });
+  
+          setTimeout(() => {
+            switch (role) {
+              case 'doctor':
+                navigate('/doctorprofile/dashboardpage/start-dashboard');
+                break;
+              case 'patient':
+                navigate('/profile/userprofile/');
+                break;
+              case 'admin':
+                navigate('/admin/admin-home');
+                break;
+              default:
+                alert('Unexpected role.');
+                break;
+            }
+  
+      
+            setEmail('');
+            setPassword('');
+            handleClose();
+          }, 1000); 
         } else {
-          alert(res.data.message || 'Login failed. Please try again.');
+          toast.error("Login failed. Please try again.", {
+            position: "top-center"
+          });
         }
       } catch (err) {
         console.error('Error during login:', err);
-        alert('Login failed. Please try again.');
+        toast.error("Login failed. Please try again.", {
+          position: "top-center"
+        });
       } finally {
-        setIsSubmitDisabled(false); // Re-enable the submit button
+        setIsSubmitDisabled(false); 
       }
     }
   };
@@ -94,27 +106,56 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
   const forgetPassword = async (e) => {
     e.preventDefault();
     if (validateEmail(email)) {
-      setIsSubmitDisabled(true); // Disable the submit button
+      setIsSubmitDisabled(true); 
       try {
         const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/forgot-password`, { email });
         if (res.data.success) {
-          alert('Password reset email sent successfully.');
+          toast.success('Password reset email sent successfully.', { position: "top-center" });
           setIsForgotPassword(false);
         } else {
-          alert(res.data.message || 'Failed to send reset email. Please try again.');
+          toast.error(res.data.message || 'Failed to send reset email. Please try again.', { position: "top-center" });
         }
       } catch (err) {
         console.error('Error during password reset:', err);
-        alert('Failed to send reset email. Please try again.');
+        toast.error('Failed to send reset email. Please try again.', { position: "top-center" });
       } finally {
-        setIsSubmitDisabled(false); // Re-enable the submit button
+        setIsSubmitDisabled(false); 
       }
     } else {
-      alert('Please enter a valid email address.');
+      toast.error('Please enter a valid email address.', { position: "top-center" });
     }
   };
 
-
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const role = urlParams.get('role');
+    const name = urlParams.get('name');
+    const id = urlParams.get('id');
+    const email = urlParams.get('email');
+    const userSubscriptionType = urlParams.get('userSubscriptionType');
+    const userSubscriptionVerification = urlParams.get('userSubscriptionVerification');
+  
+    console.log('Role:', role);
+    console.log('Name:', name);
+    console.log('ID:', id);
+    console.log('Email:', email);
+    console.log('Subscription Type:', userSubscriptionType);
+    console.log('Subscription Verification:', userSubscriptionVerification);
+  
+    if (role && name && id) {
+      sessionStorage.setItem('role', role);
+      sessionStorage.setItem('userEmail', email);
+      sessionStorage.setItem('userName', name);
+      sessionStorage.setItem('userId', id);
+      sessionStorage.setItem('loggedIn', 'true');
+      sessionStorage.setItem('subscriptionType', userSubscriptionType);
+      sessionStorage.setItem('subscriptionVerification', userSubscriptionVerification);
+      
+      // Optionally, you might want to remove the parameters from the URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, []);
+  
   const handleGoogleSignIn = (role) => {
     setIsLoading(true);
     const url = role === 'patient'
@@ -211,6 +252,9 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
 
   
   return (
+    <>
+        <ToastContainer />
+
     <Modal show={show} onHide={handleClose} centered className="custom-modal">
       <Modal.Title>
         <span className="model-header-login">Sign In</span>{' '}
@@ -334,6 +378,7 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
         </Form>
       </Modal.Body>
     </Modal>
+    </>
   );
 };
 

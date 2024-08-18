@@ -248,7 +248,7 @@ const VerifyLogin = ({ show, handleClose,openRegisterModal }) => {
       
         </div>
     
-        <div className='or-sign-up-container-login'>
+        {/* <div className='or-sign-up-container-login'>
        
        <div className='or-sign-up'>OR</div>
           <div className='end-line-sign-up'></div>
@@ -272,7 +272,7 @@ const VerifyLogin = ({ show, handleClose,openRegisterModal }) => {
             </div>
   
 
-     </div>
+     </div> */}
 
      <div className="sign-up-button-container"></div>
         <Form onSubmit={isForgotPassword ? forgetPassword : verifylogin} className="form-overall-container-login">

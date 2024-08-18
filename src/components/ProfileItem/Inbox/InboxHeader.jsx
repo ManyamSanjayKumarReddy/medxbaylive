@@ -12,8 +12,8 @@ const Header = ({ doctorName ,image}) => {
         <div className="chatProfile-name">{doctorName}</div>
       </div>
       <div className="header-actions">
-        <FontAwesomeIcon icon={faSearch} />
-        <FontAwesomeIcon icon={faEllipsisV} />
+        {/* <FontAwesomeIcon icon={faSearch} />
+        <FontAwesomeIcon icon={faEllipsisV} /> */}
       </div>
     </div>
   );

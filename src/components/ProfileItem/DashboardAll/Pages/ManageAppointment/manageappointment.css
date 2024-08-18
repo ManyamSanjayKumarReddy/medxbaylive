@@ -1,3 +1,57 @@
+
+/* toastify-custom.css */
+.toastify-custom-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .toastify-custom-container p {
+    margin-bottom: 16px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+  }
+  
+  .toastify-custom-container button {
+    width: 100px;
+    margin: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .toastify-custom-container .confirm-button {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .toastify-custom-container .confirm-button:hover {
+    background-color: #45a049;
+  }
+  
+  .toastify-custom-container .cancel-button {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .toastify-custom-container .cancel-button:hover {
+    background-color: #e53935;
+  }
+  
+
+
+
 .dashboard-appointments{
     padding: 0px 20px;
   }

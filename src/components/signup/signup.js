@@ -16,6 +16,8 @@ import apple from '../../assests/img/apple.png'
 import Typed from 'typed.js';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignupCard = ({ show, handleClose,openLoginModal }) => {
   useEffect(() => {
@@ -23,8 +25,9 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
   }, []);
   const [isLoading, setIsLoading] = useState(false); 
 
-  const typedElement = useRef('');
-  const typedElementTwo = useRef('');
+  const typedElement = useRef(null);
+  const typedElementTwo = useRef(null);
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [mobile, setMobile] = useState('');
@@ -35,42 +38,41 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
   const [mobileError, setMobileError] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
-
   useEffect(() => {
-    if (typedElement.current) {
+    if (typedElement.current && show) {
       const options = {
         strings: ['Greetings! 👋 Book your visit <br>today. 📅'],
         typeSpeed: 50,
         backSpeed: 50,
         showCursor: false,
       };
-
+  
       const typed = new Typed(typedElement.current, options);
-
+  
       return () => {
         typed.destroy();
       };
     }
   }, [show]);
-
   
-
+  
   useEffect(() => {
-    if (typedElementTwo.current) {
+    if (typedElementTwo.current && show) {
       const optionsTwo = {
         strings: ['Hey! 😊 Hope you\'re well! 🌟'],
         typeSpeed: 50,
         backSpeed: 50,
         showCursor: false,
       };
-
+  
       const typedTwo = new Typed(typedElementTwo.current, optionsTwo);
-
+  
       return () => {
         typedTwo.destroy();
       };
     }
   }, [show]);
+  
 
   const handleGoogleSignIn = (role) => {
     setIsLoading(true);
@@ -80,21 +82,54 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
   
     window.location.href = url;
   };
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const role = urlParams.get('role');
+    const name = urlParams.get('name');
+    const id = urlParams.get('id');
+    const email = urlParams.get('email');
+    const userSubscriptionType = urlParams.get('userSubscriptionType');
+    const userSubscriptionVerification = urlParams.get('userSubscriptionVerification');
+  
+    console.log('Role:', role);
+    console.log('Name:', name);
+    console.log('ID:', id);
+    console.log('Email:', email);
+    console.log('Subscription Type:', userSubscriptionType);
+    console.log('Subscription Verification:', userSubscriptionVerification);
+  
+    if (role && name && id) {
+      sessionStorage.setItem('role', role);
+      sessionStorage.setItem('userEmail', email);
+      sessionStorage.setItem('userName', name);
+      sessionStorage.setItem('userId', id);
+      sessionStorage.setItem('loggedIn', 'true');
+      sessionStorage.setItem('subscriptionType', userSubscriptionType);
+      sessionStorage.setItem('subscriptionVerification', userSubscriptionVerification);
+      
+      // Optionally, you might want to remove the parameters from the URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, []);
   
 
- const register = async (e) => {
+
+  const register = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);  // Disable the button upon submission
     const user = { name, email, mobile, password };
     const endpoint = isProvider 
       ? `${process.env.REACT_APP_BASE_URL}/auth/signup/doctor`
       : `${process.env.REACT_APP_BASE_URL}/auth/signup/patient`;
-
+  
     if (validateForm()) {
       try {
         const res = await axios.post(endpoint, user);
         console.log(res.data);
-        alert("Registration successful! Please check your email and verify.");
+        toast.success("Registration successful! Please check your email and verify.", {
+          position: "top-center"
+        });
         
         // Clear the form data
         setName('');
@@ -104,10 +139,26 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
         handleClose(); // Close the modal
       } catch (err) {
         console.error("Error during registration:", err);
-        if (err.response && err.response.status === 400 && err.response.data.error) {
-          alert(err.response.data.error); 
+        if (err.response) {
+          if (err.response.status === 400 && err.response.data.error) {
+            if (err.response.data.error.includes("User already exists")) {
+              toast.error("User already exists. Please use a different email.", {
+                position: "top-center"
+              });
+            } else {
+              toast.error(err.response.data.error, {
+                position: "top-center"
+              });
+            }
+          } else {
+            toast.error("Registration failed. Please try again.", {
+              position: "top-center"
+            });
+          }
         } else {
-          alert("Registration failed. Please try again.");
+          toast.error("Registration failed. Please try again.", {
+            position: "top-center"
+          });
         }
       } finally {
         setIsSubmitting(false);  // Re-enable the button after response
@@ -116,6 +167,7 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
       setIsSubmitting(false);  // Re-enable the button if validation fails
     }
   };
+  
   
   const [isProvider, setIsProvider] = useState(false);
 
@@ -250,6 +302,8 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
   
 
   return (
+    <>
+    <ToastContainer />
     <Modal show={show} onHide={handleClose} centered className="custom-modal">
       <Modal.Title>
         <span className="model-header">Sign up</span>{' '}
@@ -398,6 +452,7 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
       )}
       </Modal.Body>
     </Modal>
+    </>
   );
 };
 

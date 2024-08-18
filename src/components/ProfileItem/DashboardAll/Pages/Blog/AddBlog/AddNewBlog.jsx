@@ -2,16 +2,17 @@ import React, { useRef, useState } from "react";
 import "./addnewblog.css";
 import Blog from "../Blog";
 import Editor from "./Editor";
+import axios from "axios";
 
-const AddNewBlog = () => {
+const AddNewBlog = ({loadBlogs}) => {
   const [showAddNewBlog, setShowAddNewBlog] = useState(false);
   const [newBlog, setNewBlog] = useState({
     title: "",
-    authorName: "",
+    author: "",
     category: "",
     subCategory: "",
-    tags: "",
-    status: "",
+    hashtags: "",
+    priority: "",
     description: "",
     image: null,
     save: false,
@@ -45,6 +46,26 @@ const AddNewBlog = () => {
 
   const handlePublish = () => {
     alert("Blog Publish");
+    console.log("Blog submitted:", newBlog);
+    try{
+      const res= axios.post(`${process.env.REACT_APP_BASE_URL}/doctor/blog`,
+        newBlog,
+        {
+            withCredentials: true,
+            headers: { "Content-Type": "multipart/form-data" },
+        })
+        console.log(res)
+        if (res.data) {
+          console.log("Blog updated successfully:", res.data);
+          loadBlogs()
+          handleAddClick()
+      } else {
+          console.error("Failed to update Blog:", res.data);
+      } 
+
+    }catch(e){
+      console.log(e)
+    }
   }
 
   return (
@@ -73,10 +94,10 @@ const AddNewBlog = () => {
             <div className="publish-blog-header">
               <input
                 type="text"
-                value={newBlog.authorName}
+                value={newBlog.author}
                 className="publish-blog-input"
                 onChange={(e) =>
-                  setNewBlog({ ...newBlog, authorName: e.target.value })
+                  setNewBlog({ ...newBlog, author: e.target.value })
                 }
               />
               <p className="publish-blog-placeholder">
@@ -135,10 +156,10 @@ const AddNewBlog = () => {
             <div className="publish-blog-header">
               <input
                 type="text"
-                value={newBlog.tags}
+                value={newBlog.hashtags}
                 className="publish-blog-input"
                 onChange={(e) =>
-                  setNewBlog({ ...newBlog, tags: e.target.value })
+                  setNewBlog({ ...newBlog, hashtags: e.target.value })
                 }
               />
               <p className="publish-blog-placeholder">
@@ -149,7 +170,7 @@ const AddNewBlog = () => {
 
             <div className="publish-blog-header">
               <p className="publish-blog-placeholder-status">
-                Blog Status
+                Blog priority
                 <span style={{ color: "red" }}> *</span>
               </p>
               <div className="publish-blog-check-aina">
@@ -158,12 +179,12 @@ const AddNewBlog = () => {
                     type="radio"
                     id="check-active"
                     className="checkbox"
-                    checked={newBlog.status === "active"}
+                    checked={newBlog.priority === "active"}
                     onChange={() =>
                       setNewBlog({
                         ...newBlog,
-                        status:
-                          newBlog.status === "active"
+                        priority:
+                          newBlog.priority === "active"
                             ? "notActive"
                             : "active",
                       })
@@ -178,12 +199,12 @@ const AddNewBlog = () => {
                     type="radio"
                     id="check-inactive"
                     className="checkbox"
-                    checked={newBlog.status === "notActive"}
+                    checked={newBlog.priority === "notActive"}
                     onChange={() =>
                       setNewBlog({
                         ...newBlog,
-                        status:
-                          newBlog.status === "notActive"
+                        priority:
+                          newBlog.priority === "notActive"
                             ? "active"
                             : "notActive",
                       })
@@ -202,7 +223,8 @@ const AddNewBlog = () => {
                 ref={quillRef}
                 defaultText="Description"
                 onTextChange={(content) => {
-                  setNewBlog({ ...newBlog, description: content });
+                  const plainText = content.replace(/<[^>]*>/g, ""); // Remove HTML tags
+                  setNewBlog({ ...newBlog, description: plainText });
                 }}
               />
             </div>

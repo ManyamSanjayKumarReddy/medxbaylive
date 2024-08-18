@@ -1,15 +1,24 @@
+import axios from "axios";
 import React, { useState } from "react";
-const PostComment = () => {
+const PostComment = ({id,loadBlogs}) => {
   const [isCurrentFocus, setIsCurrentFocus] = useState(null);
   const [newComment, setNewComment] = useState({
-    comment: "",
-    save: false,
+    comment: ""
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
+  const handleSubmit = () => {
     console.log("Comment submitted:", newComment);
+    try{
+      const res= axios.post(`${process.env.REACT_APP_BASE_URL}/doctor/blogs/comment/${id}`,
+        newComment,
+        { withCredentials: true}
+      )
+          console.log("Blog updated successfully:", res);
+          // loadBlogs()
+
+    }catch(e){
+      console.log(e)
+    }
   };
 
   return (

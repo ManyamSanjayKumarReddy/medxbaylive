@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import DoctorMainCard from './DoctorMainCard';
 import Filter from './Filter';
 import './FilterPage.css';
-import MidPartTwo from '../../MidPartTwo';
+
 import Footer from '../footer/footerrs';
-import Footerr from '../footer/footer';
+
 import MapContainer from './Mapcontainer';
 import './OffCanvas.css';
 import { fetchFromPatient } from '../../actions/api';
@@ -182,8 +182,8 @@ const FilterPage = () => {
           </div>
         </div>
     
-        <MidPartTwo />
-        <Footerr />
+ 
+
         <Footer />
       </div>
     </>

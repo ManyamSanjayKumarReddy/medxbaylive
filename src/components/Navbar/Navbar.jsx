@@ -85,7 +85,6 @@ const Navbar = () => {
   };
 
   const handleLogin = (role) => {
-    
     sessionStorage.setItem('loggedIn', 'true');
     sessionStorage.setItem('role', role);
 
@@ -107,9 +106,7 @@ const Navbar = () => {
     return () => {
         document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []); // Ensure this effect runs only once on mount
-
- 
+  }, []); 
 
   const navbarClass = userRole === 'doctor' ? 'navbar navbar-expand-lg navbar-light navbar-doctor' : 'navbar navbar-expand-lg navbar-light navbar-default';
 
@@ -123,9 +120,12 @@ const Navbar = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item active ml-md-4">
-                <Link className="find-doctor nav-link nav-link-style" to="/Filters">Find Doctor</Link>
-              </li>
+              {/* Conditionally render "Find Doctor" only if the user is not a doctor */}
+              {userRole !== 'doctor' && (
+                <li className="nav-item active ml-md-4">
+                  <Link className="find-doctor nav-link nav-link-style" to="/Filters">Find Doctor</Link>
+                </li>
+              )}
               <li className="nav-item active ml-md-4">
                 <Link className="about-nav nav-link nav-link-style" to="#">About</Link>
               </li>
@@ -168,6 +168,19 @@ const Navbar = () => {
                           <Link className="nav-link dashboard-text-button" to="/doctorprofile/dashboardpage/">Dashboard</Link>
                       </li>
                   )}
+
+                  {userRole === 'doctor' && (
+                      <li className="nav-item active ml-md-4">
+                      <Link to='/Doctor/profile/Edit'>
+                          <div className='image-container'>
+                              <button type="button" className="nav-notification-button">
+                              <img src={profile} alt="Profile" />
+                              </button>
+                          </div>
+                          </Link>
+                  </li>
+                  )}
+
                   {isLoggedIn && userRole !== 'doctor' && (
                       <li className="nav-item ml-md-4">
                           <Link to='/profile/userprofile/notification'>
@@ -179,11 +192,20 @@ const Navbar = () => {
                           </Link>
                       </li>
                   )}
-                  <li className="nav-item ml-md-4">
-                      <div className="image-container">
-                          <img src={profile} alt="Profile" />
-                      </div>
-                  </li>
+
+                  {isLoggedIn && userRole !== 'doctor' && (
+                      <li className="nav-item ml-md-4">
+                          <Link to='/profile/userprofile/'>
+                          <div className='image-container'>
+                              <button type="button"  className="nav-notification-button">
+                              <img src={profile} alt="Profile" />
+                              </button>
+                          </div>
+                          </Link>
+                      </li>
+                  )}
+
+                  
                   <li className="nav-item ml-md-4">
                       <div className='logout-container-button'>
                           <button className='logout-button' onClick={handleLogout}><RiLogoutCircleRLine size='1.1rem' /></button>

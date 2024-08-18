@@ -1,15 +1,15 @@
 import React from "react";
 import WidgetCard from "./WidgetCard";
 
-const MostReads = () => {
+const MostReads = ({mostReads,handleData}) => {
   return (
     <div className="related-post-cnt">
       <div className="related-post-head">
         <h4>Most Reads</h4>
-        <p>Show All</p>
+        {/* <p>Show All</p> */}
       </div>
       <div className="suggestion-List">
-        <WidgetCard />
+        <WidgetCard reletedPost={mostReads} handleData={handleData} />
       </div>
     </div>
   );

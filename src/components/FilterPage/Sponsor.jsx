@@ -115,7 +115,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
         if (!user) {
       // If no user data in session storage, redirect to login page
       alert('You need to log in to book an appointment.');
-        navigate('/login');
+        navigate('/verify/login');
         return;
     }
         try {
@@ -147,7 +147,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                 const result = await response.json();
                 console.log('Booking response:', result);
                 alert('Booking successful!');
-                navigate('userprofile/manage-appointments')
+                navigate('/profile/userprofile/manage/appointments')
             } else {
                 const responseText = await response.text();
                 console.error('Unexpected response format:', responseText);
@@ -279,9 +279,10 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                             </div>
                         </div>
                         <div className="doctor-details1">
-                            <Link to={`/doctor/${doctor._id}`}>
+                        <h2>{doctor.name}</h2>
+                            {/* <Link to={`/doctor/${doctor._id}`}>
                                 <h2>{doctor.name}</h2>
-                            </Link>
+                            </Link> */}
                             <p className="speciality">{doctor.speciality }</p>
                             <p className="experience">{doctor.experience || "16 years experience overall"}</p>
                             <p className={`location ${isMapExpanded ? 'mapExpanded-location' : ''}`}>{doctor.city || "Pare, Mumbai"}</p>

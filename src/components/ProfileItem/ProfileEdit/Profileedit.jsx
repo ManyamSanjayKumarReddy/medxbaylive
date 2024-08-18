@@ -7,7 +7,8 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProfileEdit = () => {
   const [profileImage, setProfileImage] = useState(profileimg);
@@ -163,7 +164,11 @@ const ProfileEdit = () => {
         },
         withCredentials: true
       });
-      alert("Profile updated successfully!");
+
+      toast.success("Profile updated successfully!", {
+        position: "top-center"
+      });
+     
     } catch (error) {
       console.error("There was an error updating the profile!", error);
       alert("Error updating profile. Please try again.");
@@ -172,6 +177,7 @@ const ProfileEdit = () => {
   
 
   return (
+    <>        <ToastContainer /> 
     <div className="userprofile-card">
       <div className="profile-header">
         <div className="profile-image-wrapper">
@@ -448,6 +454,7 @@ const ProfileEdit = () => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 

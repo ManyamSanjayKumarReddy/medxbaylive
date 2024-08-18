@@ -15,20 +15,26 @@ const Header = () => {
     <>
       <header className="header-head">
         <div className="home-return">
-         <Link to='/' className="text-home-return">Home</Link>
+          <Link to='/' className="text-home-return">Home</Link>
         </div>
         <div className="profile-return">
-         <Link to='/Doctor/profile/Edit' className="text-profile-return" >Profile</Link>
+          <Link to='/Doctor/profile/Edit' className="text-profile-return" >Profile</Link>
         </div>
+
         <div className="profile-container">
-          {/* <div className="icon-container">
-            <div className="icon">
-              <SlBell />
-            </div>
-          </div> */}
+        <li className="nav-item active ml-md-4" style={{ listStyle: 'none' }}>
+    <Link to='/Doctor/profile/Edit'>
+      <div className='image-container'>
+        <button type="button" className="nav-notification-button">
+          <img src={profile} alt="Profile" />
+        </button>
+      </div>
+    </Link>
+  </li>
+{/*           
           <div className="image-container">
             <img src={profile} alt="Profile" />
-          </div>
+          </div> */}
         </div>
       </header>
     </>

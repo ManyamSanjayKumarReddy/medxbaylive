@@ -4,7 +4,8 @@ import Modal from 'react-modal';
 import './manageAppointments.css';
 import { MdOutlineCalendarToday } from "react-icons/md";
 import tick from '../../../assests/img/tick.png'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 Modal.setAppElement('#root');
 
 const ManageAppointments = () => {
@@ -34,7 +35,6 @@ const ManageAppointments = () => {
     fetchAppointments();
   }, []);
   
-  // console.log(bookings.map(booking => booking.status))
   const getStatusClass = (status) => {
     switch (status.toLowerCase()) {
       case 'accepted':
@@ -46,7 +46,7 @@ const ManageAppointments = () => {
       case 'completed':
         return 'completed'; 
       default:
-        return 'gray'; // default or unknown status
+        return 'gray'; 
     }
   };
   

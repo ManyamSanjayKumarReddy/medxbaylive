@@ -1,56 +1,32 @@
+import moment from "moment";
 import React from "react";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import profileimg from "../../../Assets/profileimg.png";
 
-const WidgetCard = () => {
-  const widgetData = [
-    {
-      id: 1,
-      imageUrl: "https://s3-alpha-sig.figma.com/img/4575/18c4/caea4d9e6da616048af279345be73770?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c22YIQhWQlE04yv~t1rg3VvGxr1hr9bJSswcZwQrfnaKwhCYdpHjKYt0x83FqARjBMzj8sETxD3U6ha39cgMRJsfyvI5Ew4a9o5vKH6hiljGyevGuG7Mu~u6QYloz3JR~hwOGzjJBGRrpug7XKTtA~sDbNTRut~ggKV8DLGd0I7SdEFg2EaqYWtBoLfZ926FSJf88Uoy~GooZjNI3-JlCpJavC4x4eo6THQLCKKGzqLk~o554K4B3o4pYSkUqj~uHa8smmiejwP1kdvGtfNWSWPrAExwLL8Zm8c~hiPlMgB5OgrUSMS40u96d3mu10lAPvMXvLQi6fy9Qrq3xXiGww__",
-      tag: "Health",
-      date: "15 Jun 2023",
-      title: "Lorem ipsum dolor sit amet, consectetur",
-      readTime: 8,
-    },
-    {
-      id: 2,
-      imageUrl: "https://s3-alpha-sig.figma.com/img/4575/18c4/caea4d9e6da616048af279345be73770?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c22YIQhWQlE04yv~t1rg3VvGxr1hr9bJSswcZwQrfnaKwhCYdpHjKYt0x83FqARjBMzj8sETxD3U6ha39cgMRJsfyvI5Ew4a9o5vKH6hiljGyevGuG7Mu~u6QYloz3JR~hwOGzjJBGRrpug7XKTtA~sDbNTRut~ggKV8DLGd0I7SdEFg2EaqYWtBoLfZ926FSJf88Uoy~GooZjNI3-JlCpJavC4x4eo6THQLCKKGzqLk~o554K4B3o4pYSkUqj~uHa8smmiejwP1kdvGtfNWSWPrAExwLL8Zm8c~hiPlMgB5OgrUSMS40u96d3mu10lAPvMXvLQi6fy9Qrq3xXiGww__",
-      tag: "Health",
-      date: "15 Jun 2023",
-      title: "Lorem ipsum dolor sit amet, consectetur",
-      readTime: 8,
-    },
-    {
-      id: 3,
-      imageUrl: "https://s3-alpha-sig.figma.com/img/4575/18c4/caea4d9e6da616048af279345be73770?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c22YIQhWQlE04yv~t1rg3VvGxr1hr9bJSswcZwQrfnaKwhCYdpHjKYt0x83FqARjBMzj8sETxD3U6ha39cgMRJsfyvI5Ew4a9o5vKH6hiljGyevGuG7Mu~u6QYloz3JR~hwOGzjJBGRrpug7XKTtA~sDbNTRut~ggKV8DLGd0I7SdEFg2EaqYWtBoLfZ926FSJf88Uoy~GooZjNI3-JlCpJavC4x4eo6THQLCKKGzqLk~o554K4B3o4pYSkUqj~uHa8smmiejwP1kdvGtfNWSWPrAExwLL8Zm8c~hiPlMgB5OgrUSMS40u96d3mu10lAPvMXvLQi6fy9Qrq3xXiGww__",
-      tag: "Health",
-      date: "15 Jun 2023",
-      title: "Lorem ipsum dolor sit amet, consectetur",
-      readTime: 8,
-    },
-    {
-      id: 4,
-      imageUrl: "https://s3-alpha-sig.figma.com/img/4575/18c4/caea4d9e6da616048af279345be73770?Expires=1722816000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c22YIQhWQlE04yv~t1rg3VvGxr1hr9bJSswcZwQrfnaKwhCYdpHjKYt0x83FqARjBMzj8sETxD3U6ha39cgMRJsfyvI5Ew4a9o5vKH6hiljGyevGuG7Mu~u6QYloz3JR~hwOGzjJBGRrpug7XKTtA~sDbNTRut~ggKV8DLGd0I7SdEFg2EaqYWtBoLfZ926FSJf88Uoy~GooZjNI3-JlCpJavC4x4eo6THQLCKKGzqLk~o554K4B3o4pYSkUqj~uHa8smmiejwP1kdvGtfNWSWPrAExwLL8Zm8c~hiPlMgB5OgrUSMS40u96d3mu10lAPvMXvLQi6fy9Qrq3xXiGww__",
-      tag: "Health",
-      date: "15 Jun 2023",
-      title: "Lorem ipsum dolor sit amet, consectetur",
-      readTime: 8,
-    }
-    
-  ];
+const WidgetCard = ({reletedPost,handleData}) => {
+  
+  var post =reletedPost
+  
+  const getProfile = (profile) =>{
+    const profileImageData = profile.data
+          ? `data:image/jpeg;base64,${profile.data}` // Update the prefix if the image is not JPEG
+          : profileimg;
+    return profileImageData;      
+  }
 
   return (
     <div className="widget-cards-container">
-      {widgetData.map((item) => (
-        <div className="widget-card" key={item.id}>
-          <img src={item.imageUrl} alt="post-img" className="widget-img-preview" />
+      {post?.map((item) => (
+        <div className="widget-card" key={item._id} onClick={() => handleData(item)}>
+          <img src={getProfile(item.image)} alt="post-img" className="widget-img-preview" />
           <div className="post-details-cnt">
             <div className="card-tag-time">
-              <p className="post-preview-tag">{item.tag}</p>
-              <p className="post-preview-date">{item.date}</p>
+              <p className="post-preview-tag">{item.categories[0]}</p>
+              <p className="post-preview-date">{moment(item.date).format('DD MMM YYYY')}</p>
             </div>
             <h4>{item.title}</h4>
             <div className="widget-card-readMore-cnt">
-              <h4>Read more in {item.readTime} Minutes</h4>
+              <h4>Read more in 8 Minutes</h4>
               <FaLongArrowAltRight size="1rem" className="readMore-cnt-icon" />
             </div>
           </div>

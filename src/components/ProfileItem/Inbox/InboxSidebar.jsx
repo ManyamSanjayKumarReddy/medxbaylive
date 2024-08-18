@@ -55,14 +55,14 @@ const Sidebar = ({ onSelectChat }) => {
   return (
     <div className="sidebar-container">
       <div className="sidebar-header">
-        <select>
-          <option>All Messages</option>
-        </select>
+
+   <h6>All Messages</h6>
+      
       </div>
-      <div className="search-bar">
+      {/* <div className="search-bar">
         <FontAwesomeIcon icon={faSearch} />
         <input type="text" placeholder="Search or start a new chat" />
-      </div>
+      </div> */}
       <ul className="user-list">
         {error ? (
           <li>Error loading users: {error}</li>

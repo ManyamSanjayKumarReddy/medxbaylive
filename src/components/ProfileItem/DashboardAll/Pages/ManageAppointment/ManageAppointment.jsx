@@ -3,6 +3,8 @@ import { MdOutlineCalendarToday } from "react-icons/md";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { IoIosCheckmarkCircleOutline } from 'react-icons/io';
 import './manageappointment.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ManageAppointments = () => {
   const [activeTab, setActiveTab] = useState('All');
@@ -45,39 +47,82 @@ const ManageAppointments = () => {
   const handleStatusChange = (id, newStatus) => {
     setSelectedStatus(prev => ({ ...prev, [id]: newStatus }));
   };
-
   const confirmAndUpdateStatus = async (id) => {
     const newStatus = selectedStatus[id];
-    if (window.confirm(`Are you sure you want to change the status to ${newStatus}?`)) {
-      try {
-        const response = await fetch(`${process.env.REACT_APP_BASE_URL}/doctor/bookings/${id}`, {
-          method: 'POST',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify({ status: newStatus })
+  
+    const confirmStatusUpdate = () => {
+      fetch(`${process.env.REACT_APP_BASE_URL}/doctor/bookings/${id}`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({ status: newStatus })
+      })
+        .then(async (response) => {
+          if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Error updating status:', errorText);
+            toast.error("Failed to update status. Please try again.", {
+              position: "top-center"
+            });
+            return;
+          }
+  
+          setStatuses(statuses.map(status => status.id === id ? { ...status, status: newStatus } : status));
+          toast.success("Status updated successfully.", {
+            position: "top-center"
+          });
+        })
+        .catch((error) => {
+          console.error('Error updating status:', error);
+          toast.error("Failed to update status. Please try again.", {
+            position: "top-center"
+          });
         });
-
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.error('Error updating status:', errorText);
-          alert('Failed to update status. Please try again.');
-          return;
-        }
-
-        setStatuses(statuses.map(status => status.id === id ? { ...status, status: newStatus } : status));
-      } catch (error) {
-        console.error('Error updating status:', error);
-        alert('Failed to update status. Please try again.');
+    };
+  
+    const cancelStatusUpdate = () => {
+      toast.info("Status update cancelled.", {
+        position: "top-center"
+      });
+    };
+  
+    toast(
+      ({ closeToast }) => (
+        <div className="toastify-custom-container">
+          <p>Are you sure you want to change the status to {newStatus}?</p>
+          <div className='row  '>
+          <button 
+            className="confirm-button" 
+            onClick={() => { confirmStatusUpdate(); closeToast(); }}
+          >
+            Confirm
+          </button>
+          <button 
+            className="cancel-button" 
+            onClick={() => { cancelStatusUpdate(); closeToast(); }}
+          >
+            Cancel
+          </button>
+        </div>
+        </div>
+      ),
+      {
+        position: "top-center",
+        autoClose: false,
+        closeOnClick: false,
+        closeButton: false,
+        draggable: false,
       }
-    }
+    );
   };
-
   const filteredStatuses = activeTab === 'All' ? statuses : statuses.filter(status => status.status === activeTab);
 
   return (
+    <>
+        <ToastContainer />
     <div className="dashboard-appointments">
       <h2>All Appointments</h2>
       <div className="dashboard-tabs-container">
@@ -141,6 +186,7 @@ const ManageAppointments = () => {
         </table>
       </div>
     </div>
+    </>
   );
 };
 
