@@ -192,7 +192,7 @@ const Reviews = () => {
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const monthName = monthNames[month];
     const day = dateObject.getDate();
-    const formatteddate = `${day.toString().padStart(2, '0')} ${monthName} ${year}`
+    const formatteddate =`${day.toString().padStart(2, '0')} ${monthName} ${year}`
     return `${timeString}, ${formatteddate}`
   }
 
@@ -207,10 +207,10 @@ const Reviews = () => {
     <div className="dashboard-page-item-review-head">
       <h2>Reviews</h2>
       <div className='review-scroll'>
-      {reviews.map((review) => (
+      {reviews.map((review, index) => (
         <div className="review-container" key={review._id}>
           <div className="review-header">
-            <p className='review-idnumber'>{review._id}.</p>
+            <p className='review-idnumber'>{index+1}</p>
             <div className="review-details-item">
               <p className="review-day">{getday(review.createdAt)}</p>
               <p className="review-date-time">{getdate(review.createdAt)}</p>

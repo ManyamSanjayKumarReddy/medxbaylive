@@ -113,19 +113,30 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
     const handleBookAppointment = async () => {
         const user = sessionStorage.getItem('loggedIn');
 
+    
         if (!user) {
-            toast.error('You need to log in to book an appointment.',{
-                position: "top-center"
+            toast.info('You need to log in to book an appointment.',{
+                className: 'toast-sign toast-fail ',
+                closeButton: true,
+                progressBar: true,
               });
+
+              
             setTimeout(() => {
                 navigate('/');
             }, 2000); 
             return;
         }
+    
         try {
             const selectedDay = dates[selectedDate];
-            if (consultationType == '') {
-                toast.warning('Please select a consultation type.');
+            if(consultationType ==''){
+                toast('Please select a consultation type.',{
+                    className: 'toast-center ',
+                    closeButton: true,
+                    progressBar: true,
+
+                });
                 return
             }
             const bookingData = {
@@ -135,7 +146,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                 consultationType: consultationType
             };
             console.log('Booking data:', bookingData);
-
+    
             const response = await fetch(`${process.env.REACT_APP_BASE_URL}/patient/book`, {
                 method: 'POST',
                 headers: {
@@ -143,25 +154,45 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify(bookingData),
-                credentials: 'include'
+                credentials: 'include' 
             });
-
+    
             const contentType = response.headers.get('Content-Type');
             if (contentType && contentType.includes('application/json')) {
                 const result = await response.json();
                 console.log('Booking response:', result);
-                toast.success('Booking successful!');
+                toast('Booking successful!',{
+                    className: 'toast-center toast-success',
+                    closeButton: true,
+                    progressBar: true,
+                });
+                navigate('/profile/userprofile/manage/appointments')
             } else {
                 const responseText = await response.text();
                 console.error('Unexpected response format:', responseText);
-                toast.error('Unexpected response from server. Please try again.');
+                toast('Unexpected response from server. Please try again.',
+                
+                    {
+                      className: 'toast-center toast-fail',
+                      closeButton: true,
+                      progressBar: true,
+                   
+                    }
+                  );
             }
         } catch (error) {
             console.error('Error booking appointment:', error.message);
-            toast.error('Error booking appointment. Please try again.');
+            toast('Error booking appointment. Please try again.',
+            {
+                className: 'toast-center toast-fail',
+                closeButton: true,
+                progressBar: true,
+            });
         }
     };
-
+    
+    
+    
     const renderStars = (rating) => {
         const fullStars = Math.floor(rating);
         const hasHalfStar = rating % 1 !== 0;

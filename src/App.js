@@ -21,6 +21,7 @@ import ConnectedRoutes from './components/ProfileItem/DashboardAll/ConnectedRout
 import FilterPage from './components/FilterPage/FilterPage';
 import VerifyLogin from './components/login/VerifyLogin';
 import Verification from './components/login/Verification';
+import  BlogPage from './components/patientBlog/blog';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/Filters" element={<FilterPage />} />
           <Route path="/verify/login" element={<VerifyLogin />} />
           <Route path="/verify" element={<Verification />} />
+          <Route path="/blog" element={ <BlogPage/>}/>
         </Routes>
       </Router>
     </>

@@ -60,8 +60,11 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
           sessionStorage.setItem('subscriptionType', userSubscriptionType);
           sessionStorage.setItem('subscriptionVerification', userSubscriptionVerification);
   
-          toast.success("Login successful!", {
-            position: "top-center"
+          toast.info("Login successful!", {
+            position: "top-center" ,
+            closeButton: true,
+            progressBar: true,
+            className: 'toast-sign toast-success',
           });
   
           setTimeout(() => {
@@ -86,14 +89,20 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
             handleClose();
           }, 1000); 
         } else {
-          toast.error("Login failed. Please try again.", {
-            position: "top-center"
+          toast.info("Login failed. Please try again.", {
+            position: "top-center" ,
+            closeButton: true,
+            progressBar: true,
+            className: 'toast-sign toast-success',
           });
         }
       } catch (err) {
         console.error('Error during login:', err);
-        toast.error("Login failed. Please try again.", {
-          position: "top-center"
+        toast.info("Login failed. Please try again.", {
+          position: "top-center" ,
+          closeButton: true,
+          progressBar: true,
+          className: 'toast-sign toast-success',
         });
       } finally {
         setIsSubmitDisabled(false); 
@@ -110,19 +119,35 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
       try {
         const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/forgot-password`, { email });
         if (res.data.success) {
-          toast.success('Password reset email sent successfully.', { position: "top-center" });
+          toast.info('Password reset email sent successfully.', { 
+            position: "top-center" ,
+            closeButton: true,
+            progressBar: true,
+            className: 'toast-sign toast-success',
+
+          });
           setIsForgotPassword(false);
         } else {
           toast.error(res.data.message || 'Failed to send reset email. Please try again.', { position: "top-center" });
         }
       } catch (err) {
         console.error('Error during password reset:', err);
-        toast.error('Failed to send reset email. Please try again.', { position: "top-center" });
+        toast.info('Failed to send reset email. Please try again.', { 
+          position: "top-center" ,
+          closeButton: true,
+          progressBar: true,
+          className: 'toast-sign toast-success',
+        });
       } finally {
         setIsSubmitDisabled(false); 
       }
     } else {
-      toast.error('Please enter a valid email address.', { position: "top-center" });
+      toast.info('Please enter a valid email address.', {
+        position: "top-center" , 
+        closeButton: true,
+        progressBar: true,
+        className: 'toast-sign toast-success',
+       });
     }
   };
 

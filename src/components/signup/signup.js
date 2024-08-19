@@ -126,8 +126,12 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
       try {
         const res = await axios.post(endpoint, user);
         console.log(res.data);
-        toast.success("Registration successful! Please check your email and verify.", {
-          position: "top-center"
+        toast.info("Registration successful! Please check your email and verify.", {
+           position: "top-center" ,
+          closeButton: true,
+          progressBar: true,
+          className: 'toast-sign toast-success',
+
         });
         
 
@@ -141,22 +145,34 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
         if (err.response) {
           if (err.response.status === 400 && err.response.data.error) {
             if (err.response.data.error.includes("User already exists")) {
-              toast.error("User already exists. Please use a different email.", {
-                position: "top-center"
+              toast.info("User already exists. Please use a different email.", {
+                closeButton: true,
+                progressBar: true,
+                className: 'toast-center toast-success',
+
               });
             } else {
-              toast.error(err.response.data.error, {
-                position: "top-center"
+              toast.info(err.response.data.error, {
+                closeButton: true,
+                progressBar: true,
+                className: 'toast-center toast-success',
+
               });
             }
           } else {
-            toast.error("Registration failed. Please try again.", {
-              position: "top-center"
+            toast.info("Registration failed. Please try again.", {
+              closeButton: true,
+              progressBar: true,
+              className: 'toast-center toast-success',
+
             });
           }
         } else {
-          toast.error("Registration failed. Please try again.", {
-            position: "top-center"
+          toast.info("Registration failed. Please try again.", {
+            closeButton: true,
+            progressBar: true,
+            className: 'toast-center toast-success',
+
           });
         }
       } finally {

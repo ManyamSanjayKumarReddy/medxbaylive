@@ -64,28 +64,40 @@ const ManageAppointments = () => {
           if (!response.ok) {
             const errorText = await response.text();
             console.error('Error updating status:', errorText);
-            toast.error("Failed to update status. Please try again.", {
-              position: "top-center"
+            toast.info("Failed to update status. Please try again.", {
+              position: "top-center",
+              closeButton: true,
+              progressBar: true,
+              className: 'toast-sign toast-success',
             });
             return;
           }
   
           setStatuses(statuses.map(status => status.id === id ? { ...status, status: newStatus } : status));
-          toast.success("Status updated successfully.", {
-            position: "top-center"
+          toast.info("Status updated successfully.", {
+            position: "top-center",
+            closeButton: true,
+            progressBar: true,
+            className: 'toast-sign toast-success',
           });
         })
         .catch((error) => {
           console.error('Error updating status:', error);
-          toast.error("Failed to update status. Please try again.", {
-            position: "top-center"
+          toast.info("Failed to update status. Please try again.", {
+            position: "top-center",
+            closeButton: true,
+            progressBar: true,
+            className: 'toast-sign toast-success',
           });
         });
     };
   
     const cancelStatusUpdate = () => {
       toast.info("Status update cancelled.", {
-        position: "top-center"
+        position: "top-center",
+        closeButton: true,
+        progressBar: true,
+        className: 'toast-sign toast-success',
       });
     };
   

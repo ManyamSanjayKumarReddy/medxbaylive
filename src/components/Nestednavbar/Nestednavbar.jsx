@@ -67,14 +67,14 @@ const Nestednavbar = () => {
             <form>
               <div className="form-control-one">
                 <label>What</label>
-                <input className="width-input" type="text" placeholder="Search Doctors, providers or conditions" />
+                <input className="width-input" type="text" placeholder="Search specialities, providers or conditions" />
               </div>
               <div className="form-control-two">
                 <label>Where</label>
                 <input type="text" placeholder="United Arab Emirates" />
               </div>
               <button type="submit" className="btn button-color " onClick={handleButtonClick}>
-                Find My Doctor
+                Find My Provider
               </button>
             </form>
           </div>

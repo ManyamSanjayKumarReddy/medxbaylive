@@ -63,8 +63,11 @@ const VerifyLogin = ({ show, handleClose,openRegisterModal }) => {
                     sessionStorage.setItem('loggedIn', 'true');
                     sessionStorage.setItem('subscriptionType', userSubscriptionType);
                     sessionStorage.setItem('subscriptionVerification', userSubscriptionVerification);
-                    toast.success("Your has been verified!", {
-                      position: "top-center"
+                    toast.info("Your has been verified!", {
+                      position: "top-center",
+                      closeButton: true,
+                      progressBar: true,
+                      className: 'toast-sign toast-success',
                     });
                     setTimeout(() => {
                     switch (role) {
@@ -89,8 +92,11 @@ const VerifyLogin = ({ show, handleClose,openRegisterModal }) => {
                 } else {
                     console.error('Login failed response:', res.data);
                     console.log('Login failed:', res.data.message);
-                    toast.error("Login failed. Please try again.", {
-                      position: "top-center"
+                    toast.info("Login failed. Please try again.", {
+                      position: "top-center",
+                      closeButton: true,
+                      progressBar: true,
+                      className: 'toast-sign toast-success',
                     });                }
             } catch (err) {
                 console.error('Error during login:', err);

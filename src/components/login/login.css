@@ -4,6 +4,31 @@
 
 }
 
+/* In your signup.css or a relevant CSS file */
+/* .toast-sign {
+
+} */
+.toast-center .Toastify__close-button {
+  color: #0067FF; 
+}
+
+.toast-center .Toastify__progress-bar {
+  color:#0067FF !important;
+}
+.toast-center .Toastify__toast-icon {
+  color:#0067FF; 
+}
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100px; /* Adjust as needed */
+  position: relative;
+
+}
+
+
 
 
 .model-header-login{

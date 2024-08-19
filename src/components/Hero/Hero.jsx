@@ -70,7 +70,7 @@ const Hero = () => {
                                 <div className='simple-line-small'></div>
                                 <div className="outer">
                                 <button className="search-button" onClick={handleButtonClick}>
-      Find My Doctor
+      Find My Provider
     </button>
                                 </div>
                             </div>

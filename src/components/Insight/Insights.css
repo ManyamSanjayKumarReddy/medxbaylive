@@ -12,7 +12,7 @@ display: flex;
 margin-top: 00px;
 overflow-x: hidden; 
 z-index: 4 !important;
-
+border-bottom: 1px solid #908f8f3e;
 }
 .frame{
 max-width: 414px;

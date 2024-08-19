@@ -82,6 +82,8 @@ const Navbar = () => {
     setIsLoggedIn(false);
     setUserRole('');
     navigate('/'); 
+
+    window.location.reload();  
   };
 
   const handleLogin = (role) => {
@@ -123,7 +125,7 @@ const Navbar = () => {
               {/* Conditionally render "Find Doctor" only if the user is not a doctor */}
               {userRole !== 'doctor' && (
                 <li className="nav-item active ml-md-4">
-                  <Link className="find-doctor nav-link nav-link-style" to="/Filters">Find Doctor</Link>
+                  <Link className="find-doctor nav-link nav-link-style" to="/Filters">Find Provider</Link>
                 </li>
               )}
               <li className="nav-item active ml-md-4">

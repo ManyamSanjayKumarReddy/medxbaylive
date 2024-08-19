@@ -66,7 +66,7 @@ const Nestednavbar = () => {
               
             </div>
             <button type="submit" className="btn button-color" onClick={searchDoctors}>
-              Find My Doctor
+              Find My Provider
             </button>
             </form>
         </div>

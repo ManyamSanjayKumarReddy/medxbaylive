@@ -75,17 +75,41 @@ const ChangePassword = () => {
         });
         
         if (res.data.success) {
-          toast.success('Password reset successful.');
+          toast.info('Password reset successful.',{
+            position: "top-center" ,
+           closeButton: true,
+           progressBar: true,
+           className: 'toast-sign toast-success',
+ 
+         });
           navigate('/'); 
         } else {
-          toast.error(res.data.message || 'Failed to reset password. Please try again.');
+          toast.error(res.data.message || 'Failed to reset password. Please try again.',{
+            position: "top-center" ,
+           closeButton: true,
+           progressBar: true,
+           className: 'toast-sign toast-success',
+ 
+         });
         }
       } catch (err) {
         console.error('Error during password reset:', err);
-        toast.error('Failed to reset password. Please try again.');
+        toast.info('Failed to reset password. Please try again.',{
+          position: "top-center" ,
+         closeButton: true,
+         progressBar: true,
+         className: 'toast-sign toast-success',
+
+       });
       }
     } else {
-      toast.error('Please correct the errors in the form.');
+      toast.info('Please correct the errors in the form.',{
+        position: "top-center" ,
+       closeButton: true,
+       progressBar: true,
+       className: 'toast-sign toast-success',
+
+     });
     }
   };
   

@@ -116,9 +116,13 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
 
     
         if (!user) {
-            toast.error('You need to log in to book an appointment.',{
-                position: "top-center"
+            toast.info('You need to log in to book an appointment.',{
+                className: 'toast-center toast-fail',
+                closeButton: true,
+                progressBar: true,
               });
+
+              
             setTimeout(() => {
                 navigate('/');
             }, 2000); 
@@ -128,7 +132,12 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
         try {
             const selectedDay = dates[selectedDate];
             if(consultationType ==''){
-                toast.warning('Please select a consultation type.');
+                toast('Please select a consultation type.',{
+                    className: 'toast-center ',
+                    closeButton: true,
+                    progressBar: true,
+
+                });
                 return
             }
             const bookingData = {
@@ -153,18 +162,36 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
             if (contentType && contentType.includes('application/json')) {
                 const result = await response.json();
                 console.log('Booking response:', result);
-                toast.success('Booking successful!');
+                toast('Booking successful!',{
+                    className: 'toast-center toast-success',
+                    closeButton: true,
+                    progressBar: true,
+                });
                 navigate('/profile/userprofile/manage/appointments')
             } else {
                 const responseText = await response.text();
                 console.error('Unexpected response format:', responseText);
-                toast.error('Unexpected response from server. Please try again.');
+                toast('Unexpected response from server. Please try again.',
+                
+                    {
+                      className: 'toast-center toast-fail',
+                      closeButton: true,
+                      progressBar: true,
+                   
+                    }
+                  );
             }
         } catch (error) {
             console.error('Error booking appointment:', error.message);
-            toast.error('Error booking appointment. Please try again.');
+            toast('Error booking appointment. Please try again.',
+            {
+                className: 'toast-center toast-fail',
+                closeButton: true,
+                progressBar: true,
+            });
         }
     };
+    
     
     
 
