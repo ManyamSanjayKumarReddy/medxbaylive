@@ -278,9 +278,10 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
   
   return (
     <>
-        <ToastContainer />
+
 
     <Modal show={show} onHide={handleClose} centered className="custom-modal">
+    <ToastContainer />
       <Modal.Title>
         <span className="model-header-login">Sign In</span>{' '}
         <span className="model-header-sub-login"> Sign In to your account.</span>

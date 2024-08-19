@@ -165,19 +165,27 @@ const ProfileEdit = () => {
         withCredentials: true
       });
 
-      toast.success("Profile updated successfully!", {
-        position: "top-center"
+      toast.info("Profile updated successfully!", {
+ 
+        closeButton: true,
+        progressBar: true,
+        className: 'toast-center toast-success',
       });
-     
     } catch (error) {
       console.error("There was an error updating the profile!", error);
-      toast.error("Error updating profile. Please try again.");
+      toast.info("Error updating profile. Please try again.",{
+
+        closeButton: true,
+        progressBar: true,
+        className: 'toast-center toast-success',
+      });
     }
   };
   
 
   return (
-    <>        <ToastContainer /> 
+    <>      
+      <ToastContainer /> 
     <div className="userprofile-card">
       <div className="profile-header">
         <div className="profile-image-wrapper">

@@ -102,6 +102,7 @@ const ManageAppointments = () => {
     };
   
     toast(
+      
       ({ closeToast }) => (
         <div className="toastify-custom-container">
           <p>Are you sure you want to change the status to {newStatus}?</p>
@@ -122,7 +123,8 @@ const ManageAppointments = () => {
         </div>
       ),
       {
-        position: "top-center",
+
+      className:'confirmbox',
         autoClose: false,
         closeOnClick: false,
         closeButton: false,

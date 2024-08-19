@@ -131,6 +131,7 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
           closeButton: true,
           progressBar: true,
           className: 'toast-sign toast-success',
+          autoClose: 5000 ,
 
         });
         
@@ -149,6 +150,7 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
                 closeButton: true,
                 progressBar: true,
                 className: 'toast-center toast-success',
+            
 
               });
             } else {
@@ -320,7 +322,8 @@ const SignupCard = ({ show, handleClose,openLoginModal }) => {
     <>
    
     <Modal show={show} onHide={handleClose} centered className="custom-modal">
-    <ToastContainer />
+    <ToastContainer 
+   />
       <Modal.Title>
         <span className="model-header">Sign up</span>{' '}
         <span className="model-header-sub"> Sign up as {isProvider ? 'Provider' : 'Patient'}</span>

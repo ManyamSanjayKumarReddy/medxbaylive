@@ -30,7 +30,7 @@ const ProfileLayout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("http://localhost:8000/patient/profile", { withCredentials: true })
+    axios.get(`${process.env.REACT_APP_BASE_URL}/patient/profile`, { withCredentials: true })
       .then(response => {
         const {patient} = response.data;
 
@@ -62,7 +62,7 @@ const ProfileLayout = () => {
   };
 
   const handleLogout = () => {
-    axios.post("http://localhost:8000/auth/logout",{withCredentials:true})
+    axios.post(`${process.env.REACT_APP_BASE_URL}/auth/logout`,{withCredentials:true})
       .then(() => {
         sessionStorage.clear();
         navigate('/'); 
