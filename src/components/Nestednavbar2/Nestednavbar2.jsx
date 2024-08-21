@@ -4,33 +4,51 @@ import './nestednavbar.css';
 import Navbar from '../Navbar/Navbar';
 import axios from 'axios';
 
-
 const Nestednavbar = () => {
   const [what, setWhat] = useState('');
   const [where, setWhere] = useState('');
+  const [whatOptions, setWhatOptions] = useState([]);
+  const [whereOptions, setWhereOptions] = useState([]);
   const navigate = useNavigate();
 
-  const searchDoctors = async () => {
-    try {
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/search-doctors?what=${what}&where=${where}`, { withCredentials: true });
-        const data = response.data; // Access the data directly
-        navigate('/Filters', { state: { doctors: data, what, where } });
-        // If you need to check content type, you can use the following (though it's usually unnecessary with axios):
-        const contentType = response.headers['content-type'];
-        if (contentType && contentType.includes('application/json')) {
-            console.log('Booking response:', data);
-        } else {
-            console.error('Unexpected response format:', data);
-        }
-    } catch (error) {
-        console.error('Error fetching doctors:', error);
-    }
-};
-
   useEffect(() => {
-    searchDoctors();
-  }, [what, where]);
+    const populateWhatOptions = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/what-options`, { withCredentials: true });
+        const data = response.data;
+        const { specialities, conditions, doctors } = data;
+        setWhatOptions([...specialities, ...conditions, ...doctors]);
+      } catch (error) {
+        console.error('Error fetching what options:', error);
+      }
+    };
 
+    const populateWhereOptions = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/where-options`, { withCredentials: true });
+        const data = response.data;
+        const { cities, states, countries } = data;
+        setWhereOptions([...cities, ...states, ...countries]);
+      } catch (error) {
+        console.error('Error fetching where options:', error);
+      }
+    };
+
+    populateWhatOptions();
+    populateWhereOptions();
+  }, []);
+
+  const searchDoctors = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/search-doctors?what=${what}&where=${where}`, { withCredentials: true });
+      console.log('Navigating with:', { doctors: response.data, what, where });
+      navigate('/profile/filters', { state: { doctors: response.data, what, where } });
+    } catch (error) {
+      console.error('Error fetching doctors:', error);
+    }
+  };
+  
 
   return (
     <>
@@ -40,35 +58,43 @@ const Nestednavbar = () => {
         </div>
 
         <div className="navbar-back">
-              <form>
+          <form onSubmit={searchDoctors}>
             <div className="form-control-one">
-              <label>What</label>
-              
+              <label htmlFor="what">What</label>
               <input
                 className="width-input"
-                type="text"
                 id="what"
                 value={what}
                 onChange={(e) => setWhat(e.target.value)}
-                placeholder="Search Doctors, providers or conditions"
+                list="what-options"
+                placeholder="Search Specialities, providers or conditions"
               />
+              <datalist id="what-options">
+                {whatOptions.map((option, index) => (
+                  <option key={index} value={option} />
+                ))}
+              </datalist>
             </div>
             <div className="form-control-two">
-              <label>Where</label>
+              <label htmlFor="where">Where</label>
               <input
                 className="width-input"
-          type="text"
-          id="where"
-          value={where}
-          onChange={(e) => setWhere(e.target.value)}
-          placeholder="United Arab Emirates"
-          />
-              
+                id="where"
+                value={where}
+                onChange={(e) => setWhere(e.target.value)}
+                list="where-options"
+                placeholder="United Arab Emirates"
+              />
+              <datalist id="where-options">
+                {whereOptions.map((option, index) => (
+                  <option key={index} value={option} />
+                ))}
+              </datalist>
             </div>
-            <button type="submit" className="btn button-color" onClick={searchDoctors}>
-              Find My Provider
+            <button type="submit" className="btn button-color">
+              Find My Doctor
             </button>
-            </form>
+          </form>
         </div>
       </div>
     </>

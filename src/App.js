@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 //Landing page imported
 import Section from './components/section/section';
@@ -22,8 +23,12 @@ import FilterPage from './components/FilterPage/FilterPage';
 import VerifyLogin from './components/login/VerifyLogin';
 import Verification from './components/login/Verification';
 import  BlogPage from './components/patientBlog/blog';
+import Nestednavbar from './components/Nestednavbar2/Nestednavbar';
 
 function App() {
+  useEffect(() => {
+    document.title = "MedxBay";
+}, []);
   return (
     <>
       <Router>
@@ -31,13 +36,13 @@ function App() {
           <Route path="/" element={[<Navbar/>,<Section />,<Footer/>]} />
           <Route path="/reset-password" element={<ChangePassword />} />
           <Route path="/Doctor/profile/Edit" element={[<Navbar/>,<DoctorEdit />,<Footer/>]} />     
-          <Route path="/doctor/:id" element={ <DoctorProfile/>}/>
+          <Route path="/doctor/:id" element={[<Nestednavbar/>,<DoctorProfile />,<Footer/>]}/>
           <Route path="/profile/*" element={<ProfileRoutes />} />
           <Route path="/doctorprofile/dashboardpage/*" element={<ConnectedRoutes />} />
           <Route path="/Filters" element={<FilterPage />} />
           <Route path="/verify/login" element={<VerifyLogin />} />
           <Route path="/verify" element={<Verification />} />
-          <Route path="/blog" element={ <BlogPage/>}/>
+          <Route path="/blogs" element={[<Nestednavbar/>,<BlogPage />,<Footer/>]}/>
         </Routes>
       </Router>
     </>

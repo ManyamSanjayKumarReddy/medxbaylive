@@ -1,10 +1,136 @@
 .doctor-profile{
   width: 100%;
     max-width: 100%;
-height: 4400px;
+    height: auto;
+
     background: linear-gradient(180deg, #EDF3FF 0%, #FFFFFF 100%);
 overflow: hidden;
 
+}
+.book-now{
+  width: 200px;
+  height: 100px;
+  position: relative;
+  top: 30px;
+  justify-content: center;
+}
+.date-nav-doctor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  /* margin-bottom: 20px;
+  padding-bottom: 10px; */
+}
+ .arrow-doctor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px !important;
+  height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+  color: orange;
+}
+.arrow-doctor:disabled {
+  color: orange;
+  cursor: not-allowed;
+}
+.date-carousel-doctor {
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  flex-grow: 1;
+}
+
+.date-item-doctor {
+  padding: 10px 20px;
+  cursor: pointer;
+  text-align: center;
+  flex: 1;
+  border-bottom: 2px solid #eee;
+  transition: border-bottom 0.3s;
+}
+
+.date-item-doctor.active {
+  border-bottom: 2px solid #007bff;
+  color: #000000;
+}
+.date-item-doctor.active h3{
+  color: #000000;
+  font-weight: bold;
+}
+.underline-doctor {
+  position: relative;
+  height: 5px;
+  background-color: #F0F0F5;
+  margin: 0 100px;
+}
+
+.underline-doctor-active {
+  position: absolute;
+  height: 5px;
+  background-color: #2AA7FF;
+  transition: left 0.3s, width 0.3s;
+}
+  
+.date-item-doctor h3 {
+  margin: 5px 0;
+  font-size: 15px;
+}
+
+.date-item-doctor .slots-available-doctor {
+  color: green;
+  font-size: 14px;
+}
+
+/* Time slots group styles */
+.time-slots-group-doctor {
+  margin-bottom: 20px;
+  border-bottom: #e6f7ff solid 1px;
+  padding-bottom: 20px;
+}
+.time-slots-group-doctor h6{
+  font-size: 14px;
+  margin: 10px 30px 10px -80px;
+  font-weight: 400;
+}
+
+/* Time slots container styles */
+.time-slots-doctor {
+  display: flex;
+  justify-content: flex-start; /* Align to start */
+
+}
+
+/* Individual time slot button styles */
+.time-slot-doctor {
+  background: white;
+  border: 1px solid #37adff;
+  border-radius: 5px;
+  padding: 5px 20px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #37adff;
+  white-space: nowrap;
+
+}
+
+.time-slot-doctor:hover {
+  background: #e6f7ff;
+  border-color: #007bff;
+}
+.time-slot-doctor.selected {
+  background-color: #007bff; /* Change to your desired color */
+  color: #fff;
+  border: none; /* Optionally remove border */
+}
+
+.c{
+  margin-top: 20px;
+  border-top: #eee solid 1px;
 }
 
 .doctor-profile-container{
@@ -15,14 +141,15 @@ left: 72px;
 position: relative;
 display: flex;
 }
-/* .doctor-details {
-    flex: 1;
+.doctor-details {
+ position: relative;
+ top: -15%;
   }
-   */
+  
 .doctor-profile-img{
     width: 311px;
 height: 341px;
-top:-150px;
+top:-420px;
 
 
 border-radius: 53px 0px 53px 0px;
@@ -149,7 +276,7 @@ color: #414146;
 .share-box{
     width: 1432px;
 height: 179px;
-top:11%;
+margin-top: 22%;
 left: 4px;
 gap: 0px;
 border: 1px 0px 0px 0px;
@@ -212,7 +339,7 @@ color: #414146;
     position: relative;
     width: 440px;
 height: 409px;
-top: -204%;
+top: -205%;
 left: 939px;
 border-radius: 15px;
 background: #ffffff;
@@ -220,9 +347,9 @@ border: 1px solid #0000001A;
 z-index: 1; 
 
 }
-/* .doctor-card-date{
+.doctor-card-date-doctor{
   margin-left: -70px;
-} */
+}
 .arrow{
   font-size: 30px;
 }
@@ -243,6 +370,45 @@ position: relative;
     display: flex;
 }
 
+/* Add default styles */
+.book-appointment-inperson,
+.video-consultation-container {
+  background-color: white; /* Default background color */
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.book-appointment-inperson-icon,
+.video-consultation-container-icon {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Add styles for active state */
+.book-appointment-inperson.active,
+.video-consultation-container.active {
+  background-color: #0167FF; /* Active background color */
+  color: white; /* Active text color */
+}
+
+.book-appointment-inperson.active .book-appointment-inperson-icon,
+.video-consultation-container.active .video-consultation-container-icon {
+
+  color: white;
+}
+
+/* Add styles for inactive state */
+.book-appointment-inperson.inactive,
+.video-consultation-container.inactive {
+  background-color: rgb(255, 255, 255); /* Inactive background color */
+  color: #0167FF; /* Inactive text color */
+}
+
+.book-appointment-inperson.inactive .book-appointment-inperson-icon,
+.video-consultation-container.inactive .video-consultation-container-icon {
+
+  color: #0167FF;
+}
+
 .book-appointment-inperson{
     width: 182px;
     height: 39px;
@@ -251,7 +417,8 @@ position: relative;
     padding: 7px 20px 7px 20px;
     gap: 10px;
     border-radius: 5px ;
-    background: #0167FF;
+    /* background: #0167FF; */
+    border: 1px solid #0167FF;
     position: relative;
     display: flex;
 
@@ -261,21 +428,21 @@ position: relative;
     width: 15.36px;
     height: 15.04px;
   margin-top: 4px;
-  margin-left: 20px;
+  margin-left: 10px;
     background: url('../../assests/img/Vector.svg') no-repeat;
     color: #ffffff;
 
 
 }
 .book-appointment-inperson-container{
-    width: 71px;
+    width: 100px;
 height: 22px;
 font-family: 'Matter', sans-serif;
 font-size: 16px;
 font-weight: 600;
 line-height: 25px;
 
-color: #FFFFFF;
+/* color: #FFFFFF; */
 
 }
 .video-consultation-container{
@@ -301,13 +468,13 @@ font-size: 16px;
 font-weight: 600;
 line-height: 25px;
 text-align: left;
-color: #0167FF;
+/* color: #0167FF; */
 }
 
 .video-consultation-container-icon{
     width: 18px;
 height: 12px;
-color: #0167FF;
+/* color: #0167FF; */
 background: url('../../assests/img/Vector-2.svg') no-repeat;
 margin-top: 5px;
 }
@@ -755,7 +922,7 @@ color: #ffffff;
     position: relative;
     width: 743px;
 height: 48px;
-top: -1237px;
+top: -1720px;
 text-align: center;
 justify-content: center;
 align-items: center;
@@ -844,7 +1011,7 @@ border: 1px solid #0000001A
   position: relative;
   width: 100% !important;
 height: 100% !important;
-top: -1200px !important;
+top: -1700px !important;
 left: 289px !important;
 border-radius: 15px;
 transition: transform 0.3s ease-in-out;

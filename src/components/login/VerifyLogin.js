@@ -72,7 +72,7 @@ const VerifyLogin = ({ show, handleClose,openRegisterModal }) => {
                     setTimeout(() => {
                     switch (role) {
                         case 'doctor':
-                            navigate('/Doctor/profile/Edit');
+                            navigate('/doctorprofile/dashboardpage/start-dashboard');
                             break;
                         case 'patient':
                             navigate('/profile/userprofile/');
@@ -87,7 +87,7 @@ const VerifyLogin = ({ show, handleClose,openRegisterModal }) => {
     
                     setEmail('');
                     setPassword('');
-                    handleClose();
+
                   }, 1000); 
                 } else {
                     console.error('Login failed response:', res.data);

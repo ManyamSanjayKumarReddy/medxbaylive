@@ -3,7 +3,7 @@ import StarRating from "./StarRating";
 import "../DoctorProfile/doctorProfile.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePrescription } from "@fortawesome/free-solid-svg-icons";
-import Reviewpage from "../../components/Reviewpage/Reviewpage";
+// import Reviewpage from "../../components/Reviewpage/Reviewpage";
 // import Articles from "../Article/Article";
 import Languages from "../Languages/Language";
 import AwardsRecognition from "../Awards/Awards";
@@ -52,7 +52,6 @@ function DoctorProfile() {
   const [showDoctorCard, setShowDoctorCard] = useState(false);
   const [startIndex, setStartIndex] = useState(0);
   const [consultationType, setConsultationType] = useState('inPerson');
-
   const [selectedPlace, setSelectedPlace] = useState("");
   const handleInsuranceChange = (event) => {
     setSelectedInsurancePlace(event.target.value);
@@ -167,7 +166,8 @@ function DoctorProfile() {
 
   const faqRef = useRef(null);
   const insuranceRef = useRef(null);
-  const aboutRef = useRef(null);
+  const awardRef = useRef(null);
+  const languageRef = useRef(null);
 
   const scrollToFaq = () => {
     faqRef.current.scrollIntoView({ behavior: "smooth" });
@@ -175,11 +175,15 @@ function DoctorProfile() {
   const scrollToInsurace = () => {
     insuranceRef.current.scrollIntoView({ behavior: "smooth" });
   };
-  const scrollToAbout = () => {
-    aboutRef.current.scrollIntoView({ behavior: "smooth" });
+  const scrollToAward = () => {
+    awardRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
   const locationRef = useRef(null);
+  const scrollTOLanguage = () => {
+    locationRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
   const scrollTOLocation = () => {
     locationRef.current.scrollIntoView({ behavior: "smooth" });
   };
@@ -275,11 +279,19 @@ const handleBookAppointment = async () => {
 
       // const result = await fetchFromPatient('/book', bookingData, 'POST');
       // console.log('Booking response JSON:', result);
-      toast.success('Booking successful!');
+      toast.info('Booking successful!',{
+        className: 'toast-center toast-success',
+        closeButton: true,
+        progressBar: true,
+    });
   } catch (error) {
       console.error('Error booking appointment:', error.message);
-      toast.error('Error booking appointment. Please try again.');
-    }
+      toast.info('Error booking appointment. Please try again.',
+        {
+            className: 'toast-center toast-fail',
+            closeButton: true,
+            progressBar: true,
+        });    }
 };
 
 const handleConsultationTypeChange = (type) => {
@@ -301,21 +313,22 @@ const handleConsultationTypeChange = (type) => {
         >
             <div className="book-appointment">Book Appointment</div>
             <div className="Appointment-container-box">
-              <div 
-                className={`book-appointment-inperson ${consultationType !== 'inPerson' ? 'inactive' : ''}`}
-                onClick={() => handleConsultationTypeChange('inPerson')}
-              >
-                <div className="book-appointment-inperson-icon"></div>
-                <div className="book-appointment-inperson-container">In-person</div>
-              </div>
-              <div 
-                className={`video-consultation-container ${consultationType === 'video' ? 'active' : ''}`}
-                onClick={() => handleConsultationTypeChange('video')}
-              >
-                <div className="video-consultation-container-icon"></div>
-                <div className="video-consultation-text">Video Consultation</div>
-              </div>
-            </div>
+  <div 
+    className={`book-appointment-inperson ${consultationType === 'inPerson' ? 'active' : 'inactive'}`}
+    onClick={() => handleConsultationTypeChange('inPerson')}
+  >
+    <div className="book-appointment-inperson-icon"></div>
+    <div className="book-appointment-inperson-container">In-person</div>
+  </div>
+  <div 
+    className={`video-consultation-container ${consultationType === 'video' ? 'active' : 'inactive'}`}
+    onClick={() => handleConsultationTypeChange('video')}
+  >
+    <div className="video-consultation-container-icon"></div>
+    <div className="video-consultation-text">Video Consultation</div>
+  </div>
+</div>
+
           <div className="Appointment-select-place">Select Place</div>
           <div className="Appointment-select-place-dropdown">
             <select
@@ -388,26 +401,26 @@ const handleConsultationTypeChange = (type) => {
                 />
               </svg>
               {showAppointmentDropdown && (
-                  <div className="container doctor-card-date">
-                      <div className="date-nav">
-                          <button className="arrow" onClick={showPrev} disabled={startIndex === 0}>‹</button>
-                          <div className="date-carousel">
+                  <div className="container doctor-card-date-doctor">
+                      <div className="date-nav-doctor">
+                          <button className="arrow-doctor" onClick={showPrev} disabled={startIndex === 0}>‹</button>
+                          <div className="date-carousel-doctor">
                               {dates.slice(startIndex, startIndex + 2).map((date, index) => (
                                   <div
                                       key={index}
-                                      className={`date-item ${index + startIndex === selectedDate ? 'active' : ''}`}
+                                      className={`date-item-doctor ${index + startIndex === selectedDate ? 'active' : ''}`}
                                       onClick={() => setSelectedDate(index + startIndex)}
                                   >
                                       <h3>{date.day}</h3>
-                                      <span className="slots-available">{date.slots} Slots Available</span>
+                                      <span className="slots-available-doctor">{date.slots} Slots Available</span>
                                   </div>
                               ))}
                           </div>
-                          <button className="arrow" onClick={showNext} disabled={startIndex + 3 >= dates.length}>›</button>
+                          <button className="arrow-doctor" onClick={showNext} disabled={startIndex + 3 >= dates.length}>›</button>
                       </div>
-                      <div className="underline">
+                      <div className="underline-doctor">
                           <div
-                              className="underline-active"
+                              className="underline-doctor-active"
                               style={{
                                   left: `calc(100% / ${2} * ${selectedDate - startIndex})`,
                                   width: `calc(100% / ${2})`
@@ -416,13 +429,13 @@ const handleConsultationTypeChange = (type) => {
                       </div>
                       {dates[selectedDate] && (
                           <div className="container mt-3">
-                              <div className="time-slots-group d-flex flex-row">
+                              <div className="time-slots-group-doctor d-flex flex-row">
                                   <h6>Morning</h6>
-                                  <div className="time-slots">
+                                  <div className="time-slots-doctor">
                                       {groupedSlots.morning.map((slot, index) => (
                                           <button
                                               key={`morning-${index}`}
-                                              className={`time-slot ${selectedTimeSlot === slot ? 'selected' : ''}`}
+                                              className={`time-slot-doctor ${selectedTimeSlot === slot ? 'selected' : ''}`}
                                               onClick={() => handleTimeSlotClick(slot)}
                                           >
                                               {slot}
@@ -430,13 +443,13 @@ const handleConsultationTypeChange = (type) => {
                                       ))}
                                   </div>
                               </div>
-                              <div className="time-slots-group d-flex flex-row">
+                              <div className="time-slots-group-doctor d-flex flex-row">
                                   <h6>Afternoon</h6>
-                                  <div className="time-slots">
+                                  <div className="time-slots-doctor">
                                       {groupedSlots.afternoon.map((slot, index) => (
                                           <button
                                               key={`afternoon-${index}`}
-                                              className={`time-slot ${selectedTimeSlot === slot ? 'selected' : ''}`}
+                                              className={`time-slot-doctor ${selectedTimeSlot === slot ? 'selected' : ''}`}
                                               onClick={() => handleTimeSlotClick(slot)}
                                           >
                                               {slot}
@@ -444,13 +457,13 @@ const handleConsultationTypeChange = (type) => {
                                       ))}
                                   </div>
                               </div>
-                              <div className="time-slots-group d-flex flex-row">
+                              <div className="time-slots-group-doctor d-flex flex-row">
                                   <h6>Evening</h6>
-                                  <div className="time-slots">
+                                  <div className="time-slots-doctor">
                                       {groupedSlots.evening.map((slot, index) => (
                                           <button
                                               key={`evening-${index}`}
-                                              className={`time-slot ${selectedTimeSlot === slot ? 'selected btn-primary' : ''}`}
+                                              className={`time-slot-doctor ${selectedTimeSlot === slot ? 'selected btn-primary' : ''}`}
                                               onClick={() => handleTimeSlotClick(slot)}
                                           >
                                               {slot}
@@ -473,11 +486,15 @@ const handleConsultationTypeChange = (type) => {
         </div>
       </div>
       <div className="doctor-profile-container">
-        <div className="doctor-profile-img-con">
+      
           <img src={profile} alt={doctorData.name || "Doctor"} className="doctor-profile-img"/>
-        </div>
+
         <div className="doctor-details">
-          <p className="doctorname">{doctorData.name}</p>
+          <p className="doctorname">{doctorData.name}
+          {doctorData.verified === 'Verified' && (
+          <span className="blue-tick"></span>
+        )}
+          </p>
 
           <div className="education">
             <StarRating totalStars={doctorData.rating} className="doctor-star"/>
@@ -535,9 +552,9 @@ const handleConsultationTypeChange = (type) => {
       >
         <p className="doctor-details-header-Location" onClick={scrollTOLocation}>Location</p>
         <p className="doctor-details-header-Insurances" onClick={scrollToInsurace}>Insurances</p>
-        <p className="doctor-details-header-About" onClick={scrollToAbout}>About Me</p>
-        <p className="doctor-details-header-Ratings" onClick={scrollToReviews}>
-          Ratings
+        <p className="doctor-details-header-About" onClick={scrollToAward}>Awards</p>
+        <p className="doctor-details-header-Ratings" onClick={scrollTOLanguage}>
+Language
         </p>
         <p className="doctor-details-header-faq" onClick={scrollToFaq}>
           FAQ’s
@@ -623,15 +640,17 @@ const handleConsultationTypeChange = (type) => {
       <div ref={insuranceRef}>
         <AcceptedInsurances insurance={insurance}/>
       </div>
-      <div ref={aboutRef}>
+      <div ref={awardRef}>
       <AwardsRecognition Awards={doctorData.awards} />
       </div>
+      <div ref={languageRef}>
       <Languages Languages={doctorData.languages} />
+      </div>
       {/* <Articles  blogs={blogs}/> */}
       {/* <div ref={reviewRef}>
         <Reviewpage reviews={doctorData.reviews}/>
       </div> */}
-
+ 
       <div className="faq " ref={faqRef}>
         <h2 className="heading">Frequently Asked Questions</h2>
         <div className="faq-container">

@@ -161,7 +161,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
             if (contentType && contentType.includes('application/json')) {
                 const result = await response.json();
                 console.log('Booking response:', result);
-                toast('Booking successful!',{
+                toast.info('Booking successful!',{
                     className: 'toast-center toast-success',
                     closeButton: true,
                     progressBar: true,
@@ -170,7 +170,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
             } else {
                 const responseText = await response.text();
                 console.error('Unexpected response format:', responseText);
-                toast('Unexpected response from server. Please try again.',
+                toast.info('Unexpected response from server. Please try again.',
                 
                     {
                       className: 'toast-center toast-fail',
@@ -182,7 +182,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
             }
         } catch (error) {
             console.error('Error booking appointment:', error.message);
-            toast('Error booking appointment. Please try again.',
+            toast.info('Error booking appointment. Please try again.',
             {
                 className: 'toast-center toast-fail',
                 closeButton: true,
@@ -310,10 +310,10 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                             </div>
                         </div>
                         <div className="doctor-details1">
-                        <h2>{doctor.name}</h2>
-                            {/* <Link to={`/doctor/${doctor._id}`}>
+                  
+                            <Link to={`/doctor/${doctor._id}`}>
                                 <h2>{doctor.name}</h2>
-                            </Link> */}
+                            </Link>
                             <p className="speciality">{doctor.speciality}</p>
                             <p className="experience">{doctor.experience || "16 years experience overall"}</p>
                             <p className={`location ${isMapExpanded ? 'mapExpanded-location' : ''}`}>{doctor.city}</p>

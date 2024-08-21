@@ -1,4 +1,8 @@
-
+ .doctor-edit-name span {
+  color: blue !important;
+  margin-left: 8px;
+  font-size: 0.5em;
+}
 
 
 

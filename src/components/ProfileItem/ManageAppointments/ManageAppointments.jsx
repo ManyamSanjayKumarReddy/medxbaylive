@@ -4,8 +4,7 @@ import Modal from 'react-modal';
 import './manageAppointments.css';
 import { MdOutlineCalendarToday } from "react-icons/md";
 import tick from '../../../assests/img/tick.png'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 Modal.setAppElement('#root');
 
 const ManageAppointments = () => {
@@ -15,7 +14,7 @@ const ManageAppointments = () => {
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [reviewModalIsOpen, setReviewModalIsOpen] = useState(false);
-  const [reviewForm, setReviewForm] = useState({ rating: 0, comments: '' });
+  const [reviewForm, setReviewForm] = useState({ rating: 0, reviewText: '' });
 
   useEffect(() => {
     const fetchAppointments = async () => {
@@ -31,10 +30,11 @@ const ManageAppointments = () => {
         console.error('Error fetching appointments:', error);
       }
     };
-  
+
     fetchAppointments();
   }, []);
-  
+
+  // console.log(bookings.map(booking => booking.status))
   const getStatusClass = (status) => {
     switch (status.toLowerCase()) {
       case 'accepted':
@@ -44,12 +44,12 @@ const ManageAppointments = () => {
       case 'rejected':
         return 'red';
       case 'completed':
-        return 'completed'; 
+        return 'blue';
       default:
-        return 'gray'; 
+        return 'gray'; // default or unknown status
     }
   };
-  
+
 
   const handleStatusChange = (id, newStatus) => {
     setBookings(bookings.map(booking => booking._id === id ? { ...booking, status: newStatus } : booking));
@@ -107,7 +107,8 @@ const ManageAppointments = () => {
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/patient/review/${selectedAppointment.doctor._id}/${selectedAppointment._id}`, reviewForm,{ withCredentials: true });
+      console.log(reviewForm);
+      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/patient/review/${selectedAppointment.doctor._id}/${selectedAppointment._id}`, reviewForm, { withCredentials: true });
       console.log('Review submitted:', response.data);
       closeReviewModal();
     } catch (error) {
@@ -119,7 +120,7 @@ const ManageAppointments = () => {
     const handleClick = (index) => {
       onChange(index + 1);
     };
-    
+
 
     return (
       <div className="star-rating">
@@ -146,10 +147,12 @@ const ManageAppointments = () => {
           <button className={`tab ${activeTab === 'Completed' ? 'active' : ''}`} onClick={() => setActiveTab('Completed')}>Completed</button>
           <button className={`tab ${activeTab === 'Cancelled' ? 'active' : ''}`} onClick={() => setActiveTab('Cancelled')}>Cancelled</button>
         </div>
-        {/* <button className="calendar-button">
-          <MdOutlineCalendarToday />
-          Calendar
-        </button> */}
+        <div className='d-flex'>
+          <p className='appointment-acc'><span className={`status-dot green `}></span>Accepted</p>
+          <p className='appointment-acc'><span className={`status-dot orange `}></span>Waiting</p>
+          <p className='appointment-acc'><span className={`status-dot red `}></span>Rejected</p>
+          <p className='appointment-acc'><span className={`status-dot blue `}></span>Completed</p>
+        </div>
       </div>
       <div className="appointments-table-container">
         <table className="appointments-table">
@@ -163,21 +166,21 @@ const ManageAppointments = () => {
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(filteredBookings) && filteredBookings.slice(0, visibleAppointments).map(({ _id, doctor, date, time, status ,consultationType ,meetingLink }) => (
+            {Array.isArray(filteredBookings) && filteredBookings.slice(0, visibleAppointments).map(({ _id, doctor, date, time, status, consultationType, meetingLink }) => (
               <tr key={_id}>
                 <td>{doctor.name}</td>
                 <td>{new Date(date).toLocaleDateString()}</td>
                 <td>{time}</td>
                 <td><span className={`status-dot ${getStatusClass(status)}`}>
-                  {status.toLowerCase() === 'completed'}
+
                 </span></td>
                 <td>
                   {activeTab === 'Completed' ? (
-                    <button className="add-review-button" onClick={() => openReviewModal({ _id, doctor, date, time, status ,consultationType,meetingLink })}>
+                    <button className="add-review-button" onClick={() => openReviewModal({ _id, doctor, date, time, status, consultationType, meetingLink })}>
                       Add Review
                     </button>
                   ) : (
-                    <button className="view-button" onClick={() => openModal({ _id, doctor, date, time, status,consultationType ,meetingLink})}>
+                    <button className="view-button" onClick={() => openModal({ _id, doctor, date, time, status, consultationType, meetingLink })}>
                       View Appointment
                     </button>
                   )}
@@ -200,34 +203,34 @@ const ManageAppointments = () => {
         className="view-appointment-modal"
         overlayClassName="custom-overlay"
       >
-        <div className="appointment-modal-content">
-  <h2>Appointment Details</h2>
-  {selectedAppointment ? (
-    <>
-      <p><strong>Doctor:</strong> {selectedAppointment.doctor.name}</p>
-      <p><strong>Date:</strong> {new Date(selectedAppointment.date).toLocaleDateString()}</p>
-      <p><strong>Time:</strong> {selectedAppointment.time}</p>
-      <p><strong>Status:</strong> {selectedAppointment.status}</p>
-      {selectedAppointment.consultationType === 'In-person' ? (
-        <div className="appointment-modal-content">
-        <strong>Doctor Location:</strong>
-        <ul className="appointment-modal-content">
-          {selectedAppointment.doctor.hospitals.map((hospital, index) => (
-            <li key={index} className="appointment-modal-content">
-              {hospital.street}, {hospital.city}, {hospital.state}, {hospital.country}
-            </li>
-          ))}
-        </ul>
-      </div>
-      ) : (
-        <p><strong>Meeting Link:</strong> <a href={selectedAppointment.meetingLink} target="_blank" rel="noopener noreferrer">Join Meeting</a></p>
-      )}
-    </>
-  ) : (
-    <p>No appointment selected.</p>
-  )}
-  <button onClick={closeModal} className="close-modal-button">Close</button>
-</div>
+        <div className="modal-content">
+          <h2>Appointment Details</h2>
+          {selectedAppointment ? (
+            <>
+              <p><strong>Doctor:</strong> {selectedAppointment.doctor.name}</p>
+              <p><strong>Date:</strong> {new Date(selectedAppointment.date).toLocaleDateString()}</p>
+              <p><strong>Time:</strong> {selectedAppointment.time}</p>
+              <p><strong>Status:</strong> {selectedAppointment.status}</p>
+              {selectedAppointment.consultationType === 'In-person' ? (
+                <div>
+                  <strong>Doctor Location:</strong>
+                  <ul>
+                    {selectedAppointment.doctor.hospitals.map((hospital, index) => (
+                      <li key={index}>
+                        {hospital.street}, {hospital.city}, {hospital.state}, {hospital.country}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <p><strong>Meeting Link:</strong> <a href={selectedAppointment.meetingLink} target="_blank" rel="noopener noreferrer">Join Meeting</a></p>
+              )}
+            </>
+          ) : (
+            <p>No appointment selected.</p>
+          )}
+          <button onClick={closeModal} className="close-modal-button">Close</button>
+        </div>
 
       </Modal>
 
@@ -257,9 +260,9 @@ const ManageAppointments = () => {
                   <label>
                     Comments:
                     <textarea
-                      name="comments"
-                      id="comments"
-                      value={reviewForm.comments}
+                      name="reviewText"
+                      id="reviewText"
+                      value={reviewForm.reviewText}
                       onChange={handleReviewChange}
                       required
                     />

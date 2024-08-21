@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 
 import "./doctoredit.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAward, faPlus, faUserMd } from "@fortawesome/free-solid-svg-icons";
+import { faAward, faPlus, faUserMd,faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import {
   faInstagram,
   faTwitter,
@@ -132,6 +132,9 @@ function DoctorEdit() {
 
             <div className="doctor-edit-name">
               {doctor ? doctor.name : "Loading..."}
+       {doctor.verified === 'Verified' && (
+          <span className="blue-tick"></span>
+        )}
             </div>
 
             <div className="edit-profile-degree">

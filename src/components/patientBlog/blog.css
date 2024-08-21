@@ -2,11 +2,15 @@
   display: flex;
   padding: 20px;
   margin: 40px;
+  width: 95%;
 }
 
 .main-content {
   flex: 3;
-  margin-right: 20px;
+  margin-right: 0px;
+  width: 95%;
+  padding: 30px;
+
 }
 
 .featured-section {
@@ -106,7 +110,7 @@
   flex: 2;
   margin: 5px;
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 100px;
   border: 1px solid gainsboro;
   border-radius: 8px;
   width: 430px;
@@ -138,7 +142,8 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  margin-left: -30px;
+  margin-left: 0px;
+  margin-top: 20px;
 }
 
 .sidebar-item-icon {
@@ -616,6 +621,7 @@
   /* padding: 20px; */
   background-color: white;
   border: 1px solid rgb(223, 221, 221);
+  height: 690px;
 }
 
 .bloodPrSp-card-image {
@@ -1013,4 +1019,78 @@
   /* justify-content: center; */
 }
 
-/* New Footer End */
+
+
+
+
+
+
+.featured-img {
+  width: 325px; /* 30% less than 464px */
+  height: 267px; /* 30% less than 381px */
+}
+
+.featured-details {
+  width: 325px; /* 30% less than 464px */
+}
+
+.side-post-card {
+  height: 63px; /* 30% less than 90px */
+}
+
+.side-post-img {
+  width: 49px; /* 30% less than 70px */
+  height: 49px; /* 30% less than 70px */
+}
+
+.card {
+  width: 401px; /* 30% less than 430px */
+  margin-left: -480px; /* 30% less than -400px */
+
+}
+
+.blog-section {
+  width: 420px; /* 30% less than 600px */
+}
+
+.blog-section img {
+  width: 84px; /* 30% less than 120px */
+  height: 84px; /* 30% less than 120px */
+}
+
+.treatment-card {
+  width: 385px; /* 30% less than 550px */
+}
+
+.treatment-img {
+  width: 56px; /* 30% less than 80px */
+  height: 56px; /* 30% less than 80px */
+}
+
+.living-card {
+  width: 65%; /* Adjust if needed */
+}
+
+.living-img {
+  width: 70%; /* Adjust if needed */
+}
+
+.newtreatment-card-image {
+  width: 109px; /* 30% less than 125px */
+  height: 109px; /* 30% less than 105px */
+}
+
+.moreBloodPr-card-image {
+  width: 460px; /* 30% less than 600px */
+  height: 303px; /* 30% less than 290px */
+}
+
+.bloodPrSp-card-image {
+  width: 100%; /* Adjust if needed */
+  height: 55%; /* Adjust if needed */
+}
+
+.recentBlog-card-image {
+  width: 52.5px; /* 30% less than 75px */
+  height: 38.5px; /* 30% less than 55px */
+}

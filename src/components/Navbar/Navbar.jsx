@@ -128,6 +128,8 @@ const Navbar = () => {
                   <Link className="find-doctor nav-link nav-link-style" to="/Filters">Find Provider</Link>
                 </li>
               )}
+
+
               <li className="nav-item active ml-md-4">
                 <Link className="about-nav nav-link nav-link-style" to="#">About</Link>
               </li>
@@ -153,7 +155,14 @@ const Navbar = () => {
                   <FontAwesomeIcon icon={faChevronDown} className="ml-2"/>
                 </Link>
               </li>
+              {userRole !== 'doctor' && (
+                <li className="nav-item active ml-md-4">
+                  <Link className="find-doctor nav-link nav-link-style" to="/blogs">Blog</Link>
+                </li>
+              )}
             </ul>
+
+       
             {!isLoggedIn ? (
               <ul className="navbar-nav ml-auto mr-md-2">
                   <li className="nav-item ml-md-4">
@@ -170,6 +179,7 @@ const Navbar = () => {
                           <Link className="nav-link dashboard-text-button" to="/doctorprofile/dashboardpage/">Dashboard</Link>
                       </li>
                   )}
+            
 
                   {userRole === 'doctor' && (
                       <li className="nav-item active ml-md-4">
@@ -205,6 +215,10 @@ const Navbar = () => {
                           </div>
                           </Link>
                       </li>
+                      
+
+
+
                   )}
 
                   

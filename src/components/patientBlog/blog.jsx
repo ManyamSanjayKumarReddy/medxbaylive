@@ -331,19 +331,7 @@ const BlogPage = () => {
 
       {/* Sidebar */}
       <div>
-        <input
-          type="text"
-          placeholder="Search..."
-          style={{
-            padding: "10px",
-            width: "430px",
-            borderRadius: "5px",
-            border: "1px solid #ccc",
-            fontSize: "16px",
-            marginTop: "30px",
-            marginLeft: "-400px",
-          }}
-        />
+        
         <div className="card">
           <SidebarSection title="Categories" items={categoryData} />
           <NewRecentBlog
@@ -364,7 +352,7 @@ const BlogPage = () => {
 const BlogPostList = ({ title, posts }) => {
   return (
     <div className="blog-section">
-      <h3>{title}</h3>
+      <h3>{title}ing & Diagnosis</h3>
       <ul>
         {posts.map((post, index) => (
           <li key={index}>
@@ -415,10 +403,10 @@ const NewTreatement = ({ newTreatmentData, heading }) => {
         {newTreatmentData.map((card, index) => (
           <div key={index} className="newtreatment-card">
             <div className="newtreatment-card-left">
-              <img
+              <img  
                 src={card.imageUrl}
                 alt="Card thumbnail"
-                className="newtreatment-card-image"
+                className="newtreatment-card-image cards"
               />
               <div className="newtreatment-card-author-container">
                 <div className="newtreatment-card-author">{card.author}</div>

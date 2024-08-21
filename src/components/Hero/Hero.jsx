@@ -14,22 +14,22 @@ const Hero = () => {
     const [locations, setLocations] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState(null);
 
-    const [showPopup, setShowPopup] = useState(false);
-
-    const handleShowPopup = () => setShowPopup(true);
-    const handleClosePopup = () => setShowPopup(false);
     useEffect(() => {
         const countriesList = getNames().map(country => {
             const alpha2Code = getCode(country);
             const alpha3Code = countries.alpha2ToAlpha3(alpha2Code);
+
+            // Map "ARE" to "UAE"
+            const displayValue = alpha3Code === 'ARE' ? 'UAE' : alpha3Code;
+
             return {
-                value: alpha3Code,
+                value: displayValue,
                 label: country,
                 fullLabel: country
             };
         });
         setLocations(countriesList);
-        setSelectedLocation(countriesList.find(c => c.value === 'ARE'));
+        setSelectedLocation(countriesList.find(c => c.value === 'UAE'));
     }, []);
 
     const handleLocationChange = (event) => {
@@ -40,11 +40,11 @@ const Hero = () => {
 
     const handleButtonClick = () => {
         navigate('/Filters');
-      };
+    };
+
     return (
         <>  
            <div className='hero-head container-fluid'>
-          
                 <div className='row hero-content align-items-center'>
                     <div className="col-md-6 col-12 hero-item">
                         <h5>Be Your Own Health Advocate</h5>
@@ -54,7 +54,7 @@ const Hero = () => {
                                 <HiOutlineLocationMarker className="icon-loc-src"/>
                                 <select
                                     onChange={handleLocationChange}
-                                    value={selectedLocation ? selectedLocation.value : 'ARE'}
+                                    value={selectedLocation ? selectedLocation.value : 'UAE'}
                                 >
                                     {locations.map(location => (
                                         <option key={location.value} value={location.value}>
@@ -69,9 +69,9 @@ const Hero = () => {
                                 <input type="text" className='search-input' placeholder="Search Doctors" />
                                 <div className='simple-line-small'></div>
                                 <div className="outer">
-                                <button className="search-button" onClick={handleButtonClick}>
-      Find My Provider
-    </button>
+                                    <button className="search-button" onClick={handleButtonClick}>
+                                        Find My Doctor
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -91,8 +91,6 @@ const Hero = () => {
                     </div>
                 </div>
            </div>
-
-
         </>
     );
 };

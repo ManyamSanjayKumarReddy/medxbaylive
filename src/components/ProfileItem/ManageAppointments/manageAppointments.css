@@ -116,9 +116,18 @@
 .status-dot.orange {
   background-color: orange;
 }
-
+.status-dot.blue {
+  background-color: blue;
+}
 .status-dot.red {
   background-color: red;
+}
+.appointment-acc{
+  margin-right: 10px;
+  margin-bottom: 0;
+}
+.appointment-acc span{
+  margin-right: 4px;
 }
 .tick-mark {
   width: 20px;
@@ -188,10 +197,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.appointment-modal-content h2{
-  color:#007bff;
 }
 
 .close-modal-button {

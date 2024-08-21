@@ -1,9 +1,9 @@
 /* src/FAQ.css */
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+} */
 
 .faq {
   position: relative;
@@ -11,7 +11,7 @@
   /* background-color: #ffffff; */
 
   margin: 0 auto;
-  top: -640px;
+  top: -1240px;
 }
 
 .heading {

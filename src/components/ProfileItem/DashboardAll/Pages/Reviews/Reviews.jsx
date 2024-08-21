@@ -169,7 +169,7 @@ const Reviews = () => {
 
   async function fetchReview(){
     try {
-      axios.get(`${process.env.REACT_APP_BASE_URL}/doctor/reviews/${doctorId}`)
+      axios.get(`http://localhost:8000/doctor/reviews/${doctorId}`)
       .then(response => {
         setReview(response.data.reviews)
       })
@@ -192,7 +192,7 @@ const Reviews = () => {
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const monthName = monthNames[month];
     const day = dateObject.getDate();
-    const formatteddate =`${day.toString().padStart(2, '0')} ${monthName} ${year}`
+    const formatteddate = `${day.toString().padStart(2, '0')} ${monthName} ${year}`
     return `${timeString}, ${formatteddate}`
   }
 

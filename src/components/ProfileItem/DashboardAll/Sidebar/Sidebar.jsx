@@ -18,6 +18,7 @@ const Sidebar = () => {
   const location = useLocation();
   const [activeItem, setActiveItem] = useState(location.pathname);
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
+  const [isVerified, setIsVerified] = useState(false); // Verification status state
 
   useEffect(() => {
     const handleResize = () => {
@@ -50,6 +51,14 @@ const Sidebar = () => {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
+  useEffect(() => {
+    setActiveItem(location.pathname);
+    
+    // Fetch the doctor's verification status from sessionStorage or backend
+    const verificationStatus = sessionStorage.getItem('verified');
+    setIsVerified(verificationStatus === 'Verified');
+  }, [location.pathname]);
 
   return (
     <div className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
