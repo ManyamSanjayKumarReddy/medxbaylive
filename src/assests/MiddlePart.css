@@ -124,13 +124,13 @@ body{
 .overlay-image {
     width: 100%;
     height: auto;
-    max-height: 75vh;
+    /* max-height: 75vh; */
   }
 
   .overlay-image-2 {
     width: 100%;
     height: auto;
-    max-height: 75vh;
+    /* max-height: 75vh; */
   }
   .x-image1 {
     position: relative;
@@ -166,7 +166,7 @@ body{
     z-index: 1;
 }
 .midSecondRow{
-    margin-top: 7rem;
+    margin-top: 16rem;
 }
 .col-first{
     margin-top: 30px !important;

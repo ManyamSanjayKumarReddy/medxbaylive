@@ -4,7 +4,7 @@
 .award-section{
     /* background: linear-gradient(180deg, #EDF3FF 0%, #FFFFFF 100%); */
     position: relative;
-    top:-1600px
+    top:-50px
 
 }
 
@@ -383,7 +383,7 @@ left: 0;
 @media (min-width:1024px) and (max-width: 1439px) {
     .award-section{
 
-        top:850px
+        top:600px
     
     }
 
@@ -431,7 +431,7 @@ justify-content: center;
 }
 @media (min-width:1441px) and (max-width: 4086px) {    .award-section{
   
-        top:450px
+        top:-100px
     
     }
     

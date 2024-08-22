@@ -219,7 +219,7 @@ const Filter = ({ onFilterChange, initialFilters }) => {
             speciality: '',
             languages: [],
             gender: '',
-            hospital: [],
+            hospital: '',
             availability: '',
             dateAvailability: '',
             consultation: '',
@@ -228,14 +228,6 @@ const Filter = ({ onFilterChange, initialFilters }) => {
         };
         setFormData(resetData);
         onFilterChange(resetData);
-        searchDoctors();
-    };
-
-    const sortDoctors = () => {
-        setFormData((prev) => ({
-            ...prev,
-            sortOption: document.getElementById('sortOptions').value,
-        }));
         searchDoctors();
     };
 
@@ -321,17 +313,17 @@ const Filter = ({ onFilterChange, initialFilters }) => {
                         <label>Conditions:</label>
                         <div className="checkbox-group">
                             {dropdownData.conditions.map(condition => (
-                                <div key={condition} className="checkbox-item">
-                                    <input
-                                        type="checkbox"
-                                        id={`condition-${condition}`}
-                                        name="conditions"
-                                        value={condition}   
-                                        checked={formData.conditions ? formData.conditions.includes(condition) : false}
-                                        onChange={handleCheckboxChange}
-                                    />
-                                    <label htmlFor={`condition-${condition}`}>{condition}</label>
-                                </div>
+                                 <div key={condition} className="checkbox-item">
+                                 <input
+                                     type="checkbox"
+                                     id={`condition-${condition}`}
+                                     name="conditions"
+                                     value={condition}
+                                     checked={formData.conditions.includes(condition)}
+                                     onChange={handleCheckboxChange}
+                                 />
+                                 <label htmlFor={`condition-${condition}`}>{condition}</label>
+                             </div>
                             ))}
                         </div>
                     </div>
@@ -341,7 +333,7 @@ const Filter = ({ onFilterChange, initialFilters }) => {
                     <label>Language Spoken:</label>
                     <div className="checkbox-group">
                         {dropdownData.languages.map(language => (
-                            <div key={language} className="checkbox-item">
+                            <div key={language} className="checkbox-item" >
                                 <input
                                     type="checkbox"
                                     id={`language-${language}`}

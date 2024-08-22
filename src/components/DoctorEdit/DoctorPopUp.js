@@ -6,11 +6,14 @@ import doctor from "../../assests/img/doctorprofile.jpeg";
 import axios from "axios";
 import profileImage from "../Assets/profileimg.png";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
   useEffect(() => {
     import("../DoctorEdit/DoctorPopUp.css");
   }, []);
+  const [loading, setLoading] = useState(false); 
 
   const [formData, setFormData] = useState({
     name: "",
@@ -101,7 +104,7 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
         setProfileimage(reader.result);
         setFormData((prevData) => ({
           ...prevData,
-          profilePicture: file, // Save the file object directly
+          profilePicture: file, 
         }));
       };
       reader.readAsDataURL(file);
@@ -178,15 +181,15 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
     
     return "";
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); 
     const form = new FormData();
 
     for (const key in formData) {
-        if (key == "profilePicture" && formData.profilePicture) {
+        if (key === "profilePicture" && formData.profilePicture) {
             form.append(key, formData.profilePicture);
-        }else if (Array.isArray(formData[key])) {
+        } else if (Array.isArray(formData[key])) {
             formData[key].forEach((item, index) => {
                 if (typeof item === "object") {
                     for (const nestedKey in item) {
@@ -196,7 +199,7 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
                     form.append(`${key}[${index}]`, item);
                 }
             });
-        }else {
+        } else {
             form.append(key, formData[key]);
         }
     }
@@ -211,19 +214,34 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
             }
         );
         if (response.data.success) {
-            console.log("Profile updated successfully:", response.data);
+            toast.info("Profile updated successfully!", {
+              className: 'toast-center ',
+              closeButton: true,
+              progressBar: true,
+            });
             handleClose();
             fetchDoctorDetails();
         } else {
+            toast.info(`Failed to update profile: ${response.data.message}`, {
+              className: 'toast-center toast-fail',
+              closeButton: true,
+              progressBar: true,
+            });
             console.error("Failed to update profile:", response.data.message);
         }
     } catch (error) {
-        console.error("An error occurred:", error);
-    }
-};
-
+        toast.info("An error occurred while updating the profile.", {
+          className: 'toast-center toast-fail',
+          closeButton: true,
+          progressBar: true,
+        });
+      } finally {
+        setLoading(false); 
+      }
+    };
   return (
     <Modal show={show} onHide={handleClose} centered className="custom-modal">
+          
       <Modal.Header className="custom-modal-header">
         <Modal.Title className="model-header">Edit Your Profile</Modal.Title>
         <button
@@ -237,6 +255,7 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
       </Modal.Header>
 
       <Modal.Body className="modal-body-scrollable">
+      <ToastContainer />
         <div className="profile-edit-outter">
           {profilePicturePreview ? (
             <img
@@ -747,10 +766,14 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
               </Form.Group>
             </div>
           </div>
-
-          <Button variant="primary" type="submit" className="btn-custom">
-            Update Profile
-          </Button>
+          <Button
+          variant="primary"
+          type="submit"
+          className="btn-custom"
+          disabled={loading} 
+        >
+          {loading ? 'Updating...' : 'Update Profile'} 
+        </Button>
         </Form>
       </Modal.Body>
     </Modal>

@@ -43,7 +43,7 @@ const Nestednavbar = () => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/search-doctors?what=${what}&where=${where}`, { withCredentials: true });
       console.log('Navigating with:', { doctors: response.data, what, where });
-      navigate('/profile/filters', { state: { doctors: response.data, what, where } });
+      navigate('/Filters', { state: { doctors: response.data, what, where } });
     } catch (error) {
       console.error('Error fetching doctors:', error);
     }
@@ -92,7 +92,7 @@ const Nestednavbar = () => {
               </datalist>
             </div>
             <button type="submit" className="btn button-color">
-              Find My Doctor
+              Find My Provider
             </button>
           </form>
         </div>

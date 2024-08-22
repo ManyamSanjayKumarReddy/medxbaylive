@@ -6,11 +6,11 @@ top:-200px;
 
 
 }
-.accepted-section{
+.accepted-section-edit{
   position: relative;
-  top:-900px;
+  top:-450px;
 }
-.accepted-section h2{
+.accepted-section-edit h2{
   position: relative;
     font-family: 'Matter', sans-serif;
     font-weight: 700;
@@ -52,10 +52,10 @@ top:-200px;
 
   @media(max-width:412px){
 
-.accepted-section{
+.accepted-section-edit{
     top:-70px;
   }
-  .accepted-section h2{
+  .accepted-section-edit h2{
       line-height: 45px;
   }
   .insurance-logo {
@@ -80,10 +80,10 @@ top:-200px;
   
 }
 @media (min-width:413px) and (max-width: 600px) {
-  .accepted-section{
+  .accepted-section-edit{
     top:1100px;
   }
-  .accepted-section h2{
+  .accepted-section-edit h2{
       line-height: 45px;
   }
   .insurance-logo {
@@ -107,16 +107,16 @@ top:-200px;
 }
 @media (min-width:601px) and (max-width: 676px) {
 
-  .accepted-section{
+  .accepted-section-edit{
     top:-200px;
   }
 }
 @media (min-width:678px) and (max-width: 914px) {
 
-.accepted-section{
+.accepted-section-edit{
     top:-220px;
   }
-  .accepted-section h2{
+  .accepted-section-edit h2{
       line-height: 45px;
   }
   .insurance-logo {
@@ -149,10 +149,10 @@ top:-200px;
   
 @media (min-width:915px) and (max-width: 1023px) {
 
-  .accepted-section{
+  .accepted-section-edit{
     top:-600px;
   }
-  .accepted-section h2{
+  .accepted-section-edit h2{
     line-height: 45px;
 }
 .insurance-logo {
@@ -190,7 +190,7 @@ top:-100px;
 
 
 }
-.accepted-section{
+.accepted-section-edit{
   position: relative;
   top:-600px;
 }
@@ -198,7 +198,7 @@ top:-100px;
 
 
 @media (min-width:1441px) and (max-width: 4086px) {
-  .accepted-section{
+  .accepted-section-edit{
 
     top:300px;
   }

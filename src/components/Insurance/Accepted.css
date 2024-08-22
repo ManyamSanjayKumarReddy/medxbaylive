@@ -8,7 +8,7 @@ top:-200px;
 }
 .accepted-section{
   position: relative;
-  top:-1550px;
+  top:-150px;
 }
 .accepted-section h2{
   position: relative;
@@ -192,7 +192,8 @@ top:-100px;
 }
 .accepted-section{
   position: relative;
-  top:700px;
+  top:450px;
+  
 }
 }
 
@@ -200,6 +201,6 @@ top:-100px;
 @media (min-width:1441px) and (max-width: 4086px) {
   .accepted-section{
 
-    top:300px;
+    top:-200px;
   }
 }

@@ -24,7 +24,7 @@ const AcceptedInsurances = ({ insurance }) => {
 
   return (
     <div className="Accepted-area">
-      <div className="container accepted-section">
+      <div className="container accepted-section-edit">
         <h2>Accepted Insurances</h2>
         <div className="row accepted-row justify-content-center align-items-center ">
           {insurance?.map(i => (

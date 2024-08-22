@@ -78,14 +78,17 @@ div.rbc-toolbar button {
 }
 
 .calender .rbc-event{
-  background: #0167FF;
-  color: #000;
+  color: #fff;
   font-size: 12px;
   padding: 1px;
   height: 100%;
-
 }
-
+.calender .rbc-event.booked{
+  background-color: grey;
+}
+.calender .rbc-event.free{
+  background-color: #0067FF;
+}
 .calender .rbc-event.rbc-selected{
   background: rgb(49, 104, 255);
   color: white;
@@ -94,7 +97,13 @@ div.rbc-toolbar button {
 .calender .rbc-event-content{
   white-space: normal !important;
 }
-
+.calender .rbc-event-content.booked{
+  background-color: grey;
+}
+.calender .rbc-event-content.free{
+  /* white-space: normal !important; */
+  background-color: #0067FF;
+}
 .swal2-popup{
   padding: 1rem 2rem;
   border-radius: none !important;
@@ -121,6 +130,30 @@ div.rbc-toolbar button {
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+
+.input-radio-button {
+  display: flex;
+  gap: 20px; /* Space between the radio button groups */
+  align-items: center;
+}
+
+.input-radio-button div {
+  display: flex;
+  align-items: center;
+}
+
+.input-radio-button label {
+  margin-left: 5px; /* Space between the radio button and its label */
+  margin-top: 5px;
+}
+
+.schedule-sidebar-delete{
+  font-size: 20px;
+  margin-left: 5px;
+  margin-top: 5px;
+  color: orange;
+  cursor: pointer;
 }
 
 .swal2-html-container .addtimeslot .inputgroup{
@@ -187,20 +220,23 @@ div.rbc-toolbar button {
 }
 
 .schedule-sidebar-list li {
-  background:#0167FF;
-  color: white;
+  color: #fff;
   margin-bottom: 10px;
   padding: 5px;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   overflow-y: auto; /* Add this line */
-
   /* font-family: Poppins; */
 font-size: 12px;
 font-weight: 400;
 line-height: 19.13px;
-
+}
+.schedule-sidebar-list li.booked{
+  background-color: grey !important;
+}
+.schedule-sidebar-list li.free{
+  background-color: #0167FF !important;
 }
 
 /* scroll for schedule sidebar */
@@ -236,6 +272,18 @@ line-height: 19.13px;
   margin-top: -5px;
 }
 
+.Schedule-TimeSlot-button{
+  border-radius: 5px;
+  background-color: #0067FF;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 19.2px;
+  letter-spacing: 0.02em;
+}
 
 @media (max-width:1024px){
   .allandcal{

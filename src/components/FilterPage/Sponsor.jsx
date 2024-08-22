@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import doctorProfile from '../../assests/img/Ellipse-30.png'; // Placeholder image
 import videoCall from '../../assests/img/video_call.svg';
-// import videoCallwhite from '../../assests/img/video_call_white.svg';
 import MedicalService from '../../assests/img/medical_services.svg';
-// import MedicalServiceWhite from '../../assests/img/medical_services_white.svg';
 import thumbsUp from '../../assests/img/ThumbsUp.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons'; // Filled star
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'; // Not filled star
 import { faStarHalfAlt } from '@fortawesome/free-solid-svg-icons'; // Half-filled star
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'; // Filled star
-// import { fetchFromPatient } from '../../actions/api';
-// import api from 'axios';
-// import { fetchFromPatient } from '../../actions/api.js';
 import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment/moment.js';
+import { RiArrowDownSLine } from "react-icons/ri";
+
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -40,6 +37,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
     const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
     const [consultationType, setConsultationType] = useState(''); // Default consultation type
     const [showAllHospitals, setShowAllHospitals] = useState(false); // State to show all hospitals
+    const [selectedHospital, setSelectedHospital] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -52,12 +50,16 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
 
 
     }, [doctor.profilePicture]);
-
     // Default values for dates if doctor data is missing
     // console.log(doctor.profilePicture);
 
-    const timeSlots = doctor.timeSlots || [];
-    const datesMap = timeSlots.reduce((acc, slot) => {
+    const timeSlots = doctor.timeSlots || []; 
+    const filteredTimeSlots = selectedHospital
+        ? timeSlots.filter(slot => slot.hospital === selectedHospital)
+        : timeSlots;        
+
+        
+    const datesMap = filteredTimeSlots.reduce((acc, slot) => {
         const date = new Date(slot.date).toDateString();
         if (!acc[date]) {
             acc[date] = { day: date, slots: 0, timeSlots: [] };
@@ -144,7 +146,8 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                 doctorId: doctor._id,
                 date: moment(selectedDay.day).format('YYYY-MM-DD'),
                 startTime: selectedTimeSlot,
-                consultationType: consultationType
+                consultationType: consultationType,
+                hospital : selectedHospital
             };
             console.log('Booking data:', bookingData);
     
@@ -172,7 +175,6 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                 const responseText = await response.text();
                 console.error('Unexpected response format:', responseText);
                 toast.info('Unexpected response from server. Please try again.',
-                
                     {
                       className: 'toast-center toast-fail',
                       closeButton: true,
@@ -191,12 +193,6 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
             });
         }
     };
-    
-    
-    
-
-    
-
     const renderStars = (rating) => {
         const fullStars = Math.floor(rating);
         const hasHalfStar = rating % 1 !== 0;
@@ -293,6 +289,34 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
         return null;
     };
 
+    const renderHospitalOptions = () => {
+        if (!doctor.hospitals || doctor.hospitals.length === 0) {
+            return <p>No hospitals available</p>;
+        }
+    
+        return (
+            <>
+            <div className={`sort-by`}>
+                        <div className="form-group">
+                            <select value={selectedHospital}
+                onChange={(e) => setSelectedHospital(e.target.value)}>
+  <option value="" disabled selected>Select Hospital</option>
+  {doctor.hospitals.map((hospital, index) => (
+                    <option key={index} value={hospital.name}>
+                        {hospital.name || 'Unnamed Hospital'}
+                    </option>
+                ))}
+                            </select>
+                            <RiArrowDownSLine className="arrow-icon-filter" />
+                        </div>
+                    </div>
+            </>
+            
+        );
+    };
+    
+    
+
     return (
         <>
                 <ToastContainer />
@@ -322,21 +346,11 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                             <p className="experience">{doctor.experience || "16 years experience overall"}</p>
                             <p className={`location ${isMapExpanded ? 'mapExpanded-location' : ''}`}>{doctor.city || "Pare, Mumbai"}</p>
                             <p className={`clinic ${isMapExpanded ? 'mapExpanded-clinic' : ''}`}>
-                                        {doctor.hospitals && doctor.hospitals.length > 0 ? (
-                                            <>
-                                                <p className="hospital-item">{doctor.hospitals[0].name}</p>
-                                                {showAllHospitals && doctor.hospitals.slice(1).map((hospital, index) => (
-                                                    <p key={index} className="hospital-item">{hospital.name}</p>
-                                                ))}
-                                                {doctor.hospitals.length > 1 && (
-                                                    <p style={{cursor:"pointer"}} onClick={() => setShowAllHospitals(!showAllHospitals)}>
-                                                        {showAllHospitals ? 'Show Less' : `+${doctor.hospitals.length - 1} more`}
-                                                    </p>
-                                                )}
-                                            </>
-                                        ) : (
-                                            <p>No hospitals available</p>
-                                        )}
+                            <div className="row mt-2">
+                                <div className="col">
+                                    {renderHospitalOptions()}
+                                </div>
+                            </div>
                             </p>
                             <div className={`consultation-type ${isMapExpanded ? 'mapExpanded-consultation-type' : ''}`}>
                                 {renderConsultationType()}
@@ -374,16 +388,20 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                         <div className="date-nav">
                             <button className="arrow" onClick={showPrev} disabled={startIndex === 0}>‹</button>
                             <div className="date-carousel">
-                                {dates.slice(startIndex, startIndex + (isMapExpanded ? 2 : 3)).map((date, index) => (
-                                    <div
-                                        key={index}
-                                        className={`date-item ${index + startIndex === selectedDate ? 'active' : ''}`}
-                                        onClick={() => setSelectedDate(index + startIndex)}
-                                    >
-                                        <h3>{date.day}</h3>
-                                        <span className="slots-available">{date.slots} Slots Available</span>
-                                    </div>
-                                ))}
+                                {dates.length > 0 ? (
+                                    dates.slice(startIndex, startIndex + (isMapExpanded ? 2 : 3)).map((date, index) => (
+                                        <div
+                                            key={index}
+                                            className={`date-item ${index + startIndex === selectedDate ? 'active' : ''}`}
+                                            onClick={() => setSelectedDate(index + startIndex)}
+                                        >
+                                            <h3>{date.day}</h3>
+                                            <span className="slots-available">{date.slots} Slots Available</span>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p>No slots are available</p>
+                                )}
                             </div>
                             <button className="arrow" onClick={showNext} disabled={startIndex + 3 >= dates.length}>›</button>
                         </div>

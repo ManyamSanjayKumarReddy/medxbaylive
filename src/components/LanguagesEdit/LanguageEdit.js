@@ -5,7 +5,7 @@ const languages = ['English', 'Telugu', 'Hindi', 'Balinese'];
 
 const Languages = ({Languages}) => {
   return (
-    <div className="languages-container text-center py-4">
+    <div className="languages-container-edit text-center py-4">
       <h2>Languages</h2>
       <div className="d-flex justify-content-center languages-column-container">
           <div className="languages-column ">

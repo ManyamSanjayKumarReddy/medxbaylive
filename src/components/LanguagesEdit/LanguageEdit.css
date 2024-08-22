@@ -2,13 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Matter:wght@400;500;600;700&display=swap');
 
 
-.languages-container {
+.languages-container-edit {
     padding: 20px;
     position: relative;
-    top: -800px;
+    top: -200px;
   }
 
-  .languages-container h2 {
+  .languages-container-edit h2 {
     position: relative;
     font-family: 'Matter', sans-serif;
     font-weight: 700;
@@ -42,7 +42,7 @@ top: 15px;
   }
   @media(max-width:412px){
     
-.languages-container {
+.languages-container-edit {
 
   top: 0px;
 }
@@ -59,7 +59,7 @@ top: 15px;
 
   @media (min-width:413px) and (max-width: 600px) {
         
-.languages-container {
+.languages-container-edit {
 
   top: 0px;
 }
@@ -74,21 +74,21 @@ top: 15px;
 }
   }
   @media (min-width:601px) and (max-width: 767px) {
-    .languages-container {
+    .languages-container-edit {
 
       top: -150px;
     }
   }
 
   @media (min-width:768px) and (max-width: 914px) {
-    .languages-container {
+    .languages-container-edit {
 
       top: -80px;
     }
     
   }
   @media (min-width:915px) and (max-width: 1023px) {
-    .languages-container {
+    .languages-container-edit {
 
       top: -300px;
     }
@@ -96,13 +96,13 @@ top: 15px;
   }
 
   @media (min-width:1024px) and (max-width: 1439px) {
-    .languages-container {
+    .languages-container-edit {
       padding: 20px;
       position: relative;
       top: -300px;
     }
   }
-  @media (min-width:1441px) and (max-width: 4086px) {    .languages-container {
+  @media (min-width:1441px) and (max-width: 4086px) {    .languages-container-edit {
       padding: 20px;
       position: relative;
       top: 500px;

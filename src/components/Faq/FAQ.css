@@ -11,7 +11,7 @@
   /* background-color: #ffffff; */
 
   margin: 0 auto;
-  top: -1240px;
+  top: -100px;
 }
 
 .heading {
@@ -856,7 +856,7 @@ max-width: 80%;
 
   @media (min-width:1024px) and (max-width: 1100px) {
     .faq {
-      top: 1100px;
+      top: 720px;
       height: auto;
     }
     .faq-container {
@@ -994,7 +994,7 @@ left: 10%;
 
   @media (min-width:1101px) and (max-width: 1439px) {
     .faq {
-      top: 1000px;
+      top: 700px;
     }
     .faq-left{
       width: 100%;
@@ -1033,7 +1033,7 @@ left: 10%;
   @media (min-width:1441px) and (max-width: 4086px) {
 .faq {
 
-  top: 750px;
+  top: -80px;
 }
 
   }

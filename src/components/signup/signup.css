@@ -81,7 +81,8 @@ height: auto;
 .custom-modal .modal-content {
   border-radius: 10px;
   border: none;
-  overflow-y: auto;
+  overflow-y: auto; 
+  overflow-x: hidden; 
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   height: 90vh; 
   font-family: 'Matter', sans-serif;

@@ -4,7 +4,8 @@ import Modal from 'react-modal';
 import './manageAppointments.css';
 import { MdOutlineCalendarToday } from "react-icons/md";
 import tick from '../../../assests/img/tick.png'
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 Modal.setAppElement('#root');
 
 const ManageAppointments = () => {
@@ -108,13 +109,43 @@ const ManageAppointments = () => {
     e.preventDefault();
     try {
       console.log(reviewForm);
-      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/patient/review/${selectedAppointment.doctor._id}/${selectedAppointment._id}`, reviewForm, { withCredentials: true });
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/patient/review/${selectedAppointment.doctor._id}/${selectedAppointment._id}`, 
+        reviewForm, 
+        { withCredentials: true }
+      );
       console.log('Review submitted:', response.data);
-      closeReviewModal();
+      
+
+      toast.info('Review submitted successfully!', {
+        className: 'toast-center ',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      
+
+      setTimeout(() => {
+        closeReviewModal();
+      }, 5000); 
+  
     } catch (error) {
       console.error('Error submitting review:', error);
+      toast.info('Failed to submit review. Please try again.', {
+        className: 'toast-center ',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
+  
 
   const StarRating = ({ rating, onChange, starCount }) => {
     const handleClick = (index) => {

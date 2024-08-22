@@ -206,7 +206,7 @@ const Reviews = () => {
   return (
     <div className="dashboard-page-item-review-head">
       <h2>Reviews</h2>
-      <div className='review-scroll'>
+      <div className='review-scroll-user'>
       {reviews.map((review, index) => (
         <div className="review-container" key={review._id}>
           <div className="review-header">

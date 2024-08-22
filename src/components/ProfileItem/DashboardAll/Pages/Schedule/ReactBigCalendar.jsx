@@ -5,26 +5,32 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 moment.locale("en-GB");
 const localizer = momentLocalizer(moment);
 
 const styles = `
-  .rbc-event {
-    background: blue;
+ .rbc-event {
     border-radius: 5px;
     text-align: center;
+    padding: 2px 5px;
+    color: white;
+  }
+     .rbc-event.booked {
+    background-color: grey;
+  }
+
+  .rbc-event.free {
+    background-color: #0167FF;
   }
 `;
-
 const CustomEvent = ({ event }) => (
-  <span>
+  <div className={`${event.status === 'booked' ? 'rbc-event booked' : 'rbc-event free'}`}>
     <strong>{moment(event.start).format("HH:mm")}</strong> -{" "}
-    <strong>{moment(event.end).format("HH:mm")}</strong><br />
-    {event.title} <br />
-    {event.consultationType}
-  </span>
+    <strong>{moment(event.end).format("HH:mm")}</strong>{" "}
+    { "(" + event.title + ")"} 
+    {event.consultationType ? ` (${event.consultationType})` : ''}
+  </div>
 );
 
 export default function ReactBigCalendar({ onScheduleChange }) {
@@ -36,8 +42,7 @@ export default function ReactBigCalendar({ onScheduleChange }) {
     const user = sessionStorage.getItem("loggedIn");
 
     if (!user) {
-      toast.error("You need to log in to book an appointment.");
-      navigate("/");
+      alert("You need to log in to book an appointment.");
       return;
     }
 
@@ -46,15 +51,14 @@ export default function ReactBigCalendar({ onScheduleChange }) {
         const response = await axios.get(
           `${process.env.REACT_APP_BASE_URL}/doctor/manage-time-slots`,
           {
-            // headers: {
-            //   "Access-Control-Allow-Origin": "*",
-            // },
             withCredentials: true,
           }
         );
 
         const doctorData = response.data;
         setDoctor(doctorData);
+        console.log(doctor);
+        
 
         const parseDateTime = (dateStr, timeStr) => {
           try {
@@ -101,6 +105,7 @@ export default function ReactBigCalendar({ onScheduleChange }) {
               title: slot.hospital,
               start: start,
               end: end,
+              status : slot.status
             };
           });
           
@@ -116,11 +121,12 @@ export default function ReactBigCalendar({ onScheduleChange }) {
               consultationType: booking.consultationType || 'N/A',
             };
           });
-
-          console.log("Bookings:", bookings); // Debugging: Log bookings with consultationType
-
-          
           setEvents([...timeSlots, ...bookings]);
+          const statuses = events.map((event,index)=>{ 
+            return event.status
+          });
+          console.log(statuses);
+          
         }
       } catch (error) {
         console.error("Error fetching doctor data:", error);
@@ -160,7 +166,22 @@ export default function ReactBigCalendar({ onScheduleChange }) {
   }
 
   function onSelectSlot(e) {
-    const selectedDate = moment(e.start).format("YYYY-MM-DD"); 
+    const selectedDate = moment(e.start).format("YYYY-MM-DD");
+  
+    // Check if the selected date is before today's date
+    if (moment(selectedDate).isBefore(moment().format("YYYY-MM-DD"))) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Date',
+        text: 'You cannot add time slots for past dates.',
+      });
+      return;
+    }
+  
+    const selectedEndDate = moment(new Date())
+      .add(1, "days")
+      .format("YYYY-MM-DD");
+  
     const filteredEvents = events.filter((event) => {
       const eventDate = moment(event.start).format("YYYY-MM-DD");
       return eventDate === selectedDate;
@@ -173,8 +194,23 @@ export default function ReactBigCalendar({ onScheduleChange }) {
       html: `
         <form class="addtimeslot">
           <div class="inputgroup">
-            <label htmlFor="date">Date</label>
-            <input type="date" id="date" value="${selectedDate}" readonly/>
+            <label>Timeslot Type</label>
+            <div class="input-radio-button">
+              <div>
+                <input type="radio" id="single" name="slotType" value="Single" checked>
+                <label for="single">Single</label>
+              </div>
+              <div>
+                <input type="radio" id="multiple" name="slotType" value="Multiple">
+                <label for="multiple">Multiple</label>
+              </div>
+            </div>
+          </div>
+          <div id="dategroup">
+            <div class="inputgroup">
+              <label htmlFor="date">Date</label>
+              <input type="date" id="date" value="${selectedDate}" readonly/>
+            </div>
           </div>
           <div id="lineargroup">
             <div class="inputgroup">
@@ -191,7 +227,7 @@ export default function ReactBigCalendar({ onScheduleChange }) {
             <select id="hospital" name="hospital" class="form-control">
               <option value=""></option>
               ${
-                doctor.doctor.hospitals
+                doctor?.doctor?.hospitals
                   ? doctor.doctor.hospitals
                       .map(
                         (hospital) =>
@@ -206,42 +242,80 @@ export default function ReactBigCalendar({ onScheduleChange }) {
       `,
       confirmButtonText: "Add Time Slot",
       showCancelButton: true,
+      didOpen: () => {
+        const singleRadio = document.getElementById('single');
+        const multipleRadio = document.getElementById('multiple');
+  
+        singleRadio.addEventListener('change', () => {
+          if (singleRadio.checked) {
+            document.getElementById('dategroup').innerHTML = `
+              <div class="inputgroup">
+                <label htmlFor="date">Date</label>
+                <input type="date" id="date" value="${selectedDate}" readonly/>
+              </div>
+            `;
+          }
+        });
+  
+        multipleRadio.addEventListener('change', () => {
+          if (multipleRadio.checked) {
+            document.getElementById('dategroup').innerHTML = `
+              <div id="lineargroup">
+                <div class="inputgroup">
+                  <label htmlFor="startdate">Start Date</label>
+                  <input type="date" id="startdate" value="${selectedDate}" />
+                </div>
+                <div class="inputgroup">
+                  <label htmlFor="enddate">End Date</label>
+                  <input type="date" id="enddate" value="${selectedEndDate}" />
+                </div>
+              </div>
+            `;
+          }
+        });
+      },
       preConfirm: () => {
-        const date = document.getElementById("date").value;
+        const slotType = document.querySelector('input[name="slotType"]:checked').value;
+        const date = document.getElementById("date") ? document.getElementById("date").value : null;
+        const startdate = document.getElementById("startdate") ? document.getElementById("startdate").value : null;
+        const enddate = document.getElementById("enddate") ? document.getElementById("enddate").value : null;
         const starttime = document.getElementById("starttime").value;
         const endtime = document.getElementById("endtime").value;
         const hospital = document.getElementById("hospital").value;
-        if (!starttime || !endtime || !hospital) {
+        
+        if (slotType === 'Single' && (!starttime || !endtime || !hospital || !date)) {
+          Swal.showValidationMessage("Please fill all details before proceeding!");
+          return null;
+        } else if (slotType === 'Multiple' && (!startdate || !enddate || !starttime || !endtime || !hospital)) {
           Swal.showValidationMessage("Please fill all details before proceeding!");
           return null;
         } else {
-          return { date, starttime, endtime, hospital };
+          return { slotType, date, startdate, enddate, starttime, endtime, hospital };
         }
       },
     }).then((result) => {
       if (result.isConfirmed && result.value) {
-        const { date, starttime, endtime, hospital } = result.value;
-
+        const { slotType, date, startdate, enddate, starttime, endtime, hospital } = result.value;
+        
         const newEvent = {
           title: hospital,
-          start: new Date(`${date}T${starttime}:00`),
-          end: new Date(`${date}T${endtime}:00`),
+          start: new Date(`${slotType === 'Single' ? date : startdate}T${starttime}:00`),
+          end: new Date(`${slotType === 'Single' ? date : enddate}T${endtime}:00`),
+          slotType,
         };
-
-        console.log("New Event:", newEvent); // Debugging: Log the new event details
-
+  
         setEvents((prevEvents) => [...prevEvents, newEvent]);
-
-        // Optionally, make an API call to save the new time slot
-        axios.post("http://localhost:8000/doctor/add-time-slot", {
-          date,
+  
+        axios.post(`${process.env.REACT_APP_BASE_URL}/doctor/add-time-slot`, {
+          date: slotType === 'Single' ? date : startdate,
+          endDate: enddate,
           startTime: starttime,
           endTime: endtime,
           hospital,
-        },{withCredentials:true})
+          slotType,
+        }, { withCredentials: true })
         .then(() => {
           Swal.fire("Time Slot Added!", "", "success");
-          console.log("Event added successfully");
         })
         .catch((error) => {
           console.error("Error adding time slot:", error);
@@ -252,10 +326,10 @@ export default function ReactBigCalendar({ onScheduleChange }) {
       }
     });
   }
+  
 
   return (
     <>
-            <ToastContainer />
       <style>{styles}</style>
       <Calendar
         views={["month", "day"]}

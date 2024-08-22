@@ -5,7 +5,7 @@
 .languages-container {
     padding: 20px;
     position: relative;
-    top: -1300px;
+    top: -50px;
   }
 
   .languages-container h2 {
@@ -99,12 +99,12 @@ top: 15px;
     .languages-container {
       padding: 20px;
       position: relative;
-      top: 950px;
+      top: 650px;
     }
   }
   @media (min-width:1441px) and (max-width: 4086px) {    .languages-container {
       padding: 20px;
       position: relative;
-      top: 500px;
+      top: -70px;
     }
   }

@@ -38,6 +38,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
     const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
     const [consultationType, setConsultationType] = useState('video call'); // Default consultation type
     const [showAllHospitals, setShowAllHospitals] = useState(false); // State to show all hospitals
+    const [selectedHospital, setSelectedHospital] = useState(''); // State for selected hospital
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -54,8 +55,11 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
     // Default values for dates if doctor data is missing
     // console.log(doctor.profilePicture);
 
-    const timeSlots = doctor.timeSlots || [];
-    const datesMap = timeSlots.reduce((acc, slot) => {
+    const timeSlots = doctor.timeSlots || []; 
+    const filteredTimeSlots = selectedHospital
+        ? timeSlots.filter(slot => slot.hospital === selectedHospital)
+        : timeSlots;        
+    const datesMap = filteredTimeSlots.reduce((acc, slot) => {
         const date = new Date(slot.date).toDateString();
         if (!acc[date]) {
             acc[date] = { day: date, slots: 0, timeSlots: [] };
@@ -64,7 +68,6 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
         acc[date].timeSlots.push(slot);
         return acc;
     }, {});
-
     const dates = Object.values(datesMap);
 
     const groupedSlots = {
@@ -127,6 +130,16 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
             }, 2000); 
             return;
         }
+
+        if (!selectedHospital) {
+            toast.info('Please select a hospital.', {
+                className: 'toast-center',
+                closeButton: true,
+                progressBar: true,
+            });
+            return;
+        }
+
     
         try {
             const selectedDay = dates[selectedDate];
@@ -289,6 +302,48 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
         return null;
     };
 
+    const renderHospitalOptions = () => {
+        if (!doctor.hospitals || doctor.hospitals.length === 0) {
+            return <p>No hospitals available</p>;
+        }
+
+        const hospitals = showAllHospitals
+            ? doctor.hospitals
+            : doctor.hospitals.slice(0, 2);
+
+        return (
+            <>
+                {hospitals.map((hospital, index) => (
+                    <div key={index} className="form-check">
+                        <input
+                            className="form-check-input"
+                            type="radio"
+                            id={`hospital${index}`}
+                            name="hospital"
+                            value={hospital.name}
+                            checked={selectedHospital === hospital.name}
+                            onChange={(e) => setSelectedHospital(e.target.value)}
+                        />
+                        <label className="form-check-label" htmlFor={`hospital${index}`}>
+                            {hospital.name || 'Unnamed Hospital'}
+                        </label>
+                    </div>
+                ))}
+                {doctor.hospitals.length > 2 && !showAllHospitals && (
+                    <button className="btn btn-link" onClick={() => setShowAllHospitals(true)}>
+                        Show All Hospitals
+                    </button>
+                )}
+                {showAllHospitals && (
+                    <button className="btn btn-link" onClick={() => setShowAllHospitals(false)}>
+                        Show Less
+                    </button>
+                )}
+            </>
+        );
+    };
+
+
     return (
         <>
                 <ToastContainer />
@@ -318,21 +373,12 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                             <p className="experience">{doctor.experience || "16 years experience overall"}</p>
                             <p className={`location ${isMapExpanded ? 'mapExpanded-location' : ''}`}>{doctor.city}</p>
                             <p className={`clinic ${isMapExpanded ? 'mapExpanded-clinic' : ''}`}>
-                                {doctor.hospitals && doctor.hospitals.length > 0 ? (
-                                    <>
-                                        <p className="hospital-item">{doctor.hospitals[0].name}</p>
-                                        {showAllHospitals && doctor.hospitals.slice(1).map((hospital, index) => (
-                                            <p key={index} className="hospital-item">{hospital.name}</p>
-                                        ))}
-                                        {doctor.hospitals.length > 1 && (
-                                            <p style={{ cursor: "pointer" }} onClick={() => setShowAllHospitals(!showAllHospitals)}>
-                                                {showAllHospitals ? 'Show Less' : `+${doctor.hospitals.length - 1} more`}
-                                            </p>
-                                        )}
-                                    </>
-                                ) : (
-                                    <p>No hospitals available</p>
-                                )}
+                            <div className="row mt-2">
+                                <div className="col">
+                                    <h6>Select Hospital:</h6>
+                                    {renderHospitalOptions()}
+                                </div>
+                            </div>
                             </p>
                             <div className={`consultation-type ${isMapExpanded ? 'mapExpanded-consultation-type' : ''}`}>
                                 {renderConsultationType()}

@@ -6,7 +6,7 @@ h2 {
   margin-bottom: 20px;
 }
 
-.review-scroll {
+.review-scroll-user {
   max-height: 400px;
   overflow-y: auto;
 }
@@ -28,12 +28,12 @@ h2 {
 }
 
 .review-idnumber {
-  font-weight: bold;
+
   margin-right: 10px;
 }
 
 .review-details-item {
-  font-weight: bold;
+
   font-size: 19px;
   display: flex;
   flex-direction: column;
@@ -44,7 +44,9 @@ h2 {
   margin: 0;
   font-size: 0.9em;
 }
-
+.review-day{
+font-weight: bold;
+}
 .review-body {
   flex-grow: 1;
   text-align: center;

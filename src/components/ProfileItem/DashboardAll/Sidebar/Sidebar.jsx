@@ -38,6 +38,7 @@ const Sidebar = () => {
       .then(() => {
         sessionStorage.clear();
         navigate('/'); 
+        window.location.reload(); 
       })
       .catch(error => {
         console.error('Error during logout:', error);

@@ -197,6 +197,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align:center;
 }
 
 .close-modal-button {
@@ -305,6 +306,29 @@
   color: #FFD700; /* Color for filled stars */
 }
 
+
+.toast-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  padding: 16px;
+  color: #0067FF;
+  border-radius: 8px;
+  font-size: 16px;
+  text-align: center;
+}
+.toast-center .Toastify__close-button {
+  color: #0067FF; 
+}
+
+.toast-center .Toastify__progress-bar {
+  color: #0067FF !important;
+}
+.toast-center .Toastify__toast-icon {
+  color: #0067FF; 
+}
 
 
 /* Media Queries for Tablet View */

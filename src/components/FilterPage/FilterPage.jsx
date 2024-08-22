@@ -110,7 +110,7 @@ const FilterPage = () => {
   
     return doctors.filter((doctor) => {
       const getStringValue = (value) => (typeof value === 'string' ? value.toLowerCase().replace(" ", "") : '');
-      console.log(filters)
+      // console.log(filters)
 
       const country = getStringValue(doctor.country || '');
       const state = getStringValue(doctor.state || '');
@@ -153,7 +153,7 @@ const FilterPage = () => {
 
 
   const filteredDoctors = filterDoctors(doctors);
-  console.log(filteredDoctors,"after")
+  // console.log(filteredDoctors,"after")
 
   
 
@@ -194,7 +194,6 @@ const FilterPage = () => {
             </div>
           </div>
         </div>
-    
 
         <Footer />
       </div>

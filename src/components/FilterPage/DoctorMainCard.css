@@ -317,7 +317,23 @@
   background-color: #2AA7FF;
   transition: left 0.3s, width 0.3s;
 }
-  
+.custom-dropdown {
+  padding: 5px 2px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.custom-dropdown:hover {
+  border-color: #007bff; /* Change on hover */
+}
+
+.custom-dropdown {
+  transition: all 0.3s ease;
+}
+
 .date-item h3 {
   margin: 5px 0;
   font-size: 15px;

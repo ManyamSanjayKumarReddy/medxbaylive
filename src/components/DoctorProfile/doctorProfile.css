@@ -134,22 +134,24 @@ overflow: hidden;
 }
 
 .doctor-profile-container{
-    width: 1307px;
-height: 1756px;
-top: 3%;
+  width: 100%;
+height: auto;
+top: 0%;
 left: 72px;
 position: relative;
 display: flex;
+margin-left: auto;
+margin-right: auto;
 }
 .doctor-details {
  position: relative;
- top: -15%;
+ top: -280px;
   }
   
 .doctor-profile-img{
     width: 311px;
 height: 341px;
-top:-420px;
+top:-440px;
 
 
 border-radius: 53px 0px 53px 0px;
@@ -276,7 +278,7 @@ color: #414146;
 .share-box{
     width: 1432px;
 height: 179px;
-margin-top: 22%;
+margin-top: 23%;
 left: 4px;
 gap: 0px;
 border: 1px 0px 0px 0px;
@@ -922,7 +924,7 @@ color: #ffffff;
     position: relative;
     width: 743px;
 height: 48px;
-top: -1720px;
+top: -280px;
 text-align: center;
 justify-content: center;
 align-items: center;
@@ -1011,7 +1013,7 @@ border: 1px solid #0000001A
   position: relative;
   width: 100% !important;
 height: 100% !important;
-top: -1700px !important;
+top: -250px !important;
 left: 289px !important;
 border-radius: 15px;
 transition: transform 0.3s ease-in-out;
@@ -2382,8 +2384,8 @@ left: 586px;
 @media (min-width:1024px) and (max-width: 1439px) {
   .doctor-profile-container{
     width: 100%;
-height: auto;
-top: 3%;
+    height: auto;
+top: 0%;
 left: 10%;
 position: relative;
 display: flex;
@@ -2394,7 +2396,7 @@ margin-right: auto;
   .share-box{
     width: 100%;
 height: 179px;
-top:450px;
+top:130px;
 left: 4px;
 gap: 0px;
 border: 1px 0px 0px 0px;
@@ -2402,6 +2404,20 @@ position: relative;
 background: #E4EDFF;
 border: 1px solid #0000001A
 }
+
+.doctor-profile-img{
+  width: 311px;
+height: 341px;
+top:-320px;
+
+
+}
+.doctor-details {
+  position: relative;
+top:  -160px;
+
+   }
+   
   .Appointment-container{
 
     display: flex; 
@@ -2418,7 +2434,7 @@ margin-right: auto;
 
 
   .doctor-appoinment-card-container{
-    top:600px !important;
+    top:320px !important;
     left: 0% !important;
  
  
@@ -2452,7 +2468,7 @@ margin-right: auto;
 .doctor-details-header{
 width: 743px;
 height: 48px;
-top: -1270px;
+top: 300px;
 left: 0px;
 margin-left: auto;
 margin-right: auto;
@@ -2514,10 +2530,9 @@ margin-right: auto;
 
 }
   .doctor-profile-img{
-    /* margin-left: auto;
-    margin-right: auto; */
-    transform: translateX(-50%);
-    left: 80.5%;
+left: 5%;
+   
+
   }
   .share-box{
     width: 100%;
@@ -2529,7 +2544,7 @@ height: 179px;
 
   width: 743px;
 height: 48px;
-top: 185px;
+top: -295px;
 margin-left: auto;
 margin-right: auto;
 left: 0px;
@@ -2537,17 +2552,18 @@ left: 0px;
 }
 .doctor-appoinment-card-container{
 
-top:200px !important;
-left: 0px;
-margin-left: auto;
-margin-right: auto;
+top:-260px !important;
+left: 0px !important;
+
 
 
 }
 .doctor-appoinment-card-one{
 
-top: 0px;
-left: 0px;
+top: 0px !important;
+left: 0px !important;
+margin-left: auto;
+margin-right: auto;
 
 }
 .doctor-appoinment-card-two{
