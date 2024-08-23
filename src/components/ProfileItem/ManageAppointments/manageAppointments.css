@@ -184,7 +184,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.custom-overlay {
+.appointment-custom-overlay {
   position: fixed; /* Ensure overlay covers the whole viewport */
   top: 0;
   left: 0;
@@ -197,10 +197,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align:center;
 }
 
-.close-modal-button {
+.appointment-modal-content h2{
+  color:#007bff;
+}
+
+.appointment-close-modal-button {
   margin-top: 20px;
   background-color: #007bff;
   color: white;
@@ -210,7 +213,7 @@
   cursor: pointer;
 }
 
-.close-modal-button:hover {
+.appointment-close-modal-button:hover {
   background-color: #0056b3;
 }
 
@@ -226,7 +229,14 @@
   max-width: 600px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
+.review-custom-overlay {
+  position: fixed; /* Ensure overlay covers the whole viewport */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
 .review-modal-content {
   display: flex;
   flex-direction: column;
@@ -275,15 +285,19 @@
    background-color: #0056b3;
 }
 
-.review-custom-modal .review-modal-content form .close-modal-button {
-  background-color: #007bff; 
-  color: white; 
-  padding: 10px 20px; 
-  border: none; 
+
+.review-close-modal-button{
+  margin-top: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
   cursor: pointer;
-  border-radius: 4px; 
-  transition: background-color 0.3s; 
-  margin-left: 10px; 
+}
+
+.review-close-modal-button:hover {
+  background-color: #0056b3;
 }
 
 .review-custom-modal .review-modal-content form .close-modal-button:hover {

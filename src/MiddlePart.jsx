@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
 import maledoc3 from './assests/img/maledoc3.png'
@@ -9,18 +9,13 @@ import doctorProfile4 from './assests/img/doctor-profile-4.png'
 import smallbar from './assests/img/smallbar.png'
 import largebar from './assests/img/largebar.png'
 import './assests/MiddlePart.css'
-import { Card, Form, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import yunche3 from '../src/assests/img/yunche2.png'
+// import yunche3 from '../src/assests/img/yunche2.png'
 import midyunche from '../src/assests/img/midyunche.png'
 
 const MiddlePart = () => {
-  const handleShowPopup = () => {
-    window.location.href = 'https://mxb-providerslaunch.zoholandingpage.com/patients/';
-  };
-  const handleShowPopupProviders = () => {
-    window.location.href = 'https://mxb-providerslaunch.zoholandingpage.com/zoho-marketing-automation-workspace/Prelaunch%20-%20Providers/';
-  };
+
 
   useEffect(() => {
     const handleScroll = () => {

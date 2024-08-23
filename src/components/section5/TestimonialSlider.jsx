@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './TestimonialSlider.css';
-import { RiDoubleQuotesL } from "react-icons/ri";
+
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 
 

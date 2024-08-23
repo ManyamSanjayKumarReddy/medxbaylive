@@ -115,8 +115,6 @@ const ManageAppointments = () => {
         { withCredentials: true }
       );
       console.log('Review submitted:', response.data);
-      
-
       toast.info('Review submitted successfully!', {
         className: 'toast-center ',
         autoClose: 5000,
@@ -126,12 +124,7 @@ const ManageAppointments = () => {
         draggable: true,
         progress: undefined,
       });
-      
-
-      setTimeout(() => {
-        closeReviewModal();
-      }, 5000); 
-  
+      closeReviewModal();
     } catch (error) {
       console.error('Error submitting review:', error);
       toast.info('Failed to submit review. Please try again.', {
@@ -145,7 +138,6 @@ const ManageAppointments = () => {
       });
     }
   };
-  
 
   const StarRating = ({ rating, onChange, starCount }) => {
     const handleClick = (index) => {
@@ -232,9 +224,9 @@ const ManageAppointments = () => {
         onRequestClose={closeModal}
         contentLabel="Appointment Details"
         className="view-appointment-modal"
-        overlayClassName="custom-overlay"
+        overlayClassName="appointment-custom-overlay"
       >
-        <div className="modal-content">
+        <div className="appointment-modal-content">
           <h2>Appointment Details</h2>
           {selectedAppointment ? (
             <>
@@ -260,7 +252,7 @@ const ManageAppointments = () => {
           ) : (
             <p>No appointment selected.</p>
           )}
-          <button onClick={closeModal} className="close-modal-button">Close</button>
+          <button onClick={closeModal} className="appointment-close-modal-button">Close</button>
         </div>
 
       </Modal>
@@ -270,7 +262,7 @@ const ManageAppointments = () => {
         onRequestClose={closeReviewModal}
         contentLabel="Add Review"
         className="review-custom-modal"
-        overlayClassName="custom-overlay"
+        overlayClassName="review-custom-overlay"
       >
         <div className="review-modal-content">
           {selectedAppointment ? (
@@ -300,7 +292,7 @@ const ManageAppointments = () => {
                   </label>
                 </div>
                 <button type="submit" className="submit-review-button">Submit Review</button>
-                <button type="button" onClick={closeReviewModal} className="close-modal-button">Close</button>
+                <button type="button" onClick={closeReviewModal} className="review-close-modal-button">Close</button>
               </form>
             </>
           ) : (

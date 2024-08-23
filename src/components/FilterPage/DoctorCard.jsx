@@ -12,7 +12,7 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'; // Filled star
 // import api from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { fetchFromPatient } from '../../actions/api.js';
+
 import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment/moment.js';
 

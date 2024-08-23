@@ -3,7 +3,7 @@ import React from "react";
 import "./blog.css";
 import {
   FaTag,
-  FaTelegram,
+
   FaStar,
   FaMapMarkerAlt,
   FaTimes,
@@ -98,102 +98,102 @@ const BlogPage = () => {
     },
   ];
 
-  const treatmentPosts = [
-    {
-      title: "Medication for High Blood Pressure",
-      description: "Various medications can help manage high blood pressure...",
-      imageUrl:
-        "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-      author: "Sarah Green",
-      time: "4 min read",
-    },
-    {
-      title: "Lifestyle Changes to Reduce Blood Pressure",
-      description: "Learn how small changes can have a big impact...",
-      imageUrl:
-        "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-      author: "Paul Brown",
-      time: "5 min read",
-    },
-    {
-      title: "Alternative Therapies for Hypertension",
-      description: "Explore non-pharmaceutical options...",
-      imageUrl:
-        "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-      author: "Lisa Blue",
-      time: "6 min read",
-    },
-    {
-      title: "Alternative Therapies for Hypertension",
-      description: "Explore non-pharmaceutical options...",
-      imageUrl:
-        "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-      author: "Lisa Blue",
-      time: "6 min read",
-    },
-    {
-      title: "Alternative Therapies for Hypertension",
-      description: "Explore non-pharmaceutical options...",
-      imageUrl:
-        "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-      author: "Lisa Blue",
-      time: "6 min read",
-    },
+  // const treatmentPosts = [
+  //   {
+  //     title: "Medication for High Blood Pressure",
+  //     description: "Various medications can help manage high blood pressure...",
+  //     imageUrl:
+  //       "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
+  //     author: "Sarah Green",
+  //     time: "4 min read",
+  //   },
+  //   {
+  //     title: "Lifestyle Changes to Reduce Blood Pressure",
+  //     description: "Learn how small changes can have a big impact...",
+  //     imageUrl:
+  //       "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
+  //     author: "Paul Brown",
+  //     time: "5 min read",
+  //   },
+  //   {
+  //     title: "Alternative Therapies for Hypertension",
+  //     description: "Explore non-pharmaceutical options...",
+  //     imageUrl:
+  //       "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
+  //     author: "Lisa Blue",
+  //     time: "6 min read",
+  //   },
+  //   {
+  //     title: "Alternative Therapies for Hypertension",
+  //     description: "Explore non-pharmaceutical options...",
+  //     imageUrl:
+  //       "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
+  //     author: "Lisa Blue",
+  //     time: "6 min read",
+  //   },
+  //   {
+  //     title: "Alternative Therapies for Hypertension",
+  //     description: "Explore non-pharmaceutical options...",
+  //     imageUrl:
+  //       "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
+  //     author: "Lisa Blue",
+  //     time: "6 min read",
+  //   },
 
-    {
-      title: "Alternative Therapies for Hypertension",
-      description: "Explore non-pharmaceutical options...",
-      imageUrl:
-        "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-      author: "Lisa Blue",
-      time: "6 min read",
-    },
-  ];
+  //   {
+  //     title: "Alternative Therapies for Hypertension",
+  //     description: "Explore non-pharmaceutical options...",
+  //     imageUrl:
+  //       "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
+  //     author: "Lisa Blue",
+  //     time: "6 min read",
+  //   },
+  // ];
 
-  const livingPosts = [
-    {
-      imageUrl: "path/to/image3.jpg",
-      title: "Living with A",
-      description: "Description for living with A",
-      time: "3 mins",
-      name: "Nurse Johnson",
-    },
-    {
-      imageUrl: "path/to/image4.jpg",
-      title: "Living with B",
-      description: "Description for living with B",
-      time: "8 mins",
-      name: "Nurse Williams",
-    },
-    {
-      imageUrl: "path/to/image4.jpg",
-      title: "Living with B",
-      description: "Description for living with B",
-      time: "8 mins",
-      name: "Nurse Williams",
-    },
-    {
-      imageUrl: "path/to/image4.jpg",
-      title: "Living with B",
-      description: "Description for living with B",
-      time: "8 mins",
-      name: "Nurse Williams",
-    },
-    {
-      imageUrl: "path/to/image4.jpg",
-      title: "Living with B",
-      description: "Description for living with B",
-      time: "8 mins",
-      name: "Nurse Williams",
-    },
-    {
-      imageUrl: "path/to/image4.jpg",
-      title: "Living with B",
-      description: "Description for living with B",
-      time: "8 mins",
-      name: "Nurse Williams",
-    },
-  ];
+  // const livingPosts = [
+  //   {
+  //     imageUrl: "path/to/image3.jpg",
+  //     title: "Living with A",
+  //     description: "Description for living with A",
+  //     time: "3 mins",
+  //     name: "Nurse Johnson",
+  //   },
+  //   {
+  //     imageUrl: "path/to/image4.jpg",
+  //     title: "Living with B",
+  //     description: "Description for living with B",
+  //     time: "8 mins",
+  //     name: "Nurse Williams",
+  //   },
+  //   {
+  //     imageUrl: "path/to/image4.jpg",
+  //     title: "Living with B",
+  //     description: "Description for living with B",
+  //     time: "8 mins",
+  //     name: "Nurse Williams",
+  //   },
+  //   {
+  //     imageUrl: "path/to/image4.jpg",
+  //     title: "Living with B",
+  //     description: "Description for living with B",
+  //     time: "8 mins",
+  //     name: "Nurse Williams",
+  //   },
+  //   {
+  //     imageUrl: "path/to/image4.jpg",
+  //     title: "Living with B",
+  //     description: "Description for living with B",
+  //     time: "8 mins",
+  //     name: "Nurse Williams",
+  //   },
+  //   {
+  //     imageUrl: "path/to/image4.jpg",
+  //     title: "Living with B",
+  //     description: "Description for living with B",
+  //     time: "8 mins",
+  //     name: "Nurse Williams",
+  //   },
+  // ];
 
   const categories = [
     { title: "Hydration or Moisturization (10)", icon: FaTag },

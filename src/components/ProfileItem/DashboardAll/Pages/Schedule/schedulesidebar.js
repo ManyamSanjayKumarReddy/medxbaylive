@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import './myschedule.css';
+import './Myschedule.css';
 import { MdDelete } from "react-icons/md";
 
 function Sidebar({ scheduleList, doctor, setEvents }) {
@@ -217,7 +217,7 @@ function Sidebar({ scheduleList, doctor, setEvents }) {
   
         setEvents((prevEvents) => [...prevEvents, newEvent]);
   
-        axios.post("http://localhost:8000/doctor/add-time-slot", {
+        axios.post(`${process.env.REACT_APP_BASE_URL}/doctor/add-time-slot`, {
           date: slotType === 'Single' ? date : startdate,
           endDate: enddate,
           startTime: starttime,
@@ -248,7 +248,6 @@ function Sidebar({ scheduleList, doctor, setEvents }) {
         {timeSlots.map((schedule, index) => (
           <div className='d-flex'>
           <li key={index} className={`${schedule.status === "booked" ? "booked":"free"}`}>
-            {schedule.status}
             <div >
               {moment(schedule.start).format('MMM DD, YYYY HH:mm')} - {moment(schedule.end).format('HH:mm')}
             </div>
@@ -261,7 +260,7 @@ function Sidebar({ scheduleList, doctor, setEvents }) {
       <p>Events</p>
       <ul className="schedule-sidebar-list">
         {events.map((schedule, index) => (
-          <li key={index}>
+          <li key={schedule.id} className={`${schedule.status === "booked" ? "booked":"free"}`}>
             <div>
               <strong>{schedule.consultationType}</strong><br />
               {moment(schedule.start).format('MMM DD, YYYY HH:mm')} - {moment(schedule.end).format('HH:mm')}

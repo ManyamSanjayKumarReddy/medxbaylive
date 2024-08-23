@@ -6,17 +6,17 @@ import ManageAppointments from '../ProfileItem/ManageAppointments/ManageAppointm
 import Profileedit from '../ProfileItem/ProfileEdit/Profileedit';
 import Inbox from '../ProfileItem/Inbox/Inbox';
 import Prescriptions from '../ProfileItem/Prescriptions/Prescriptions';
-import Reviews from '../ProfileItem/Reviews/Reviews';
-import Settings from '../ProfileItem/Settings/Settings';
+// import Reviews from '../ProfileItem/Reviews/Reviews';
+// import Settings from '../ProfileItem/Settings/Settings';
 import Notification from '../ProfileItem/Notification/Notification';
-import Language from '../ProfileItem/Language/Language';
+// import Language from '../ProfileItem/Language/Language';
 import ProfileLayout from '../Layout/ProfileLayout';
 import DoctorLayout from '../Layout/DoctorLayout';
 import ConnectedRoutes from '../ProfileItem/DashboardAll/ConnectedRoutes/ConnectedRoutes';
 
 
 import Nestednavbar from '../Nestednavbar2/Nestednavbar';
-import Footer from '../footer/footerrs';
+// import Footer from '../footer/footerrs';
 import UserFooter from '../footer/UserFooter';
 const ProfileRoutes = () => {
   const location = useLocation();

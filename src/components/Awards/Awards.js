@@ -1,6 +1,6 @@
 import React from 'react';
 import './Awards.css';
-import { BiSolidTrophy } from "react-icons/bi";
+
 
 
 

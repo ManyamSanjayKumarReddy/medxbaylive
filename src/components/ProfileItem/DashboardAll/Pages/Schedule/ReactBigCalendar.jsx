@@ -11,10 +11,12 @@ const localizer = momentLocalizer(moment);
 
 const styles = `
  .rbc-event {
+ background :transparent;
     border-radius: 5px;
     text-align: center;
     padding: 2px 5px;
     color: white;
+    border :none !important;
   }
      .rbc-event.booked {
     background-color: grey;
@@ -28,8 +30,11 @@ const CustomEvent = ({ event }) => (
   <div className={`${event.status === 'booked' ? 'rbc-event booked' : 'rbc-event free'}`}>
     <strong>{moment(event.start).format("HH:mm")}</strong> -{" "}
     <strong>{moment(event.end).format("HH:mm")}</strong>{" "}
-    { "(" + event.title + ")"} 
-    {event.consultationType ? ` (${event.consultationType})` : ''}
+    {event?.title ? (
+      `(${event.title})`
+    ) : (
+      event.consultationType ? ` (${event.consultationType})` : ''
+    )}
   </div>
 );
 

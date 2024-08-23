@@ -11,8 +11,7 @@ import heartbeat from '../Assets/heartbeat.svg';
 import brand from '../Assets/medbrand.png'
 import curvedesign from '../../assests/img/curvedesign.svg'
 import curvedsigntwo from '../../assests/img/curvedsigntwo.svg';
-import google from '../../assests/img/google.png'
-import apple from '../../assests/img/apple.png'
+
 import Typed from 'typed.js';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';

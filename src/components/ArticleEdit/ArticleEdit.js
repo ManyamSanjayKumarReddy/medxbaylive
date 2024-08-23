@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ArticleEdit.css';
 import { Link } from 'react-router-dom';
-import { BsArrowRight } from "react-icons/bs";
+
 
 const bufferToBase64 = (buffer) => {
     if (buffer?.type === 'Buffer' && Array.isArray(buffer?.data)) {

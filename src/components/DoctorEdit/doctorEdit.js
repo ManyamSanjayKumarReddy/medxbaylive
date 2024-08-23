@@ -2,14 +2,14 @@ import React, { useEffect, useState, useRef } from "react";
 
 import "./doctoredit.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAward, faPlus, faUserMd,faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { faAward, faPlus, faUserMd } from "@fortawesome/free-solid-svg-icons";
 import {
   faInstagram,
   faTwitter,
   faFacebook,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
-
+import { MdVerified } from 'react-icons/md'; 
 // import Articles from "../ArticleEdit/ArticleEdit";
 import Languages from "../LanguagesEdit/LanguageEdit";
 
@@ -21,7 +21,6 @@ import image from "../../assests/img/Image.png";
 import hospitallogo from "../../assests/img/hospitallogo.png";
 import faqimage from "../../assests/img/faqimage.png";
 import hanfheart from "../../assests/img/handheart.svg";
-import doctoreditimage from "../../assests/img/doctoreditimage.png";
 import DoctorPopUp from "./DoctorPopUp";
 import axios from "axios";
 import profileImage from "../Assets/profileimg.png";
@@ -29,10 +28,10 @@ import profileImage from "../Assets/profileimg.png";
 function DoctorEdit() {
   const [doctor, setDoctor] = useState([]);
   const [insurance, setInsurance] = useState([]);
-  const [blogs, setBlogs] = useState([]);
+  const [ setBlogs] = useState([]);
 
   const [showEditPopup, setShowEditPopup] = useState(false);
-  const [isEditClicked, setIsEditClicked] = useState(false);
+  // const [isEditClicked, setIsEditClicked] = useState(false);
 
   const handleShowEditPopup = () => setShowEditPopup(true);
   const handleCloseEditPopup = () => setShowEditPopup(false);
@@ -133,7 +132,11 @@ function DoctorEdit() {
             <div className="doctor-edit-name">
               {doctor ? doctor.name : "Loading..."}
        {doctor.verified === 'Verified' && (
-          <span className="blue-tick"></span>
+   
+
+   <span className="blue-tick"> <MdVerified style={{ color: '#1DA1F2' }} /></span>
+
+
         )}
             </div>
 

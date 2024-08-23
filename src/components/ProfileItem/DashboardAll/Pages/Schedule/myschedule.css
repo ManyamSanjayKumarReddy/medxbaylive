@@ -98,11 +98,11 @@ div.rbc-toolbar button {
   white-space: normal !important;
 }
 .calender .rbc-event-content.booked{
-  background-color: grey;
+  background-color: grey !important;
 }
 .calender .rbc-event-content.free{
   /* white-space: normal !important; */
-  background-color: #0067FF;
+  background-color: #0067FF !important;
 }
 .swal2-popup{
   padding: 1rem 2rem;

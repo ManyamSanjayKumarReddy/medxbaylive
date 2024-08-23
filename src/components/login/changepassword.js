@@ -11,10 +11,9 @@ import heartbeat from '../Assets/heartbeat.svg';
 import brand from '../Assets/medbrand.png'
 import curvedesign from '../../assests/img/curvedesign.svg'
 import curvedsigntwo from '../../assests/img/curvedsigntwo.svg';
-import google from '../../assests/img/google.png'
-import apple from '../../assests/img/apple.png'
+
 import Typed from 'typed.js';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './changepassword.css'
 import { ToastContainer, toast } from 'react-toastify';
@@ -28,11 +27,11 @@ const ChangePassword = () => {
   const typedElement = useRef(null);
   const typedElementTwo = useRef(null);
 
-  const [email, setEmail] = useState('');
+ 
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [isForgotPassword, setIsForgotPassword] = useState(false);
+  const [isForgotPassword] = useState(false);
 
 
 

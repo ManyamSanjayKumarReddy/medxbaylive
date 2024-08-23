@@ -26,7 +26,7 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
   const navigate = useNavigate();
   const typedElement = useRef('');
   const typedElementTwo = useRef('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [ setIsLoading] = useState(false);
 
   const [email, setEmail] = useState('');
   
@@ -34,7 +34,7 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
 
   const [isForgotPassword, setIsForgotPassword] = useState(false);
 
-  const [isProvider, setIsProvider] = useState(false); 
+  const [isProvider] = useState(false); 
 
   const [emailError, setEmailError] = useState('');
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);

@@ -4,10 +4,25 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { RiArrowDownSLine } from "react-icons/ri";
 
-const BookingRate = () => {
+const BookingRate = ( {booking} ) => { 
   ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
   const chartRef = useRef(null);
+
+    // Map the book data to days of the week
+    const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+    const sortedBookData = booking?.sort((a, b) => a._id - b._id);
+    const counts = sortedBookData.map(item => item.count);
+  
+    const totalCount = counts.reduce((acc, curr) => acc + curr, 0);
+    const maxIndex = counts.indexOf(Math.max(...counts));
+
+    const labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const highestPercentage = ((counts[maxIndex] / totalCount) * 100).toFixed(2);
+    const previousIndex = maxIndex === 0 ? 6 : maxIndex - 1;
+    const previousPercentage = ((counts[previousIndex] / totalCount) * 100).toFixed(2);
+    const increase = (highestPercentage - previousPercentage).toFixed(2);
 
   useEffect(() => {
     const chart = chartRef.current;
@@ -22,25 +37,21 @@ const BookingRate = () => {
       gradientGreen.addColorStop(0, '#00A500');
       gradientGreen.addColorStop(1, '#008200');
 
-      chart.data.datasets[0].backgroundColor = [
-        gradientBlue,
-        gradientBlue,
-        gradientBlue,
-        gradientBlue,
-        gradientGreen,
-        gradientBlue,
-        gradientBlue
-      ];
+      chart.data.datasets[0].backgroundColor = counts.map((_, index) =>
+        index === maxIndex ? gradientGreen : gradientBlue
+      );
       chart.update();
     }
-  }, []);
+  }, [counts, maxIndex]);
 
+
+  
   const data = {
-    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    labels: daysOfWeek,
     datasets: [
       {
         label: 'Booking Rate',
-        data: [4, 2, 4, 4, 8, 2, 4],
+        data: counts,
         borderRadius: 3,
         borderSkipped: false,
       },
@@ -57,7 +68,8 @@ const BookingRate = () => {
       tooltip: {
         callbacks: {
           label: function (context) {
-            return `${context.raw * 10}%`;
+            const percentage = ((context.raw / totalCount) * 100).toFixed(2);
+            return `${percentage}%`;
           }
         }
       }
@@ -95,7 +107,7 @@ const BookingRate = () => {
     <>
       <div className='booking-header'>
         <h2 className="booking-title">Booking Rate</h2>
-        <div className="select-container">
+        {/* <div className="select-container">
           <select className='recently'>
             <option>Recently</option>
             <option>This Month</option>
@@ -103,13 +115,13 @@ const BookingRate = () => {
             <option>This Year</option>
           </select>
           <RiArrowDownSLine className="arrow-icon-filter" />
-        </div>
+        </div> */}
       </div>
       <div className="booking-area">
         <div className="rate">
-          <h1 className="booking-number">80%</h1>
-          <p className='booking-description'>Your total<br /> patient on Friday</p>
-          <p className="increase">Your booking rate is 6% increase than previous day</p>
+          <h1 className="booking-number">{highestPercentage}%</h1>
+          <p className='booking-description'>Your total<br /> patient on {labels[maxIndex]}</p>
+          <p className="increase">Your booking rate is {increase}% increase than previous day</p>
         </div>
         <div className="chart">
           <Bar ref={chartRef} data={data} options={options} />

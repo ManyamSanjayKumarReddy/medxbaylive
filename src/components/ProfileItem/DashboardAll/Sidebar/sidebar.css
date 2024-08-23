@@ -1,3 +1,41 @@
+.sidebar-menu.disabled .menu-link {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.sidebar-menu.disabled .menu-link:hover {
+  cursor: not-allowed;
+}
+
+.verify-popup-doctor h1 {
+  font-size: 28px; 
+  margin-bottom: 20px; 
+  white-space: nowrap; 
+}
+
+.verify-popup-doctor p {
+  font-size: 18px; 
+  margin-bottom: 20px;
+}
+
+.submitbtn {
+  background-color: #007bff; 
+  color: white;
+  padding: 6px 12px; 
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 17px; 
+  margin: 20px auto; 
+  display: block; 
+}
+
+  .submitbtn:hover {
+    background-color: #0056b3;
+  }
+
+
+
 .sidebar {
   z-index: 1000;
   width: 270px;

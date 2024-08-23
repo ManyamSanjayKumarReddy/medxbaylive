@@ -15,14 +15,14 @@ overflow: hidden;
   justify-content: center;
 }
 .date-nav-doctor {
-  display: flex;
+
   align-items: center;
   justify-content: space-between;
   padding: 20px;
   /* margin-bottom: 20px;
   padding-bottom: 10px; */
 }
- .arrow-doctor {
+ /* .arrow-doctor {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,12 +36,52 @@ overflow: hidden;
 .arrow-doctor:disabled {
   color: orange;
   cursor: not-allowed;
+} */
+
+
+.arrow-doctor-one {
+ position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 40px !important;
+  height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+  color: orange;
+  left: -90px;
+  top: 120px;
+}
+.arrow-doctor-one:disabled {
+  color: orange;
+  cursor: not-allowed;
+}
+
+
+.arrow-doctor-two {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 40px !important;
+  height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+  color: orange;
+  left: 280px;
+  top: -55px;
+}
+.arrow-doctor-two:disabled {
+  color: orange;
+  cursor: not-allowed;
 }
 .date-carousel-doctor {
   text-align: center;
   display: flex;
   justify-content: space-evenly;
   flex-grow: 1;
+  position: relative;
+  left: 90px;
 }
 
 .date-item-doctor {
@@ -77,7 +117,7 @@ overflow: hidden;
   
 .date-item-doctor h3 {
   margin: 5px 0;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .date-item-doctor .slots-available-doctor {

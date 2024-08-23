@@ -16,7 +16,7 @@ import hospitallogo from "../../assests/img/hospitallogo.png";
 import faqimage from "../../assests/img/faqimage.png";
 import hanfheart from "../../assests/img/handheart.svg";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+
 import { fetchFromDoctor } from "../../actions/api";
 import moment from "moment";
 import { ToastContainer, toast } from 'react-toastify';
@@ -403,7 +403,8 @@ const handleConsultationTypeChange = (type) => {
               {showAppointmentDropdown && (
                   <div className="container doctor-card-date-doctor">
                       <div className="date-nav-doctor">
-                          <button className="arrow-doctor" onClick={showPrev} disabled={startIndex === 0}>‹</button>
+                          <button className="arrow-doctor-one" onClick={showPrev} disabled={startIndex === 0}>‹</button>
+                          </div>
                           <div className="date-carousel-doctor">
                               {dates.slice(startIndex, startIndex + 2).map((date, index) => (
                                   <div
@@ -416,8 +417,8 @@ const handleConsultationTypeChange = (type) => {
                                   </div>
                               ))}
                           </div>
-                          <button className="arrow-doctor" onClick={showNext} disabled={startIndex + 3 >= dates.length}>›</button>
-                      </div>
+                          <button className="arrow-doctor-two" onClick={showNext} disabled={startIndex + 4 >= dates.length}>›</button>
+
                       <div className="underline-doctor">
                           <div
                               className="underline-doctor-active"
