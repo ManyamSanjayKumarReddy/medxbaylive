@@ -155,11 +155,16 @@ const Navbar = () => {
                   <FontAwesomeIcon icon={faChevronDown} className="ml-2"/>
                 </Link>
               </li>
-              {userRole === 'patient' && (
+              <li className="nav-item active ml-md-1">
+    <Link className="find-doctor nav-link nav-link-style" to="/blogs">Blog</Link>
+  </li>
+              
+              {/* {userRole === 'patient' && (
   <li className="nav-item active ml-md-2">
     <Link className="find-doctor nav-link nav-link-style" to="/blogs">Blog</Link>
   </li>
-)}
+)} */}
+
             </ul>
 
        

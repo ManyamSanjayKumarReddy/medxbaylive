@@ -5,15 +5,19 @@ import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import doctor from "../../assests/img/doctorprofile.jpeg";
 import axios from "axios";
 import profileImage from "../Assets/profileimg.png";
-
+import 'leaflet/dist/leaflet.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LocationPicker from "./LocationPicker";
+import { useMapEvents } from 'react-leaflet';
 
 const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
   useEffect(() => {
     import("../DoctorEdit/DoctorPopUp.css");
   }, []);
   const [loading, setLoading] = useState(false); 
+  const [selectedLocation, setSelectedLocation] = useState({ lat: "", lng: "" });
+  const [modalShow, setModalShow] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -35,11 +39,16 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
     linkedin: "",
     instagram: "",
     hospitals: [
-      { name: "", street: "", city: "", state: "", country: "", zip: "" },
+      { name: "", street: "", city: "", state: "", country: "", zip: "", latitude: "", longitude: "" },
     ],
     insurances: [""],
     awards: [""],
     profilePicture: null,
+     documents: {
+    licenseProof: { data: null, contentType: "" },
+    certificationProof: { data: null, contentType: "" },
+    businessProof: { data: null, contentType: "" }
+  }
   });
   const [profilePicturePreview, setProfilePicturePreview] = useState(null);
 
@@ -76,11 +85,13 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
                 state: "",
                 country: "",
                 zip: "",
+                latitude: "",
+                longitude: "",
               }
             : "",
         ],
       };
-      localStorage.setItem("doctorFormData", JSON.stringify(newData)); // Save to localStorage
+      localStorage.setItem("doctorFormData", JSON.stringify(newData)); 
       return newData;
     });
   };
@@ -91,7 +102,7 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
         ...prevData,
         [field]: prevData[field].filter((_, i) => i !== index),
       };
-      localStorage.setItem("doctorFormData", JSON.stringify(newData)); // Save to localStorage
+      localStorage.setItem("doctorFormData", JSON.stringify(newData));
       return newData;
     });
   };
@@ -181,6 +192,27 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
     
     return "";
   };
+
+  const handleLocationSelect = (lat, lng) => {
+    setSelectedLocation({ lat, lng });
+    setFormData((prevData) => ({
+      ...prevData,
+      hospitals: prevData.hospitals.map((hospital, i) =>
+        i === modalShow.index ? { ...hospital, latitude: lat, longitude: lng } : hospital
+      ),
+    }));
+    setModalShow({ show: false, index: null });
+  };
+
+  const LocationMarker = () => {
+    const map = useMapEvents({
+      click(e) {
+        handleLocationSelect(e.latlng.lat, e.latlng.lng);
+      },
+    });
+    return null;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); 
@@ -240,18 +272,11 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
       }
     };
   return (
-    <Modal show={show} onHide={handleClose} centered className="custom-modal">
+    <div  centered className="custom-modal">
           
       <Modal.Header className="custom-modal-header">
         <Modal.Title className="model-header">Edit Your Profile</Modal.Title>
-        <button
-          type="button"
-          className="btn-close"
-          aria-label="Close"
-          onClick={handleClose}
-        >
-          &times;
-        </button>
+     
       </Modal.Header>
 
       <Modal.Body className="modal-body-scrollable">
@@ -660,25 +685,45 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
                   placeholder="Zip"
                   className="form-control-custom address-field"
                 />
+        <Form.Control
+                type="text"
+                name="latitude"
+                value={hospital.latitude}
+                onChange={(e) => handleChange(e, index, "hospitals", "latitude")}
+                placeholder="Latitude"
+                className="form-control-custom address-field"
+              />
+              <Form.Control
+                type="text"
+                name="longitude"
+                value={hospital.longitude}
+                onChange={(e) => handleChange(e, index, "hospitals", "longitude")}
+                placeholder="Longitude"
+                className="form-control-custom address-field"
+              />
+              <Button
+                className="btn-custom-edit"
+                onClick={() => setModalShow({ show: true, index })}
+              >
+                Select Location
+              </Button>
+              <InputGroup.Text
+                className="form-control-custom adjust-form-icon-one-add"
+                onClick={() => handleAddItem("hospitals")}
+              >
+                <FontAwesomeIcon icon={faPlus} className="plus-edit-doctor" />
+              </InputGroup.Text>
+              {formData.hospitals.length > 1 && (
                 <InputGroup.Text
-                  className="form-control-custom adjust-form-icon-one-add"
-                  onClick={() => handleAddItem("hospitals")}
+                  className="form-control-custom adjust-form-icon-two-add"
+                  onClick={() => handleRemoveItem(index, "hospitals")}
                 >
-                  <FontAwesomeIcon icon={faPlus} className="plus-edit-doctor" />
+                  <FontAwesomeIcon icon={faTrash} className="delete-edit-profile" />
                 </InputGroup.Text>
-                {formData.hospitals.length > 1 && (
-                  <InputGroup.Text
-                    className="form-control-custom adjust-form-icon-two-add"
-                    onClick={() => handleRemoveItem(index, "hospitals")}
-                  >
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      className="delete-edit-profile"
-                    />
-                  </InputGroup.Text>
-                )}
-              </div>
-            ))}
+              )}
+            </div>
+          ))}
+   
           </Form.Group>
 
           <div className="row mb-3">
@@ -766,6 +811,47 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
               </Form.Group>
             </div>
           </div>
+
+          <div className="row mb-3">
+    <div className="col-md-6">
+      <Form.Group className="mb-3" controlId="formCertificationProof">
+        <Form.Label>Certification Proof</Form.Label>
+        <Form.Control
+          type="file"
+          name="certificationProof"
+          onChange={handleFileChange}
+          className="form-control-custom"
+          placeholder="choose file"
+        />
+
+      </Form.Group>
+    </div>
+    <div className="col-md-6">
+      <Form.Group className="mb-3" controlId="formBusinessProof">
+        <Form.Label>Business Proof</Form.Label>
+        <Form.Control
+          type="file"
+          name="businessProof"
+          onChange={handleFileChange}
+          className="form-control-custom"
+        />
+      </Form.Group>
+    </div>
+  </div>
+  <div className="row mb-3">
+    <div className="col-md-6">
+      <Form.Group className="mb-3" controlId="formLicenseProof">
+        <Form.Label>License Proof</Form.Label>
+        <Form.Control
+          type="file"
+          name="licenseProof"
+          onChange={handleFileChange}
+          className="form-control-custom"
+        />
+      </Form.Group>
+    </div>
+  </div>
+
           <Button
           variant="primary"
           type="submit"
@@ -776,7 +862,18 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
         </Button>
         </Form>
       </Modal.Body>
-    </Modal>
+      <LocationPicker 
+   
+       zoom={13}
+       style={{ height: '400px', width: '100%' }}
+       dragging={true} 
+       zoomControl={true} 
+        show={modalShow}
+        handleClose={() => setModalShow(false)}
+        handleLocationSelect={handleLocationSelect}
+      />
+
+    </div>
   );
 };
 

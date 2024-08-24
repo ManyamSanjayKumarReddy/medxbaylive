@@ -9,7 +9,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.js'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
-
+import DoctorPopUp from './components/DoctorEdit/DoctorPopUp';
 //Landing page imported
 import Section from './components/section/section';
 
@@ -43,6 +43,7 @@ function App() {
           <Route path="/verify/login" element={<VerifyLogin />} />
           <Route path="/verify" element={<Verification />} />
           <Route path="/blogs" element={[<Nestednavbar/>,<BlogPage />,<Footer/>]}/>
+          <Route path="/edit/profile/doctor" element={[<Navbar/>,<DoctorPopUp />,<Footer/>]}  />
         </Routes>
       </Router>
     </>

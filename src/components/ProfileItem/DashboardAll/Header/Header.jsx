@@ -18,7 +18,7 @@ const Header = () => {
           <Link to='/' className="text-home-return">Home</Link>
         </div>
         <div className="profile-return">
-          <Link to='/Doctor/profile/Edit' className="text-profile-return" >Profile</Link>
+          <Link to='/edit/profile/doctor' className="text-profile-return" >Profile</Link>
         </div>
 
         <div className="profile-container">

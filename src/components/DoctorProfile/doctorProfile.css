@@ -78,11 +78,12 @@ overflow: hidden;
 .date-carousel-doctor {
   text-align: center;
   display: flex;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   flex-grow: 1;
   position: relative;
-  left: 90px;
+  left: -10px;
 }
+
 
 .date-item-doctor {
   padding: 10px 20px;

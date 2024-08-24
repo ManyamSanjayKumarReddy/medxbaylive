@@ -1,206 +1,88 @@
 // BlogPage.js
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./blog.css";
 import {
   FaTag,
-
+  FaTelegram,
   FaStar,
   FaMapMarkerAlt,
   FaTimes,
 } from "react-icons/fa";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import Treatment from "./TreatmentPage";
+import LivingWithHighBloodPressure from "./bloodpress";
+import axios from "axios";
+import moment from "moment";
+import profileimg from '../Assets/profileimg.png';
 
+const bufferToBase64 = (buffer) => {
+  if (buffer?.type === 'Buffer' && Array.isArray(buffer?.data)) {
+    const bytes = new Uint8Array(buffer.data);
+    let binary = '';
+    for (let i = 0; i < bytes.length; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    return `data:image/jpeg;base64,${btoa(binary)}`;
+  } else {
+    console.error('Unexpected buffer type:', typeof buffer);
+    return '';
+  }
+};
 
-import { IoSearch } from "react-icons/io5";
+const getProfileImage = (formData) =>{
+  if (formData?.data?.type === 'Buffer') {
+    return bufferToBase64(formData.data);
+  } else if (typeof formData?.data === 'string') {
+    return `data:image/jpeg;base64,${formData.data}`;
+  } else {
+    return profileimg;
+
+  }      
+}
 
 const BlogPage = () => {
-  const featuredPost = {
-    imageUrl:
-      "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-    title: "10 Drugs Commonly Prescribed for High Blood Pressure",
-    description:
-      "Learn about the classes of blood pressure medications, how blood pressure medications work, and the top blood pressure medications...",
-  };
 
-  const featuredSidePosts = [
-    {
-      title: "Everything to Know About Essential",
-      date: "January 15, 2023",
-      imageUrl:
-        "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-    },
-    {
-      title: "High Blood Pressure: Symptoms, Causes",
-      date: "January 15, 2023",
-      imageUrl:
-        "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-    },
-    {
-      title: "Blood Pressure Readings",
-      date: "January 15, 2023",
-      imageUrl:
-        "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-    },
-    {
-      title: "When to See a Doctor for High Pressure",
-      date: "January 15, 2023",
-      imageUrl:
-        "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-    },
-  ];
+  const [blogData,setBlogData]=useState([])
+  const [tempBlog,setTempBlog]=useState([])
+  const [categoryData,setCategoryData]=useState([])
+  const [hashtags,setHastags]=useState([])
+  const [recentBlog,setRecentBlog]=useState([])
+  const [mostReadBlog,setMostReadBlog]=useState([])
+  const [topRatedDoctors,setTopRatedDoctors]=useState([])
+  const [featuredBlog,setFeaturedBlog]=useState([])
+  const [sideFeatureBlog,setSideFeatureBlog]=useState([])
+  const [categories,setCategories]=useState([])
 
-  const causesAndRisksPosts = [
-    {
-      title: "Does stress cause high blood pressure?",
-      description:
-        "Consuming nicotine can have short- and long-term effects on your blood pressure and cardiovascular health...",
-      imageUrl:
-        "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-      author: "John Doe",
-      time: "5 min read",
-    },
-    {
-      title: "Does salt increase blood pressure?",
-      description:
-        "Facts to consider onsuming nicotine can have short- and long-term effects on your blood pressure",
-      imageUrl:
-        "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-      author: "Jane Smith",
-      time: "3 min read",
-    },
-    {
-      title: "Smoking and high blood pressure",
-      description:
-        "What to know onsuming nicotine can have short- and long-term effects on your blood",
-      imageUrl:
-        "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-      author: "Michael Brown",
-      time: "4 min read",
-    },
-  ];
+ 
 
-  const testingAndDiagnosisPosts = [
-    {
-      title: "Blood Pressure Readings: What They Mean",
-      description: "Understanding the numbers",
-      imageUrl:
-        "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-      author: "Emily White",
-      time: "6 min read",
-    },
-    {
-      title: "How to Monitor Blood Pressure at Home",
-      description: "Steps and tips",
-      imageUrl:
-        "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-      author: "David Black",
-      time: "7 min read",
-    },
-  ];
+  const loadBlogs =async () =>{
+    const response = await axios.get(
+      `${process.env.REACT_APP_BASE_URL}/patient/blogs`,
+    );
+    if(response.data){
+      var data = response.data
+      console.log(data);
+      setHastags(data.hashtags)
+      setCategoryData(data.categoryCounts)
+      setRecentBlog(data.recentBlogs)
+      setMostReadBlog(data.mostReadBlogs)
+      setTopRatedDoctors(data.topRatedDoctors)
+      setBlogData(response.data)
+      setTempBlog(response.data)
+      setCategories(data.blogsByCategory)
+      const sortedBlogs = data.featuredBlogs.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+      setFeaturedBlog(sortedBlogs[0]);
+      setSideFeatureBlog(sortedBlogs.slice(1));
+    }else{
+      setBlogData([]);
+      console.log(response.data)
+    }
+  }
 
-  // const treatmentPosts = [
-  //   {
-  //     title: "Medication for High Blood Pressure",
-  //     description: "Various medications can help manage high blood pressure...",
-  //     imageUrl:
-  //       "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-  //     author: "Sarah Green",
-  //     time: "4 min read",
-  //   },
-  //   {
-  //     title: "Lifestyle Changes to Reduce Blood Pressure",
-  //     description: "Learn how small changes can have a big impact...",
-  //     imageUrl:
-  //       "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-  //     author: "Paul Brown",
-  //     time: "5 min read",
-  //   },
-  //   {
-  //     title: "Alternative Therapies for Hypertension",
-  //     description: "Explore non-pharmaceutical options...",
-  //     imageUrl:
-  //       "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-  //     author: "Lisa Blue",
-  //     time: "6 min read",
-  //   },
-  //   {
-  //     title: "Alternative Therapies for Hypertension",
-  //     description: "Explore non-pharmaceutical options...",
-  //     imageUrl:
-  //       "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-  //     author: "Lisa Blue",
-  //     time: "6 min read",
-  //   },
-  //   {
-  //     title: "Alternative Therapies for Hypertension",
-  //     description: "Explore non-pharmaceutical options...",
-  //     imageUrl:
-  //       "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-  //     author: "Lisa Blue",
-  //     time: "6 min read",
-  //   },
-
-  //   {
-  //     title: "Alternative Therapies for Hypertension",
-  //     description: "Explore non-pharmaceutical options...",
-  //     imageUrl:
-  //       "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-  //     author: "Lisa Blue",
-  //     time: "6 min read",
-  //   },
-  // ];
-
-  // const livingPosts = [
-  //   {
-  //     imageUrl: "path/to/image3.jpg",
-  //     title: "Living with A",
-  //     description: "Description for living with A",
-  //     time: "3 mins",
-  //     name: "Nurse Johnson",
-  //   },
-  //   {
-  //     imageUrl: "path/to/image4.jpg",
-  //     title: "Living with B",
-  //     description: "Description for living with B",
-  //     time: "8 mins",
-  //     name: "Nurse Williams",
-  //   },
-  //   {
-  //     imageUrl: "path/to/image4.jpg",
-  //     title: "Living with B",
-  //     description: "Description for living with B",
-  //     time: "8 mins",
-  //     name: "Nurse Williams",
-  //   },
-  //   {
-  //     imageUrl: "path/to/image4.jpg",
-  //     title: "Living with B",
-  //     description: "Description for living with B",
-  //     time: "8 mins",
-  //     name: "Nurse Williams",
-  //   },
-  //   {
-  //     imageUrl: "path/to/image4.jpg",
-  //     title: "Living with B",
-  //     description: "Description for living with B",
-  //     time: "8 mins",
-  //     name: "Nurse Williams",
-  //   },
-  //   {
-  //     imageUrl: "path/to/image4.jpg",
-  //     title: "Living with B",
-  //     description: "Description for living with B",
-  //     time: "8 mins",
-  //     name: "Nurse Williams",
-  //   },
-  // ];
-
-  const categories = [
-    { title: "Hydration or Moisturization (10)", icon: FaTag },
-    { title: "Cardiology (50)", icon: FaTag },
-    { title: "Nutrition (40)", icon: FaTag },
-    { title: "Exercise (50)", icon: FaTag },
-  ];
+  useEffect(() => {
+        loadBlogs()
+    },[])
+  
 
   const newTreatmentData = [
     {
@@ -316,51 +198,6 @@ const BlogPage = () => {
     },
   ];
 
-  const newBloodPressureSpecialist = [
-    {
-      name: "Dr. Donald Hopkins, MD",
-      specialist: "Cardio",
-      rating: 3,
-      address: "49 mi, 795 El Camino Real Palo Alto, CA 94301",
-      instruction: [
-        "Appt wasn't rushed",
-        "Listened/answered questions",
-        "Explains conditions well",
-        "Found trustworthy",
-        "Felt respected",
-      ],
-      imageUrl: "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-    },
-    {
-      name: "Dr. Donald Hopkins, MD",
-      specialist: "Cardio",
-      rating: 3,
-      address: "49 mi, 795 El Camino Real Palo Alto, CA 94301",
-      instruction: [
-        "Appt wasn't rushed",
-        "Listened/answered questions",
-        "Explains conditions well",
-        "Found trustworthy",
-        "Felt respected",
-      ],
-      imageUrl: "https://imgv3.fotor.com/images/slider-image/A-clear-close-up-photo-of-a-woman.jpg",
-    },
-    {
-      name: "Dr. Donald Hopkins, MD",
-      specialist: "Cardio",
-      rating: 3,
-      address: "49 mi, 795 El Camino Real Palo Alto, CA 94301",
-      instruction: [
-        "Appt wasn't rushed",
-        "Listened/answered questions",
-        "Explains conditions well",
-        "Found trustworthy",
-        "Felt respected",
-      ],
-      imageUrl: "https://via.placeholder.com/600/400",
-    },
-  ];
-
   const newMoreOnHighBloodPressure = [
     {
       title: "Herbs for High Blood Pressure: What to Know",
@@ -417,74 +254,9 @@ const BlogPage = () => {
       readTime: "10 Minutes",
     },
   ];
-
-  const recentBlogData = [
-    {
-      title: "Lorem ipsum dolor sit amet, consectetur",
-      chip: "health",
-      date: "January 12, 2023",
-      imageUrl: "https://via.placeholder.com/75/10",
-      readTime: "10 Minutes",
-    },
-    {
-      title: "Lorem ipsum dolor sit amet, consectetur",
-      chip: "health",
-      date: "January 12, 2023",
-      imageUrl: "https://via.placeholder.com/75/10",
-      readTime: "10 Minutes",
-    },
-    {
-      title: "Lorem ipsum dolor sit amet, consectetur",
-      chip: "health",
-      date: "January 12, 2023",
-      imageUrl: "https://via.placeholder.com/75/10",
-      readTime: "10 Minutes",
-    },
-    {
-      title: "Lorem ipsum dolor sit amet, consectetur",
-      chip: "health",
-      date: "January 12, 2023",
-      imageUrl: "https://via.placeholder.com/75/10",
-      readTime: "10 Minutes",
-    },
-  ];
-
-  const mostReadsData = [
-    {
-      title: "Lorem ipsum dolor sit amet, consectetur",
-      chip: "health",
-      date: "Sep 05, 2023",
-      imageUrl: "https://via.placeholder.com/75/3",
-      readTime: "10 Minutes",
-    },
-    {
-      title: "Lorem ipsum dolor sit amet, consectetur",
-      chip: "health",
-      date: "Sep 05, 2023",
-      imageUrl: "https://via.placeholder.com/75/3",
-      readTime: "10 Minutes",
-    },
-    {
-      title: "Lorem ipsum dolor sit amet, consectetur",
-      chip: "health",
-      date: "Sep 05, 2023",
-      imageUrl: "https://via.placeholder.com/75/3",
-      readTime: "10 Minutes",
-    },
-  ];
-
   
 
-  const tags = [
-    "info",
-    "ecom",
-    "dynamics",
-    "social",
-    "info",
-    "ecom",
-    "dynamics",
-    "social",
-  ];
+
 
   return (
     <div className="blog-page">
@@ -494,28 +266,28 @@ const BlogPage = () => {
         <div className="featured-section">
           <div className="featured-post">
             <img
-              src={featuredPost.imageUrl}
+              src={getProfileImage(featuredBlog.image)}
               alt="Featured Post"
               className="featured-img"
             />
             <div className="featured-details">
-              <h2>{featuredPost.title}</h2>
-              <p>{featuredPost.description}</p>
+              <h2>{featuredBlog.title}</h2>
+              <p>{featuredBlog.description}</p>
             </div>
           </div>
 
           {/* Featured Side Posts */}
           <div className="featured-side-posts">
-            {featuredSidePosts.map((post, index) => (
+            {sideFeatureBlog.map((post, index) => (
               <div key={index} className="side-post-card">
                 <img
-                  src={post.imageUrl}
+                  src={getProfileImage(post.image)}
                   alt={post.title}
                   className="side-post-img"
                 />
                 <div className="side-post-details">
                   <h5>{post.title}</h5>
-                  <span>{post.date}</span>
+                  <span>{moment(post.date).format('MMMM DD, YYYY')}</span>
                 </div>
               </div>
             ))}
@@ -523,11 +295,18 @@ const BlogPage = () => {
         </div>
 
         {/* Blog Content Sections */}
-        <BlogPostList title="Causes & Risks" posts={causesAndRisksPosts} />
+        {Object.entries(categories).map(([name, value], index) => (
+            <BlogPostList
+            key={index}
+              title={name}
+              posts={value}
+          />
+        ))}
+        {/* <BlogPostList title="Causes & Risks" posts={causesAndRisksPosts} />
         <BlogPostList
           title="Testing & Diagnosis"
           posts={testingAndDiagnosisPosts}
-        />
+        /> */}
 
         {/* Treatment Section */}
         {/* <Treatment posts={treatmentPosts} /> */}
@@ -537,7 +316,7 @@ const BlogPage = () => {
           heading={"Treatment"}
         />
         <HighBloodPressureSpecialist
-          newBloodPressureSpecialist={newBloodPressureSpecialist}
+          newBloodPressureSpecialist={topRatedDoctors}
         />
         <NewTreatement
           newTreatmentData={newHighBloodPressureTips}
@@ -552,46 +331,18 @@ const BlogPage = () => {
 
       {/* Sidebar */}
       <div>
-        <input
-          type="text"
-          placeholder="Search..."
-          style={{
-            padding: "10px",
-            width: "400px",
-            borderRadius: "5px",
-            border: "1px solid #ccc",
-            fontSize: "16px",
-            marginTop: "30px",
-            marginLeft: "-350px",
-            position: "relative",
-            left:"-40px",
-          }}
-        />
-        <span
-    style={{
-     fontSize:"18px",
-      position: "absolute",
-      right: "100px", // Position the icon inside the input field
-      top: "14%",
-      transform: "translateY(-50%)",
-      pointerEvents: "none", // Make the icon unclickable
-    }}
-  >
-   <IoSearch />
-
-  </span>
-        <div className="card  card-blog-user">
-          <SidebarSection title="Categories" items={categories} />
+        
+        <div className="card">
+          <SidebarSection title="Categories" items={categoryData} />
           <NewRecentBlog
-            recentBlogData={recentBlogData}
+            recent={recentBlog}
             heading={"Recent Blog"}
           />
           <NewRecentBlog
-            recentBlogData={mostReadsData}
+            recent={mostReadBlog}
             heading={"Most Reads"}
           />
-
-          <NewTags tags={tags} />
+          <NewTags tags={hashtags} />
         </div>
       </div>
     </div>
@@ -601,22 +352,22 @@ const BlogPage = () => {
 const BlogPostList = ({ title, posts }) => {
   return (
     <div className="blog-section">
-      <h3>{title}</h3>
+      <h3>{title}ing & Diagnosis</h3>
       <ul>
         {posts.map((post, index) => (
           <li key={index}>
             <div className="post-meta">
-              <img src={post.imageUrl} alt={post.title} />
+              <img src={getProfileImage(post.image)} alt={post.title} />
               <span className="post-author">
                 <b>{post.author}</b>
               </span>
-              <span className="post-time">{post.time}</span>
+              <span className="post-time">5 min read</span>
             </div>
             <div className="post-content">
               <h4>{post.title}</h4>
               <p>{post.description}</p>
               <a href="#" className="read-more">
-                Read more in {post.time} <FaLongArrowAltRight />
+                Read more in 5 min <FaLongArrowAltRight />
               </a>
             </div>
           </li>
@@ -633,10 +384,10 @@ const SidebarSection = ({ title, items }) => {
         <h3>{title}</h3>
       </div>
       <ul>
-        {items.map((item, index) => (
+      {Object.entries(items).map(([name, count], index) => (
           <li key={index} className="sidebar-item">
-            {item.icon && <item.icon className="sidebar-item-icon" />}
-            <span>{item.title}</span>
+            {<FaTag className="sidebar-item-icon" />}
+            <span>{name} ({count})</span>
           </li>
         ))}
       </ul>
@@ -652,10 +403,10 @@ const NewTreatement = ({ newTreatmentData, heading }) => {
         {newTreatmentData.map((card, index) => (
           <div key={index} className="newtreatment-card">
             <div className="newtreatment-card-left">
-              <img
+              <img  
                 src={card.imageUrl}
                 alt="Card thumbnail"
-                className="newtreatment-card-image"
+                className="newtreatment-card-image cards"
               />
               <div className="newtreatment-card-author-container">
                 <div className="newtreatment-card-author">{card.author}</div>
@@ -717,22 +468,29 @@ const NewMoreOnHighBloodPressure = ({ newMoreOnHighBloodPressure }) => {
 };
 
 const HighBloodPressureSpecialist = ({ newBloodPressureSpecialist }) => {
+  const instruction= [
+    "Appt wasn't rushed",
+    "Listened/answered questions",
+    "Explains conditions well",
+    "Found trustworthy",
+    "Felt respected",
+  ]
+
   return (
     <div className="bloodPrSp-card-container">
       <div className="bloodPrSp-section-title">
-        Top high blood pressure specialists
+        Top Rated Heart specialists
       </div>
       <div className="bloodPrSp-card-grid">
         {newBloodPressureSpecialist.map((card, index) => (
           <div key={index} className="bloodPrSp-card">
-            
-            <div className="bloodPrSp-card-content">
-              <div className="bloodPrSp-card-content-heading">
-              <img
-              src={card.imageUrl}
+            <img
+              src={getProfileImage(card.profilePicture)}
               alt="Card thumbnail"
               className="bloodPrSp-card-image"
             />
+            <div className="bloodPrSp-card-content">
+              <div className="bloodPrSp-card-content-heading">
                 <div className="bloodPrSp-card-title">{card.name}</div>
                 <div className="bloodPrSp-card-rating">
                   <FaStar className="starr" />
@@ -742,11 +500,11 @@ const HighBloodPressureSpecialist = ({ newBloodPressureSpecialist }) => {
               <div className="bloodPrSp-card-specialist">{card.specialist}</div>
               <div className="bloodPrSp-card-address">
                 <FaMapMarkerAlt className="bloodPrSp-card-location" />
-                {card.address}
+                {card.city}{','}{card.state}
               </div>
               <div className="bloodPrSp-card-instruction">
                 <span>Patient Tell Us:</span>{" "}
-                {card.instruction.map((point, index) => (
+                {instruction.map((point, index) => (
                   <div key={index}>
                     <FaStar className="str" />
                     {point}
@@ -762,34 +520,34 @@ const HighBloodPressureSpecialist = ({ newBloodPressureSpecialist }) => {
   );
 };
 
-const NewRecentBlog = ({ recentBlogData, heading }) => {
+const NewRecentBlog = ({ recent, heading }) => {
   return (
     <div className="recentBlog-card-container">
       <div className="recentBlog-section-header">
         <div className="recentBlog-section-title">{heading}</div>
-        <div className="recentBlog-section-showAll">Show All</div>{" "}
+        {/* <div className="recentBlog-section-showAll">Show All</div>{" "} */}
       </div>
 
       <div className="recentBlog-card-grid">
-        {recentBlogData.map((card, index) => (
+        {recent.map((card, index) => (
           <div key={index} className="recentBlog-card">
             <div className="recentBlog-card-left">
               <img
-                src={card.imageUrl}
+                src={getProfileImage(card.image)}
                 alt="Card thumbnail"
                 className="recentBlog-card-image"
               />
             </div>
             <div className="recentBlog-card-right">
               <div className="recentBlog-card-flex">
-                <div className="recentBlog-card-chips">{card.chip}</div>
-                <div className="recentBlog-card-date">{card.date}</div>
+                <div className="recentBlog-card-chips">{card.categories[0]}</div>
+                <div className="recentBlog-card-date">{moment(card.date).format('MMM DD, YYYY')}</div>
               </div>
               <div className="recentBlog-card-title">{card.title}</div>
 
               <a href="##">
                 <div className="recentBlog-card-readmore">
-                  Read more in {card.readTime} ⟶
+                  Read more in 8 mins ⟶
                 </div>
               </a>
             </div>
@@ -818,6 +576,69 @@ const NewTags = ({ tags }) => {
   );
 };
 
+const Footer = () => {
+  return (
+    <footer className="footer">
+      <div className="footer-container">
+        <div className="footer-column">
+          <img
+            src="https://via.placeholder.com/130/10"
+            alt="Logo"
+            className="footer-logo"
+          />
+        </div>
+        <div className="footer-column">
+          <h3>Explore</h3>
+          <ul>
+            <li>
+              <a href="#home">Home Page</a>
+            </li>
+            <li>
+              <a href="#about">About Us</a>
+            </li>
+            <li>
+              <a href="#services">FAQs</a>
+            </li>
+            <li>
+              <a href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+        <div className="footer-column">
+          <h3>Legal</h3>
+          <ul>
+            <li>
+              <a href="#privacy">Privacy Policy</a>
+            </li>
+            <li>
+              <a href="#terms">Terms of Service</a>
+            </li>
+            <li>
+              <a href="#terms">Documentation</a>
+            </li>
+            <li>
+              <a href="#terms">Site Map</a>
+            </li>
+          </ul>
+        </div>
+        <div className="footer-column">
+          <h3>Subscribe</h3>
+          <div className="footer-sub">
+            <input type="email" placeholder="Your email" />
+            <button type="submit">
+              <FaTelegram size={17} color="#ffffff" />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="footer-bottom">
+        <p>
+          &copy; {new Date().getFullYear()} Global Wellness Alliance. All Rights
+          Reserved.
+        </p>
+      </div>
+    </footer>
+  );
+};
 
-  
 export default BlogPage;

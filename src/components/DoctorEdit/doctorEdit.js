@@ -21,7 +21,8 @@ import image from "../../assests/img/Image.png";
 import hospitallogo from "../../assests/img/hospitallogo.png";
 import faqimage from "../../assests/img/faqimage.png";
 import hanfheart from "../../assests/img/handheart.svg";
-import DoctorPopUp from "./DoctorPopUp";
+import { useNavigate } from 'react-router-dom';
+
 import axios from "axios";
 import profileImage from "../Assets/profileimg.png";
 
@@ -32,7 +33,7 @@ function DoctorEdit() {
 
   const [showEditPopup, setShowEditPopup] = useState(false);
   // const [isEditClicked, setIsEditClicked] = useState(false);
-
+  const navigate = useNavigate();
   const handleShowEditPopup = () => setShowEditPopup(true);
   const handleCloseEditPopup = () => setShowEditPopup(false);
 
@@ -50,6 +51,10 @@ function DoctorEdit() {
   const toggle = (i) => {
     setSelected(selected === i ? null : i);
   };
+
+  const handleShowEdit= () =>{
+    navigate('/edit/profile/doctor'); 
+  }
 
   useEffect(() => {
     document.title = "Doctor-Edit";
@@ -206,7 +211,7 @@ function DoctorEdit() {
             <React.Fragment key={index}>
               <span className="condition-item">{condition}</span>
               {index < doctor.conditions.length - 1 && (
-                <span className="date-edit-vector-two"></span> /* Add separator */
+                <span className="date-edit-vector-two"></span> 
               )}
             </React.Fragment>
           ))
@@ -276,7 +281,7 @@ function DoctorEdit() {
             </div>
             <button
               className="edit-doctor-button"
-              onClick={handleShowEditPopup}
+              onClick={handleShowEdit}
             >
               Edit profile
             </button>
@@ -395,7 +400,6 @@ function DoctorEdit() {
           </div>
         </div>
       </div>
-      <DoctorPopUp show={showEditPopup} handleClose={handleCloseEditPopup} fetchDoctorDetails={fetchDoctorDetails} />
     </>
   );
 }

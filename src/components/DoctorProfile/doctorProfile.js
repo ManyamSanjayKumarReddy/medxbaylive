@@ -267,6 +267,18 @@ const handleTimeSlotClick = (slot) => {
 };
 
 const handleBookAppointment = async () => {
+  const user = sessionStorage.getItem('loggedIn');
+
+  if (!user) {
+    toast.info('Please log in before booking.', {
+      className: 'toast-center toast-warning', 
+      closeButton: true,
+      progressBar: true,
+    });
+    return;
+  }
+
+
   try {
       const selectedDay = dates[selectedDate];
       const bookingData = {
