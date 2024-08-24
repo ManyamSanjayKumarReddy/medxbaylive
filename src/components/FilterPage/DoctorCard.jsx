@@ -12,9 +12,10 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'; // Filled star
 // import api from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { fetchFromPatient } from '../../actions/api.js';
 import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment/moment.js';
+import { RiArrowDownSLine } from 'react-icons/ri';
 
 const bufferToBase64 = (buffer) => {
     if (buffer?.type === 'Buffer' && Array.isArray(buffer?.data)) {
@@ -30,15 +31,34 @@ const bufferToBase64 = (buffer) => {
     }
 };
 
-const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
+const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const toRad = (value) => value * Math.PI / 180;
+    const R = 6371; // Radius of the Earth in kilometers
+
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c; // Distance in kilometers
+    return distance.toFixed(2); // Return distance with two decimal places
+};
+
+const DoctorCard = ({ isMapExpanded, doctor = {},location }) => {
     const [startIndex, setStartIndex] = useState(0);
     const [selectedDate, setSelectedDate] = useState(0);
     const [showDoctorCard, setShowDoctorCard] = useState(false);
     const [profilePicture, setProfilePicture] = useState(doctorProfile);
     const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
-    const [consultationType, setConsultationType] = useState('video call'); // Default consultation type
+    const [consultationType, setConsultationType] = useState(''); // Default consultation type
     const [showAllHospitals, setShowAllHospitals] = useState(false); // State to show all hospitals
     const [selectedHospital, setSelectedHospital] = useState(''); // State for selected hospital
+    
+    const [userLocation, setUserLocation] = useState({ lat: 0, lng: 0 });
+    const [hospitalDistance, setHospitalDistance] = useState(null); 
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -52,8 +72,32 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
 
     }, [doctor.profilePicture]);
 
-    // Default values for dates if doctor data is missing
-    // console.log(doctor.profilePicture);
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                setUserLocation({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                });
+            },
+            (error) => {
+                console.error('Error fetching geolocation:', error);
+                toast.error('Unable to fetch your location. Please enable location services.');
+            }
+        );
+    }, []);
+
+    // Calculate distance when hospital or user location changes
+    useEffect(() => {
+        if (selectedHospital && doctor.hospitals) {
+            const hospital = doctor.hospitals.find(h => h.name === selectedHospital);
+            console.log(hospital)
+            if (hospital && hospital.lat && hospital.lng && userLocation.lat && userLocation.lng) {
+                const distance = calculateDistance(userLocation.lat, userLocation.lng, hospital.lat, hospital.lng);
+                setHospitalDistance(distance);
+            }
+        }
+    }, [selectedHospital, doctor.hospitals, userLocation]);
 
     const timeSlots = doctor.timeSlots || []; 
     const filteredTimeSlots = selectedHospital
@@ -70,6 +114,9 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
     }, {});
     const dates = Object.values(datesMap);
 
+    while (dates.length < 3) {
+        dates.push({ day: 'Unavailable', slots: 0, timeSlots: [] });
+    }
     const groupedSlots = {
         morning: [],
         afternoon: [],
@@ -143,7 +190,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
     
         try {
             const selectedDay = dates[selectedDate];
-            if(consultationType ==''){
+            if(consultationType === ''){
                 toast('Please select a consultation type.',{
                     className: 'toast-center ',
                     closeButton: true,
@@ -306,40 +353,25 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
         if (!doctor.hospitals || doctor.hospitals.length === 0) {
             return <p>No hospitals available</p>;
         }
-
-        const hospitals = showAllHospitals
-            ? doctor.hospitals
-            : doctor.hospitals.slice(0, 2);
-
+    
         return (
             <>
-                {hospitals.map((hospital, index) => (
-                    <div key={index} className="form-check">
-                        <input
-                            className="form-check-input"
-                            type="radio"
-                            id={`hospital${index}`}
-                            name="hospital"
-                            value={hospital.name}
-                            checked={selectedHospital === hospital.name}
-                            onChange={(e) => setSelectedHospital(e.target.value)}
-                        />
-                        <label className="form-check-label" htmlFor={`hospital${index}`}>
-                            {hospital.name || 'Unnamed Hospital'}
-                        </label>
+                <div className={`hospital-sort-by`}>
+                    <div className="form-group">
+                        <select value={selectedHospital}
+                            onChange={(e) => setSelectedHospital(e.target.value)}>
+                            <option value="" disabled selected>Select Hospital</option>
+                            {doctor.hospitals.map((hospital, index) => (
+                                <option key={index} value={hospital.name}>
+                                    {hospital.name || 'Unnamed Hospital'}
+                                </option>
+                            ))}
+                        </select>
+                        <RiArrowDownSLine className="arrow-icon-filter" />
                     </div>
-                ))}
-                {doctor.hospitals.length > 2 && !showAllHospitals && (
-                    <button className="btn btn-link" onClick={() => setShowAllHospitals(true)}>
-                        Show All Hospitals
-                    </button>
-                )}
-                {showAllHospitals && (
-                    <button className="btn btn-link" onClick={() => setShowAllHospitals(false)}>
-                        Show Less
-                    </button>
-                )}
+                </div>
             </>
+            
         );
     };
 
@@ -360,7 +392,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                             <div className={`distance-div ${isMapExpanded ? 'mapExpanded-sponsor-distance-div' : 'd-none'}`}>
                                 <div className='d-flex flex-row'>
                                     <FontAwesomeIcon icon={faPaperPlane} style={{ fontSize: "10px", marginTop: "4.8px", marginRight: "3px" }} />
-                                    <p className='distance'>{doctor.distance || '1.3km Away'}</p>
+                                    <p className='distance'>{hospitalDistance ? `${hospitalDistance} km Away` : 'Calculating distance...'}</p>
                                 </div>
                             </div>
                         </div>
@@ -401,7 +433,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                         <div className={`distance-div ${isMapExpanded ? 'd-none' : ''}`}>
                             <div className='d-flex flex-row'>
                                 <FontAwesomeIcon icon={faPaperPlane} style={{ fontSize: "10px", marginTop: "4.8px", marginRight: "3px" }} />
-                                <p className='distance'>{doctor.distance || '1.3km Away'}</p>
+                                <p className='distance'>{hospitalDistance ? `${hospitalDistance} km Away` : 'Calculating distance...'}</p>
                             </div>
                             <p className="availability">{doctor.availability ? "Available" : "Not Available"}</p>
                         </div>
@@ -422,6 +454,11 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                                             key={index}
                                             className={`date-item ${index + startIndex === selectedDate ? 'active' : ''}`}
                                             onClick={() => setSelectedDate(index + startIndex)}
+                                            style={{
+                                                pointerEvents: date.slots === 0 ? 'none' : 'auto', 
+                                                opacity: date.slots === 0 ? 0.5 : 1, 
+                                                cursor: date.slots === 0 ? 'not-allowed' : 'pointer'
+                                            }}
                                         >
                                             <h3>{date.day}</h3>
                                             <span className="slots-available">{date.slots} Slots Available</span>

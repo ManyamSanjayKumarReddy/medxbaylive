@@ -6,7 +6,7 @@ import VerifiedImg from '../../assests/img/Verified-SVG.svg';
 import { RiArrowDownSLine } from "react-icons/ri";
 import Sponsor from './Sponsor';
 
-const DoctorMainCard = ({ isMapExpanded, doctors = [] }) => {
+const DoctorMainCard = ({ isMapExpanded, doctors = [],location }) => {
     const [sortOption, setSortOption] = useState('');
     const [sponsoredDoctors, setSponsoredDoctors] = useState([]);
     const [nonSponsoredDoctors, setNonSponsoredDoctors] = useState([]);
@@ -29,21 +29,28 @@ const DoctorMainCard = ({ isMapExpanded, doctors = [] }) => {
     useEffect(() => {
         const sorted = sortDoctors(doctors);
         // Filter out doctors with empty time slots
-        const filteredDoctors = sorted.filter(doctor => doctor.timeSlots && doctor.timeSlots.length > 0);
+        const filteredDoctors = sorted.filter(
+            doctor => doctor.timeSlots && doctor.timeSlots.length > 0 && 
+            doctor.timeSlots.some(slot => slot.status === 'free')
+        )
 
         // Separate doctors into sponsored and non-sponsored categories
         const sponsored = filteredDoctors.filter(doctor => 
             doctor.subscriptionType === 'Premium' || 
-            doctor.subscriptionType === 'Enterprise' || 
-            doctor.subscriptionType === 'Standard'
+            doctor.subscriptionType === 'Enterprise' 
         );
         const nonSponsored = filteredDoctors.filter(doctor => 
             doctor.subscriptionType !== 'Premium' && 
-            doctor.subscriptionType !== 'Enterprise'
+            doctor.subscriptionType !== 'Enterprise' ||
+            doctor.subscriptionType === 'Standard'
         );
+
+        // const freeTimesoltsDoctors = filteredDoctors.map()
         
         setSponsoredDoctors(sponsored);
         setNonSponsoredDoctors(nonSponsored);
+        console.log(doctors);
+        
     }, [sortOption, doctors]);
 
     return (
@@ -88,7 +95,7 @@ const DoctorMainCard = ({ isMapExpanded, doctors = [] }) => {
                 <p>All results</p>
                 {nonSponsoredDoctors.length > 0 ? (
                     nonSponsoredDoctors.map((doctor) => (
-                        <DoctorCard key={doctor._id} doctor={doctor} isMapExpanded={isMapExpanded} />
+                        <DoctorCard key={doctor._id} doctor={doctor} isMapExpanded={isMapExpanded}/>
                     ))
                 ) : (
                     <p>No doctors found based on the applied filters.</p>

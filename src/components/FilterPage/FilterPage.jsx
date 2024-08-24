@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import DoctorMainCard from './DoctorMainCard';
 import Filter from './Filter';
 import './FilterPage.css';
-
+import MidPartTwo from '../../MidPartTwo';
 import Footer from '../footer/footerrs';
-
+import Footerr from '../footer/footer';
 import MapContainer from './Mapcontainer';
 import './OffCanvas.css';
 import { fetchFromPatient } from '../../actions/api';
@@ -59,10 +59,14 @@ const FilterPage = () => {
               .filter(hospital => hospital.lat && hospital.lng) 
               .map(hospital => ({
                 lat: hospital.lat,
-                lng: hospital.lng
+                lng: hospital.lng,
+                name:hospital.name,
+                city:hospital.city
               }))
             );
                     setLocations(extractedLocations);
+                    console.log(extractedLocations);
+                    
         } else {
           setDoctors([]);
           setLocations([])
@@ -101,6 +105,9 @@ const FilterPage = () => {
     setIsMapExpanded(false);
     setSearchInput('');
     
+  };
+  const handleMapClose = () => {
+    setIsMapExpanded(false);
   };
 
   const filterDoctors = (doctors) => {
@@ -148,15 +155,8 @@ const FilterPage = () => {
       );
     });
   };
-  
-  
-
-
   const filteredDoctors = filterDoctors(doctors);
   // console.log(filteredDoctors,"after")
-
-  
-
   return (
     <>
     <Nestednavbar/>
@@ -179,7 +179,7 @@ const FilterPage = () => {
 
             </div>
             <div className={`doctorMainCard-edit ${isMapExpanded ? 'col-4' : 'col-12 col-lg-6'}`}>
-              <DoctorMainCard isMapExpanded={isMapExpanded} doctors={filteredDoctors} />
+              <DoctorMainCard isMapExpanded={isMapExpanded} doctors={filteredDoctors} location={locations}/>
             </div>
             <div className={`map-edit d-none d-lg-block ${isMapExpanded ? 'col-5 mt-4' : 'col-3'}`}>
               <MapContainer
@@ -190,6 +190,8 @@ const FilterPage = () => {
                 onSearchButtonClick={handleSearchButtonClick}
                 onResetClick={handleResetClick}
                 uniqueLocations={locations}
+                onClickOutside={handleMapClose} // Pass handleMapClose function
+
               />
             </div>
           </div>

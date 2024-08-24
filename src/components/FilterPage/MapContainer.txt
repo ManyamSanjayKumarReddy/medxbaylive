@@ -206,3 +206,257 @@ const MapContainer = ({ uniqueLocations }) => {
 };
 
 export default MapContainer;
+
+
+
+
+
+
+
+
+
+
+
+show the default map as using userlocation :
+import React, { useEffect, useState } from 'react';
+import './mapcontainer.css';
+import { IoSearch } from "react-icons/io5";
+import { RiArrowDownSLine } from "react-icons/ri";
+
+const MapContainer = ({
+    expanded,
+    searchInput,
+    onExpandToggle,
+    onSearchInputChange,
+    onSearchButtonClick,
+    onResetClick,
+    uniqueLocations
+}) => {
+    const [mapLoaded, setMapLoaded] = useState(false);
+    const [locationDenied, setLocationDenied] = useState(false); // Track if location was denied
+    const apiKey = 'AIzaSyApr-nSbv28HGFJxddFfjhtNM-xtF2YfMA'; // Ensure this is correctly set
+
+    const loadGoogleMapsScript = () => {
+        return new Promise((resolve, reject) => {
+            if (document.querySelector(`script[src*="maps.googleapis.com"]`)) {
+                resolve(window.google.maps);
+                return;
+            }
+
+            if (window.google && window.google.maps) {
+                resolve(window.google.maps);
+                return;
+            }
+
+            window.initMap = () => {
+                if (window.google && window.google.maps) {
+                    resolve(window.google.maps);
+                } else {
+                    reject(new Error('Google Maps API not loaded'));
+                }
+            };
+
+            const script = document.createElement('script');
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&v=weekly&libraries=geometry`;
+            script.async = true;
+            script.defer = true;
+            script.onerror = (error) => {
+                reject(error);
+            };
+            document.head.appendChild(script);
+        });
+    };
+
+    useEffect(() => {
+        loadGoogleMapsScript()
+            .then((googleMaps) => {
+                setMapLoaded(true);
+                if (uniqueLocations) {
+                    initMap(googleMaps);
+                } else {
+                    console.warn('uniqueLocations is not available');
+                }
+            })
+            .catch((error) => {
+                console.error('Error loading Google Maps:', error);
+            });
+    }, [uniqueLocations]);
+
+    const getUserLocation = () => {
+        return new Promise((resolve, reject) => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        resolve({
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        });
+                    },
+                    error => {
+                        reject(error);
+                    }
+                );
+            } else {
+                reject(new Error('Geolocation is not supported by this browser.'));
+            }
+        });
+    };
+
+    const handleLocationRequest = async () => {
+        try {
+            const userLocation = await getUserLocation();
+            setLocationDenied(false); // Reset location denied state if access is granted
+            return userLocation;
+        } catch (error) {
+            if (error.code === 1) { // User denied geolocation
+                setLocationDenied(true); // Show prompt to enable location
+            }
+            return null; // Return null if location access is denied or fails
+        }
+    };
+
+    const calculateDistance = (googleMaps, userLocation, targetLocation) => {
+        const userLatLng = new googleMaps.LatLng(userLocation.lat, userLocation.lng);
+        const targetLatLng = new googleMaps.LatLng(targetLocation.lat, targetLocation.lng);
+        return googleMaps.geometry.spherical.computeDistanceBetween(userLatLng, targetLatLng);
+    };
+
+    const initMap = async (googleMaps) => {
+        if (!googleMaps) {
+            console.error('Google Maps API not loaded');
+            return;
+        }
+
+        let userLocation = await handleLocationRequest();
+        const defaultCenter = { lat: 20.5937, lng: 78.9629 }; // Center map on India initially
+        const map = new googleMaps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: userLocation || defaultCenter // Set the default center if user location is not available
+        });
+
+        const bounds = new googleMaps.LatLngBounds();
+
+        if (userLocation) {
+            const userMarker = new googleMaps.Marker({
+                position: userLocation,
+                map: map,
+                title: 'Your Location',
+                icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+            });
+
+            bounds.extend(userLocation);
+
+            const userInfoWindow = new googleMaps.InfoWindow({
+                content: 'You are here'
+            });
+
+            userMarker.addListener('click', () => {
+                userInfoWindow.open(map, userMarker);
+            });
+
+            map.setCenter(userLocation);
+            map.setZoom(12);
+        }
+
+        if (uniqueLocations && Array.isArray(uniqueLocations)) {
+            uniqueLocations.forEach(location => {
+                if (!location.lat || !location.lng) {
+                    console.error('Location data is incomplete:', location);
+                    return;
+                }
+
+                const position = { lat: location.lat, lng: location.lng };
+                let distanceInKm = 'N/A'; 
+
+                if (userLocation) {
+                    const distanceInMeters = calculateDistance(googleMaps, userLocation, position);
+                    distanceInKm = (distanceInMeters / 1000).toFixed(2);
+                }
+
+                const marker = new googleMaps.Marker({
+                    position: position,
+                    map: map,
+                    title: 'Free Time Slot Location'
+                });
+
+                const infoWindow = new googleMaps.InfoWindow({
+                    content: `Hospital: ${location.name}, City: ${location.city}, Distance: ${distanceInKm} km`
+                });
+
+                marker.addListener('click', () => {
+                    infoWindow.open(map, marker);
+                });
+
+                bounds.extend(position);
+            });
+        } else {
+            console.error('uniqueLocations is not properly defined:', uniqueLocations);
+        }
+
+        map.fitBounds(bounds);
+
+        const maxZoomLevel = 10;
+        map.addListener('bounds_changed', () => {
+            if (map.getZoom() > maxZoomLevel) {
+                map.setZoom(maxZoomLevel);
+            }
+        });
+    };
+
+    const handleContainerClick = (event) => {
+        event.stopPropagation(); // Prevent click events from propagating outside the map container
+    };
+
+    return (
+        <div className='map-container-edit' onClick={handleContainerClick}>
+            <div className={` ${expanded ? 'mapExpanded-mapHead' : 'mapHead'}`}>
+                <div className={`mapContainer ${expanded ? 'expanded' : ''}`}>
+                    <div className={` map-sort-by ${expanded ? '' : 'mapExpanded-sort-by'}`}>
+                        <div className="map-form-group">
+                            <label htmlFor="sort">Sort By</label>
+                            <select id="sort">
+                                <option value="relevance" className='custom-option'>Relevance</option>
+                                <option value="distance" className='custom-option'>Distance</option>
+                                <option value="rating" className='custom-option'>Rating</option>
+                            </select>
+                            <RiArrowDownSLine className="map-arrow-icon-filter" />
+                        </div>
+                    </div>
+                    {mapLoaded ? (
+                        <div id="map" style={{ height: '100vh', width: '100%' }}></div>
+                    ) : (
+                        <div>Loading map...</div>
+                    )}
+                    {expanded ? (
+                        <div className="searchInputContainer">
+                            <input
+                                type="text"
+                                className="searchInput"
+                                placeholder="Enter search term"
+                                value={searchInput}
+                                onChange={onSearchInputChange}
+                            />
+                            <button className="searchButton" onClick={onSearchButtonClick}>
+                                <IoSearch />
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="searchButtonContainer">
+                            <button className="searchButton" onClick={onExpandToggle}>
+                                Search on Map <IoSearch />
+                            </button>
+                        </div>
+                    )}
+                </div>
+            </div>
+            {locationDenied && (
+                <div className="location-denied-prompt">
+                    <p>Location access is required to show your position on the map. Please enable location services in your browser settings.</p>
+                    <button onClick={handleLocationRequest}>Try Again</button>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default MapContainer;

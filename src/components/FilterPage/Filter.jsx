@@ -39,12 +39,12 @@ const Filter = ({ onFilterChange, initialFilters }) => {
         populateSearchFieldsFromUrl();
         searchDoctors();
     }, []);
-      useEffect(() => {
-        const delayDebounceFn = setTimeout(() => {
-            searchDoctors();
-            onFilterChange(formData);
-        }, 300); // 300ms debouncereturn() =>clearTimeout(delayDebounceFn);
-    }, [formData]);
+    //   useEffect(() => {
+    //     const delayDebounceFn = setTimeout(() => {
+    //         searchDoctors();
+    //         onFilterChange(formData);
+    //     }, 300); // 300ms debouncereturn() =>clearTimeout(delayDebounceFn);
+    // }, [formData]);
     const populateDropdowns = async () => {
         await populateCountryDropdown();
         await populateStateDropdown();
@@ -158,7 +158,7 @@ const Filter = ({ onFilterChange, initialFilters }) => {
     const handleInputChange = (e) => {
         const { id, value, selectedOptions } = e.target;
 
-        if (id == 'conditions' || id == 'languages') {
+        if (id === 'conditions' || id === 'languages') {
             const options = Array.from(selectedOptions).map(option => option.value);
             setFormData((prevData) => ({
                 ...prevData,
@@ -178,10 +178,7 @@ const Filter = ({ onFilterChange, initialFilters }) => {
         setFormData(prev => {
             const updatedArray = checked
                 ? [...prev[name], value]
-                : prev[name].filter(item => item != value);
-    
-            // Update the form data and trigger external filter change
-            console.log(updatedArray);
+                : prev[name].filter(item => item !== value);
             
             onFilterChange({ ...prev, [name]: updatedArray });
 
@@ -191,6 +188,7 @@ const Filter = ({ onFilterChange, initialFilters }) => {
                 [name]: updatedArray
             };
         });
+        console.log(formData)
     };
     
     
@@ -313,17 +311,17 @@ const Filter = ({ onFilterChange, initialFilters }) => {
                         <label>Conditions:</label>
                         <div className="checkbox-group">
                             {dropdownData.conditions.map(condition => (
-                                 <div key={condition} className="checkbox-item">
-                                 <input
-                                     type="checkbox"
-                                     id={`condition-${condition}`}
-                                     name="conditions"
-                                     value={condition}
-                                     checked={formData.conditions.includes(condition)}
-                                     onChange={handleCheckboxChange}
-                                 />
-                                 <label htmlFor={`condition-${condition}`}>{condition}</label>
-                             </div>
+                                <div key={condition} className="checkbox-item">
+                                    <input
+                                        type="checkbox"
+                                        id={`condition-${condition}`}
+                                        name="conditions"
+                                        value={condition}   
+                                        checked={formData.conditions ? formData.conditions.includes(condition) : false}
+                                        onChange={handleCheckboxChange}
+                                    />
+                                    <label htmlFor={`condition-${condition}`}>{condition}</label>
+                                </div>
                             ))}
                         </div>
                     </div>
@@ -339,7 +337,7 @@ const Filter = ({ onFilterChange, initialFilters }) => {
                                     id={`language-${language}`}
                                     name="languages"
                                     value={language}
-                                    checked={formData.languages ? formData.languages.includes(language) : false}
+                                    checked={formData.languages.includes(language)}
                                     onChange={handleCheckboxChange}
                                 />
                                 <label htmlFor={`language-${language}`}>{language}</label>

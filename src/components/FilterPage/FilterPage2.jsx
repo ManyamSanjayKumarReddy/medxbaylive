@@ -1,13 +1,18 @@
 import React, { useState } from 'react'
 import Nestednavbar from '../Nestednavbar/Nestednavbar2'
-
+import DoctorMainCard from './DoctorMainCard'
+import Filter from './Filter'
 import './FilterPage.css'
-
+import MidPartTwo from '../../MidPartTwo'
+import Footer from '../footer/footerrs'
+import Footerr from '../footer/footer'
+import MapContainer from './Mapcontainer'
 import './filter.css';
 import './DoctorMainCard.css'
 import VerifiedImg from '../../assests/img/Verified-SVG.svg'
 import { BsInfoCircle } from "react-icons/bs";
-
+import DoctorCard from './DoctorCard'
+import Sponsor from './Sponsor'
 import doctorProfile from '../../assests/img/Ellipse-30.png'
 import videoCall from '../../assests/img/video_call.svg'
 import MedicalService from '../../assests/img/medical_services.svg'
