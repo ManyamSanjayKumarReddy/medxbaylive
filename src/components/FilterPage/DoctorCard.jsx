@@ -16,6 +16,7 @@ import { fetchFromPatient } from '../../actions/api.js';
 import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment/moment.js';
 import { RiArrowDownSLine } from 'react-icons/ri';
+import LoginCard from '../login/login';
 
 const bufferToBase64 = (buffer) => {
     if (buffer?.type === 'Buffer' && Array.isArray(buffer?.data)) {
@@ -56,9 +57,11 @@ const DoctorCard = ({ isMapExpanded, doctor = {},location }) => {
     const [consultationType, setConsultationType] = useState(''); // Default consultation type
     const [showAllHospitals, setShowAllHospitals] = useState(false); // State to show all hospitals
     const [selectedHospital, setSelectedHospital] = useState(''); // State for selected hospital
-    
     const [userLocation, setUserLocation] = useState({ lat: 0, lng: 0 });
     const [hospitalDistance, setHospitalDistance] = useState(null); 
+    const [hospitalCity, setHospitalCity] = useState(null); 
+    const [userLoggedin,setUserLogged] = useState();
+    const [showLoginPopup,setShowLoginPopup] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -71,6 +74,10 @@ const DoctorCard = ({ isMapExpanded, doctor = {},location }) => {
 
 
     }, [doctor.profilePicture]);
+    useEffect(() => {
+        const loggedIn = sessionStorage.getItem('loggedIn') === 'true';
+        setUserLogged(loggedIn);
+    }, []);
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(
@@ -91,7 +98,8 @@ const DoctorCard = ({ isMapExpanded, doctor = {},location }) => {
     useEffect(() => {
         if (selectedHospital && doctor.hospitals) {
             const hospital = doctor.hospitals.find(h => h.name === selectedHospital);
-            console.log(hospital)
+            // console.log(hospital.city)
+            setHospitalCity(hospital.city)
             if (hospital && hospital.lat && hospital.lng && userLocation.lat && userLocation.lng) {
                 const distance = calculateDistance(userLocation.lat, userLocation.lng, hospital.lat, hospital.lng);
                 setHospitalDistance(distance);
@@ -153,18 +161,18 @@ const DoctorCard = ({ isMapExpanded, doctor = {},location }) => {
     };
 
     const handleShowCard = () => {
-        setShowDoctorCard(true);
+        setShowDoctorCard(prevState => !prevState);
     };
+
+    const handleShowLoginPopup = () => setShowLoginPopup(true);
+    const handleCloseLoginPopup = () => setShowLoginPopup(false);
 
     const handleTimeSlotClick = (slot) => {
         setSelectedTimeSlot(slot);
     };
 
     const handleBookAppointment = async () => {
-        const user = sessionStorage.getItem('loggedIn');
-
-    
-        if (!user) {
+        if (!userLoggedin) {
             toast.info('You need to log in to book an appointment.',{
                 className: 'toast-sign toast-fail ',
                 closeButton: true,
@@ -403,11 +411,10 @@ const DoctorCard = ({ isMapExpanded, doctor = {},location }) => {
                             </Link>
                             <p className="speciality">{doctor.speciality}</p>
                             <p className="experience">{doctor.experience || "16 years experience overall"}</p>
-                            <p className={`location ${isMapExpanded ? 'mapExpanded-location' : ''}`}>{doctor.city}</p>
+                            <p className={`location ${isMapExpanded ? 'mapExpanded-location' : ''}`}>{hospitalCity || "Hospital City"}</p>
                             <p className={`clinic ${isMapExpanded ? 'mapExpanded-clinic' : ''}`}>
                             <div className="row mt-2">
                                 <div className="col">
-                                    <h6>Select Hospital:</h6>
                                     {renderHospitalOptions()}
                                 </div>
                             </div>
@@ -438,7 +445,10 @@ const DoctorCard = ({ isMapExpanded, doctor = {},location }) => {
                             <p className="availability">{doctor.availability ? "Available" : "Not Available"}</p>
                         </div>
                         <div className='d-flex flex-row'>
-                            <button className={`book-button mr-2 ${isMapExpanded ? 'mapExpanded-button' : ''}`} onClick={handleShowCard}>Book Appointment</button>
+                        {!userLoggedin ? 
+                        (<button className={`book-button book-login mr-2 ${isMapExpanded ? 'mapExpanded-button' : ''}`}  onClick={handleShowLoginPopup}>Login</button>)
+                        : (<button className={`book-button  mr-2 ${isMapExpanded ? 'mapExpanded-button' : ''}`} onClick={handleShowCard}>Book Appointment</button>) 
+                        }
                             <button className={`book-button ${isMapExpanded ? 'mapExpanded-button' : ''}`}><FontAwesomeIcon icon={faPaperPlane} /></button>
                         </div>
                     </div>
@@ -552,6 +562,10 @@ const DoctorCard = ({ isMapExpanded, doctor = {},location }) => {
                 )}
 
             </div>
+            <LoginCard 
+        show={showLoginPopup} 
+        handleClose={handleCloseLoginPopup}
+      />
         </>
     );
 };

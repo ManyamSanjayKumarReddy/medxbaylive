@@ -170,6 +170,7 @@ const Filter = ({ onFilterChange, initialFilters }) => {
                 [id]: value,
             }));
         }
+        searchDoctors();
     };
 
 
@@ -179,10 +180,10 @@ const Filter = ({ onFilterChange, initialFilters }) => {
             const updatedArray = checked
                 ? [...prev[name], value]
                 : prev[name].filter(item => item !== value);
-            
+
             onFilterChange({ ...prev, [name]: updatedArray });
 
-    
+
             return {
                 ...prev,
                 [name]: updatedArray
@@ -190,9 +191,9 @@ const Filter = ({ onFilterChange, initialFilters }) => {
         });
         console.log(formData)
     };
-    
-    
-      
+
+
+
 
     const searchDoctors = async () => {
         const query = new URLSearchParams(formData).toString();
@@ -307,44 +308,48 @@ const Filter = ({ onFilterChange, initialFilters }) => {
                     </div>
                 </div>
                 <div className="select-container-filter">
+    <div className="form-group">
+        <label>Conditions:</label>
+        <div className="checkbox-group">
+            {dropdownData.conditions.map(condition => (
+                <div key={condition} className="checkbox-item">
+                    <input
+                        type="checkbox"
+                        id={`condition-${condition}`}
+                        name="conditions"
+                        value={condition}
+                        checked={formData.conditions ? formData.conditions.includes(condition) : false}
+                        onChange={handleCheckboxChange}
+                    />
+                    <label htmlFor={`condition-${condition}`} className="checkbox-label">
+                        {condition}
+                    </label>
+                </div>
+            ))}
+        </div>
+    </div>
+</div>
+
+
+                <div className="select-container-filter">
                     <div className="form-group">
-                        <label>Conditions:</label>
+                        <label>Language Spoken:</label>
                         <div className="checkbox-group">
-                            {dropdownData.conditions.map(condition => (
-                                <div key={condition} className="checkbox-item">
+                            {dropdownData.languages.map(language => (
+                                <div key={language} className="checkbox-item" >
                                     <input
                                         type="checkbox"
-                                        id={`condition-${condition}`}
-                                        name="conditions"
-                                        value={condition}   
-                                        checked={formData.conditions ? formData.conditions.includes(condition) : false}
+                                        id={`language-${language}`}
+                                        name="languages"
+                                        value={language}
+                                        checked={formData.languages ? formData.languages.includes(language) : false}
                                         onChange={handleCheckboxChange}
                                     />
-                                    <label htmlFor={`condition-${condition}`}>{condition}</label>
+                                    <label htmlFor={`language-${language}`} className="checkbox-label">{language}</label>
                                 </div>
                             ))}
                         </div>
                     </div>
-                </div>
-                <div className="select-container-filter">
-                <div className="form-group">
-                    <label>Language Spoken:</label>
-                    <div className="checkbox-group">
-                        {dropdownData.languages.map(language => (
-                            <div key={language} className="checkbox-item" >
-                                <input
-                                    type="checkbox"
-                                    id={`language-${language}`}
-                                    name="languages"
-                                    value={language}
-                                    checked={formData.languages.includes(language)}
-                                    onChange={handleCheckboxChange}
-                                />
-                                <label htmlFor={`language-${language}`}>{language}</label>
-                            </div>
-                        ))}
-                    </div>
-                </div>
                 </div>
                 <div className="select-container-filter">
                     <div className="form-group">
@@ -359,18 +364,18 @@ const Filter = ({ onFilterChange, initialFilters }) => {
                     </div>
                 </div>
                 <div className="select-container-filter">
-                <div className="form-group">
-                    <label htmlFor="hospital">Hospital:</label>
-                    <select id="hospital" name="hospital" value={formData.hospital} onChange={handleInputChange}>
-                        <option value="">Select Hospital</option>
-                        {dropdownData.hospitals.map(hospital => (
-                            <option key={hospital} value={hospital}>{hospital}</option>
-                        ))}
-                    </select>
-                    <RiArrowDownSLine className="arrow-icon-filter" />
+                    <div className="form-group">
+                        <label htmlFor="hospital">Hospital:</label>
+                        <select id="hospital" name="hospital" value={formData.hospital} onChange={handleInputChange}>
+                            <option value="">Select Hospital</option>
+                            {dropdownData.hospitals.map(hospital => (
+                                <option key={hospital} value={hospital}>{hospital}</option>
+                            ))}
+                        </select>
+                        <RiArrowDownSLine className="arrow-icon-filter" />
+                    </div>
                 </div>
-            </div>
-                
+
                 <div className="select-container-filter">
                     <div className="form-group">
 

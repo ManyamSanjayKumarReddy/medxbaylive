@@ -1,6 +1,8 @@
 // BlogPage.js
 import React, { useEffect, useState } from "react";
 import "./blog.css";
+import { IoSearch } from "react-icons/io5";
+
 import {
   FaTag,
   FaTelegram,
@@ -14,6 +16,7 @@ import LivingWithHighBloodPressure from "./bloodpress";
 import axios from "axios";
 import moment from "moment";
 import profileimg from '../Assets/profileimg.png';
+
 
 const bufferToBase64 = (buffer) => {
   if (buffer?.type === 'Buffer' && Array.isArray(buffer?.data)) {
@@ -91,7 +94,7 @@ const BlogPage = () => {
         "Unmanaged high blood pressure can increase your risk of heart disease and stroke. Along with medications, certain natural remedies may help manage your blood pressure...",
       author: "By Tessa Cooper",
       date: "January 12, 2023",
-      imageUrl: "https://via.placeholder.com/125",
+      imageUrl: "https://www.pexels.com/photo/smiling-woman-standing-near-plant-1996250/",
       readTime: "10 Minutes",
     },
     {
@@ -100,7 +103,7 @@ const BlogPage = () => {
         "Unmanaged high blood pressure can increase your risk of heart disease and stroke. Along with medications, certain natural remedies may help manage your blood pressure...",
       author: "By Tessa Cooper",
       date: "January 12, 2023",
-      imageUrl: "https://via.placeholder.com/125",
+      imageUrl: "https://www.pexels.com/photo/smiling-woman-standing-near-plant-1996250/",
       readTime: "10 Minutes",
     },
     {
@@ -109,7 +112,7 @@ const BlogPage = () => {
         "Unmanaged high blood pressure can increase your risk of heart disease and stroke. Along with medications, certain natural remedies may help manage your blood pressure...",
       author: "By Tessa Cooper",
       date: "January 12, 2023",
-      imageUrl: "https://via.placeholder.com/125",
+      imageUrl: "https://www.pexels.com/photo/smiling-woman-standing-near-plant-1996250/",
       readTime: "10 Minutes",
     },
     {
@@ -118,7 +121,7 @@ const BlogPage = () => {
         "Unmanaged high blood pressure can increase your risk of heart disease and stroke. Along with medications, certain natural remedies may help manage your blood pressure...",
       author: "By Tessa Cooper",
       date: "January 12, 2023",
-      imageUrl: "https://via.placeholder.com/125",
+      imageUrl: "https://www.pexels.com/photo/smiling-woman-standing-near-plant-1996250/",
       readTime: "10 Minutes",
     },
     {
@@ -127,7 +130,7 @@ const BlogPage = () => {
         "Unmanaged high blood pressure can increase your risk of heart disease and stroke. Along with medications, certain natural remedies may help manage your blood pressure...",
       author: "By Tessa Cooper",
       date: "January 12, 2023",
-      imageUrl: "https://via.placeholder.com/125",
+      imageUrl: "https://www.pexels.com/photo/smiling-woman-standing-near-plant-1996250/",
       readTime: "10 Minutes",
     },
     {
@@ -331,7 +334,34 @@ const BlogPage = () => {
 
       {/* Sidebar */}
       <div>
-        
+      <input
+          type="text"
+          placeholder="Search..."
+          style={{
+            padding: "10px",
+            width: "400px",
+            borderRadius: "5px",
+            border: "1px solid #ccc",
+            fontSize: "16px",
+            marginTop: "30px",
+            marginLeft: "-350px",
+            position: "relative",
+            left:"-40px",
+          }}
+        />
+        <span
+    style={{
+     fontSize:"18px",
+      marginTop:"-20px",
+      position: "relative",
+      top:"-40px",
+      left:"-20px"
+    }}
+  >
+   <IoSearch />
+
+  </span>
+
         <div className="card">
           <SidebarSection title="Categories" items={categoryData} />
           <NewRecentBlog
@@ -352,7 +382,7 @@ const BlogPage = () => {
 const BlogPostList = ({ title, posts }) => {
   return (
     <div className="blog-section">
-      <h3>{title}ing & Diagnosis</h3>
+      <h3>{title}</h3>
       <ul>
         {posts.map((post, index) => (
           <li key={index}>
@@ -381,7 +411,7 @@ const SidebarSection = ({ title, items }) => {
   return (
     <div className="sidebar-section">
       <div className="sidebar-header">
-        <h3>{title}</h3>
+        <h3>{title}ing & Diagnosis</h3>
       </div>
       <ul>
       {Object.entries(items).map(([name, count], index) => (
@@ -484,13 +514,15 @@ const HighBloodPressureSpecialist = ({ newBloodPressureSpecialist }) => {
       <div className="bloodPrSp-card-grid">
         {newBloodPressureSpecialist.map((card, index) => (
           <div key={index} className="bloodPrSp-card">
-            <img
+            
+            <div className="bloodPrSp-card-content">
+
+              <div className="bloodPrSp-card-content-heading">
+              <img
               src={getProfileImage(card.profilePicture)}
               alt="Card thumbnail"
               className="bloodPrSp-card-image"
             />
-            <div className="bloodPrSp-card-content">
-              <div className="bloodPrSp-card-content-heading">
                 <div className="bloodPrSp-card-title">{card.name}</div>
                 <div className="bloodPrSp-card-rating">
                   <FaStar className="starr" />

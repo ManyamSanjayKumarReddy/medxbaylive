@@ -169,16 +169,26 @@ export default function ReactBigCalendar({ onScheduleChange }) {
       confirmButtonText: "Ok",
     });
   }
-
   function onSelectSlot(e) {
     const selectedDate = moment(e.start).format("YYYY-MM-DD");
-  
+    
     // Check if the selected date is before today's date
     if (moment(selectedDate).isBefore(moment().format("YYYY-MM-DD"))) {
       Swal.fire({
         icon: 'error',
         title: 'Invalid Date',
         text: 'You cannot add time slots for past dates.',
+      });
+      return;
+    }
+
+    const freeSlotsCount = events.filter(event => event.status === 'free').length;
+  
+    if (freeSlotsCount >= 3) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Upgrade Required',
+        text: 'You have reached the limit of 3 free time slots. Please upgrade to add more.',
       });
       return;
     }
@@ -307,6 +317,7 @@ export default function ReactBigCalendar({ onScheduleChange }) {
           start: new Date(`${slotType === 'Single' ? date : startdate}T${starttime}:00`),
           end: new Date(`${slotType === 'Single' ? date : enddate}T${endtime}:00`),
           slotType,
+          status: 'free', // Assuming all new slots are free
         };
   
         setEvents((prevEvents) => [...prevEvents, newEvent]);
@@ -331,6 +342,7 @@ export default function ReactBigCalendar({ onScheduleChange }) {
       }
     });
   }
+  
   
 
   return (

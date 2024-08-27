@@ -11,10 +11,10 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'; // Filled star
 import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment/moment.js';
 import { RiArrowDownSLine } from "react-icons/ri";
-
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LoginCard from '../login/login';
+
 const bufferToBase64 = (buffer) => {
     if (buffer?.type === 'Buffer' && Array.isArray(buffer?.data)) {
       const bytes = new Uint8Array(buffer.data);
@@ -53,10 +53,11 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
     const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
     const [consultationType, setConsultationType] = useState(''); // Default consultation type
     const [selectedHospital, setSelectedHospital] = useState('');
-
-
     const [userLocation, setUserLocation] = useState({ lat: 0, lng: 0 });
     const [hospitalDistance, setHospitalDistance] = useState(null); 
+    const [hospitalCity, setHospitalCity] = useState(null); 
+    const [userLoggedin,setUserLogged] = useState();
+    const [showLoginPopup,setShowLoginPopup] = useState(false);
     const navigate = useNavigate();
 
 
@@ -78,9 +79,10 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
     // Calculate distance when hospital or user location changes
     useEffect(() => {
         if (selectedHospital && doctor.hospitals) {
-            console.log(userLocation)
+            // console.log(userLocation)
             const hospital = doctor.hospitals.find(h => h.name === selectedHospital);
-            console.log(hospital)
+            // console.log(hospital)
+            setHospitalCity(hospital.city)
             if (hospital && hospital.lat && hospital.lng && userLocation.lat && userLocation.lng) {
                 const distance = calculateDistance(userLocation.lat, userLocation.lng, hospital.lat, hospital.lng);
                 setHospitalDistance(distance);
@@ -98,6 +100,10 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
 
 
     }, [doctor.profilePicture]);
+    useEffect(() => {
+        const loggedIn = sessionStorage.getItem('loggedIn') === 'true';
+        setUserLogged(loggedIn);
+    }, []);
     // Default values for dates if doctor data is missing
     // console.log(doctor.profilePicture);
 
@@ -158,18 +164,18 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
     };
 
     const handleShowCard = () => {
-        setShowDoctorCard(true);
+        setShowDoctorCard(prevState => !prevState);
     };
-
+    const handleShowLoginPopup = () => setShowLoginPopup(true);
+    const handleCloseLoginPopup = () => setShowLoginPopup(false);
+  
     const handleTimeSlotClick = (slot) => {
         setSelectedTimeSlot(slot);
     };
     
     const handleBookAppointment = async () => {
-        const user = sessionStorage.getItem('loggedIn');
-
-    
-        if (!user) {
+        
+        if (!userLoggedin) {
             toast.info('You need to log in to book an appointment.',{
                 className: 'toast-center toast-fail',
                 closeButton: true,
@@ -396,7 +402,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                             </Link> 
                             <p className="speciality">{doctor.speciality }</p>
                             <p className="experience">{doctor.experience || "16 years experience overall"}</p>
-                            <p className={`location ${isMapExpanded ? 'mapExpanded-location' : ''}`}>{doctor.city || "Pare, Mumbai"}</p>
+                            <p className={`location ${isMapExpanded ? 'mapExpanded-location' : ''}`}>{hospitalCity || "Hospital City"}</p>
                             <p className={`clinic ${isMapExpanded ? 'mapExpanded-clinic' : ''}`}>
                             <div className="row mt-2">
                                 <div className="col">
@@ -430,9 +436,13 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
                             <p className="availability">{doctor.availability ? "Available" : "Not Available"}</p>
                         </div>
                         <div className='d-flex flex-row'>
-                            <button className={`book-button mr-2 ${isMapExpanded ? 'mapExpanded-button' : ''}`} onClick={handleShowCard}>Book Appointment</button>
+                        {!userLoggedin ? 
+                         (<button className={`book-button book-login mr-2 ${isMapExpanded ? 'mapExpanded-button' : ''}`}  onClick={handleShowLoginPopup}>Login</button>)
+                        : (<button className={`book-button mr-2 ${isMapExpanded ? 'mapExpanded-button' : ''}`} onClick={handleShowCard}>Book Appointment</button>) 
+                        }
                             <button className={`book-button ${isMapExpanded ? 'mapExpanded-button' : ''}`}><FontAwesomeIcon icon={faPaperPlane} /></button>
                         </div>
+                        
                     </div>
                 </div>
                 {showDoctorCard && (
@@ -527,6 +537,10 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
 
                 )}
             </div>
+            <LoginCard 
+        show={showLoginPopup} 
+        handleClose={handleCloseLoginPopup}
+      />
         </>
     );
 };

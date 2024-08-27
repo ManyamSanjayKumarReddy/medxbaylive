@@ -44,11 +44,11 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
     insurances: [""],
     awards: [""],
     profilePicture: null,
-     documents: {
-    licenseProof: { data: null, contentType: "" },
-    certificationProof: { data: null, contentType: "" },
-    businessProof: { data: null, contentType: "" }
-  }
+    documents: {
+      licenseProof: { data: null, contentType: "" },
+      certificationProof: { data: null, contentType: "" },
+      businessProof: { data: null, contentType: "" },
+    },
   });
   const [profilePicturePreview, setProfilePicturePreview] = useState(null);
 
@@ -71,63 +71,82 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
     });
   };
 
+  
+
   const handleAddItem = (field) => {
-    setFormData((prevData) => {
-      const newData = {
-        ...prevData,
-        [field]: [
-          ...prevData[field],
-          field === "hospitals"
-            ? {
-                name: "",
-                street: "",
-                city: "",
-                state: "",
-                country: "",
-                zip: "",
-                latitude: "",
-                longitude: "",
-              }
-            : "",
-        ],
-      };
-      localStorage.setItem("doctorFormData", JSON.stringify(newData)); 
-      return newData;
-    });
+    setFormData((prevData) => ({
+      ...prevData,
+      [field]: [
+        ...prevData[field],
+        field === "hospitals"
+          ? {
+              name: "",
+              street: "",
+              city: "",
+              state: "",
+              country: "",
+              zip: "",
+              latitude: "",
+              longitude: "",
+            }
+          : "",
+      ],
+    }));
   };
 
   const handleRemoveItem = (index, field) => {
-    setFormData((prevData) => {
-      const newData = {
-        ...prevData,
-        [field]: prevData[field].filter((_, i) => i !== index),
-      };
-      localStorage.setItem("doctorFormData", JSON.stringify(newData));
-      return newData;
-    });
+    setFormData((prevData) => ({
+      ...prevData,
+      [field]: prevData[field].filter((_, i) => i !== index),
+    }));
   };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setProfileimage(reader.result);
-        setFormData((prevData) => ({
-          ...prevData,
-          profilePicture: file, 
-        }));
-      };
-      reader.readAsDataURL(file);
+    const { name, files } = e.target;
+    const file = files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const base64String = btoa(
+        new Uint8Array(reader.result).reduce((data, byte) => data + String.fromCharCode(byte), '')
+      );
+
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: {
+          data: base64String,
+          contentType: file.type,
+        },
+      }));
+
+      if (name === "profilePicture") {
+        setProfilePicturePreview(URL.createObjectURL(file));
+      }
+    };
+
+    if (name === "profilePicture") {
+      if (!file.type.startsWith("image/")) {
+        toast.error("Please upload a valid image file for the profile picture.");
+        return;
+      }
+      reader.readAsArrayBuffer(file);
+    } else if (["licenseProof", "certificationProof", "businessProof"].includes(name)) {
+      if (file.type !== "application/pdf") {
+        toast.error(`Please upload a valid PDF file for ${name.replace("Proof", "")}.`);
+        return;
+      }
+      reader.readAsArrayBuffer(file);
     }
   };
+
 
   const [profileimg,setProfileimage]=useState('')
 
   useEffect(() => {
     import("../DoctorEdit/DoctorPopUp.css");
 
-    // Load form data from localStorage
     const savedData = localStorage.getItem("doctorFormData");
     if (savedData) {
       const data = JSON.parse(savedData)
@@ -152,18 +171,19 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
           `${process.env.REACT_APP_BASE_URL}/doctor/profile/update`,
           { withCredentials: true }
         );
-        const formData = response.data;
+        const fetchedData = response.data.doctor;
 
-        if (formData.doctor.dateOfBirth) {
-          formData.doctor.dateOfBirth = formatDateForInput(formData.doctor.dateOfBirth);
+        if (fetchedData.dateOfBirth) {
+          fetchedData.dateOfBirth = formatDateForInput(fetchedData.dateOfBirth);
         }
+
+
+        const profileImageData = fetchedData.profilePicture
+          ? `data:image/jpeg;base64,${fetchedData.profilePicture.data}`
+          : profileImage;
+        setProfilePicturePreview(profileImageData);
         
-        var form = formData.doctor
-        const profileImageData = form?.profilePicture
-        ? `data:image/jpeg;base64,${form.profilePicture.data}` 
-        : profileImage;
-        setProfileimage(profileImageData)
-        setFormData(formData.doctor);
+        setFormData(fetchedData);
       } catch (error) {
         console.error("Error fetching doctor details:", error);
       }
@@ -171,6 +191,7 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
 
     fetchDoctor();
   }, []);
+
 
   const formatDateForInput = (dateString) => {
     if (!dateString) return "";
@@ -194,6 +215,7 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
   };
 
   const handleLocationSelect = (lat, lng) => {
+    console.log('Selected Location:', { lat, lng });
     setSelectedLocation({ lat, lng });
     setFormData((prevData) => ({
       ...prevData,
@@ -203,6 +225,8 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
     }));
     setModalShow({ show: false, index: null });
   };
+  
+  
 
   const LocationMarker = () => {
     const map = useMapEvents({
@@ -213,64 +237,55 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
     return null;
   };
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); 
-    const form = new FormData();
+    setLoading(true);
+  
+    const formPayload = { ...formData };
 
-    for (const key in formData) {
-        if (key === "profilePicture" && formData.profilePicture) {
-            form.append(key, formData.profilePicture);
-        } else if (Array.isArray(formData[key])) {
-            formData[key].forEach((item, index) => {
-                if (typeof item === "object") {
-                    for (const nestedKey in item) {
-                        form.append(`${key}[${index}][${nestedKey}]`, item[nestedKey]);
-                    }
-                } else {
-                    form.append(`${key}[${index}]`, item);
-                }
-            });
-        } else {
-            form.append(key, formData[key]);
-        }
+    const transformedDocuments = {};
+    for (const key in formPayload.documents) {
+      const doc = formPayload.documents[key];
+      if (doc.data) {
+        transformedDocuments[key] = {
+          data: doc.data, 
+          contentType: doc.contentType,
+        };
+      }
     }
 
+    formPayload.documents = transformedDocuments;
+
     try {
-        const response = await axios.post(
-            `${process.env.REACT_APP_BASE_URL}/doctor/profile/update`,
-            form,
-            {
-                withCredentials: true,
-                headers: { "Content-Type": "multipart/form-data" },
-            }
-        );
-        if (response.data.success) {
-            toast.info("Profile updated successfully!", {
-              className: 'toast-center ',
-              closeButton: true,
-              progressBar: true,
-            });
-            handleClose();
-            fetchDoctorDetails();
-        } else {
-            toast.info(`Failed to update profile: ${response.data.message}`, {
-              className: 'toast-center toast-fail',
-              closeButton: true,
-              progressBar: true,
-            });
-            console.error("Failed to update profile:", response.data.message);
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/doctor/profile/update`,
+        formPayload,
+        {
+          withCredentials: true,
+          headers: { "Content-Type": "application/json" },
         }
-    } catch (error) {
-        toast.info("An error occurred while updating the profile.", {
-          className: 'toast-center toast-fail',
-          closeButton: true,
-          progressBar: true,
-        });
-      } finally {
-        setLoading(false); 
-      }
-    };
+      );
+      
+   
+    toast.info('Profile updated successfully!',{
+      className: 'toast-center toast-success',
+      closeButton: true,
+      progressBar: true,
+  });
+  } catch (error) {
+
+    toast.info('Failed to update profile. Please try again.',{
+      className: 'toast-center toast-success',
+      closeButton: true,
+      progressBar: true,
+  });
+  } finally {
+    setLoading(false);
+  }
+};
+
+
   return (
     <div  centered className="custom-modal">
           
@@ -486,6 +501,28 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
             <div className="col-md-6">
               <Form.Group className="mb-3" controlId="formConditions">
                 <Form.Label>Conditions</Form.Label>
+                {formData.conditions.length === 0 && (
+    <div className="row row-container" style={{ marginBottom: "10px" }}>
+      <Form.Control
+        type="text"
+          name="conditions"
+        value={formData.conditions}
+        onChange={(e) => handleChange(e, 0, "conditions")}
+        placeholder="Enter conditions"
+        className="form-control-custom adjust-form"
+      />
+      <InputGroup.Text
+        className="form-control-custom adjust-form-icon-one"
+        onClick={() => handleAddItem("languages")}
+        aria-label="Add language"
+      >
+        <FontAwesomeIcon
+          icon={faPlus}
+          className="plus-edit-doctor"
+        />
+      </InputGroup.Text>
+    </div>
+  )}
                 {formData.conditions.map((condition, index) => (
                   <div
                     className="row row-container"
@@ -524,45 +561,71 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
               </Form.Group>
             </div>
 
-            <div className="col-md-6">
-              <Form.Group className="mb-3" controlId="formLanguages">
-                <Form.Label>Languages</Form.Label>
-                {formData.languages.map((language, index) => (
-                  <div
-                    className="row row-container"
-                    key={index}
-                    style={{ marginBottom: "10px" }}
-                  >
-                    <Form.Control
-                      type="text"
-                      value={language}
-                      onChange={(e) => handleChange(e, index, "languages")}
-                      placeholder="English"
-                      className="form-control-custom adjust-form"
-                    />
-                    <InputGroup.Text
-                      className="form-control-custom adjust-form-icon-one"
-                      onClick={() => handleAddItem("languages")}
-                    >
-                      <FontAwesomeIcon
-                        icon={faPlus}
-                        className="plus-edit-doctor"
-                      />
-                    </InputGroup.Text>
-                    {formData.languages.length > 1 && (
-                      <InputGroup.Text
-                        className="form-control-custom adjust-form-icon-two"
-                        onClick={() => handleRemoveItem(index, "languages")}
-                      >
-                        <FontAwesomeIcon
-                          icon={faTrash}
-                          className="delete-edit-profile"
-                        />
-                      </InputGroup.Text>
-                    )}
-                  </div>
-                ))}
-              </Form.Group>
+  <div className="col-md-6">
+            <Form.Group className="mb-3" controlId="formLanguages">
+  <Form.Label>Languages</Form.Label>
+  {formData.languages.length === 0 && (
+    <div className="row row-container" style={{ marginBottom: "10px" }}>
+      <Form.Control
+        type="text"
+          name="languages"
+        value={formData.languages}
+        onChange={(e) => handleChange(e, 0, "languages")}
+        placeholder="Enter language"
+        className="form-control-custom adjust-form"
+      />
+      <InputGroup.Text
+        className="form-control-custom adjust-form-icon-one"
+        onClick={() => handleAddItem("languages")}
+        aria-label="Add language"
+      >
+        <FontAwesomeIcon
+          icon={faPlus}
+          className="plus-edit-doctor"
+        />
+      </InputGroup.Text>
+    </div>
+  )}
+  {formData.languages.map((language, index) => (
+    <div
+      className="row row-container"
+      key={index}
+      style={{ marginBottom: "10px" }}
+    >
+      <Form.Control
+        type="text"
+        name="languages"
+        value={language}
+        onChange={(e) => handleChange(e, index, "languages")}
+        placeholder="Enter language"
+        className="form-control-custom adjust-form"
+      />
+      <InputGroup.Text
+        className="form-control-custom adjust-form-icon-one"
+        onClick={() => handleAddItem("languages")}
+        aria-label="Add language"
+      >
+        <FontAwesomeIcon
+          icon={faPlus}
+          className="plus-edit-doctor"
+        />
+      </InputGroup.Text>
+      {formData.languages.length > 1 && (
+        <InputGroup.Text
+          className="form-control-custom adjust-form-icon-two"
+          onClick={() => handleRemoveItem(index, "languages")}
+          aria-label="Remove language"
+        >
+          <FontAwesomeIcon
+            icon={faTrash}
+            className="delete-edit-profile"
+          />
+        </InputGroup.Text>
+      )}
+    </div>
+  ))}
+</Form.Group>
+
             </div>
           </div>
 
@@ -730,6 +793,28 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
             <div className="col-md-6">
               <Form.Group className="mb-3" controlId="formInsurances">
                 <Form.Label>Insurance</Form.Label>
+                {formData.insurances.length === 0 && (
+    <div className="row row-container" style={{ marginBottom: "10px" }}>
+      <Form.Control
+        type="text"
+          name="insurances"
+        value={formData.insurances}
+        onChange={(e) => handleChange(e, 0, "insurances")}
+        placeholder="Enter insurances"
+        className="form-control-custom adjust-form"
+      />
+      <InputGroup.Text
+        className="form-control-custom adjust-form-icon-one"
+        onClick={() => handleAddItem("insurances")}
+        aria-label="Add insurances"
+      >
+        <FontAwesomeIcon
+          icon={faPlus}
+          className="plus-edit-doctor"
+        />
+      </InputGroup.Text>
+    </div>
+  )}
                 {formData.insurances.map((insurance, index) => (
                   <div
                     className="row row-container row-gap"
@@ -772,6 +857,28 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
             <div className="col-md-6">
               <Form.Group className="mb-3" controlId="formAwards">
                 <Form.Label>Awards</Form.Label>
+                {formData.awards.length === 0 && (
+    <div className="row row-container" style={{ marginBottom: "10px" }}>
+      <Form.Control
+        type="text"
+          name="awards"
+        value={formData.awards}
+        onChange={(e) => handleChange(e, 0, "awards")}
+        placeholder="Enter awards"
+        className="form-control-custom adjust-form"
+      />
+      <InputGroup.Text
+        className="form-control-custom adjust-form-icon-one"
+        onClick={() => handleAddItem("awards")}
+        aria-label="Add awards"
+      >
+        <FontAwesomeIcon
+          icon={faPlus}
+          className="plus-edit-doctor"
+        />
+      </InputGroup.Text>
+    </div>
+  )}
                 {formData.awards.map((award, index) => (
                   <div
                     className="row row-container row-gap"
@@ -814,41 +921,39 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
 
           <div className="row mb-3">
     <div className="col-md-6">
-      <Form.Group className="mb-3" controlId="formCertificationProof">
-        <Form.Label>Certification Proof</Form.Label>
-        <Form.Control
-          type="file"
-          name="certificationProof"
-          onChange={handleFileChange}
-          className="form-control-custom"
-          placeholder="choose file"
-        />
-
-      </Form.Group>
+    <Form.Group className="mb-3" controlId="formCertificationProof">
+      <Form.Label>Certification Proof</Form.Label>
+      <Form.Control
+        type="file"
+        name="certificationProof"
+        onChange={handleFileChange}
+        className="form-control-custom"
+      />
+    </Form.Group>
     </div>
     <div className="col-md-6">
-      <Form.Group className="mb-3" controlId="formBusinessProof">
-        <Form.Label>Business Proof</Form.Label>
-        <Form.Control
-          type="file"
-          name="businessProof"
-          onChange={handleFileChange}
-          className="form-control-custom"
-        />
-      </Form.Group>
+    <Form.Group className="mb-3" controlId="formBusinessProof">
+      <Form.Label>Business Proof</Form.Label>
+      <Form.Control
+        type="file"
+        name="businessProof"
+        onChange={handleFileChange}
+        className="form-control-custom"
+      />
+    </Form.Group>
     </div>
   </div>
   <div className="row mb-3">
     <div className="col-md-6">
-      <Form.Group className="mb-3" controlId="formLicenseProof">
-        <Form.Label>License Proof</Form.Label>
-        <Form.Control
-          type="file"
-          name="licenseProof"
-          onChange={handleFileChange}
-          className="form-control-custom"
-        />
-      </Form.Group>
+    <Form.Group className="mb-3" controlId="formLicenseProof">
+      <Form.Label>License Proof</Form.Label>
+      <Form.Control
+        type="file"
+        name="licenseProof"
+        onChange={handleFileChange}
+        className="form-control-custom"
+      />
+    </Form.Group>
     </div>
   </div>
 
@@ -871,6 +976,7 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
         show={modalShow}
         handleClose={() => setModalShow(false)}
         handleLocationSelect={handleLocationSelect}
+        
       />
 
     </div>

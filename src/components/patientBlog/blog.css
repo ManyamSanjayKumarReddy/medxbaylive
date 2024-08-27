@@ -4,7 +4,7 @@
   margin: 30px;
 }
 
-.main-content-blog {
+.main-content {
   flex: 3;
   margin-right: 20px;
 }
@@ -102,18 +102,29 @@
   color: #777;
 }
 
-.card-blog-user {
+
+.card {
   flex: 2;
   margin: 5px;
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 0px;
   border: 1px solid gainsboro;
   border-radius: 8px;
   width: 400px;
-  /* height: 900px; */
+  height: 780px;
   margin-left: -400px;
   position: relative;
-  left:10px;
+  left: 10px;
+  
+  /* Add overflow properties */
+  overflow: auto; /* Allows scrolling if content exceeds card size */
+  
+  /* Hide the scrollbar */
+  scrollbar-width: none; /* For Firefox */
+}
+
+.card::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
 }
 
 .read-more {
@@ -139,6 +150,7 @@
 .sidebar-item {
   display: flex;
   align-items: center;
+  margin-top: 10px;
   margin-bottom: 10px;
   margin-left: -30px;
 }
@@ -154,7 +166,7 @@
 }
 
 .blog-section {
-  width: 600px;
+  width: 700px;
   margin-bottom: 40px;
 }
 
@@ -187,6 +199,7 @@
   object-fit: cover;
   margin-right: 20px;
   border-radius: 8px;
+
 }
 
 .post-meta {
@@ -194,7 +207,7 @@
   flex-direction: column;
   align-items: center;
   margin-right: 20px;
-  width: 120px;
+  width: 150px;
 }
 
 .post-meta img {
@@ -205,6 +218,7 @@
 .post-author {
   margin: 5px 0;
   color: #000000;
+  text-align: center;
 }
 
 .post-time {
@@ -393,7 +407,8 @@
   cursor: default;
   display: flex;
   gap: 20px;
-  padding: 2vw 0;
+  padding:  10px;
+  padding-left: 10px !important;
   text-align: start;
   flex-direction: column;
 }
@@ -423,6 +438,8 @@
 }
 
 .newtreatment-card-left {
+  padding-left: 10px;
+
   display: flex;
   flex-direction: column;
 }
@@ -583,55 +600,51 @@
 }
 
 /* New More High Blood Pressure End */
-
 /* New More High Blood Pressure Specialist Start */
 .bloodPrSp-card-container {
   cursor: default;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 2vw 0;
+  gap: 18.05px; /* Decreased by 5% from 19px */
+  padding: 1.805vw 0; /* Decreased by 5% from 1.9vw */
   text-align: start;
 }
 
 .bloodPrSp-section-title {
-  font-size: 2em;
+  font-size: 1.805em; /* Decreased by 5% from 1.9em */
   font-weight: 600;
-  padding-left: 5px;
+  padding-left: 4.525px; /* Decreased by 5% from 4.75px */
   border-left: 4px solid #0167ff;
 }
 
 .bloodPrSp-card-grid {
-  width: 110%;
-  display: flex;
-  gap: 30px;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3 cards per row, adjusts with screen size */
+  gap: 27.075px; /* Decreased by 5% from 28.5px */
+  width: 100%; /* Full width */
 }
 
 .bloodPrSp-card {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  width: 110%;
-  border-radius: 7px;
-  /* padding: 20px; */
+  gap: 4.5125px; /* Decreased by 5% from 4.75px */
+  border-radius: 6.3175px; /* Decreased by 5% from 6.65px */
   background-color: white;
   border: 1px solid rgb(223, 221, 221);
 }
 
 .bloodPrSp-card-image {
-  width: 25%;
-  height: 100px;
- border-radius: 8px;
-
+  width: 22.5625%; /* Decreased by 5% from 23.75% */
+  height: 90.25px; /* Decreased by 5% from 95px */
+  border-radius: 7.22px; /* Decreased by 5% from 7.6px */
   object-fit: cover;
 }
 
 .bloodPrSp-card-content {
   display: flex;
   flex-direction: column;
-  gap: 13px;
-  padding: 10px 20px;
+  gap: 11.73px; /* Decreased by 5% from 12.35px */
+  padding: 9.025px 18.525px; /* Decreased by 5% from 9.5px 19px */
 }
 
 .bloodPrSp-card-content-heading {
@@ -641,7 +654,7 @@
 }
 
 .bloodPrSp-card-title {
-  font-size: 1.3em;
+  font-size: 1.17325em; /* Decreased by 5% from 1.235em */
   color: #1a1a1a;
   font-weight: 500;
   margin: 0;
@@ -649,36 +662,36 @@
 
 .starr {
   margin-bottom: -1px;
-  margin-right: 5px;
+  margin-right: 4.5125px; /* Decreased by 5% from 4.75px */
   color: gold;
 }
 
 .bloodPrSp-card-rating {
-  font-size: 1.1em;
+  font-size: 0.992em; /* Decreased by 5% from 1.045em */
   color: #000000;
   font-weight: 500;
 }
 
 .bloodPrSp-card-specialist {
-  font-size: 0.95em;
+  font-size: 0.857375em; /* Decreased by 5% from 0.9025em */
   color: #747474;
 }
 
 .bloodPrSp-card-address {
   display: flex;
-  font-size: 0.9em;
+  font-size: 0.81275em; /* Decreased by 5% from 0.855em */
   color: #000000;
 }
 
 .bloodPrSp-card-location {
-  font-size: 1.8em;
+  font-size: 1.6245em; /* Decreased by 5% from 1.71em */
   color: red;
 }
 
 .bloodPrSp-card-instruction {
-  font-size: 1em;
+  font-size: 0.9025em; /* Decreased by 5% from 0.95em */
   color: #000000;
-  margin-bottom: 14px;
+  margin-bottom: 12.665px; /* Decreased by 5% from 13.3px */
 }
 
 .bloodPrSp-card-instruction span {
@@ -686,7 +699,7 @@
 }
 
 .bloodPrSp-card-readmore {
-  font-size: 1em;
+  font-size: 0.9025em; /* Decreased by 5% from 0.95em */
   color: #0066cc;
   font-weight: 500;
   width: max-content;
@@ -696,30 +709,30 @@
 
 .str {
   stroke: #0167ff;
-  stroke-width: 20px;
-  font-size: 0.9em;
-  margin-right: 5px;
-  margin-top: 2px;
+  stroke-width: 18.05px; /* Decreased by 5% from 19px */
+  font-size: 0.81275em; /* Decreased by 5% from 0.855em */
+  margin-right: 4.2875px; /* Decreased by 5% from 4.75px */
+  margin-top: 1.805px; /* Decreased by 5% from 1.9px */
   fill: transparent;
   stroke-linecap: round;
 }
 
 .bloodPrSp-card-readmore:hover {
-  transform: translateX(3px);
+  transform: translateX(2.7075px); /* Decreased by 5% from 2.85px */
   text-decoration: underline;
 }
 
 .bloodPrSp-card-btn {
   color: white;
-  font-size: 1em;
+  font-size: 0.9025em; /* Decreased by 5% from 0.95em */
   cursor: pointer;
   margin: auto;
   border: none;
   outline: none;
-  border-radius: 4px;
+  border-radius: 3.61px; /* Decreased by 5% from 3.8px */
   width: max-content;
-  padding: 12px 30px;
-  margin-bottom: 10px;
+  padding: 10.83px 27.075px; /* Decreased by 5% from 11.4px 28.5px */
+  margin-bottom: 9.025px; /* Decreased by 5% from 9.5px */
   transition: all 250ms;
   background-color: #0167ff;
 }
@@ -739,6 +752,7 @@
   padding: 2vw 1vw;
   text-align: start;
   flex-direction: column;
+  width: 300px;
 }
 
 .recentBlog-section-header {
@@ -1012,5 +1026,7 @@
   /* align-items: center; */
   /* justify-content: center; */
 }
+
+
 
 /* New Footer End */

@@ -69,6 +69,18 @@ function Sidebar({ scheduleList, doctor, setEvents }) {
       return;
     }
   
+    const freeSlotsCount = events.filter(event => event.status === 'free').length;
+  
+    if (freeSlotsCount >= 3) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Upgrade Required',
+        text: 'You have reached the limit of 3 free time slots. Please upgrade to add more.',
+      });
+      return;
+    }
+  
+
     const selectedEndDate = moment(new Date())
       .add(1, "days")
       .format("YYYY-MM-DD");
@@ -269,10 +281,7 @@ function Sidebar({ scheduleList, doctor, setEvents }) {
         ))}
       </ul>
 
-      <div className="remove-option">
-        <input type="checkbox" id="remove" />
-        <label htmlFor="remove">Remove after drop</label>
-      </div>
+  
     </div>
   );
 }

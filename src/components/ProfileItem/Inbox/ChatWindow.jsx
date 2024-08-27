@@ -1,42 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Header from './InboxHeader';
 import MessageList from './InboxMessageList';
 import MessageInput from './InboxMessageInput';
 import './ChatWindow.css';
-import { fetchFromServer } from '../../../actions/api';
 
-const ChatWindow = ({ chatId, doctorName ,image}) => {
-  const [messages, setMessages] = useState([]);
-  const [error, setError] = useState(null);
-  const [patientId, setPatientId] = useState(null);
-
-  useEffect(() => {
-    const fetchMessages = async () => {
-      try {
-        const role = sessionStorage.getItem('role');
-        const response = await fetchFromServer(role, `/chat/${chatId}`);
-        console.log('Fetched messages:', response);
-        setMessages(response.chat.messages);
-        setPatientId(response.chat.patientId);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-
-    if (chatId) {
-      fetchMessages();
-    }
-  }, [chatId]);
-
+const ChatWindow = ({ chatId, doctorName, image, messages, error, patientId, onSendMessage }) => {
   const userId = sessionStorage.getItem('userId');
 
   const handleSendMessage = async (message) => {
     try {
-      const role = sessionStorage.getItem('role');
-      await fetchFromServer(role, `/chats/${chatId}/send-message`, { message }, 'POST');
-      setMessages([...messages, { text: message, timestamp: new Date(), senderId: userId }]);
+      await onSendMessage(message);
     } catch (error) {
-      setError(error.message);
+      console.error(error.message);
     }
   };
 
@@ -45,10 +20,21 @@ const ChatWindow = ({ chatId, doctorName ,image}) => {
   }
 
   return (
-    <div className="chat-window-container">
+    <div className={`chat-window-container ${chatId ? 'active' : ''}`}>
       <Header doctorName={doctorName} image={image} />
-      <MessageList messages={messages} />
-      <MessageInput onSendMessage={handleSendMessage} />
+      {chatId ? (
+        <>
+          <MessageList messages={messages} />
+          <MessageInput onSendMessage={handleSendMessage} />
+        </>
+      ) : (
+        <>
+        <div className="placeholder-message">
+          <p className='btn btn-primary'>Select a chat to begin your consultation</p>
+        </div>
+        <MessageInput onSendMessage={handleSendMessage} />
+        </>
+      )}
     </div>
   );
 };

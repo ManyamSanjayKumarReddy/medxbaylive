@@ -247,7 +247,7 @@
     justify-content: center;
     background-color: #00a500;
     padding: 3px 5px;
-    width: 70px;
+    width: 60px;
     margin-right: 10px;
     border-radius: 5px;
   }
@@ -287,6 +287,9 @@
     border-radius: 5px;
     cursor: pointer;
     margin-bottom: 20px;
+  }
+  .book-login{
+    padding: 10px 50px;
   }
   .distance{
     font-size: 12px;
@@ -488,9 +491,9 @@
   font-size: 14px;
   opacity: 0.5;
 }
-.result-card p{
+/* .result-card p{
   opacity: 0.6;
-}
+} */
 
 .container.expanded-map {
   max-width: 70%;

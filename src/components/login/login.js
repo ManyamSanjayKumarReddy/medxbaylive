@@ -26,7 +26,7 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
   const navigate = useNavigate();
   const typedElement = useRef('');
   const typedElementTwo = useRef('');
-  const [ setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [email, setEmail] = useState('');
   
@@ -43,12 +43,12 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
   const login = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      setIsSubmitDisabled(true); // Disable the submit button
+      setIsSubmitDisabled(true); 
       try {
         const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/login`, { email, password }, { withCredentials: true });
         if (res.data.success) {
           const { user } = res.data;
-          const { role, _id: userId, email: userEmail, subscriptionType, subscriptionVerification } = user;
+          const { role, _id: userId, email: userEmail, subscriptionType, subscriptionVerification, trialEndDate } = user;
   
           const userSubscriptionType = subscriptionType || 'none';
           const userSubscriptionVerification = subscriptionVerification || 'not verified';
@@ -59,7 +59,11 @@ const LoginCard = ({ show, handleClose,openRegisterModal }) => {
           sessionStorage.setItem('loggedIn', 'true');
           sessionStorage.setItem('subscriptionType', userSubscriptionType);
           sessionStorage.setItem('subscriptionVerification', userSubscriptionVerification);
-  
+          if (trialEndDate) {
+            sessionStorage.setItem('trialEndDate', trialEndDate);
+        } else {
+            sessionStorage.setItem('trialEndDate', 'not set'); 
+        }
           toast.info("Login successful!", {
             position: "top-center" ,
             closeButton: true,

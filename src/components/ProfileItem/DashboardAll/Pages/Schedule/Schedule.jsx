@@ -25,12 +25,13 @@ function Schedule() {
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_BASE_URL}/doctor/manage-time-slots`,
-          {
-            headers: {
-              "Access-Control-Allow-Origin": "*",
+
+        {
+              withCredentials: true,
+              headers: { "Content-Type": "application/json" },
             },
-            withCredentials: true,
-          }
+   
+   
         );
 
         const doctorData = response.data;

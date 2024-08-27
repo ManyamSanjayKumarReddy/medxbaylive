@@ -36,6 +36,8 @@ function DoctorEdit() {
   const navigate = useNavigate();
   const handleShowEditPopup = () => setShowEditPopup(true);
   const handleCloseEditPopup = () => setShowEditPopup(false);
+  const [loading, setLoading] = useState(false); 
+  const [verificationStatus, setVerificationStatus] = useState('');
 
   const handleInsuranceChange = (event) => {
     setSelectedInsurancePlace(event.target.value);
@@ -90,11 +92,43 @@ function DoctorEdit() {
       setDoctor(doctorData.doctor);
       setInsurance(doctorData.insurances);
       setBlogs(doctorData.blogs);
+      setVerificationStatus(doctorData.doctor.verified);
+
+  
     } catch (error) {
       console.error("Error fetching doctor details:", error);
     }
   };
+  const handleVerify = async (e) => {
+    e.preventDefault();
 
+    if (doctor.verified === 'Verified') {
+      // If the status is 'Verified', redirect to /subscribe
+      navigate('/subscribe');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/doctor/profile/verify`,
+        {},
+        {
+          withCredentials: true,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      // Set the status to 'Pending' after verification request
+      await fetchDoctorDetails();
+
+    } catch (error) {
+      console.error("Verification request failed:", error.response?.data?.message || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
   const faqRef = useRef(null);
 
   const faqData = [
@@ -279,12 +313,25 @@ function DoctorEdit() {
                 </a>
               </div>
             </div>
+            <div className="row edit-doctor-btns">
             <button
               className="edit-doctor-button"
               onClick={handleShowEdit}
             >
               Edit profile
             </button>
+            <button
+      className={`verify-doctor-button ${doctor.verified === 'Pending' ? 'pending' : ''}`}
+      onClick={handleVerify}
+      disabled={loading || doctor.verified === 'Pending' || doctor.verified === 'Verified'}
+    >
+      {doctor.verified === 'Verified' ? 'Subscribe' : doctor.verified === 'Pending' ? 'Pending' : 'Verify'}
+    </button>
+
+
+
+
+            </div>
           </div>
         </div>
         </div>
