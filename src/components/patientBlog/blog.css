@@ -1,275 +1,434 @@
-.blog-page-container {
+.blog-page {
   display: flex;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 30px;
-  font-family: Arial, sans-serif;
-  color: #333;
-}
-
-.blog-content {
-  width: 65%;
-  padding-right: 40px;
- 
-}
-
-.blog-sidebar {
-  width: 37%;
-  height: 800px;
-  background-color: #ffff;
-  box-shadow: 4px 5px 5px 3px  gainsboro;
   padding: 20px;
-  border-radius: 8px;
+  margin: 30px;
 }
 
-.blog-title {
-  font-size: 30px;
-  font-weight: bold;
-  color: black;
-  margin-bottom: 20px;
-  
+.main-content {
+  flex: 3;
+  margin-right: 20px;
 }
 
-.blog-heading {
-  font-size: 22px;
-  margin-top: 30px;
-  margin-bottom: 15px;
-  
-  font-weight: 600;
-  padding-left: 5px;
-  border-left: 4px solid #0167ff;
-  color: #272848;
-}
-
-.blog-paragraph {
-  line-height: 1.6;
-  margin-bottom: 15px;
-}
-
-.blog-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin: 20px 0;
-}
-
-.blog-list {
-  padding-left: 20px;
-  margin-bottom: 15px;
-}
-
-.blog-list-item {
-  margin-bottom: 8px;
-}
-
-.blog-link {
-  color: #1a73e8;
-  text-decoration: none;
-}
-
-.blog-link:hover {
-  text-decoration: underline;
-}
-
-.blog-search-bar {
+.featured-section {
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
-.blog-search-input {
-  flex: 1;
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px 0 0 4px;
+.featured-post {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
 }
 
-.blog-search-button {
-  padding: 8px 16px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  background-color: #1a73e8;
-  color: white;
-  border-radius: 0 4px 4px 0;
-  cursor: pointer;
-}
-.category-icon {
-  margin-right: 8px; /* Adjust as needed */
-  color:gray; /* Set icon color to match your design */
-}
-
-.spacing{
-  margin-left: 10px;
+.featured-img {
+  width: 464px;
+  height: 381px;
+  object-fit: cover;
   margin-bottom: 10px;
 }
 
-.blog-search-button:hover {
-  background-color: #155ab6;
+.featured-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 464px;
 }
 
-.blog-categories {
-  margin-bottom: 30px;
-  background-color: none !important;
-}
-.blog-image {
-  width: 100%;
-  margin: 20px 0;
-  border-radius: 5px;
+.featured-details h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.blog-categories-title {
+.featured-details p {
+  color: #666;
+  overflow: hidden;
+}
+
+.featured-side-posts {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 395px;
+  width: 301px;
+  overflow-y: auto;
+  margin-left: 0px;
+}
+
+.side-post-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  height: 90px;
+  overflow: hidden;
+}
+
+.side-post-card:hover {
+  transform: translateY(-5px);
+}
+
+.side-post-img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 8px;
+}
+
+.side-post-details {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.side-post-details h5 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  overflow: hidden;
+}
+
+.side-post-details span {
+  font-size: 12px;
+  color: #777;
+}
+
+
+.card-blog {
+  flex: 2;
+  margin: 5px;
+  padding: 10px;
+  margin-top: 0px;
+  border: 1px solid gainsboro;
+  border-radius: 8px;
+  width: 400px;
+  height: 780px;
+  margin-left: -400px;
+  position: relative;
+  left: 10px;
+  
+  /* Add overflow properties */
+  overflow: auto; /* Allows scrolling if content exceeds card size */
+  
+  /* Hide the scrollbar */
+  scrollbar-width: none; /* For Firefox */
+}
+
+.card::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.read-more {
+  color: #0167ff;
+}
+
+.sidebar-section {
+  margin-bottom: 20px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-section h3 {
   font-size: 18px;
+  font-weight: bold;
   margin-bottom: 10px;
   color: #333548;
 }
 
-.blog-categories-list {
-  list-style-type: none;
-  padding-left: 0;
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: -30px;
 }
 
-.blog-categories-item {
-  margin-bottom: 8px;
+.sidebar-item-icon {
+  margin-right: 15px;
+  font-size: 18px;
+}
+
+.sidebar-item span {
+  font-size: 15px;
+  color: #333548;
+}
+
+.blog-section {
+  width: 700px;
+  margin-bottom: 40px;
+}
+
+.blog-section h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.blog-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.blog-section li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.blog-section img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  margin-right: 20px;
+  border-radius: 8px;
+
+}
+
+.post-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+  width: 150px;
+}
+
+.post-meta img {
+  width: 110px;
+  height: 100px;
+}
+
+.post-author {
+  margin: 5px 0;
+  color: #000000;
+  text-align: center;
+}
+
+.post-time {
+  margin: 5px 0;
+  color: #777;
+}
+
+.post-content {
+  flex: 1;
+}
+
+.post-content h4 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+  overflow: hidden;
+}
+
+.post-content p {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.treatment-section {
+  margin: 20px 0;
+}
+
+.treatment-title {
+  font-size: 24px;
+  color: #333548;
+  margin-bottom: 15px;
+}
+
+.treatment-section {
+  margin: 20px 0;
+}
+
+.treatment-title {
+  font-size: 24px;
+  color: #333548; /* Adjust color if needed */
+  margin-bottom: 15px;
+}
+
+/* List styles */
+.treatment-list {
+  list-style: none;
+  padding: 0;
+}
+
+.treatment-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 550px;
+}
+
+.treatment-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.treatment-item {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.treatment-content {
+  display: flex;
+  align-items: center;
+}
+
+.treatment-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.treatment-text {
+  flex: 1;
+}
+
+.treatment-heading {
+  font-size: 20px;
+  margin: 0;
+  color: #333548;
+}
+
+.treatment-description {
+  margin: 10px 0;
   color: #656565;
 }
 
-.blog-related-blogs {
-  margin-bottom: 30px;
-}
-
-.blog-related-title {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #333548;
-}
-
-.blog-related-list {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-.blog-related-item {
-  margin-bottom: 10px;
-}
-
-.blog-related-link {
+.treatment-read-more {
+  color: #007bff; /* Adjust color if needed */
   text-decoration: none;
-  color: #1a73e8;
-}
-
-.blog-related-link:hover {
-  text-decoration: underline;
-}
-.blog-related-blogs {
-  margin-top: 2rem;
-}
-
-.blog-related-title {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.related-blog-card-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.related-blog-card-grid {
-  display: grid;
-  gap: 1rem;
-}
-
-.related-blog-card {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  padding: 0.5rem;
-  background: #fff;
-}
-
-.related-blog-image {
-  flex-shrink: 0;
-}
-
-.related-blog-image {
-  width: 75px;
-  height: 80px !important;
-  object-fit: cover;
-}
-
-.related-blog-content {
-  margin-left: 1rem;
-}
-.blog-contents {
-  max-width: 700px;
-  text-align: justify; /* Align text with both edges */
-  margin: 0 auto; /* Center align the content within the container */
-  padding: 20px; /* Optional padding for better spacing */
-  line-height: 1.6; /* Optional: Increase line-height for better readability */
-  margin-top: -30px;
-}
-
-
-.related-blog-chip {
-  background: #e0e0e0;
-  border-radius: 4px;
-  padding: 0.2rem 0.5rem;
-  font-size: 0.75rem;
-  color: #333;
-  
-  width: 65px !important;
-}
-
-.related-blog-date {
-  font-size: 0.75rem;
-  color: #666;
-  margin-left: 95px;
-  margin-top: -15px;
-}
-
-.related-blog-title {
-  font-size: 1rem;
   font-weight: bold;
 }
 
-.related-blog-read-time {
-  font-size: 0.75rem;
-  color: #999;
-}
-.highlight {
-  color: orange;
+.treatment-read-more:hover {
+  text-decoration: underline;
 }
 
+/* General styling for the Living with High Blood Pressure section */
+.living-section {
+  margin: 20px 0;
+}
 
-/* Treatment Card Start */
+.living-title {
+  font-size: 24px;
+  color: #333548;
+  margin-bottom: 15px;
+}
 
-.treatment-card-container {
+/* Grid layout for the cards */
+.living-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* Card styling */
+.living-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 93%;
+}
+
+.living-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.living-text {
+  flex: 1;
+}
+
+.living-heading {
+  font-size: 20px;
+  margin: 0;
+  color: #333548;
+}
+
+.living-description {
+  margin: 10px 0;
+  color: #656565;
+}
+
+.living-read-more {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.living-read-more:hover {
+  text-decoration: underline;
+}
+
+/* Arrow icon styling */
+.living-read-more svg {
+  margin-left: 5px;
+}
+
+/* New Treatment Start */
+
+.newtreatment-card-container {
   cursor: default;
   display: flex;
   gap: 20px;
-  padding: 2vw 0;
+  padding:  10px;
+  padding-left: 10px !important;
   text-align: start;
   flex-direction: column;
 }
 
-.treatment-section-title {
+.newtreatment-section-title {
   font-size: 2em;
   font-weight: 600;
   padding-left: 5px;
   border-left: 4px solid #0167ff;
-  color: #272848;
 }
 
-.treatment-card-grid {
+.newtreatment-card-grid {
   width: 100%;
   display: grid;
-  row-gap: 20px; /* Adjust the gap between rows */
-  grid-template-columns: 1fr; /* Single column layout */
+  column-gap: 10%;
+  justify-content: space-between;
+  grid-template-columns: repeat(2, 1fr);
 }
 
-.treatment-card {
+.newtreatment-card {
   display: flex;
   gap: 30px;
   width: 100%;
@@ -278,38 +437,40 @@
   border-bottom: 1px solid rgb(223, 221, 221);
 }
 
-.treatment-card-left {
+.newtreatment-card-left {
+  padding-left: 10px;
+
   display: flex;
   flex-direction: column;
 }
 
-.treatment-card-image {
+.newtreatment-card-image {
   width: 125px;
   height: 105px;
   object-fit: cover;
   background-color: #000000;
 }
 
-.treatment-card-author-container {
+.newtreatment-card-author-container {
   width: 100%;
   font-size: 13px;
   margin-top: 3px;
 }
 
-.treatment-card-author {
+.newtreatment-card-author {
   color: #000000;
   font-weight: 500;
 }
 
-.treatment-card-date {
+.newtreatment-card-date {
   color: #a6a6a6;
 }
 
-.treatment-card-right {
-  width: 100%; /* Ensure it takes full width for single column layout */
+.newtreatment-card-right {
+  width: 64%;
 }
 
-.treatment-card-title {
+.newtreatment-card-title {
   font-size: 24px;
   color: #1a1a1a;
   font-weight: 500;
@@ -317,7 +478,7 @@
   line-height: 26px;
 }
 
-.treatment-card-description {
+.newtreatment-card-description {
   line-clamp: 3;
   font-size: 14px;
   font-weight: 400;
@@ -325,7 +486,7 @@
   margin: 0 0 8px 0;
 }
 
-.treatment-card-readmore {
+.newtreatment-card-readmore {
   font-size: 13px;
   color: #0066cc;
   font-weight: 500;
@@ -334,52 +495,538 @@
   text-decoration: none;
 }
 
-.treatment-card-readmore:hover {
+.newtreatment-card-readmore:hover {
   transform: translateX(3px);
   text-decoration: underline;
 }
 
+/* New Treatment End */
 
-.author-info-container {
+/* New More High Blood Pressure Start */
+
+.moreBloodPr-card-container {
+  cursor: default;
+  display: flex;
+  gap: 20px;
+  padding: 2vw 0;
+  text-align: start;
+  flex-direction: column;
+}
+
+.moreBloodPr-section-title {
+  font-size: 2em;
+  font-weight: 600;
+  padding-left: 5px;
+  border-left: 4px solid #0167ff;
+}
+
+.moreBloodPr-card-grid {
+  width: 100%;
+  display: grid;
+  column-gap: 10%;
+  justify-content: space-between;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.moreBloodPr-card {
+  display: flex;
+  gap: 55px;
+  width: 100%;
+  padding: 27px 0;
+  background-color: white;
+  border-bottom: 1px solid rgb(223, 221, 221);
+}
+
+.moreBloodPr-card-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.moreBloodPr-card-image {
+  width: 450px;
+  height: 290px;
+  object-fit: cover;
+  background-color: #000000;
+}
+
+.moreBloodPr-card-author-container {
+  width: 100%;
+  font-size: 1.1em;
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
+.moreBloodPr-card-author {
+  color: #000000;
+  font-weight: 500;
+}
+
+.moreBloodPr-card-date {
+  color: #a6a6a6;
+}
+
+.moreBloodPr-card-right {
+  width: 45%;
+}
+
+.moreBloodPr-card-title {
+  font-size: 1.9em;
+  color: #1a1a1a;
+  font-weight: 500;
+  margin: 0 0 14px 0;
+  line-height: 1.2em;
+}
+
+.moreBloodPr-card-description {
+  line-clamp: 5;
+  font-size: 1.2em;
+  font-weight: 400;
+  color: #747474;
+  margin: 0 0 14px 0;
+}
+
+.moreBloodPr-card-readmore {
+  font-size: 1em;
+  color: #0066cc;
+  font-weight: 500;
+  width: max-content;
+  transition: all 250ms;
+  text-decoration: none;
+}
+
+.moreBloodPr-card-readmore:hover {
+  transform: translateX(3px);
+  text-decoration: underline;
+}
+
+/* New More High Blood Pressure End */
+/* New More High Blood Pressure Specialist Start */
+.bloodPrSp-card-container {
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  gap: 18.05px; /* Decreased by 5% from 19px */
+  padding: 1.805vw 0; /* Decreased by 5% from 1.9vw */
+  text-align: start;
+}
+
+.bloodPrSp-section-title {
+  font-size: 1.805em; /* Decreased by 5% from 1.9em */
+  font-weight: 600;
+  padding-left: 4.525px; /* Decreased by 5% from 4.75px */
+  border-left: 4px solid #0167ff;
+}
+
+.bloodPrSp-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3 cards per row, adjusts with screen size */
+  gap: 27.075px; /* Decreased by 5% from 28.5px */
+  width: 100%; /* Full width */
+}
+
+.bloodPrSp-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4.5125px; /* Decreased by 5% from 4.75px */
+  border-radius: 6.3175px; /* Decreased by 5% from 6.65px */
+  background-color: white;
+  border: 1px solid rgb(223, 221, 221);
+}
+
+.bloodPrSp-card-image {
+  width: 22.5625%; /* Decreased by 5% from 23.75% */
+  height: 90.25px; /* Decreased by 5% from 95px */
+  border-radius: 7.22px; /* Decreased by 5% from 7.6px */
+  object-fit: cover;
+}
+
+.bloodPrSp-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 11.73px; /* Decreased by 5% from 12.35px */
+  padding: 9.025px 18.525px; /* Decreased by 5% from 9.5px 19px */
+}
+
+.bloodPrSp-card-content-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bloodPrSp-card-title {
+  font-size: 1.17325em; /* Decreased by 5% from 1.235em */
+  color: #1a1a1a;
+  font-weight: 500;
+  margin: 0;
+}
+
+.starr {
+  margin-bottom: -1px;
+  margin-right: 4.5125px; /* Decreased by 5% from 4.75px */
+  color: gold;
+}
+
+.bloodPrSp-card-rating {
+  font-size: 0.992em; /* Decreased by 5% from 1.045em */
+  color: #000000;
+  font-weight: 500;
+}
+
+.bloodPrSp-card-specialist {
+  font-size: 0.857375em; /* Decreased by 5% from 0.9025em */
+  color: #747474;
+}
+
+.bloodPrSp-card-address {
+  display: flex;
+  font-size: 0.81275em; /* Decreased by 5% from 0.855em */
+  color: #000000;
+}
+
+.bloodPrSp-card-location {
+  font-size: 1.6245em; /* Decreased by 5% from 1.71em */
+  color: red;
+}
+
+.bloodPrSp-card-instruction {
+  font-size: 0.9025em; /* Decreased by 5% from 0.95em */
+  color: #000000;
+  margin-bottom: 12.665px; /* Decreased by 5% from 13.3px */
+}
+
+.bloodPrSp-card-instruction span {
+  font-weight: 500;
+}
+
+.bloodPrSp-card-readmore {
+  font-size: 0.9025em; /* Decreased by 5% from 0.95em */
+  color: #0066cc;
+  font-weight: 500;
+  width: max-content;
+  transition: all 250ms;
+  text-decoration: none;
+}
+
+.str {
+  stroke: #0167ff;
+  stroke-width: 18.05px; /* Decreased by 5% from 19px */
+  font-size: 0.81275em; /* Decreased by 5% from 0.855em */
+  margin-right: 4.2875px; /* Decreased by 5% from 4.75px */
+  margin-top: 1.805px; /* Decreased by 5% from 1.9px */
+  fill: transparent;
+  stroke-linecap: round;
+}
+
+.bloodPrSp-card-readmore:hover {
+  transform: translateX(2.7075px); /* Decreased by 5% from 2.85px */
+  text-decoration: underline;
+}
+
+.bloodPrSp-card-btn {
+  color: white;
+  font-size: 0.9025em; /* Decreased by 5% from 0.95em */
+  cursor: pointer;
+  margin: auto;
+  border: none;
+  outline: none;
+  border-radius: 3.61px; /* Decreased by 5% from 3.8px */
+  width: max-content;
+  padding: 10.83px 27.075px; /* Decreased by 5% from 11.4px 28.5px */
+  margin-bottom: 9.025px; /* Decreased by 5% from 9.5px */
+  transition: all 250ms;
+  background-color: #0167ff;
+}
+
+.bloodPrSp-card-btn:hover {
+  background-color: #0457d3;
+}
+
+/* New More High Blood Pressure Specialist End */
+
+/* New Recent Blog Start */
+
+.recentBlog-card-container {
+  cursor: default;
+  display: flex;
+  /* gap: 20px; */
+  padding: 2vw 1vw;
+  text-align: start;
+  flex-direction: column;
+  width: 300px;
+}
+
+.recentBlog-section-header {
+  display: flex;
+  padding-bottom: 20px;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(223, 221, 221);
+}
+
+.recentBlog-section-title {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.recentBlog-section-showAll {
+  font-size: 0.9em;
+  cursor: pointer;
+  color: #3083ff;
+  font-weight: 600;
+  transition: all 300ms;
+}
+
+.recentBlog-section-showAll:hover {
+  transform: translateY(-3px);
+  text-decoration: underline;
+}
+
+.recentBlog-card-grid {
+  width: 100%;
+  display: grid;
+  column-gap: 10%;
+  justify-content: space-between;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.recentBlog-card {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  padding: 15px 0;
+  background-color: white;
+  border-bottom: 1px solid rgb(223, 221, 221);
+}
+
+.recentBlog-card-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.recentBlog-card-image {
+  width: 75px;
+  height: 55px;
+  border-radius: 14px;
+  object-fit: cover;
+  background-color: #000000;
+}
+
+.recentBlog-card-flex {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  font-size: 0.8em;
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
+.recentBlog-card-chips {
+  padding: 4px 7px;
+  border-radius: 10px;
+  text-transform: capitalize;
+  background-color: #ebebed;
+  color: #000000;
+  font-weight: 500;
+}
+
+.recentBlog-card-date {
+  color: #a6a6a6;
+}
+
+.recentBlog-card-title {
+  font-size: 0.9em;
+  color: #1a1a1a;
+  font-weight: 500;
+  margin: 0 0 7px 0;
+  line-height: 1em;
+}
+
+.recentBlog-card-readmore {
+  font-size: 0.8em;
+  color: #0066cc;
+  font-weight: 500;
+  width: max-content;
+  transition: all 250ms;
+  text-decoration: none;
+}
+
+.recentBlog-card-readmore:hover {
+  transform: translateX(3px);
+  text-decoration: underline;
+}
+
+/* New Recent Blog End */
+
+/* New Tag Start */
+.tags-card-container {
+  cursor: default;
+  display: flex;
+  gap: 25px;
+  padding: 2vw 1vw;
+  text-align: start;
+  flex-direction: column;
+}
+
+.tags-section-header {
+  display: flex;
+  padding-bottom: 20px;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(223, 221, 221);
+}
+
+.tags-section-title {
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.tags-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tags-chip {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 16px;
+  background-color: #e0e0e0;
+  color: #333;
+  font-size: 0.9em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
+.tags-chip:hover {
+  background-color: #bdbdbd;
+}
+
+.tags-chip-close {
+  font-size: 0.8em;
+  color: #333;
+  cursor: pointer;
+  transition: all 250ms;
+}
+
+.tags-chip-close:hover {
+  color: #ff0000;
+}
+
+/* New Tag End */
+
+/* New Footer Start */
+.footer {
+  background-color: #f4f7fc;
+  color: #000000;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  
+  flex-wrap: wrap;
 }
 
-.author-info-details {
+.footer-column {
+  flex: 1;
+  margin: 10px;
+  text-align: start;
+  min-width: 100px;
+}
+
+.footer-column:first-child {
+  flex: 2;
+}
+
+.footer-logo {
+  width: 150px;
+  height: auto;
+}
+
+.footer-column h3 {
+  /* border-bottom: 2px solid #8949ff; */
+  font-size: 1.1em;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.footer-column ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+  color: #000000;
+  font-size: 0.9em;
+  text-decoration: none;
+}
+
+.footer-column ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-column form {
   display: flex;
-  align-items: center;
+  flex-direction: column;
 }
 
-.info-icon {
-  margin-right: 5px;
-  color: #6c757d; /* Icon color similar to the image */
-}
-
-.info-text {
-  margin-right: 20px;
-  color: #6c757d; /* Text color similar to the image */
-  font-size: 14px; /* Font size adjusted to match the image */
-}
-
-.author-social-icons {
-  display: flex;
-  align-items: center;
-}
-
-.social-icon {
-  margin-left: 10px;
-  border-radius: 20px;
-  padding: 5px;
-  background-color: #007bff ;
-  color: white; /* Social icon color similar to the image */
-  font-size: 24px; /* Size of the social icons */
+.footer-column button {
+  padding: 10px;
+  border: none;
+  background-color: #0167ff;
+  color: #fff;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: all 200ms;
 }
 
-.social-icon:hover {
-  color: #0056b3; /* Slightly darker color on hover */
+.footer-column button:hover {
+  background-color: #0147b0;
 }
+
+.footer-bottom {
+  font-size: 0.8em;
+  text-align: center;
+  padding-top: 20px;
+  color: gray;
+  /* border-top: 1px solid #444; */
+}
+
+/* Footer.css */
+.footer-sub {
+  display: flex;
+  align-items: center;
+}
+
+.footer-sub input {
+  padding: 10px;
+  border: none;
+  flex: 1;
+}
+
+.footer-sub input {
+  /* height: 30px; */
+  outline: none;
+}
+
+.footer-sub button {
+  padding: 10px;
+  border: none;
+  background-color: #8949ff;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  height: 100%;
+  /* align-items: center; */
+  /* justify-content: center; */
+}
+
+
+
+/* New Footer End */

@@ -18,7 +18,6 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
   const [loading, setLoading] = useState(false); 
   const [selectedLocation, setSelectedLocation] = useState({ lat: "", lng: "" });
   const [modalShow, setModalShow] = useState(false);
-  const [insuranceOptions, setInsuranceOptions] = useState([]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -52,6 +51,7 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
     },
   });
   const [profilePicturePreview, setProfilePicturePreview] = useState(null);
+  const [allInsurances, setAllInsurances] = useState([]);
 
   const handleChange = (e, index, field, nestedField) => {
     const newValue = e.target.value;
@@ -72,18 +72,6 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
     });
   };
 
-  const handleChangeInsurance = (e, index, field) => {
-    const newValue = e.target.value;
-    setFormData((prevData) => {
-      const newData = { ...prevData };
-      if (Array.isArray(newData[field])) {
-        newData[field][index] = newValue;
-      } else {
-        newData[e.target.name] = newValue;
-      }
-      return newData;
-    });
-  };
   
 
   const handleAddItem = (field) => {
@@ -111,6 +99,22 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
     setFormData((prevData) => ({
       ...prevData,
       [field]: prevData[field].filter((_, i) => i !== index),
+    }));
+  };
+  const handleInsuranceChange = (e) => {
+    const selectedInsurance = e.target.value;
+    if (!formData.insurances.includes(selectedInsurance)) {
+      setFormData((prevData) => ({
+        ...prevData,
+        insurances: [...prevData.insurances, selectedInsurance],
+      }));
+    }
+  };
+
+  const handleRemoveInsurance = (index) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      insurances: prevData.insurances.filter((_, i) => i !== index),
     }));
   };
 
@@ -184,20 +188,19 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
           `${process.env.REACT_APP_BASE_URL}/doctor/profile/update`,
           { withCredentials: true }
         );
-        const fetchedData = response.data.doctor;
-        setInsuranceOptions(response.data.insurances); 
+        const { doctor, allInsurances } = response.data;
 
-        if (fetchedData.dateOfBirth) {
-          fetchedData.dateOfBirth = formatDateForInput(fetchedData.dateOfBirth);
+        if (doctor.dateOfBirth) {
+          doctor.dateOfBirth = formatDateForInput(doctor.dateOfBirth);
         }
 
-
-        const profileImageData = fetchedData.profilePicture
-          ? `data:image/jpeg;base64,${fetchedData.profilePicture.data}`
+        const profileImageData = doctor.profilePicture
+          ? `data:image/jpeg;base64,${doctor.profilePicture.data}`
           : profileImage;
+
         setProfilePicturePreview(profileImageData);
-        
-        setFormData(fetchedData);
+        setFormData(doctor);
+        setAllInsurances(allInsurances);
       } catch (error) {
         console.error("Error fetching doctor details:", error);
       }
@@ -255,48 +258,52 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-  
+
     const formPayload = { ...formData };
+
+
+    formPayload.insurances = formPayload.insurances.map((name) => {
+        const insurance = allInsurances.find((ins) => ins.name === name);
+        return insurance ? insurance._id : null;
+    }).filter(Boolean);
 
     const transformedDocuments = {};
     for (const key in formPayload.documents) {
-      const doc = formPayload.documents[key];
-      if (doc.data) {
-        transformedDocuments[key] = {
-          data: doc.data, 
-          contentType: doc.contentType,
-        };
-      }
+        const doc = formPayload.documents[key];
+        if (doc.data) {
+            transformedDocuments[key] = {
+                data: doc.data, 
+                contentType: doc.contentType,
+            };
+        }
     }
 
     formPayload.documents = transformedDocuments;
 
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/doctor/profile/update`,
-        formPayload,
-        {
-          withCredentials: true,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      
-   
-    toast.info('Profile updated successfully!',{
-      className: 'toast-center toast-success',
-      closeButton: true,
-      progressBar: true,
-  });
-  } catch (error) {
+        const response = await axios.post(
+            `${process.env.REACT_APP_BASE_URL}/doctor/profile/update`,
+            formPayload,
+            {
+                withCredentials: true,
+                headers: { "Content-Type": "application/json" },
+            }
+        );
 
-    toast.info('Failed to update profile. Please try again.',{
-      className: 'toast-center toast-success',
-      closeButton: true,
-      progressBar: true,
-  });
-  } finally {
-    setLoading(false);
-  }
+        toast.success('Profile updated successfully!', {
+            className: 'toast-center toast-success',
+            closeButton: true,
+            progressBar: true,
+        });
+    } catch (error) {
+        toast.error('Failed to update profile. Please try again.', {
+            className: 'toast-center toast-error',
+            closeButton: true,
+            progressBar: true,
+        });
+    } finally {
+        setLoading(false);
+    }
 };
 
 
@@ -527,7 +534,7 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
       />
       <InputGroup.Text
         className="form-control-custom adjust-form-icon-one"
-        onClick={() => handleAddItem("languages")}
+        onClick={() => handleAddItem("conditions")}
         aria-label="Add language"
       >
         <FontAwesomeIcon
@@ -545,6 +552,7 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
                   >
                     <Form.Control
                       type="text"
+                               name="conditions"
                       value={condition}
                       onChange={(e) => handleChange(e, index, "conditions")}
                       placeholder="Heart Diseases"
@@ -702,179 +710,234 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
           </div>
 
           <Form.Group className="mb-3" controlId="formHospitals">
-            <Form.Label>Hospitals</Form.Label>
-            {formData.hospitals.map((hospital, index) => (
-              <div
-                className="row address-field-container"
-                key={index}
-                style={{ marginBottom: "10px" }}
-              >
-                <Form.Control
-                  type="text"
-                  name="name"
-                  value={hospital.name}
-                  onChange={(e) => handleChange(e, index, "hospitals", "name")}
-                  placeholder="Enter Name"
-                  className="form-control-custom address-field"
-                />
-                <Form.Control
-                  type="text"
-                  name="street"
-                  value={hospital.street}
-                  onChange={(e) =>
-                    handleChange(e, index, "hospitals", "street")
-                  }
-                  placeholder="Street"
-                  className="form-control-custom address-field"
-                />
-                <Form.Control
-                  type="text"
-                  name="city"
-                  value={hospital.city}
-                  onChange={(e) => handleChange(e, index, "hospitals", "city")}
-                  placeholder="City"
-                  className="form-control-custom address-field"
-                />
+  <Form.Label>Hospitals</Form.Label>
 
-                <Form.Control
-                  type="text"
-                  name="state"
-                  value={hospital.state}
-                  onChange={(e) => handleChange(e, index, "hospitals", "state")}
-                  placeholder="State"
-                  className="form-control-custom address-field"
-                />
-                <Form.Control
-                  type="text"
-                  name="country"
-                  value={hospital.country}
-                  onChange={(e) =>
-                    handleChange(e, index, "hospitals", "country")
-                  }
-                  placeholder="Country"
-                  className="form-control-custom address-field"
-                />
-                <Form.Control
-                  type="text"
-                  name="zip"
-                  value={hospital.zip}
-                  onChange={(e) => handleChange(e, index, "hospitals", "zip")}
-                  placeholder="Zip"
-                  className="form-control-custom address-field"
-                />
-        <Form.Control
-                type="text"
-                name="latitude"
-                value={hospital.latitude}
-                onChange={(e) => handleChange(e, index, "hospitals", "latitude")}
-                placeholder="Latitude"
-                className="form-control-custom address-field"
-              />
-              <Form.Control
-                type="text"
-                name="longitude"
-                value={hospital.longitude}
-                onChange={(e) => handleChange(e, index, "hospitals", "longitude")}
-                placeholder="Longitude"
-                className="form-control-custom address-field"
-              />
-              <Button
-                className="btn-custom-edit"
-                onClick={() => setModalShow({ show: true, index })}
-              >
-                Select Location
-              </Button>
-              <InputGroup.Text
-                className="form-control-custom adjust-form-icon-one-add"
-                onClick={() => handleAddItem("hospitals")}
-              >
-                <FontAwesomeIcon icon={faPlus} className="plus-edit-doctor" />
-              </InputGroup.Text>
-              {formData.hospitals.length > 1 && (
-                <InputGroup.Text
-                  className="form-control-custom adjust-form-icon-two-add"
-                  onClick={() => handleRemoveItem(index, "hospitals")}
-                >
-                  <FontAwesomeIcon icon={faTrash} className="delete-edit-profile" />
-                </InputGroup.Text>
-              )}
-            </div>
-          ))}
-   
-          </Form.Group>
+  {formData.hospitals.length === 0 && (
+    <div className="row address-field-container" style={{ marginBottom: "10px" }}>
+      <Form.Control
+        type="text"
+        name="name"
+        value={formData.hospitals.name || ''}
+        onChange={(e) => handleChange(e, 0, "hospitals", "name")}
+        placeholder="Enter Name"
+        className="form-control-custom address-field"
+      />
+      <Form.Control
+        type="text"
+        name="street"
+        value={formData.hospitals.street || ''}
+        onChange={(e) => handleChange(e, 0, "hospitals", "street")}
+        placeholder="Street"
+        className="form-control-custom address-field"
+      />
+      <Form.Control
+        type="text"
+        name="city"
+        value={formData.hospitals.city || ''}
+        onChange={(e) => handleChange(e, 0, "hospitals", "city")}
+        placeholder="City"
+        className="form-control-custom address-field"
+      />
+      <Form.Control
+        type="text"
+        name="state"
+        value={formData.hospitals.state || ''}
+        onChange={(e) => handleChange(e, 0, "hospitals", "state")}
+        placeholder="State"
+        className="form-control-custom address-field"
+      />
+      <Form.Control
+        type="text"
+        name="country"
+        value={formData.hospitals.country || ''}
+        onChange={(e) => handleChange(e, 0, "hospitals", "country")}
+        placeholder="Country"
+        className="form-control-custom address-field"
+      />
+      <Form.Control
+        type="text"
+        name="zip"
+        value={formData.hospitals.zip || ''}
+        onChange={(e) => handleChange(e, 0, "hospitals", "zip")}
+        placeholder="Zip"
+        className="form-control-custom address-field"
+      />
+      <Form.Control
+        type="text"
+        name="latitude"
+        value={formData.hospitals.latitude || ''}
+        onChange={(e) => handleChange(e, 0, "hospitals", "latitude")}
+        placeholder="Latitude"
+        className="form-control-custom address-field"
+      />
+      <Form.Control
+        type="text"
+        name="longitude"
+        value={formData.hospitals.longitude || ''}
+        onChange={(e) => handleChange(e, 0, "hospitals", "longitude")}
+        placeholder="Longitude"
+        className="form-control-custom address-field"
+      />
+      <Button
+        className="btn-custom-edit"
+        onClick={() => setModalShow({ show: true, index: 0 })}
+      >
+        Select Location
+      </Button>
+      <InputGroup.Text
+        className="form-control-custom adjust-form-icon-one-add"
+        onClick={() => handleAddItem("hospitals")}
+      >
+        <FontAwesomeIcon icon={faPlus} className="plus-edit-doctor" />
+      </InputGroup.Text>
+    </div>
+  )}
+
+  {formData.hospitals.map((hospital, index) => (
+    <div
+      className="row address-field-container"
+      key={index}
+      style={{ marginBottom: "10px" }}
+    >
+      <Form.Control
+        type="text"
+        name="name"
+        value={hospital.name}
+        onChange={(e) => handleChange(e, index, "hospitals", "name")}
+        placeholder="Enter Name"
+        className="form-control-custom address-field"
+      />
+      <Form.Control
+        type="text"
+        name="street"
+        value={hospital.street}
+        onChange={(e) => handleChange(e, index, "hospitals", "street")}
+        placeholder="Street"
+        className="form-control-custom address-field"
+      />
+      <Form.Control
+        type="text"
+        name="city"
+        value={hospital.city}
+        onChange={(e) => handleChange(e, index, "hospitals", "city")}
+        placeholder="City"
+        className="form-control-custom address-field"
+      />
+      <Form.Control
+        type="text"
+        name="state"
+        value={hospital.state}
+        onChange={(e) => handleChange(e, index, "hospitals", "state")}
+        placeholder="State"
+        className="form-control-custom address-field"
+      />
+      <Form.Control
+        type="text"
+        name="country"
+        value={hospital.country}
+        onChange={(e) => handleChange(e, index, "hospitals", "country")}
+        placeholder="Country"
+        className="form-control-custom address-field"
+      />
+      <Form.Control
+        type="text"
+        name="zip"
+        value={hospital.zip}
+        onChange={(e) => handleChange(e, index, "hospitals", "zip")}
+        placeholder="Zip"
+        className="form-control-custom address-field"
+      />
+      <Form.Control
+        type="text"
+        name="latitude"
+        value={hospital.latitude}
+        onChange={(e) => handleChange(e, index, "hospitals", "latitude")}
+        placeholder="Latitude"
+        className="form-control-custom address-field"
+      />
+      <Form.Control
+        type="text"
+        name="longitude"
+        value={hospital.longitude}
+        onChange={(e) => handleChange(e, index, "hospitals", "longitude")}
+        placeholder="Longitude"
+        className="form-control-custom address-field"
+      />
+      <Button
+        className="btn-custom-edit"
+        onClick={() => setModalShow({ show: true, index })}
+      >
+        Select Location
+      </Button>
+      <InputGroup.Text
+        className="form-control-custom adjust-form-icon-one-add"
+        onClick={() => handleAddItem("hospitals")}
+      >
+        <FontAwesomeIcon icon={faPlus} className="plus-edit-doctor" />
+      </InputGroup.Text>
+      {formData.hospitals.length > 1 && (
+        <InputGroup.Text
+          className="form-control-custom adjust-form-icon-two-add"
+          onClick={() => handleRemoveItem(index, "hospitals")}
+        >
+          <FontAwesomeIcon icon={faTrash} className="delete-edit-profile" />
+        </InputGroup.Text>
+      )}
+    </div>
+  ))}
+</Form.Group>
+
 
           <div className="row mb-3">
-          <div className="col-md-6">
-      <Form.Group className="mb-3" controlId="formInsurances">
-        <Form.Label>Insurance</Form.Label>
-        {formData.insurances.length === 0 && (
-          <div className="row row-container" style={{ marginBottom: "10px" }}>
-            <Form.Select
-              name="insurances"
-              onChange={(e) => handleChange(e, 0, "insurances")}
-              className="form-control-custom adjust-form"
-            >
-              <option value="">Select an insurance</option>
-              {insuranceOptions.map((insurance, index) => (
-                <option key={index} value={insurance}>
-                  {insurance}
-                </option>
-              ))}
-            </Form.Select>
-            <InputGroup.Text
-              className="form-control-custom adjust-form-icon-one"
-              onClick={() => handleAddItem("insurances")}
-              aria-label="Add insurances"
-            >
-              <FontAwesomeIcon icon={faPlus} className="plus-edit-doctor" />
-            </InputGroup.Text>
-          </div>
-        )}
-       {formData.insurances.map((insurance, index) => (
-  <div
-    className="row row-container row-gap"
-    key={index}
-    style={{ marginBottom: "10px" }}
-  >
+            <div className="col-md-6">
+            <Form.Group className="mb-3" controlId="formInsurances">
+  <Form.Label>Insurance</Form.Label>
+  <div className="row row-container" style={{ marginBottom: "10px" }}>
     <Form.Control
       as="select"
-      name="insurances"
-      value={insurance._id} 
-      onChange={(e) => handleChangeInsurance(e, index, "insurances")}
+      value="" 
+      onChange={handleInsuranceChange}
       className="form-control-custom adjust-form"
     >
-      <option value="">Select Insurance</option>
-      {insuranceOptions.map((option) => (
-        <option key={option._id} value={option._id}>
-          {option.name}
+      <option value="" disabled>Select an Insurance</option>
+      {allInsurances.map((insurance) => (
+        <option key={insurance._id} value={insurance.name}>
+          {insurance.name}
         </option>
       ))}
     </Form.Control>
-    <InputGroup.Text
-      className="form-control-custom adjust-form-icon-one"
-      onClick={() => handleAddItem("insurances")}
-    >
-      <FontAwesomeIcon
-        icon={faPlus}
-        className="plus-edit-doctor"
-      />
-    </InputGroup.Text>
-    {formData.insurances.length > 1 && (
-      <InputGroup.Text
-        className="form-control-custom adjust-form-icon-two"
-        onClick={() => handleRemoveItem(index, "insurances")}
-      >
-        <FontAwesomeIcon
-          icon={faTrash}
-          className="delete-edit-profile"
-        />
-      </InputGroup.Text>
-    )}
-  </div>
-))}
 
-      </Form.Group>
+  </div>
+  {formData.insurances.map((insurance, index) => (
+    <div
+      className="row row-container row-gap"
+      key={index}
+      style={{ marginBottom: "10px" }}
+    >
+      <Form.Control
+        type="text"
+        name="insurances"
+        value={insurance}
+        readOnly
+        placeholder="ABC Insurance"
+        className="form-control-custom adjust-form"
+      />
+      {formData.insurances.length > 1 && (
+        <InputGroup.Text
+          className="form-control-custom adjust-form-icon-two"
+          onClick={() => handleRemoveInsurance(index)}
+        >
+          <FontAwesomeIcon
+            icon={faTrash}
+            className="delete-edit-profile"
+          />
+        </InputGroup.Text>
+      )}
     </div>
+  ))}
+</Form.Group>
+
+            </div>
 
             <div className="col-md-6">
               <Form.Group className="mb-3" controlId="formAwards">

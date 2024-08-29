@@ -38,17 +38,30 @@ const Nestednavbar = () => {
     populateWhereOptions();
   }, []);
 
-  const searchDoctors = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/search-doctors?what=${what}&where=${where}`, { withCredentials: true });
-      console.log('Navigating with:', { doctors: response.data, what, where });
-      navigate('/Filters', { state: { doctors: response.data, what, where } });
-    } catch (error) {
-      console.error('Error fetching doctors:', error);
-    }
-  };
+  useEffect(()=>{
+    const searchDoctors = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/search-doctors?what=${what}&where=${where}`, { withCredentials: true });
+        const doctors = response.data;
   
+        if (doctors && doctors.length > 0) {
+          console.log('Navigating with:', { doctors, what, where });
+          navigate('/Filters', { state: { doctors, what, where} });
+        } else {
+          console.log('No doctors found');
+          // Navigate to a different page or show a message
+          navigate('/Filters', { state: {doctors,what, where } });
+        }
+      } catch (error) {
+        console.error('Error fetching doctors:', error);
+        // Handle error (e.g., show a message to the user)
+        navigate('/Filters', { state: { error: 'An error occurred while searching for doctors. Please try again later.' } });
+      }
+    };
+    searchDoctors();
+
+  },[what,where])
+
 
   return (
     <>
@@ -58,7 +71,8 @@ const Nestednavbar = () => {
         </div>
 
         <div className="navbar-back">
-          <form onSubmit={searchDoctors}>
+        <form onSubmit={(e) => e.preventDefault()}>
+
             <div className="form-control-one">
               <label htmlFor="what">What</label>
               <input

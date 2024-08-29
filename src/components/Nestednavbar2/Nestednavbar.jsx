@@ -65,7 +65,7 @@ const Nestednavbaruserside = () => {
             />
                 
               </div>
-              <button type="submit" className="btn button-color" onClick={handleButtonClick}>
+              <button type="submit" className="btn button-color" onClick={searchDoctors()}>
                 Find My Provider
               </button>
               </form>

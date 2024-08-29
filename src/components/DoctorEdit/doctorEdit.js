@@ -320,12 +320,12 @@ function DoctorEdit() {
               Edit profile
             </button>
             <button
-      className={`verify-doctor-button ${doctor.verified === 'Pending' ? 'pending' : ''}`}
-      onClick={handleVerify}
-      disabled={loading || doctor.verified === 'Pending' || doctor.verified === 'Verified'}
-    >
-      {doctor.verified === 'Verified' ? 'Subscribe' : doctor.verified === 'Pending' ? 'Pending' : 'Verify'}
-    </button>
+  className={`verify-doctor-button ${doctor.verified === 'Pending' ? 'pending' : ''}`}
+  onClick={handleVerify}
+  disabled={loading || doctor.verified === 'Pending'}
+>
+  {doctor.verified === 'Verified' ? 'Subscribe' : doctor.verified === 'Pending' ? 'Pending' : 'Verify'}
+</button>
 
 
 
