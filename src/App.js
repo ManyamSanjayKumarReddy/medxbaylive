@@ -24,7 +24,7 @@ import VerifyLogin from './components/login/VerifyLogin';
 import Verification from './components/login/Verification';
 import  BlogPage from './components/patientBlog/blog';
 import Nestednavbar from './components/Nestednavbar2/Nestednavbar';
-
+import SubscriptionPlans from './components/Subscription/SubscriptionPlans';
 function App() {
   useEffect(() => {
     document.title = "MedxBay";
@@ -44,6 +44,8 @@ function App() {
           <Route path="/verify" element={<Verification />} />
           <Route path="/blogs" element={[<Nestednavbar/>,<BlogPage />,<Footer/>]}/>
           <Route path="/edit/profile/doctor" element={[<Navbar/>,<DoctorPopUp />,<Footer/>]}  />
+          <Route path="/SubscriptionPlans" element={[<Navbar/>,<SubscriptionPlans />,<Footer/>]}  />
+
         </Routes>
       </Router>
     </>

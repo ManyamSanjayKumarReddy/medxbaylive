@@ -163,7 +163,7 @@ const Reviews = () => {
   };
 
   useEffect(()=>{
-    setReview(data.reviews) // delete this line and delete static data after getting data from backend
+    // setReview(data.reviews) // delete this line and delete static data after getting data from backend
     fetchReview();
   },[])
 
@@ -171,7 +171,7 @@ const Reviews = () => {
     try {
       axios.get(`http://localhost:8000/doctor/reviews/${doctorId}`)
       .then(response => {
-        setReview(response.data.reviews)
+        setReview(response.data.reviews);
       })
       .catch(error => {
         console.error(error);
@@ -206,8 +206,8 @@ const Reviews = () => {
   return (
     <div className="dashboard-page-item-review-head">
       <h2>Reviews</h2>
-      <div className='review-scroll-user'>
-      {reviews.map((review, index) => (
+      <div className='review-scroll'>
+      {reviews && reviews.map((review, index) => (
         <div className="review-container" key={review._id}>
           <div className="review-header">
             <p className='review-idnumber'>{index+1}</p>

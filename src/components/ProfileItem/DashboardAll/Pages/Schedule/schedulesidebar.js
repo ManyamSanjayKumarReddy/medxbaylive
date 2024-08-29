@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import moment from 'moment';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import './Myschedule.css';
+import './myschedule.css';
 import { MdDelete } from "react-icons/md";
 
 function Sidebar({ scheduleList, doctor, setEvents }) {

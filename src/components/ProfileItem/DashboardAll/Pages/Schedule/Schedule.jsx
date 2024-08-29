@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Myschedule.css';
+import './myschedule.css';
 import ReactBigCalendar from './ReactBigCalendar';
 import Sidebar from './schedulesidebar';
 import axios from 'axios';

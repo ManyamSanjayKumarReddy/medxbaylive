@@ -103,8 +103,8 @@ function DoctorEdit() {
     e.preventDefault();
 
     if (doctor.verified === 'Verified') {
-      // If the status is 'Verified', redirect to /subscribe
-      navigate('/subscribe');
+   
+      navigate('/SubscriptionPlans');
       return;
     }
 
@@ -119,7 +119,6 @@ function DoctorEdit() {
         }
       );
 
-      // Set the status to 'Pending' after verification request
       await fetchDoctorDetails();
 
     } catch (error) {

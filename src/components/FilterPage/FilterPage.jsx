@@ -19,7 +19,6 @@ const FilterPage = () => {
   const [searchInput, setSearchInput] = useState('');
   const [doctors, setDoctors] = useState([]);
   const [locations, setLocations] = useState([]);
-  const [Uniquekey,setUniqueKey] = useState('');
   const [filters, setFilters] = useState({
     what: '',
     where: '',
@@ -57,28 +56,29 @@ const FilterPage = () => {
             .filter(doctor => doctor.hospitals && Array.isArray(doctor.hospitals))
             .flatMap(doctor =>
               doctor.hospitals
-                .filter(hospital => hospital.lat && hospital.lng)
-                .map(hospital => ({
-                  lat: hospital.lat,
-                  lng: hospital.lng,
-                  name: hospital.name,
-                  city: hospital.city
-                }))
+              .filter(hospital => hospital.lat && hospital.lng) 
+              .map(hospital => ({
+                lat: hospital.lat,
+                lng: hospital.lng,
+                name:hospital.name,
+                city:hospital.city
+              }))
             );
-          setLocations(extractedLocations);
+                    setLocations(extractedLocations);
+                    console.log(extractedLocations);
+                    
         } else {
           setDoctors([]);
-          setLocations([]);
+          setLocations([])
         }
       } catch (error) {
         console.error('Error fetching doctors:', error);
         setDoctors([]); // Ensure doctors is always an array
       }
     };
-    fetchDoctors();
-
-  }, []);
   
+    fetchDoctors();
+  }, []);
   
 
   const toggleFilterCanvas = () => {
@@ -196,6 +196,8 @@ const FilterPage = () => {
             </div>
           </div>
         </div>
+        <MidPartTwo/>
+        <Footerr/>
 
         <Footer />
       </div>

@@ -39,12 +39,12 @@ const Filter = ({ onFilterChange, initialFilters }) => {
         populateSearchFieldsFromUrl();
         searchDoctors();
     }, []);
-    //   useEffect(() => {
-    //     const delayDebounceFn = setTimeout(() => {
-    //         searchDoctors();
-    //         onFilterChange(formData);
-    //     }, 300); // 300ms debouncereturn() =>clearTimeout(delayDebounceFn);
-    // }, [formData]);
+      useEffect(() => {
+        const delayDebounceFn = setTimeout(() => {
+            searchDoctors();
+            onFilterChange(formData);
+        }, 300); // 300ms debouncereturn() =>clearTimeout(delayDebounceFn);
+    }, [formData]);
     const populateDropdowns = async () => {
         await populateCountryDropdown();
         await populateStateDropdown();

@@ -18,6 +18,7 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
   const [loading, setLoading] = useState(false); 
   const [selectedLocation, setSelectedLocation] = useState({ lat: "", lng: "" });
   const [modalShow, setModalShow] = useState(false);
+  const [insuranceOptions, setInsuranceOptions] = useState([]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -71,6 +72,18 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
     });
   };
 
+  const handleChangeInsurance = (e, index, field) => {
+    const newValue = e.target.value;
+    setFormData((prevData) => {
+      const newData = { ...prevData };
+      if (Array.isArray(newData[field])) {
+        newData[field][index] = newValue;
+      } else {
+        newData[e.target.name] = newValue;
+      }
+      return newData;
+    });
+  };
   
 
   const handleAddItem = (field) => {
@@ -172,6 +185,7 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
           { withCredentials: true }
         );
         const fetchedData = response.data.doctor;
+        setInsuranceOptions(response.data.insurances); 
 
         if (fetchedData.dateOfBirth) {
           fetchedData.dateOfBirth = formatDateForInput(fetchedData.dateOfBirth);
@@ -790,69 +804,77 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
           </Form.Group>
 
           <div className="row mb-3">
-            <div className="col-md-6">
-              <Form.Group className="mb-3" controlId="formInsurances">
-                <Form.Label>Insurance</Form.Label>
-                {formData.insurances.length === 0 && (
-    <div className="row row-container" style={{ marginBottom: "10px" }}>
-      <Form.Control
-        type="text"
-          name="insurances"
-        value={formData.insurances}
-        onChange={(e) => handleChange(e, 0, "insurances")}
-        placeholder="Enter insurances"
-        className="form-control-custom adjust-form"
+          <div className="col-md-6">
+      <Form.Group className="mb-3" controlId="formInsurances">
+        <Form.Label>Insurance</Form.Label>
+        {formData.insurances.length === 0 && (
+          <div className="row row-container" style={{ marginBottom: "10px" }}>
+            <Form.Select
+              name="insurances"
+              onChange={(e) => handleChange(e, 0, "insurances")}
+              className="form-control-custom adjust-form"
+            >
+              <option value="">Select an insurance</option>
+              {insuranceOptions.map((insurance, index) => (
+                <option key={index} value={insurance}>
+                  {insurance}
+                </option>
+              ))}
+            </Form.Select>
+            <InputGroup.Text
+              className="form-control-custom adjust-form-icon-one"
+              onClick={() => handleAddItem("insurances")}
+              aria-label="Add insurances"
+            >
+              <FontAwesomeIcon icon={faPlus} className="plus-edit-doctor" />
+            </InputGroup.Text>
+          </div>
+        )}
+       {formData.insurances.map((insurance, index) => (
+  <div
+    className="row row-container row-gap"
+    key={index}
+    style={{ marginBottom: "10px" }}
+  >
+    <Form.Control
+      as="select"
+      name="insurances"
+      value={insurance._id} 
+      onChange={(e) => handleChangeInsurance(e, index, "insurances")}
+      className="form-control-custom adjust-form"
+    >
+      <option value="">Select Insurance</option>
+      {insuranceOptions.map((option) => (
+        <option key={option._id} value={option._id}>
+          {option.name}
+        </option>
+      ))}
+    </Form.Control>
+    <InputGroup.Text
+      className="form-control-custom adjust-form-icon-one"
+      onClick={() => handleAddItem("insurances")}
+    >
+      <FontAwesomeIcon
+        icon={faPlus}
+        className="plus-edit-doctor"
       />
+    </InputGroup.Text>
+    {formData.insurances.length > 1 && (
       <InputGroup.Text
-        className="form-control-custom adjust-form-icon-one"
-        onClick={() => handleAddItem("insurances")}
-        aria-label="Add insurances"
+        className="form-control-custom adjust-form-icon-two"
+        onClick={() => handleRemoveItem(index, "insurances")}
       >
         <FontAwesomeIcon
-          icon={faPlus}
-          className="plus-edit-doctor"
+          icon={faTrash}
+          className="delete-edit-profile"
         />
       </InputGroup.Text>
+    )}
+  </div>
+))}
+
+      </Form.Group>
     </div>
-  )}
-                {formData.insurances.map((insurance, index) => (
-                  <div
-                    className="row row-container row-gap"
-                    key={index}
-                    style={{ marginBottom: "10px" }}
-                  >
-                    <Form.Control
-                      type="text"
-                      name="insurances"
-                      value={insurance}
-                      onChange={(e) => handleChange(e, index, "insurances")}
-                      placeholder="ABC Insurance"
-                      className="form-control-custom adjust-form"
-                    />
-                    <InputGroup.Text
-                      className="form-control-custom adjust-form-icon-one"
-                      onClick={() => handleAddItem("insurances")}
-                    >
-                      <FontAwesomeIcon
-                        icon={faPlus}
-                        className="plus-edit-doctor"
-                      />
-                    </InputGroup.Text>
-                    {formData.insurances.length > 1 && (
-                      <InputGroup.Text
-                        className="form-control-custom adjust-form-icon-two"
-                        onClick={() => handleRemoveItem(index, "insurances")}
-                      >
-                        <FontAwesomeIcon
-                          icon={faTrash}
-                          className="delete-edit-profile"
-                        />
-                      </InputGroup.Text>
-                    )}
-                  </div>
-                ))}
-              </Form.Group>
-            </div>
 
             <div className="col-md-6">
               <Form.Group className="mb-3" controlId="formAwards">

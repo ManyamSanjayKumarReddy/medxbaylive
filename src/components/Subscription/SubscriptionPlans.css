@@ -1,0 +1,247 @@
+/* General Styles */
+.subscription-plans {
+    font-family: "Arial", sans-serif;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #272848;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #1F2937;
+}
+
+.toggle-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+   
+    
+}
+
+.toggle-btn {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: 2px solid #007bff;
+    background-color: transparent;
+    color: #007bff;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.toggle-btn.selected {
+    background-color: #007bff;
+    color: white;
+}
+
+.toggle-btn:hover {
+    background-color: #0056b3;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Discount Banner */
+.discount-banner {
+    display: flex;
+    justify-content: center;
+    background-color: #ff7a59;
+    width: 300px;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.0rem;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    animation: bannerAnimation 2s infinite;
+}
+
+/* Keyframe Animation for Discount Banner */
+@keyframes bannerAnimation {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.0);
+        opacity: 0.8;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.discount-banner:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    animation: none; /* Stop animation on hover for a focus effect */
+}
+
+/* Enterprise Notice */
+.enterprise-notice {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #1F2937;
+}
+
+/* Plans Table */
+.plans-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.plans-table th,
+.plans-table td {
+    padding: 15px;
+    text-align: center;
+    border: 2px solid #DDE9FF;
+}
+
+.plans-table thead th {
+    padding: 30px 15px !important; /* Add space inside the header cells */
+    background-color: white;
+    font-weight: bold;
+}
+
+.plan-header {
+    background-color: white;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.plan-column-selected {
+    border: 2px solid #0167FF !important;
+    border-right: 3px solid #0167FF !important;
+    border-left: 3px solid #0167FF !important;
+    border-top-left-radius: 8px !important;
+    border-top-right-radius: 12px !important;
+    border-bottom-right-radius: 16px !important;
+    border-bottom-left-radius: 20px !important;
+}
+
+.features-column {
+    margin-bottom: 10px !important;
+}
+
+.feature-space {
+    padding: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 30px;
+    background-color: #f7faff !important;
+}
+
+.plan-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #1F2937;
+}
+
+.plan-price {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #1F2937;
+}
+
+/* Buttons */
+.add-contact-btn {
+    background-color: transparent;
+    color: #007bff;
+    padding: 10px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.add-contact-btn.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.add-contact-btn:hover {
+    background-color: #0056b3;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Feature Titles */
+.feature-title {
+    max-width: 200px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 30px;
+    background-color: #f7faff;
+    text-align: center;
+    vertical-align: top;
+}
+
+.feature-titles {
+    max-width: 260px;
+    font-size: 14px;
+    font-weight: bold;
+    padding-left: 25px !important;
+    background-color: #f7faff;
+    text-align: left !important;
+    vertical-align: top;
+}
+
+.special-note {
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.tick-icon {
+    color: #ff7a59;
+    font-size: 20px;
+}
+
+/* Table Header Styling */
+.plans-table thead {
+    border: none;
+}
+
+.plans-table thead th {
+    padding-top: 20px;
+    padding-bottom: 30px;
+    margin: 30px;
+    border: none;
+}
+
+.plans-table thead tr {
+    margin-bottom: 20px;
+}
+
+.plans-table thead tr::after {
+    content: '';
+    display: block;
+    height: 20px;
+}
+
+.feature-subtitle {
+    font-size: 12px;
+    color: #656565;
+    margin-top: 5px;
+    text-align: center;
+}
