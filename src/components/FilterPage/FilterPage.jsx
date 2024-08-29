@@ -196,8 +196,7 @@ const FilterPage = () => {
             </div>
           </div>
         </div>
-        <MidPartTwo/>
-        <Footerr/>
+
 
         <Footer />
       </div>
