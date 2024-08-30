@@ -221,7 +221,7 @@ function DoctorEdit() {
               </div>
               <div className="doctor-edit-location-text">
                 {" "}
-                {doctor ? doctor.city : "Loading..."}
+                {doctor ? doctor.cities : "Loading..."}
               </div>
             </div>
     
