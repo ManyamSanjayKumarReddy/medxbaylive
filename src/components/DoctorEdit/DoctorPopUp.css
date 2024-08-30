@@ -225,6 +225,13 @@ margin-top: -10px;
     cursor: pointer;
   }
 
+  .custom-modal  .adjust-form-icon-two-insurance{
+    width: 9%;
+    border: 1px solid #FF7F50;
+    cursor: pointer;
+    margin-left: 20px;
+  }
+
   .custom-modal  .adjust-form-icon-one-add{
     width: 5%;
     border: 1px solid #0167FF;

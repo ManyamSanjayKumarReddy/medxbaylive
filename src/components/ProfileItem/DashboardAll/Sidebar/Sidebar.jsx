@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './sidebar.css';
-import {  FaBars } from 'react-icons/fa';
+import { FaBars } from 'react-icons/fa';
 import { PiStorefrontBold } from "react-icons/pi";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { CgList } from "react-icons/cg";
@@ -21,6 +21,7 @@ const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
   const [isVerified, setIsVerified] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [subscriptionType, setSubscriptionType] = useState('Free'); // Default to 'Free'
 
   useEffect(() => {
     const handleResize = () => {
@@ -51,7 +52,10 @@ const Sidebar = () => {
         setIsModalOpen(true); 
       }
 
+      setSubscriptionType(doctorData.doctor.subscriptionType || 'Free'); 
+
       console.log("Doctor verification status:", doctorData.doctor.verified);
+      console.log("Doctor subscription type:", doctorData.doctor.subscriptionType);
 
     } catch (error) {
       console.error("Error fetching doctor details:", error);
@@ -81,7 +85,7 @@ const Sidebar = () => {
   };
 
   const handleClick = () => {
-    navigate('/Doctor/profile/Edit');
+    navigate('/edit/profile/doctor');
   };
 
   return (
@@ -147,20 +151,20 @@ const Sidebar = () => {
             <span>Inbox</span>
           </Link>
         </li>
-        <li className={`menu-item ${activeItem === '/doctorprofile/dashboardpage/reviews' ? 'active' : ''}`}
+        <li className={`menu-item ${activeItem === '/doctorprofile/dashboardpage/reviews' ? 'active' : ''} ${subscriptionType === 'Free' ? 'disabled' : ''}`}
           onMouseEnter={() => setActiveItem('/doctorprofile/dashboardpage/reviews')}
           onMouseLeave={() => setActiveItem(location.pathname)}
         >
-          <Link to={isVerified ? "/doctorprofile/dashboardpage/reviews" : "#"} className="menu-link">
-            <div className="sidebar-icon"><TbStar /></div>
+          <Link to={subscriptionType !== 'Free' ? "/doctorprofile/dashboardpage/reviews" : "#"} className="menu-link">
+          <div className="sidebar-icon"><TbStar /></div>
             <span>Reviews</span>
           </Link>
         </li>
-        <li className={`menu-item ${activeItem === '/doctorprofile/dashboardpage/blog' ? 'active' : ''}`}
+        <li className={`menu-item ${activeItem === '/doctorprofile/dashboardpage/blog' ? 'active' : ''} ${subscriptionType === 'Free' ? 'disabled' : ''}`}
           onMouseEnter={() => setActiveItem('/doctorprofile/dashboardpage/blog')}
           onMouseLeave={() => setActiveItem(location.pathname)}
         >
-          <Link to={isVerified ? "/doctorprofile/dashboardpage/blog" : "#"} className="menu-link">
+          <Link to={subscriptionType !== 'Free' ? "/doctorprofile/dashboardpage/blog" : "#"} className="menu-link">
             <div className="sidebar-icon"><ImBlogger2 /></div>
             <span>Blog</span>
           </Link>
@@ -177,16 +181,17 @@ const Sidebar = () => {
       </ul>
       <Verifypopup isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <div className='verify-popup-doctor'>
-      <h1>🛸 Welcome to Medxbay!</h1>
+          <h1>🛸 Welcome to Medxbay!</h1>
           <p>You’re almost there! 🌟</p>
           <p>Just a few quick details and you’ll unlock your full dashboard.</p>
           <button className="submitbtn" onClick={handleClick}>
             Enter Details
           </button>
-          </div>
+        </div>
       </Verifypopup> 
     </div>
   );
 };
 
 export default Sidebar;
+

@@ -39,7 +39,7 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
     linkedin: "",
     instagram: "",
     hospitals: [
-      { name: "", street: "", city: "", state: "", country: "", zip: "", latitude: "", longitude: "" },
+      { name: "", street: "", city: "", state: "", country: "", zip: "", lat: "", lng: "" },
     ],
     insurances: [""],
     awards: [""],
@@ -87,8 +87,8 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
               state: "",
               country: "",
               zip: "",
-              latitude: "",
-              longitude: "",
+              lat: "",
+              lng: "",
             }
           : "",
       ],
@@ -145,13 +145,13 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
 
     if (name === "profilePicture") {
       if (!file.type.startsWith("image/")) {
-        toast.error("Please upload a valid image file for the profile picture.");
+        toast.info("Please upload a valid image file for the profile picture.");
         return;
       }
       reader.readAsArrayBuffer(file);
     } else if (["licenseProof", "certificationProof", "businessProof"].includes(name)) {
       if (file.type !== "application/pdf") {
-        toast.error(`Please upload a valid PDF file for ${name.replace("Proof", "")}.`);
+        toast.info(`Please upload a valid PDF file for ${name.replace("Proof", "")}.`);
         return;
       }
       reader.readAsArrayBuffer(file);
@@ -237,7 +237,7 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
     setFormData((prevData) => ({
       ...prevData,
       hospitals: prevData.hospitals.map((hospital, i) =>
-        i === modalShow.index ? { ...hospital, latitude: lat, longitude: lng } : hospital
+        i === modalShow.index ? { ...hospital, lat, lng } : hospital
       ),
     }));
     setModalShow({ show: false, index: null });
@@ -290,13 +290,13 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
             }
         );
 
-        toast.success('Profile updated successfully!', {
+        toast.info('Profile updated successfully!', {
             className: 'toast-center toast-success',
             closeButton: true,
             progressBar: true,
         });
     } catch (error) {
-        toast.error('Failed to update profile. Please try again.', {
+        toast.info('Failed to update profile. Please try again.', {
             className: 'toast-center toast-error',
             closeButton: true,
             progressBar: true,
@@ -764,17 +764,17 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
       />
       <Form.Control
         type="text"
-        name="latitude"
-        value={formData.hospitals.latitude || ''}
-        onChange={(e) => handleChange(e, 0, "hospitals", "latitude")}
+        name="lat"
+        value={formData.hospitals.lat || ''}
+        onChange={(e) => handleChange(e, 0, "hospitals", "lat")}
         placeholder="Latitude"
         className="form-control-custom address-field"
       />
       <Form.Control
         type="text"
-        name="longitude"
-        value={formData.hospitals.longitude || ''}
-        onChange={(e) => handleChange(e, 0, "hospitals", "longitude")}
+        name="lng"
+        value={formData.hospitals.lng || ''}
+        onChange={(e) => handleChange(e, 0, "hospitals", "lng")}
         placeholder="Longitude"
         className="form-control-custom address-field"
       />
@@ -849,17 +849,17 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
       />
       <Form.Control
         type="text"
-        name="latitude"
-        value={hospital.latitude}
-        onChange={(e) => handleChange(e, index, "hospitals", "latitude")}
+        name="lat"
+        value={hospital.lat}
+        onChange={(e) => handleChange(e, index, "hospitals", "lat")}
         placeholder="Latitude"
         className="form-control-custom address-field"
       />
       <Form.Control
         type="text"
-        name="longitude"
-        value={hospital.longitude}
-        onChange={(e) => handleChange(e, index, "hospitals", "longitude")}
+        name="lng"
+        value={hospital.lng}
+        onChange={(e) => handleChange(e, index, "hospitals", "lng")}
         placeholder="Longitude"
         className="form-control-custom address-field"
       />
@@ -918,13 +918,13 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
         type="text"
         name="insurances"
         value={insurance}
-        readOnly
+  
         placeholder="ABC Insurance"
         className="form-control-custom adjust-form"
       />
       {formData.insurances.length > 1 && (
         <InputGroup.Text
-          className="form-control-custom adjust-form-icon-two"
+          className="form-control-custom adjust-form-icon-two-insurance"
           onClick={() => handleRemoveInsurance(index)}
         >
           <FontAwesomeIcon
@@ -1035,6 +1035,7 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
       <Form.Control
         type="file"
         name="licenseProof"
+        value={formData.licenseProof}
         onChange={handleFileChange}
         className="form-control-custom"
       />

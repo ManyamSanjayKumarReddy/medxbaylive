@@ -3,6 +3,10 @@
   vertical-align: middle !important;
 }
 
+.table-adjustment{
+  margin-top: 40px;
+}
+
 .table-header {
   background-color: #272848;
   color: white !important; 

@@ -42,7 +42,27 @@ export default function ReactBigCalendar({ onScheduleChange }) {
   const [doctor, setDoctor] = useState({});
   const [events, setEvents] = useState([]);
   const navigate = useNavigate();
+  const [subscriptionType, setSubscriptionType] = useState('');
+  const [maxTimeSlots, setMaxSlots] = useState(0);
+  useEffect(() => {
+    const fetchDoctor = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/doctor/profile/update`,
+          { withCredentials: true }
+        );
 
+        const doctorData = response.data;
+        setSubscriptionType(doctorData.doctor.subscriptionType);
+        setMaxSlots(doctorData.doctor.maxTimeSlots);
+
+      } catch (error) {
+        console.error("Error fetching doctor details:", error);
+      }
+    };
+
+    fetchDoctor();
+  }, []);
   useEffect(() => {
     const user = sessionStorage.getItem("loggedIn");
 
@@ -182,9 +202,8 @@ export default function ReactBigCalendar({ onScheduleChange }) {
       return;
     }
 
-    const freeSlotsCount = events.filter(event => event.status === 'free').length;
   
-    if (freeSlotsCount >= 3) {
+    if (subscriptionType === 'Free' && maxTimeSlots <= 0) {
       Swal.fire({
         icon: 'warning',
         title: 'Upgrade Required',
@@ -298,15 +317,39 @@ export default function ReactBigCalendar({ onScheduleChange }) {
         const endtime = document.getElementById("endtime").value;
         const hospital = document.getElementById("hospital").value;
         
-        if (slotType === 'Single' && (!starttime || !endtime || !hospital || !date)) {
-          Swal.showValidationMessage("Please fill all details before proceeding!");
-          return null;
-        } else if (slotType === 'Multiple' && (!startdate || !enddate || !starttime || !endtime || !hospital)) {
-          Swal.showValidationMessage("Please fill all details before proceeding!");
-          return null;
-        } else {
-          return { slotType, date, startdate, enddate, starttime, endtime, hospital };
+        const now = moment();
+        const isPastDate = (selectedDate) => moment(selectedDate).isBefore(now, 'day');
+        const isPastTime = (selectedDate, selectedTime) => moment(`${selectedDate}T${selectedTime}`).isBefore(now);
+      
+        // Validate Single slotType
+        if (slotType === 'Single') {
+          if (isPastDate(date) || isPastTime(date, starttime)) {
+            Swal.showValidationMessage("You cannot add time slots for past dates or times.");
+            return null;
+          }
+          if (!starttime || !endtime || !hospital || !date) {
+            Swal.showValidationMessage("Please fill all details before proceeding!");
+            return null;
+          }
         }
+      
+        // Validate Multiple slotType
+        if (slotType === 'Multiple') {
+          if (isPastDate(startdate) || isPastTime(startdate, starttime)) {
+            Swal.showValidationMessage("You cannot add time slots for past dates or times.");
+            return null;
+          }
+          if (!startdate || !enddate || !starttime || !endtime || !hospital) {
+            Swal.showValidationMessage("Please fill all details before proceeding!");
+            return null;
+          }
+          if (subscriptionType === 'Free' && startdate !== enddate) {
+            Swal.showValidationMessage("Free users cannot add time slots for multiple days.");
+            return null;
+          }
+        }
+      
+        return { slotType, date, startdate, enddate, starttime, endtime, hospital };
       },
     }).then((result) => {
       if (result.isConfirmed && result.value) {

@@ -145,16 +145,16 @@ const PatientTable = () => {
       <div className="header">
         <h2 className='mypatients'>My Patients</h2>
         <div className="actions">
-          <Button variant="contained" color="primary" className="button">
+          {/* <Button variant="contained" color="primary" className="button">
             + All Appointments
-          </Button>
+          </Button> */}
           {/* <Button variant="outlined" color="primary" className="button" onClick={() => navigate('/doctorprofile/dashboardpage/calendar')}>
             Calendar
           </Button> */}
         </div>
       </div>
 
-      <TableContainer component={Paper} className="table-container reduced-width">
+      <TableContainer component={Paper} className="table-container reduced-width   table-adjustment">
         <Table>
           <TableHead>
             <TableRow>
