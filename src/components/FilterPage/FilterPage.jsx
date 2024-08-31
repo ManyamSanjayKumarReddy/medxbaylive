@@ -11,6 +11,7 @@ import './OffCanvas.css';
 import { fetchFromPatient } from '../../actions/api';
 import Nestednavbar from '../Nestednavbar2/Nestednavbar2';
 import { useLocation } from 'react-router-dom';
+import { useSearch } from '../context/context';
 
 const FilterPage = () => {
   const location = useLocation();
@@ -18,6 +19,7 @@ const FilterPage = () => {
   const [isMapExpanded, setIsMapExpanded] = useState(false);
   const [searchInput, setSearchInput] = useState('');
   const [doctors, setDoctors] = useState([]);
+  const [doc, setDoc] = useState([]);
   const [locations, setLocations] = useState([]);
   const [filters, setFilters] = useState({
     what: '',
@@ -35,51 +37,57 @@ const FilterPage = () => {
     consultation: ''
   });
 
-  useEffect(()=>{
-    if (location.state) {
-      const { doctors: fetchedDoctors, what, where } = location.state;
-      setDoctors(fetchedDoctors);
+  const { searchData } = useSearch();
+
+  console.log(searchData,'jkahfkjehkje')
+
+  useEffect(() => {
+    if (searchData.doctors) {
+      setDoctors(searchData.doctors);
       setFilters(prevFilters => ({
         ...prevFilters,
-        what: what || '',
-        where: where || ''
+        what: searchData.what || '',
+        where: searchData.where || ''
       }));
-    }
-  },[location.state])
-  useEffect(() => {
-    const fetchDoctors = async () => {
-      try {
-        const response = await fetchFromPatient('/doctors');
-        if (response && Array.isArray(response.doctors)) {
-          setDoctors(response.doctors);
-          const extractedLocations = response.doctors
-            .filter(doctor => doctor.hospitals && Array.isArray(doctor.hospitals))
-            .flatMap(doctor =>
-              doctor.hospitals
-              .filter(hospital => hospital.lat && hospital.lng) 
+    } else if (searchData.error) {
+      console.error(searchData.error);
+      // Handle error display to user
+    } 
+  }, [searchData]);
+
+  const fetchDoctors = async () => {
+    try {
+      const response = await fetchFromPatient('/doctors');
+      if (response && Array.isArray(response.doctors)) {
+        setDoc(response.doctors);
+        const extractedLocations = response.doctors
+          .filter(doctor => doctor.hospitals && Array.isArray(doctor.hospitals))
+          .flatMap(doctor =>
+            doctor.hospitals
+              .filter(hospital => hospital.lat && hospital.lng)
               .map(hospital => ({
                 lat: hospital.lat,
                 lng: hospital.lng,
-                name:hospital.name,
-                city:hospital.city
+                name: hospital.name,
+                city: hospital.city
               }))
-            );
-                    setLocations(extractedLocations);
-                    console.log(extractedLocations);
-                    
-        } else {
-          setDoctors([]);
-          setLocations([])
-        }
-      } catch (error) {
-        console.error('Error fetching doctors:', error);
-        setDoctors([]); // Ensure doctors is always an array
+          );
+        setLocations(extractedLocations);
+        console.log(response.doctors);
+
+      } else {
+        setLocations([])
       }
-    };
-  
-    fetchDoctors();
+    } catch (error) {
+      console.error('Error fetching doctors:', error);
+    }
+  };
+
+  useEffect(() => {
+      fetchDoctors()
+    
   }, []);
-  
+
 
   const toggleFilterCanvas = () => {
     setIsFilterOpen(!isFilterOpen);
@@ -100,11 +108,11 @@ const FilterPage = () => {
   const handleFilterChange = (filterData) => {
     setFilters(filterData);
   };
-  
+
   const handleResetClick = () => {
     setIsMapExpanded(false);
     setSearchInput('');
-    
+
   };
   const handleMapClose = () => {
     setIsMapExpanded(false);
@@ -112,19 +120,18 @@ const FilterPage = () => {
 
   const filterDoctors = (doctors) => {
     if (!Array.isArray(doctors)) {
-      return []; // Return an empty array if doctors is not an array
+      return [];
     }
-  
+
     return doctors.filter((doctor) => {
       const getStringValue = (value) => (typeof value === 'string' ? value.toLowerCase().replace(" ", "") : '');
-      // console.log(filters)
 
       const country = getStringValue(doctor.country || '');
       const state = getStringValue(doctor.state || '');
-      const speciality = (doctor.speciality.length >0 ? doctor.speciality:[]).map(getStringValue);
+      const speciality = (doctor.speciality.length > 0 ? doctor.speciality : []).map(getStringValue);
       const city = getStringValue(doctor.city || '');
       const gender = getStringValue(doctor.gender || '');
-      const hospital = doctor.hospitals.length > 0 ? doctor.hospitals.map(hospital => getStringValue(hospital.name)):[];
+      const hospital = doctor.hospitals.length > 0 ? doctor.hospitals.map(hospital => getStringValue(hospital.name)) : [];
       const availability = getStringValue(doctor.availability || '');
       const doctorConditions = (doctor.conditions || []).map(getStringValue);
       const doctorLanguages = (doctor.languages || []).map(getStringValue);
@@ -140,7 +147,7 @@ const FilterPage = () => {
       const matchesConditions = filters.conditions.length === 0 || filters.conditions.every(condition => doctorConditions.includes(getStringValue(condition)));
       const matchesLanguages = filters.languages.length === 0 || filters.languages.every(language => doctorLanguages.includes(getStringValue(language)));
       const matchesConsultation = !filters.consultation || consultation === getStringValue(filters.consultation);
-  
+
       return (
         matchesCountry &&
         matchesState &&
@@ -155,8 +162,7 @@ const FilterPage = () => {
       );
     });
   };
-  const filteredDoctors = filterDoctors(doctors);
-  // console.log(filteredDoctors,"after")
+  const filteredDoctors = doctors.length == 0 ? filterDoctors(doc) : filterDoctors(doctors);
   return (
     <>
     <Nestednavbar/>

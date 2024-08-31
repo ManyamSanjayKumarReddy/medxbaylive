@@ -7,12 +7,16 @@ import { IoMdSearch } from "react-icons/io";
 import { getNames, getCode } from 'country-list';
 import countries from 'i18n-iso-countries';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useSearch } from '../context/context';
+
 countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
 
 const Hero = () => {
     const navigate = useNavigate();
     const [locations, setLocations] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState(null);
+    const { setSearchData } = useSearch();
 
     useEffect(() => {
         const countriesList = getNames().map(country => {
@@ -30,6 +34,7 @@ const Hero = () => {
         });
         setLocations(countriesList);
         setSelectedLocation(countriesList.find(c => c.value === 'UAE'));
+        // setSelectedLocation(selectedOption);
     }, []);
 
     const handleLocationChange = (event) => {
@@ -38,9 +43,58 @@ const Hero = () => {
         setSelectedLocation(selectedOption);
     };
 
-    const handleButtonClick = () => {
-        navigate('/Filters');
+    const [what, setWhat] = useState('');
+  const [where, setWhere] = useState('');
+  const [whatOptions, setWhatOptions] = useState([]);
+  const [whereOptions, setWhereOptions] = useState([]);
+
+  useEffect(() => {
+    const populateWhatOptions = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/what-options`, { withCredentials: true });
+        const data = response.data;
+        const { specialities, conditions, doctors } = data;
+        setWhatOptions([...specialities, ...conditions, ...doctors]);
+      } catch (error) {
+        console.error('Error fetching what options:', error);
+      }
     };
+
+    const populateWhereOptions = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/where-options`, { withCredentials: true });
+        const data = response.data;
+        const { cities, states, countries } = data;
+        setWhereOptions([...cities, ...states, ...countries]);
+      } catch (error) {
+        console.error('Error fetching where options:', error);
+      }
+    };
+
+    populateWhatOptions();
+    populateWhereOptions();
+  }, []);
+
+  const searchDoctors = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/search-doctors?what=${what}&where=${where}`, { withCredentials: true });
+      const doctors = response.data;
+
+      if (doctors && doctors.length > 0) {
+        console.log('Navigating with:', { doctors, what, where });
+        setSearchData({ doctors, what, where });
+        navigate('/Filters');
+      } else {
+        console.log('No doctors found');
+        // Navigate to a different page or show a message
+        navigate('/Filters', { state: {doctors,what, where } });
+      }
+    } catch (error) {
+      console.error('Error fetching doctors:', error);
+    }
+  };
+
 
     return (
         <>  
@@ -66,10 +120,18 @@ const Hero = () => {
                             <div className='simple-line'></div>
                             <div className="search">
                                 <IoMdSearch className="icon-loc-src" />
-                                <input type="text" className='search-input' placeholder="Search Doctors" />
+                                <input type="text" className='search-input' placeholder="Search Providers" id="what"
+                  value={what}
+                  onChange={(e) => setWhat(e.target.value)}
+                  list="what-options"/>
+                  <datalist id="what-options">
+                {whatOptions.map((option, index) => (
+                  <option key={index} value={option} />
+                ))}
+              </datalist>
                                 <div className='simple-line-small'></div>
                                 <div className="outer">
-                                    <button className="search-button" onClick={handleButtonClick}>
+                                    <button className="search-button" onClick={searchDoctors}>
                                     Find My Provider
                                     </button>
                                 </div>

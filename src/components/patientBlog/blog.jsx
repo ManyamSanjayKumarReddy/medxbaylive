@@ -15,77 +15,72 @@ import Treatment from "./TreatmentPage";
 import LivingWithHighBloodPressure from "./bloodpress";
 import axios from "axios";
 import moment from "moment";
-import profileimg from '../Assets/profileimg.png';
-
+import profileimg from "../Assets/profileimg.png";
+import { Link } from "react-router-dom";
 
 const bufferToBase64 = (buffer) => {
-  if (buffer?.type === 'Buffer' && Array.isArray(buffer?.data)) {
+  if (buffer?.type === "Buffer" && Array.isArray(buffer?.data)) {
     const bytes = new Uint8Array(buffer.data);
-    let binary = '';
+    let binary = "";
     for (let i = 0; i < bytes.length; i++) {
       binary += String.fromCharCode(bytes[i]);
     }
     return `data:image/jpeg;base64,${btoa(binary)}`;
   } else {
-    console.error('Unexpected buffer type:', typeof buffer);
-    return '';
+    console.error("Unexpected buffer type:", typeof buffer);
+    return "";
   }
 };
 
-const getProfileImage = (formData) =>{
-  if (formData?.data?.type === 'Buffer') {
+const getProfileImage = (formData) => {
+  if (formData?.data?.type === "Buffer") {
     return bufferToBase64(formData.data);
-  } else if (typeof formData?.data === 'string') {
+  } else if (typeof formData?.data === "string") {
     return `data:image/jpeg;base64,${formData.data}`;
   } else {
     return profileimg;
+  }
+};
 
-  }      
-}
+const Blog = () => {
+  const [blogData, setBlogData] = useState([]);
+  const [tempBlog, setTempBlog] = useState([]);
+  const [categoryData, setCategoryData] = useState([]);
+  const [hashtags, setHastags] = useState([]);
+  const [recentBlog, setRecentBlog] = useState([]);
+  const [mostReadBlog, setMostReadBlog] = useState([]);
+  const [topRatedDoctors, setTopRatedDoctors] = useState([]);
+  const [featuredBlog, setFeaturedBlog] = useState([]);
+  const [sideFeatureBlog, setSideFeatureBlog] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-const BlogPage = () => {
-
-  const [blogData,setBlogData]=useState([])
-  const [tempBlog,setTempBlog]=useState([])
-  const [categoryData,setCategoryData]=useState([])
-  const [hashtags,setHastags]=useState([])
-  const [recentBlog,setRecentBlog]=useState([])
-  const [mostReadBlog,setMostReadBlog]=useState([])
-  const [topRatedDoctors,setTopRatedDoctors]=useState([])
-  const [featuredBlog,setFeaturedBlog]=useState([])
-  const [sideFeatureBlog,setSideFeatureBlog]=useState([])
-  const [categories,setCategories]=useState([])
-
- 
-
-  const loadBlogs =async () =>{
+  const loadBlogs = async () => {
     const response = await axios.get(
-      `${process.env.REACT_APP_BASE_URL}/patient/blogs`,
+      `${process.env.REACT_APP_BASE_URL}/patient/blogs`
     );
-    if(response.data){
-      var data = response.data
-      console.log(data);
-      setHastags(data.hashtags)
-      setCategoryData(data.categoryCounts)
-      setRecentBlog(data.recentBlogs)
-      setMostReadBlog(data.mostReadBlogs)
-      setTopRatedDoctors(data.topRatedDoctors)
-      setBlogData(response.data)
-      setTempBlog(response.data)
-      setCategories(data.blogsByCategory)
-      const sortedBlogs = data.featuredBlogs.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+    if (response.data) {
+      var data = response.data;
+      setHastags(data.hashtags);
+      setCategoryData(data.categoryCounts);
+      setRecentBlog(data.recentBlogs);
+      setMostReadBlog(data.mostReadBlogs);
+      setTopRatedDoctors(data.topRatedDoctors);
+      setBlogData(response.data);
+      setTempBlog(response.data);
+      setCategories(data.blogsByCategory);
+      const sortedBlogs = data.featuredBlogs.sort(
+        (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
+      );
       setFeaturedBlog(sortedBlogs[0]);
       setSideFeatureBlog(sortedBlogs.slice(1));
-    }else{
+    } else {
       setBlogData([]);
-      console.log(response.data)
     }
-  }
+  };
 
   useEffect(() => {
-        loadBlogs()
-    },[])
-  
+    loadBlogs();
+  }, []);
 
   const newTreatmentData = [
     {
@@ -94,7 +89,8 @@ const BlogPage = () => {
         "Unmanaged high blood pressure can increase your risk of heart disease and stroke. Along with medications, certain natural remedies may help manage your blood pressure...",
       author: "By Tessa Cooper",
       date: "January 12, 2023",
-      imageUrl: "https://www.pexels.com/photo/smiling-woman-standing-near-plant-1996250/",
+      imageUrl:
+        "https://www.pexels.com/photo/smiling-woman-standing-near-plant-1996250/",
       readTime: "10 Minutes",
     },
     {
@@ -103,7 +99,8 @@ const BlogPage = () => {
         "Unmanaged high blood pressure can increase your risk of heart disease and stroke. Along with medications, certain natural remedies may help manage your blood pressure...",
       author: "By Tessa Cooper",
       date: "January 12, 2023",
-      imageUrl: "https://www.pexels.com/photo/smiling-woman-standing-near-plant-1996250/",
+      imageUrl:
+        "https://www.pexels.com/photo/smiling-woman-standing-near-plant-1996250/",
       readTime: "10 Minutes",
     },
     {
@@ -112,7 +109,8 @@ const BlogPage = () => {
         "Unmanaged high blood pressure can increase your risk of heart disease and stroke. Along with medications, certain natural remedies may help manage your blood pressure...",
       author: "By Tessa Cooper",
       date: "January 12, 2023",
-      imageUrl: "https://www.pexels.com/photo/smiling-woman-standing-near-plant-1996250/",
+      imageUrl:
+        "https://www.pexels.com/photo/smiling-woman-standing-near-plant-1996250/",
       readTime: "10 Minutes",
     },
     {
@@ -121,7 +119,8 @@ const BlogPage = () => {
         "Unmanaged high blood pressure can increase your risk of heart disease and stroke. Along with medications, certain natural remedies may help manage your blood pressure...",
       author: "By Tessa Cooper",
       date: "January 12, 2023",
-      imageUrl: "https://www.pexels.com/photo/smiling-woman-standing-near-plant-1996250/",
+      imageUrl:
+        "https://www.pexels.com/photo/smiling-woman-standing-near-plant-1996250/",
       readTime: "10 Minutes",
     },
     {
@@ -130,7 +129,8 @@ const BlogPage = () => {
         "Unmanaged high blood pressure can increase your risk of heart disease and stroke. Along with medications, certain natural remedies may help manage your blood pressure...",
       author: "By Tessa Cooper",
       date: "January 12, 2023",
-      imageUrl: "https://www.pexels.com/photo/smiling-woman-standing-near-plant-1996250/",
+      imageUrl:
+        "https://www.pexels.com/photo/smiling-woman-standing-near-plant-1996250/",
       readTime: "10 Minutes",
     },
     {
@@ -257,9 +257,6 @@ const BlogPage = () => {
       readTime: "10 Minutes",
     },
   ];
-  
-
-
 
   return (
     <div className="blog-page">
@@ -275,7 +272,7 @@ const BlogPage = () => {
             />
             <div className="featured-details">
               <h2>{featuredBlog.title}</h2>
-              <p>{featuredBlog.description}</p>
+              <p>{featuredBlog?.description?.slice(0,200)+"....."}</p>
             </div>
           </div>
 
@@ -290,7 +287,7 @@ const BlogPage = () => {
                 />
                 <div className="side-post-details">
                   <h5>{post.title}</h5>
-                  <span>{moment(post.date).format('MMMM DD, YYYY')}</span>
+                  <span>{moment(post.date).format("MMMM DD, YYYY")}</span>
                 </div>
               </div>
             ))}
@@ -299,11 +296,7 @@ const BlogPage = () => {
 
         {/* Blog Content Sections */}
         {Object.entries(categories).map(([name, value], index) => (
-            <BlogPostList
-            key={index}
-              title={name}
-              posts={value}
-          />
+          <BlogPostList key={index} title={name} posts={value} />
         ))}
         {/* <BlogPostList title="Causes & Risks" posts={causesAndRisksPosts} />
         <BlogPostList
@@ -334,7 +327,7 @@ const BlogPage = () => {
 
       {/* Sidebar */}
       <div>
-      <input
+        <input
           type="text"
           placeholder="Search..."
           style={{
@@ -346,32 +339,25 @@ const BlogPage = () => {
             marginTop: "30px",
             marginLeft: "-350px",
             position: "relative",
-            left:"-40px",
+            left: "-40px",
           }}
         />
         <span
-    style={{
-     fontSize:"18px",
-      marginTop:"-20px",
-      position: "relative",
-      top:"-40px",
-      left:"-20px"
-    }}
-  >
-   <IoSearch />
-
-  </span>
+          style={{
+            fontSize: "18px",
+            marginTop: "-20px",
+            position: "relative",
+            top: "-40px",
+            left: "-20px",
+          }}
+        >
+          <IoSearch />
+        </span>
 
         <div className="card card-blog ">
           <SidebarSection title="Categories" items={categoryData} />
-          <NewRecentBlog
-            recent={recentBlog}
-            heading={"Recent Blog"}
-          />
-          <NewRecentBlog
-            recent={mostReadBlog}
-            heading={"Most Reads"}
-          />
+          <NewRecentBlog recent={recentBlog} heading={"Recent Blog"} />
+          <NewRecentBlog recent={mostReadBlog} heading={"Most Reads"} />
           <NewTags tags={hashtags} />
         </div>
       </div>
@@ -396,9 +382,18 @@ const BlogPostList = ({ title, posts }) => {
             <div className="post-content">
               <h4>{post.title}</h4>
               <p>{post.description}</p>
-              <a href="#" className="read-more">
+              {/* <a href="#" className="read-more">
                 Read more in 5 min <FaLongArrowAltRight />
-              </a>
+              </a> */}
+
+              
+
+<Link
+                to={`/blogPost/${post._id}`}
+                className="recentBlog-card-readmore"
+              >
+                Read more in 8 mins ⟶
+              </Link>
             </div>
           </li>
         ))}
@@ -414,10 +409,12 @@ const SidebarSection = ({ title, items }) => {
         <h3>{title}ing & Diagnosis</h3>
       </div>
       <ul>
-      {Object.entries(items).map(([name, count], index) => (
+        {Object.entries(items).map(([name, count], index) => (
           <li key={index} className="sidebar-item">
             {<FaTag className="sidebar-item-icon" />}
-            <span>{name} ({count})</span>
+            <span>
+              {name} ({count})
+            </span>
           </li>
         ))}
       </ul>
@@ -433,7 +430,7 @@ const NewTreatement = ({ newTreatmentData, heading }) => {
         {newTreatmentData.map((card, index) => (
           <div key={index} className="newtreatment-card">
             <div className="newtreatment-card-left">
-              <img  
+              <img
                 src={card.imageUrl}
                 alt="Card thumbnail"
                 className="newtreatment-card-image cards"
@@ -498,31 +495,27 @@ const NewMoreOnHighBloodPressure = ({ newMoreOnHighBloodPressure }) => {
 };
 
 const HighBloodPressureSpecialist = ({ newBloodPressureSpecialist }) => {
-  const instruction= [
+  const instruction = [
     "Appt wasn't rushed",
     "Listened/answered questions",
     "Explains conditions well",
     "Found trustworthy",
     "Felt respected",
-  ]
+  ];
 
   return (
     <div className="bloodPrSp-card-container">
-      <div className="bloodPrSp-section-title">
-        Top Rated Heart specialists
-      </div>
+      <div className="bloodPrSp-section-title">Top Rated Heart specialists</div>
       <div className="bloodPrSp-card-grid">
         {newBloodPressureSpecialist.map((card, index) => (
           <div key={index} className="bloodPrSp-card">
-            
             <div className="bloodPrSp-card-content">
-
               <div className="bloodPrSp-card-content-heading">
-              <img
-              src={getProfileImage(card.profilePicture)}
-              alt="Card thumbnail"
-              className="bloodPrSp-card-image"
-            />
+                <img
+                  src={getProfileImage(card.profilePicture)}
+                  alt="Card thumbnail"
+                  className="bloodPrSp-card-image"
+                />
                 <div className="bloodPrSp-card-title">{card.name}</div>
                 <div className="bloodPrSp-card-rating">
                   <FaStar className="starr" />
@@ -532,7 +525,9 @@ const HighBloodPressureSpecialist = ({ newBloodPressureSpecialist }) => {
               <div className="bloodPrSp-card-specialist">{card.specialist}</div>
               <div className="bloodPrSp-card-address">
                 <FaMapMarkerAlt className="bloodPrSp-card-location" />
-                {card.city}{','}{card.state}
+                {card.city}
+                {","}
+                {card.state}
               </div>
               <div className="bloodPrSp-card-instruction">
                 <span>Patient Tell Us:</span>{" "}
@@ -572,16 +567,27 @@ const NewRecentBlog = ({ recent, heading }) => {
             </div>
             <div className="recentBlog-card-right">
               <div className="recentBlog-card-flex">
-                <div className="recentBlog-card-chips">{card.categories[0]}</div>
-                <div className="recentBlog-card-date">{moment(card.date).format('MMM DD, YYYY')}</div>
+                <div className="recentBlog-card-chips">
+                  {card.categories[0]}
+                </div>
+                <div className="recentBlog-card-date">
+                  {moment(card.date).format("MMM DD, YYYY")}
+                </div>
               </div>
               <div className="recentBlog-card-title">{card.title}</div>
 
-              <a href="##">
+              {/* <a href="##">
                 <div className="recentBlog-card-readmore">
                   Read more in 8 mins ⟶
                 </div>
-              </a>
+              </a> */}
+
+              <Link
+                to={`/blogPost/${card._id}`}
+                className="recentBlog-card-readmore"
+              >
+                Read more in 8 mins ⟶
+              </Link>
             </div>
           </div>
         ))}
@@ -673,4 +679,4 @@ const Footer = () => {
   );
 };
 
-export default BlogPage;
+export default Blog;

@@ -4,33 +4,70 @@ import '../Nestednavbar2/nestednavbar.css';
 
 import axios from 'axios';
 import Navbar from '../Navbar/Navbar';
+import { useSearch } from '../context/context';
 const Nestednavbaruserside = () => {
     const [what, setWhat] = useState('');
     const [where, setWhere] = useState('');
+    const [whatOptions, setWhatOptions] = useState([]);
+    const [whereOptions, setWhereOptions] = useState([]);
     const navigate = useNavigate();
+  
+    const { setSearchData } = useSearch();
+
+    useEffect(() => {
+      const populateWhatOptions = async () => {
+        try {
+          const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/what-options`, { withCredentials: true });
+          const data = response.data;
+          const { specialities, conditions, doctors } = data;
+          setWhatOptions([...specialities, ...conditions, ...doctors]);
+        } catch (error) {
+          console.error('Error fetching what options:', error);
+        }
+      };
+  
+      const populateWhereOptions = async () => {
+        try {
+          const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/where-options`, { withCredentials: true });
+          const data = response.data;
+          const { cities, states, countries } = data;
+          setWhereOptions([...cities, ...states, ...countries]);
+        } catch (error) {
+          console.error('Error fetching where options:', error);
+        }
+      };
+  
+      populateWhatOptions();
+      populateWhereOptions();
+    }, []);
   
     const searchDoctors = async () => {
       try {
-          const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/search-doctors?what=${what}&where=${where}`, { withCredentials: true });
-          const data = response.data; // Access the data directly
-          // If you need to check content type, you can use the following (though it's usually unnecessary with axios):
-          const contentType = response.headers['content-type'];
-          if (contentType && contentType.includes('application/json')) {
-              console.log('Booking response:', data);
-          } else {
-              console.error('Unexpected response format:', data);
-          }
-      } catch (error) {
-          console.error('Error fetching doctors:', error);
-      }
-  };
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/search-doctors?what=${what}&where=${where}`, { withCredentials: true });
+        const doctors = response.data;
   
-    useEffect(() => {
-      searchDoctors();
-    }, [what, where]);
-    const handleButtonClick = () => {
-      navigate('/Filters');
+        if (doctors && doctors.length > 0) {
+          console.log('Navigating with:', { doctors, what, where });
+          setSearchData({ doctors, what, where });
+          navigate('/Filters');
+        } else {
+          console.log('No doctors found');
+          // Navigate to a different page or show a message
+          navigate('/Filters', { state: {doctors,what, where } });
+        }
+      } catch (error) {
+        console.error('Error fetching doctors:', error);
+        // Handle error (e.g., show a message to the user)
+        navigate('/Filters', { state: { error: 'An error occurred while searching for doctors. Please try again later.' } });
+      }
     };
+  
+    useEffect(()=>{
+     if(what != ''|| what != ''){
+      searchDoctors();
+     }  
+  
+    },[what,where])
   
     return (
       <>
@@ -40,39 +77,48 @@ const Nestednavbaruserside = () => {
           </div>
   
           <div className="navbar-back">
-                <form>
+          <form onSubmit={(e) => e.preventDefault()}>
+  
               <div className="form-control-one">
-                <label>What</label>
-                
+                <label htmlFor="what">What</label>
                 <input
                   className="width-input"
-                  type="text"
                   id="what"
                   value={what}
                   onChange={(e) => setWhat(e.target.value)}
-                  placeholder="Search Doctors, providers or conditions"
+                  list="what-options"
+                  placeholder="Search Specialities, providers or conditions"
                 />
+                <datalist id="what-options">
+                  {whatOptions.map((option, index) => (
+                    <option key={index} value={option} />
+                  ))}
+                </datalist>
               </div>
               <div className="form-control-two">
-                <label>Where</label>
+                <label htmlFor="where">Where</label>
                 <input
                   className="width-input"
-            type="text"
-            id="where"
-            value={where}
-            onChange={(e) => setWhere(e.target.value)}
-            placeholder="United Arab Emirates"
-            />
-                
+                  id="where"
+                  value={where}
+                  onChange={(e) => setWhere(e.target.value)}
+                  list="where-options"
+                  placeholder="United Arab Emirates"
+                />
+                <datalist id="where-options">
+                  {whereOptions.map((option, index) => (
+                    <option key={index} value={option} />
+                  ))}
+                </datalist>
               </div>
-              <button type="submit" className="btn button-color" onClick={searchDoctors()}>
+              <button type="submit" className="btn button-color">
                 Find My Provider
               </button>
-              </form>
+            </form>
           </div>
         </div>
       </>
-    )  
-}
+    );
+  };
 
 export default Nestednavbaruserside

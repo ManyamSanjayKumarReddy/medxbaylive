@@ -1035,7 +1035,7 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
       <Form.Control
         type="file"
         name="licenseProof"
-        value={formData.licenseProof}
+   
         onChange={handleFileChange}
         className="form-control-custom"
       />

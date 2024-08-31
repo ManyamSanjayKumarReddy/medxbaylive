@@ -22,15 +22,19 @@ import ConnectedRoutes from './components/ProfileItem/DashboardAll/ConnectedRout
 import FilterPage from './components/FilterPage/FilterPage';
 import VerifyLogin from './components/login/VerifyLogin';
 import Verification from './components/login/Verification';
-import  BlogPage from './components/patientBlog/blog';
+import  Blog from './components/patientBlog/blog';
+import  BlogPage from './components/patientBlog/BlogPage';
 import Nestednavbar from './components/Nestednavbar2/Nestednavbar';
 import SubscriptionPlans from './components/Subscription/SubscriptionPlans';
+import { SearchProvider } from './components/context/context';
+
 function App() {
   useEffect(() => {
     document.title = "MedxBay";
 }, []);
   return (
     <>
+    <SearchProvider>
       <Router>
         <Routes>
           <Route path="/" element={[<Navbar/>,<Section />,<Footer/>]} />
@@ -42,12 +46,13 @@ function App() {
           <Route path="/Filters" element={<FilterPage />} />
           <Route path="/verify/login" element={<VerifyLogin />} />
           <Route path="/verify" element={<Verification />} />
-          <Route path="/blogs" element={[<Nestednavbar/>,<BlogPage />,<Footer/>]}/>
-          <Route path="/edit/profile/doctor" element={[<Navbar/>,<DoctorPopUp />,<Footer/>]}  />
+          <Route path="/blogs" element={[<Nestednavbar/>,<Blog />,<Footer/>]}/>
+          <Route path="/blogPost/:id" element={[<Nestednavbar/>,<BlogPage />,<Footer/>]}/>          <Route path="/edit/profile/doctor" element={[<Navbar/>,<DoctorPopUp />,<Footer/>]}  />
           <Route path="/SubscriptionPlans" element={[<Navbar/>,<SubscriptionPlans />,<Footer/>]}  />
 
         </Routes>
       </Router>
+      </SearchProvider>
     </>
   );
 }

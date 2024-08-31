@@ -5,11 +5,13 @@ import Navbar from '../Navbar/Navbar';
 import MxBay from '../Assets/MxBay.mp4'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useSearch } from '../context/context';
 
 const Nestednavbar = () => {
   const [isNestedVisible, setIsNestedVisible] = useState(false);
   const videoRef = useRef(null);
   const navigate = useNavigate();
+  const { setSearchData } = useSearch();
 
   const [what, setWhat] = useState('');
   const [where, setWhere] = useState('');
@@ -51,7 +53,8 @@ const Nestednavbar = () => {
 
       if (doctors && doctors.length > 0) {
         console.log('Navigating with:', { doctors, what, where });
-        navigate('/Filters', { state: { doctors, what, where} });
+        setSearchData({ doctors, what, where });
+        navigate('/Filters');
       } else {
         console.log('No doctors found');
         // Navigate to a different page or show a message

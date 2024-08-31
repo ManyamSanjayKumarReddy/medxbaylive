@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './nestednavbar.css';
 import Navbar from '../Navbar/Navbar';
 import axios from 'axios';
+import { useSearch } from '../context/context';
 
 const Nestednavbar = () => {
   const [what, setWhat] = useState('');
@@ -10,6 +11,7 @@ const Nestednavbar = () => {
   const [whatOptions, setWhatOptions] = useState([]);
   const [whereOptions, setWhereOptions] = useState([]);
   const navigate = useNavigate();
+  const { setSearchData } = useSearch();
 
   useEffect(() => {
     const populateWhatOptions = async () => {
@@ -38,27 +40,31 @@ const Nestednavbar = () => {
     populateWhereOptions();
   }, []);
 
-  useEffect(()=>{
-    const searchDoctors = async () => {
-      try {
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/search-doctors?what=${what}&where=${where}`, { withCredentials: true });
-        const doctors = response.data;
-  
-        if (doctors && doctors.length > 0) {
-          console.log('Navigating with:', { doctors, what, where });
-          navigate('/Filters', { state: { doctors, what, where} });
-        } else {
-          console.log('No doctors found');
-          // Navigate to a different page or show a message
-          navigate('/Filters', { state: {doctors,what, where } });
-        }
-      } catch (error) {
-        console.error('Error fetching doctors:', error);
-        // Handle error (e.g., show a message to the user)
-        navigate('/Filters', { state: { error: 'An error occurred while searching for doctors. Please try again later.' } });
+  const searchDoctors = async () => {
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/search-doctors?what=${what}&where=${where}`, { withCredentials: true });
+      const doctors = response.data;
+
+      if (doctors && doctors.length > 0) {
+        console.log('Navigating with:', { doctors, what, where });
+        setSearchData({ doctors, what, where });
+        navigate('/Filters');
+      } else {
+        console.log('No doctors found');
+        // Navigate to a different page or show a message
+        navigate('/Filters', { state: {doctors,what, where } });
       }
-    };
+    } catch (error) {
+      console.error('Error fetching doctors:', error);
+      // Handle error (e.g., show a message to the user)
+      navigate('/Filters', { state: { error: 'An error occurred while searching for doctors. Please try again later.' } });
+    }
+  };
+
+  useEffect(()=>{
+   if(what != ''|| what != ''){
     searchDoctors();
+   }  
 
   },[what,where])
 

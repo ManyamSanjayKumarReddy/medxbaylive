@@ -3,6 +3,7 @@ import './filter.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { RiArrowDownSLine } from "react-icons/ri";
 import { FiCalendar } from "react-icons/fi";
+import { useSearch } from '../context/context';
 
 const Filter = ({ onFilterChange, initialFilters }) => {
     const [doctors, setDoctors] = useState([]);
@@ -23,6 +24,8 @@ const Filter = ({ onFilterChange, initialFilters }) => {
         conditions: [],
         sortOption: ''
     });
+
+    const {setSearchData}=useSearch()
 
     const [dropdownData, setDropdownData] = useState({
         countries: [],
@@ -170,6 +173,7 @@ const Filter = ({ onFilterChange, initialFilters }) => {
                 [id]: value,
             }));
         }
+        setSearchData({doctors:[]})
         searchDoctors();
     };
 
@@ -189,6 +193,7 @@ const Filter = ({ onFilterChange, initialFilters }) => {
                 [name]: updatedArray
             };
         });
+        setSearchData({doctors:[]})
         console.log(formData)
     };
 
@@ -228,6 +233,8 @@ const Filter = ({ onFilterChange, initialFilters }) => {
         setFormData(resetData);
         onFilterChange(resetData);
         searchDoctors();
+        setSearchData({doctors:[]})
+
     };
 
     return (

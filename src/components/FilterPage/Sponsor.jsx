@@ -109,9 +109,10 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
 
     const timeSlots = doctor.timeSlots || []; 
     const filteredTimeSlots = selectedHospital
-        ? timeSlots.filter(slot => slot.hospital === selectedHospital && new Date(slot.date) >= new Date())
-        : timeSlots.filter(slot => new Date(slot.date) >= new Date());
-            
+        ? timeSlots.filter(slot => slot.hospital === selectedHospital)
+        : timeSlots;        
+
+        
     const datesMap = filteredTimeSlots.reduce((acc, slot) => {
         const date = new Date(slot.date).toDateString();
         if (!acc[date]) {
@@ -121,7 +122,6 @@ const DoctorCard = ({ isMapExpanded, doctor = {} }) => {
         acc[date].timeSlots.push(slot);
         return acc;
     }, {});
-    
 
     const dates = Object.values(datesMap);
 
