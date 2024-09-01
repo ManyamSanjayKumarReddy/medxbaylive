@@ -315,46 +315,59 @@ const Filter = ({ onFilterChange, initialFilters }) => {
                     </div>
                 </div>
                 <div className="select-container-filter">
-    <div className="form-group">
-        <label>Conditions:</label>
-        <div className="checkbox-group">
-            {dropdownData.conditions.map(condition => (
-                <div key={condition} className="checkbox-item">
-                    <input
-                        type="checkbox"
-                        id={`condition-${condition}`}
-                        name="conditions"
-                        value={condition}
-                        checked={formData.conditions ? formData.conditions.includes(condition) : false}
-                        onChange={handleCheckboxChange}
-                    />
-                    <label htmlFor={`condition-${condition}`} className="checkbox-label">
-                        {condition}
-                    </label>
+                <div className="form-group">
+                    <label>Conditions:</label>
+                    <div className="checkbox-group">
+                        {dropdownData.conditions.length > 0 ? (
+                            dropdownData.conditions.map(condition => (
+                                condition && (
+                                    <div key={condition} className="checkbox-item">
+                                        <input
+                                            type="checkbox"
+                                            id={`condition-${condition}`}
+                                            name="conditions"
+                                            value={condition}
+                                            checked={formData.conditions ? formData.conditions.includes(condition) : false}
+                                            onChange={handleCheckboxChange}
+                                        />
+                                        <label htmlFor={`condition-${condition}`} className="checkbox-label">
+                                            {condition}
+                                        </label>
+                                    </div>
+                                )
+                            ))
+                        ) : (
+                            <p>No conditions available</p>
+                        )}
+                    </div>
                 </div>
-            ))}
-        </div>
-    </div>
-</div>
+            </div>
 
-
-                <div className="select-container-filter">
+            <div className="select-container-filter">
                     <div className="form-group">
                         <label>Language Spoken:</label>
                         <div className="checkbox-group">
-                            {dropdownData.languages.map(language => (
-                                <div key={language} className="checkbox-item" >
-                                    <input
-                                        type="checkbox"
-                                        id={`language-${language}`}
-                                        name="languages"
-                                        value={language}
-                                        checked={formData.languages ? formData.languages.includes(language) : false}
-                                        onChange={handleCheckboxChange}
-                                    />
-                                    <label htmlFor={`language-${language}`} className="checkbox-label">{language}</label>
-                                </div>
-                            ))}
+                            {dropdownData.languages.length > 0 ? (
+                                dropdownData.languages.map(language => (
+                                    language && (
+                                        <div key={language} className="checkbox-item">
+                                            <input
+                                                type="checkbox"
+                                                id={`language-${language}`}
+                                                name="languages"
+                                                value={language}
+                                                checked={formData.languages ? formData.languages.includes(language) : false}
+                                                onChange={handleCheckboxChange}
+                                            />
+                                            <label htmlFor={`language-${language}`} className="checkbox-label">
+                                                {language}
+                                            </label>
+                                        </div>
+                                    )
+                                ))
+                            ) : (
+                                <p>No languages available</p>
+                            )}
                         </div>
                     </div>
                 </div>

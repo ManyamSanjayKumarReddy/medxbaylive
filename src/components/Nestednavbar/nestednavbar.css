@@ -100,6 +100,71 @@ border-bottom: 1px solid #C3CFE0
   cursor: pointer;
   flex-shrink: 0;
 }
+/* Dropdown styling */
+.dropdown-list {
+  position: absolute;
+  background-color: #ffffff;
+  border: 1px solid #C3CFE0;
+  border-radius: 5px;
+  list-style: none;
+  max-height: 200px; /* Limits the dropdown height */
+  overflow-y: auto; /* Adds scroll if content overflows */
+  z-index: 10; /* Ensures dropdown is above other elements */
+  /* margin-top: 5px; */
+}
+/* Specific styles for What dropdown */
+.what-dropdown {
+  width: 48%;
+  top: 100%; /* Positions the dropdown directly below the input */
+}
+
+/* Specific styles for Where dropdown */
+.where-dropdown {
+  width: 30%;
+  top: 100%; /* Positions the dropdown directly below the input */
+}
+
+/* Dropdown item styling */
+.dropdown-item {
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #272848;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1; /* Background color on hover */
+}
+
+/* Arrow icon styling */
+/* .arrow-icon-filter{
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: orange;
+  pointer-events: none;
+} */
+
+/* .input-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.input-wrapper .width-input {
+  flex: 1;
+  padding-right: 30px; 
+}
+
+.arrow-icon-doctor-filter {
+  font-size: 20px;
+  color: orange;
+  pointer-events: none;
+} */
+
 @media (min-width: 1000px) and (max-width: 1022px) {
 .navbar-back {
   overflow: hidden;

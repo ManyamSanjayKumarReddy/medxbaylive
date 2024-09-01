@@ -71,6 +71,8 @@ const ManageAppointments = () => {
   };
 
   const filteredBookings = getFilteredAppointments();
+  console.log(filteredBookings);
+  
 
   const toggleAppointmentsVisibility = () => {
     setVisibleAppointments(prev => (prev === 5 ? filteredBookings.length : 5));
@@ -197,7 +199,7 @@ const ManageAppointments = () => {
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(filteredBookings) && filteredBookings.slice(0, visibleAppointments).map(({ _id, doctor, date, time, status, consultationType, meetingLink }) => (
+            {Array.isArray(filteredBookings) && filteredBookings.slice(0, visibleAppointments).map(({ _id, doctor, date, time, status, consultationType,hospital, meetingLink }) => (
               <tr key={_id}>
                 <td>{doctor.name}</td>
                 <td>{new Date(date).toLocaleDateString()}</td>
@@ -207,11 +209,11 @@ const ManageAppointments = () => {
                 </span></td>
                 <td>
                   {activeTab === 'Completed' ? (
-                    <button className="add-review-button mr-2" onClick={() => openReviewModal({ _id, doctor, date, time, status, consultationType, meetingLink })}>
+                    <button className="add-review-button mr-2" onClick={() => openReviewModal({ _id, doctor, date, time, status, consultationType,hospital, meetingLink })}>
                       Add Review
                     </button>
                   ) : (
-                    <button className="view-button" onClick={() => openModal({ _id, doctor, date, time, status, consultationType, meetingLink })}>
+                    <button className="view-button" onClick={() => openModal({ _id, doctor, date, time, status, consultationType, hospital, meetingLink })}>
                       View Appointment
                     </button>
                   )}
@@ -234,7 +236,7 @@ const ManageAppointments = () => {
         className="view-appointment-modal"
         overlayClassName="custom-overlay"
       >
-        <div className="modal-content">
+        <div className="appointment-modal-content ">
           <h2>Appointment Details</h2>
           {selectedAppointment ? (
             <>
@@ -245,12 +247,19 @@ const ManageAppointments = () => {
               {selectedAppointment.consultationType === 'In-person' ? (
                 <div>
                   <strong>Doctor Location:</strong>
-                  <ul>
-                    {selectedAppointment.doctor.hospitals.map((hospital, index) => (
-                      <li key={index}>
-                        {hospital.street}, {hospital.city}, {hospital.state}, {hospital.country}
+                  <br />
+                  <ul className='list-unstyled'>
+                    <li><b> Hospital Name : </b>{selectedAppointment.hospital.name}</li>
+                    <li><b> Location : </b>{selectedAppointment.hospital.location.country} , 
+                      {selectedAppointment.hospital.location.state} , 
+                      {selectedAppointment.hospital.location.city},
+                      {selectedAppointment.hospital.location.street},
+                      {selectedAppointment.hospital.location.zip}
                       </li>
-                    ))}
+                      {/* // <li>
+                      //   {hospital.street}, {hospital.city}, {hospital.state}, {hospital.country}
+                      // </li> */}
+                      
                   </ul>
                 </div>
               ) : (

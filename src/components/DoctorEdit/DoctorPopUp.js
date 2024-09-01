@@ -38,6 +38,7 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
     twitter: "",
     linkedin: "",
     instagram: "",
+    doctorFee: "",
     hospitals: [
       { name: "", street: "", city: "", state: "", country: "", zip: "", lat: "", lng: "" },
     ],
@@ -1041,6 +1042,19 @@ const DoctorPopUp = ({ show, handleClose,fetchDoctorDetails }) => {
       />
     </Form.Group>
     </div>
+    <div className="col-md-6">
+              <Form.Group className="mb-3" controlId="formName">
+                <Form.Label>Fees</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="doctorFee"
+                  value={formData.doctorFee}
+                  onChange={handleChange}
+                  placeholder="Enter your Fee"
+                  className="form-control-custom"
+                />
+              </Form.Group>
+            </div>
   </div>
 
           <Button

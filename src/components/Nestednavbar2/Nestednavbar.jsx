@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Nestednavbar2/nestednavbar.css';
-
 import axios from 'axios';
 import Navbar from '../Navbar/Navbar';
 import { useSearch } from '../context/context';
+import { RiArrowDownSLine } from "react-icons/ri";
+
 const Nestednavbaruserside = () => {
     const [what, setWhat] = useState('');
     const [where, setWhere] = useState('');
     const [whatOptions, setWhatOptions] = useState([]);
     const [whereOptions, setWhereOptions] = useState([]);
+    const [showWhatOptions, setShowWhatOptions] = useState(false);
+    const [showWhereOptions, setShowWhereOptions] = useState(false);
     const navigate = useNavigate();
   
     const { setSearchData } = useSearch();
@@ -69,6 +72,19 @@ const Nestednavbaruserside = () => {
   
     },[what,where])
   
+    const handleWhatSelect = (option) => {
+      setWhat(option);
+      setShowWhatOptions(false);
+    };
+  
+    const handleWhereSelect = (option) => {
+      setWhere(option);
+      setShowWhereOptions(false);
+    };
+  
+    const handleFocusWhat = () => setShowWhatOptions(true);
+    const handleFocusWhere = () => setShowWhereOptions(true);
+  
     return (
       <>
         <div className="nested sticky-top">
@@ -78,44 +94,66 @@ const Nestednavbaruserside = () => {
   
           <div className="navbar-back">
           <form onSubmit={(e) => e.preventDefault()}>
-  
-              <div className="form-control-one">
-                <label htmlFor="what">What</label>
-                <input
-                  className="width-input"
-                  id="what"
-                  value={what}
-                  onChange={(e) => setWhat(e.target.value)}
-                  list="what-options"
-                  placeholder="Search Specialities, providers or conditions"
-                />
-                <datalist id="what-options">
-                  {whatOptions.map((option, index) => (
-                    <option key={index} value={option} />
-                  ))}
-                </datalist>
-              </div>
-              <div className="form-control-two">
-                <label htmlFor="where">Where</label>
-                <input
-                  className="width-input"
-                  id="where"
-                  value={where}
-                  onChange={(e) => setWhere(e.target.value)}
-                  list="where-options"
-                  placeholder="United Arab Emirates"
-                />
-                <datalist id="where-options">
-                  {whereOptions.map((option, index) => (
-                    <option key={index} value={option} />
-                  ))}
-                </datalist>
-              </div>
-              <button type="submit" className="btn button-color">
-                Find My Provider
-              </button>
-            </form>
-          </div>
+            <div className="form-control-one">
+              <label htmlFor="what">What</label>
+              {/* <div className="input-wrapper"> */}
+              <input
+                type="text"
+                className="width-input"
+                id="what"
+                value={what}
+                onChange={(e) => setWhat(e.target.value)}
+                placeholder="Search Specialities, providers or conditions"
+                onFocus={handleFocusWhat}
+                onBlur={() => setTimeout(() => setShowWhatOptions(false), 200)}
+                autoComplete="off"
+              />
+              {/* <RiArrowDownSLine className="arrow-icon-doctor-filter" />
+              </div> */}
+              {showWhatOptions && (
+                <ul className="dropdown-list what-dropdown">
+                  {whatOptions
+                    .filter(option => option.toLowerCase().includes(what.toLowerCase()))
+                    .map((option, index) => (
+                      <li key={index} className="dropdown-item" onMouseDown={() => handleWhatSelect(option)}>
+                        {option}
+                      </li>
+                    ))}
+                </ul>
+              )}
+            </div>
+            <div className="form-control-two">
+              <label htmlFor="where">Where</label>
+              {/* <div className="input-wrapper"> */}
+              <input
+                className="width-input"
+                id="where"
+                value={where}
+                onChange={(e) => setWhere(e.target.value)}
+                placeholder="United Arab Emirates"
+                onFocus={handleFocusWhere}
+                onBlur={() => setTimeout(() => setShowWhereOptions(false), 200)}
+                autoComplete="off"
+              />
+              {/* <RiArrowDownSLine className="arrow-icon-doctor-filter" />
+              </div> */}
+              {showWhereOptions && (
+                <ul className="dropdown-list where-dropdown">
+                  {whereOptions
+                    .filter(option => option.toLowerCase().includes(where.toLowerCase()))
+                    .map((option, index) => (
+                      <li key={index} className="dropdown-item" onMouseDown={() => handleWhereSelect(option)}>
+                        {option}
+                      </li>
+                    ))}
+                </ul>
+              )}
+            </div>
+            <button type="submit" className="btn button-color">
+              Find My Provider
+            </button>
+          </form>
+        </div>
         </div>
       </>
     );

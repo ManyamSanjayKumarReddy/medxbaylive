@@ -16,7 +16,7 @@ import { fetchFromPatient } from '../../actions/api.js';
 import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment/moment.js';
 import { RiArrowDownSLine } from 'react-icons/ri';
-import LoginCard from '../login/login';
+import SignupCard from '../signup/signup';
 
 const bufferToBase64 = (buffer) => {
     if (buffer?.type === 'Buffer' && Array.isArray(buffer?.data)) {
@@ -61,6 +61,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {},location }) => {
     const [hospitalDistance, setHospitalDistance] = useState(null); 
     const [hospitalCity, setHospitalCity] = useState(null); 
     const [userLoggedin,setUserLogged] = useState();
+    const [showPopup, setShowPopup] = useState(false);
     const [showLoginPopup,setShowLoginPopup] = useState(false);
     const navigate = useNavigate();
 
@@ -109,8 +110,11 @@ const DoctorCard = ({ isMapExpanded, doctor = {},location }) => {
 
     const timeSlots = doctor.timeSlots || []; 
     const filteredTimeSlots = selectedHospital
-        ? timeSlots.filter(slot => slot.hospital === selectedHospital)
-        : timeSlots;        
+        ? timeSlots.filter(slot => slot.hospital === selectedHospital && new Date(slot.date) >= new Date() && slot.status === "free")
+        : timeSlots.filter(slot => new Date(slot.date) >= new Date() && slot.status === "free");
+            
+        console.log(filteredTimeSlots);
+        
     const datesMap = filteredTimeSlots.reduce((acc, slot) => {
         const date = new Date(slot.date).toDateString();
         if (!acc[date]) {
@@ -160,13 +164,19 @@ const DoctorCard = ({ isMapExpanded, doctor = {},location }) => {
         }
     };
 
+
+    const handleCloseRegister = () => setShowPopup(false);
+    const handleShowRegister = () => setShowPopup(true);
+
+    const handleShowLogin = () => setShowLoginPopup(true);
+    const handleCloseLogin = () => setShowLoginPopup(false);
+
+    const handleShowPopup = () => setShowPopup(true);
+    const handleClosePopup = () => setShowPopup(false);
+
     const handleShowCard = () => {
         setShowDoctorCard(prevState => !prevState);
     };
-
-    const handleShowLoginPopup = () => setShowLoginPopup(true);
-    const handleCloseLoginPopup = () => setShowLoginPopup(false);
-
     const handleTimeSlotClick = (slot) => {
         setSelectedTimeSlot(slot);
     };
@@ -433,10 +443,7 @@ const DoctorCard = ({ isMapExpanded, doctor = {},location }) => {
                             <p className="availability">{doctor.availability ? "Available" : "Not Available"}</p>
                         </div>
                         <div className='d-flex flex-row'>
-                        {!userLoggedin ? 
-                        (<button className={`book-button book-login mr-2 ${isMapExpanded ? 'mapExpanded-button' : ''}`}  onClick={handleShowLoginPopup}>Login</button>)
-                        : (<button className={`book-button  mr-2 ${isMapExpanded ? 'mapExpanded-button' : ''}`} onClick={handleShowCard}>Book Appointment</button>) 
-                        }
+                            <button className={`book-button  mr-2 ${isMapExpanded ? 'mapExpanded-button' : ''}`} onClick={handleShowCard}>Book Appointment</button>
                             <button className={`book-button ${isMapExpanded ? 'mapExpanded-button' : ''}`}><FontAwesomeIcon icon={faPaperPlane} /></button>
                         </div>
                     </div>
@@ -543,17 +550,17 @@ const DoctorCard = ({ isMapExpanded, doctor = {},location }) => {
                         )}
                         {selectedTimeSlot && (
                             <div className="book-now">
-                                <button className="btn btn-primary" onClick={handleBookAppointment}>Book Now</button>
-                            </div>
+                            {!userLoggedin ?
+                                (<button className={`book-button book-login mr-2 p-3 ${isMapExpanded ? 'mapExpanded-button' : ''}`} onClick={handleShowPopup}>Register to book now</button>)
+                                : (<button className="btn btn-primary" onClick={handleBookAppointment}>Book Now</button>)
+                            }
+                        </div>
                         )}
                     </div>
                 )}
 
             </div>
-            <LoginCard 
-        show={showLoginPopup} 
-        handleClose={handleCloseLoginPopup}
-      />
+            <SignupCard show={showPopup} handleClose={handleClosePopup} openLoginModal={handleShowLogin} />
         </>
     );
 };

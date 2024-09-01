@@ -23,12 +23,16 @@
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
-   
-    
+    background-color: #F8F8F8;
+    padding: 5px;
+    border-radius: 18px;
+    width: 270px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .toggle-btn {
-    padding: 10px 20px;
+    padding: 10px 35px;
     margin: 0 5px;
     border: 2px solid #007bff;
     background-color: transparent;
@@ -54,42 +58,15 @@
     display: flex;
     justify-content: center;
     background-color: #ff7a59;
-    width: 300px;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
     margin-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
     font-size: 1.0rem;
     font-weight: bold;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
     animation: bannerAnimation 2s infinite;
-}
-
-/* Keyframe Animation for Discount Banner */
-@keyframes bannerAnimation {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.0);
-        opacity: 0.8;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-}
-
-.discount-banner:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-    animation: none; /* Stop animation on hover for a focus effect */
 }
 
 /* Enterprise Notice */
@@ -114,8 +91,8 @@
 }
 
 .plans-table thead th {
-    padding: 30px 15px !important; /* Add space inside the header cells */
-    background-color: white;
+    padding: 30px 15px !important; 
+    background-color:#f7faff ;
     font-weight: bold;
 }
 
@@ -123,27 +100,36 @@
     background-color: white;
     font-size: 1rem;
     font-weight: bold;
+    position: relative;
+    transition: border-color 0.3s ease;
 }
 
+/* Overlay Effect for Selected Column */
 .plan-column-selected {
-    border: 2px solid #0167FF !important;
-    border-right: 3px solid #0167FF !important;
-    border-left: 3px solid #0167FF !important;
-    border-top-left-radius: 8px !important;
-    border-top-right-radius: 12px !important;
-    border-bottom-right-radius: 16px !important;
-    border-bottom-left-radius: 20px !important;
+    position: relative;
 }
 
+.plan-column-selected::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-left: 3px solid #0167FF;
+    border-right:3px solid #0167FF ;
+   
+    /* border-radius: 10px; */
+    pointer-events: none; /* Ensures clicks pass through to the content */
+}
+
+/* Adjusting Features Column */
 .features-column {
     margin-bottom: 10px !important;
 }
 
 .feature-space {
-    padding: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 30px;
+    padding: 30px 10px;
     background-color: #f7faff !important;
 }
 
@@ -245,3 +231,111 @@
     margin-top: 5px;
     text-align: center;
 }
+
+/* Ensure the content inside the column is not affected by the border */
+.plan-content {
+    padding: 20px;
+    background-color: white;
+}
+/* Discount Banner */
+.discount-banner {
+    display: flex;
+    justify-content: center;
+    background-color: #ff7a59;
+    width: 300px;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.0rem;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    animation: bannerAnimation 2s infinite;
+}
+
+/* Enterprise Notice */
+.enterprise-notice {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #1F2937;
+}
+
+
+.plan-column-selected {
+    position: relative;
+    border: 2px solid #ff7a59; /* Adjust the color and width as needed */
+   
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+/* Optional: Adjust the table cell padding to prevent overlap with the border */
+.plans-table th, .plans-table td {
+    padding: 15px;
+    text-align: center;
+    border: 2px solid #DDE9FF;
+    vertical-align: top; /* Ensures content aligns at the top */
+}
+
+.plans-wrapper {
+    overflow-x: auto; /* Adds horizontal scroll if needed */
+    padding: 20px; /* Adjust padding as needed */
+  }
+  
+  .plans-table {
+    width: 100%;
+    border-collapse: collapse; /* Ensures borders between cells are merged */
+  }
+  
+  /* Add border to the table columns */
+  .plans-table th,
+  .plans-table td {
+    border: 2px solid #ddd; /* Border color and style */
+  }
+  
+  .plans-table th {
+    background-color: #f4f4f4; /* Optional: Background color for header */
+  }
+  
+  .plans-table td {
+    text-align: center; /* Optional: Center align text in cells */
+  }
+  
+  /* Optional: Add border to selected plan column */
+  .plan-header.plan-column-selected {
+    border-top: 3px solid #007bff; /* Highlighted border color */
+border-top-left-radius: 4px !important;  }
+  
+
+  
+
+  .plans-wrapper {
+    overflow-x: auto; /* Adds horizontal scroll if needed */
+    padding: 20px; /* Adjust padding as needed */
+  }
+  
+  .plans-table {
+    width: 100%;
+    border-collapse: collapse; /* Ensures borders between cells are merged */
+  }
+  
+  
+ 
+  /* Optional: Border for the selected column */
+  
+  .plans-table td.feature-1-free-article.plan-column-selected {
+    border-bottom: 3px solid #007bff !important; /* Border color and style for this column */
+    border-radius: 10px;
+  }
+  
+  .plans-table td {
+    text-align: center; /* Optional: Center align text in cells */
+  }
+  
+  .plans-table td.feature-1-free-article.plan-column-selected  {
+    border-bottom: 3px solid #007bff !important; /* Border color and style for this column */
+   }
+  

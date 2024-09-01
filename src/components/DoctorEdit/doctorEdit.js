@@ -94,6 +94,7 @@ function DoctorEdit() {
       setBlogs(doctorData.blogs);
       setVerificationStatus(doctorData.doctor.verified);
 
+
   
     } catch (error) {
       console.error("Error fetching doctor details:", error);
@@ -102,15 +103,14 @@ function DoctorEdit() {
   const handleVerify = async (e) => {
     e.preventDefault();
 
-    if (doctor.verified === 'Verified') {
-   
+    if (doctor.verified === 'Verified' && doctor.subscriptionVerification !== 'Verified') {
       navigate('/SubscriptionPlans');
       return;
     }
 
     setLoading(true);
     try {
-      const response = await axios.post(
+      await axios.post(
         `${process.env.REACT_APP_BASE_URL}/doctor/profile/verify`,
         {},
         {
@@ -127,6 +127,7 @@ function DoctorEdit() {
       setLoading(false);
     }
   };
+
   
   const faqRef = useRef(null);
 
@@ -322,9 +323,19 @@ function DoctorEdit() {
             <button
   className={`verify-doctor-button ${doctor.verified === 'Pending' ? 'pending' : ''}`}
   onClick={handleVerify}
-  disabled={loading || doctor.verified === 'Pending'}
+  disabled={
+    loading || 
+    doctor.verified === 'Pending' || 
+    (doctor.verified === 'Verified' && doctor.subscriptionVerification === 'Verified')
+  }
 >
-  {doctor.verified === 'Verified' ? 'Subscribe' : doctor.verified === 'Pending' ? 'Pending' : 'Verify'}
+  {doctor.verified === 'Verified'
+    ? doctor.subscriptionVerification === 'Verified'
+      ? doctor.subscriptionType 
+      : 'Subscribe' 
+    : doctor.verified === 'Pending'
+    ? 'Pending' 
+    : 'Verify'} 
 </button>
 
 
