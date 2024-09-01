@@ -85,8 +85,8 @@ const BlogPage = () => {
     console.log('came')
 
     const response = await axios.get(
-      // `${process.env.REACT_APP_BASE_URL}/patient/blogs`
-      `http://localhost:8000/patient/blogs`
+      `${process.env.REACT_APP_BASE_URL}/patient/blogs`
+      // `http://localhost:8000/patient/blogs`
     );
     if (response.data) {
       var data = response.data;
@@ -96,8 +96,8 @@ const BlogPage = () => {
     }
 
     const blogPostresponse = await axios.get(
-      //   `${process.env.REACT_APP_BASE_URL}/patient/blogs/view/${id}`
-      `http://localhost:8000/patient/blogs/view/${id}`
+        `${process.env.REACT_APP_BASE_URL}/patient/blogs/view/${id}`
+      // `http://localhost:8000/patient/blogs/view/${id}`
     );
     if (blogPostresponse.data) {
       var data = blogPostresponse.data;
