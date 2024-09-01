@@ -80,7 +80,9 @@ const BlogPage = () => {
   //   },
   // ];
 
+
   const loadData = async () => {
+    console.log('came')
 
     const response = await axios.get(
       // `${process.env.REACT_APP_BASE_URL}/patient/blogs`
@@ -88,15 +90,14 @@ const BlogPage = () => {
     );
     if (response.data) {
       var data = response.data;
+      console.log(data,id)
       setRelatedBlogs(data.recentBlogs)
       setCategories(data.categories)
     }
 
     const blogPostresponse = await axios.get(
       //   `${process.env.REACT_APP_BASE_URL}/patient/blogs/view/${id}`
-      `http://localhost:8000/patient/blogs/view/${id}`,{
-        withCredentials:true
-      }
+      `http://localhost:8000/patient/blogs/view/${id}`
     );
     if (blogPostresponse.data) {
       var data = blogPostresponse.data;
@@ -106,8 +107,9 @@ const BlogPage = () => {
 
 
   useEffect(() => {
+    console.log('useeffect called')
     loadData();
-  }, []);
+  }, [id]);
 
   function formatDate(isoString) {
     const date = new Date(isoString);

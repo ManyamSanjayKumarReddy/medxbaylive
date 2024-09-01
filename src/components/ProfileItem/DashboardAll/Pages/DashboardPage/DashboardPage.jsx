@@ -16,6 +16,7 @@ import { CiClock2 } from "react-icons/ci";
 import { RiListView } from "react-icons/ri";
 import axios from 'axios';
 import profileImage from "../../Assets/profileimg.png";
+import { useNavigate } from 'react-router-dom';
 
 const bufferToBase64 = (buffer) => {
   if (buffer?.type === 'Buffer' && Array.isArray(buffer?.data)) {
@@ -48,6 +49,10 @@ const DashboardPage = () => {
       return profileImage;
     }
   };
+  const navigate = useNavigate();
+  const handleView =() => {
+    navigate('/Doctor/profile/Edit');
+  }
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/doctor/insights`, { withCredentials: true })
@@ -60,10 +65,10 @@ const DashboardPage = () => {
       })
       .catch(error => {
         console.error('There was an error fetching the bookings!', error.message);
-        setData([]); // Set an empty array on error
+        setData([]); 
       });
   }, []);
-  // Dummy data for different time periods
+
   const insightsData = {
     'This Month': {
       newPatients: '1,500+',
@@ -167,7 +172,7 @@ const DashboardPage = () => {
               </div>
             </div>
             <div className='button-profiles'>
-              <button>View Profile</button>
+              <button onClick={handleView}>View Profile</button>
             </div>
           </div>
           

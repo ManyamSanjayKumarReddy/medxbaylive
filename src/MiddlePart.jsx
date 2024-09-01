@@ -57,7 +57,7 @@ const MiddlePart = () => {
           <div className="col-12 col-md-6 col-first pt-lg-5">
             {/* <div className="heading">LOREM ISPUM</div> */}
             <div className="main-heading">
-  <span className="highlight">Where Providers</span> 
+  <span className="highlight-mid">Where Providers</span> 
   <span className="secondary-text"> Connect, Earn, and Grow</span>
 </div>        
     <div className="description"></div>
@@ -161,7 +161,7 @@ const MiddlePart = () => {
           <div className="col-12 col-md-6 col-second mt-5 pt-lg-5 d-flex flex-column justify-content-center">
             {/* <div className="heading">LOREM ISPUM</div> */}
             <div className="main-heading">
-  <span className="highlight">Become your</span> 
+  <span className="highlight-mid">Become your</span> 
   <span className="secondary-text"> Own Health Advocate</span>
 </div>    
             <div className="description"></div>

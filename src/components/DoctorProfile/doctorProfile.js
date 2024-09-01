@@ -288,24 +288,37 @@ const handleBookAppointment = async () => {
           consultationType: consultationType
       };
       console.log('Booking data:', bookingData);
-
-      // const result = await fetchFromPatient('/book', bookingData, 'POST');
-      // console.log('Booking response JSON:', result);
-      toast.info('Booking successful!',{
-        className: 'toast-center toast-success',
-        closeButton: true,
-        progressBar: true,
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/patient/book`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(bookingData),
+        credentials: 'include' 
     });
-  } catch (error) {
-      console.error('Error booking appointment:', error.message);
-      toast.info('Error booking appointment. Please try again.',
-        {
+
+    const result = await response.json();
+    console.log('Booking response:', result);
+
+    if (response.ok) {
+        window.location.href = result.url; 
+    } else {
+        toast.info('Unexpected response from server. Please try again.', {
             className: 'toast-center toast-fail',
             closeButton: true,
             progressBar: true,
-        });    }
+        });
+    }
+} catch (error) {
+    console.error('Error booking appointment:', error.message);
+    toast.info('Error booking appointment. Please try again.', {
+        className: 'toast-center toast-fail',
+        closeButton: true,
+        progressBar: true,
+    });
+}
 };
-
 const handleConsultationTypeChange = (type) => {
   setConsultationType(type);
 };
@@ -326,15 +339,15 @@ const handleConsultationTypeChange = (type) => {
             <div className="book-appointment">Book Appointment</div>
             <div className="Appointment-container-box">
   <div 
-    className={`book-appointment-inperson ${consultationType === 'inPerson' ? 'active' : 'inactive'}`}
-    onClick={() => handleConsultationTypeChange('inPerson')}
+    className={`book-appointment-inperson ${consultationType === 'In-person' ? 'active' : 'inactive'}`}
+    onClick={() => handleConsultationTypeChange('In-person')}
   >
     <div className="book-appointment-inperson-icon"></div>
     <div className="book-appointment-inperson-container">In-person</div>
   </div>
   <div 
-    className={`video-consultation-container ${consultationType === 'video' ? 'active' : 'inactive'}`}
-    onClick={() => handleConsultationTypeChange('video')}
+    className={`video-consultation-container ${consultationType === 'Video call' ? 'active' : 'inactive'}`}
+    onClick={() => handleConsultationTypeChange('Video call')}
   >
     <div className="video-consultation-container-icon"></div>
     <div className="video-consultation-text">Video Consultation</div>

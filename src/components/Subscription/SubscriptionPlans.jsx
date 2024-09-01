@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SubscriptionPlans.css";
 import { SiTicktick } from "react-icons/si";
-
+import axios from "axios";
 const SubscriptionPlans = () => {
   const [selectedPeriod, setSelectedPeriod] = useState("Monthly");
   const [selectedPlan, setSelectedPlan] = useState(null);
@@ -135,6 +135,32 @@ const SubscriptionPlans = () => {
   const handlePlanClick = (planName) => {
     setSelectedPlan(planName);
   };
+  const handleSubscribe = async () => {
+    if (!selectedPlan) {
+      alert("Please select a subscription plan");
+      return;
+    }
+
+    const currentPlans = selectedPeriod === "Monthly" ? monthlyPlans : yearlyPlans;
+    const selectedPlanDetails = currentPlans.find(plan => plan.name === selectedPlan);
+
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/doctor/subscribe`, {
+        subscriptionType: selectedPlan,
+        subscriptionDuration: selectedPeriod,
+        paymentDetails: {
+          amount: parseInt(selectedPlanDetails.price.replace('$', '').replace(',', ''), 10) * 100 
+        }
+        
+      },  { withCredentials: true } );
+    
+      window.location.href = response.data;
+    } catch (error) {
+      console.error("Subscription error:", error);
+      alert("Failed to initiate subscription. Please try again.");
+    }
+  };
+
 
   const features = [
     {
@@ -169,7 +195,7 @@ const SubscriptionPlans = () => {
 
   return (
     <div className="subscription-plans">
-      {/* <h2 className="title">Subscription Plans</h2> */}
+      <h2 className="title">Subscription Plans</h2>
       <p className="subtitle">Choose the best plan for you</p>
       <div className="toggle-buttons">
         <button
@@ -209,9 +235,9 @@ const SubscriptionPlans = () => {
               >
                 <div className="plan-name">{plan.name}</div>
                 <div className="plan-price">{plan.price}</div>
-                <button className={`add-contact-btn ${selectedPlan === plan.name ? "active" : ""}`}>
-                  subscribe 
-                </button>
+                <button className={`add-contact-btn ${selectedPlan === plan.name ? "active" : ""}`} onClick={handleSubscribe}>
+            Subscribe
+          </button>
               </th>
             ))}
           </tr>
