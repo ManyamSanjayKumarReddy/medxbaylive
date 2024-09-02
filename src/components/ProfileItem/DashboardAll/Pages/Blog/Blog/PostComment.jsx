@@ -6,25 +6,32 @@ const PostComment = ({id,loadBlogs}) => {
     comment: ""
   });
 
-  const handleSubmit = () => {
+
+  const handlePublish =(e)=>{
+    // e.preventDefault()
     console.log("Comment submitted:", newComment);
     try{
       const res= axios.post(`${process.env.REACT_APP_BASE_URL}/doctor/blogs/comment/${id}`,
         newComment,
         { withCredentials: true}
       )
-          console.log("Blog updated successfully:", res);
-          // loadBlogs()
+      if (res.data) {
+        console.log("Blog updated successfully:", res.data);
+        // loadBlogs()
+        // handleCancel()
+    } else {
+        console.error("Failed to update Blog:", res.data);
+    } 
 
     }catch(e){
       console.log(e)
     }
-  };
+  }
 
   return (
     <div className="leave-comment-cnt">
       <h4 className="comments-title">Leave a Comment</h4>
-      <form onSubmit={handleSubmit}>
+      <form >
         <div className="textarea-comment-post">
           <textarea
             value={newComment.comment}
@@ -51,7 +58,7 @@ const PostComment = ({id,loadBlogs}) => {
             Save my name, email, and website in this browser for the next time I comment.
           </span>
         </div>
-        <button type="submit" className="submit-button">Post Comment</button>
+        <button  className="submit-button" onClick={handlePublish}>Post Comment</button>
       </form>
     </div>
   );
