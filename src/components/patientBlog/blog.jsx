@@ -266,12 +266,12 @@ const Blog = () => {
         <div className="featured-section">
           <div className="featured-post">
             <img
-              src={getProfileImage(featuredBlog.image)}
+              src={getProfileImage(featuredBlog?.image)}
               alt="Featured Post"
               className="featured-img"
             />
             <div className="featured-details">
-              <h2>{featuredBlog.title}</h2>
+              <h2>{featuredBlog?.title}</h2>
               <p>{featuredBlog?.description?.slice(0,200)+"....."}</p>
             </div>
           </div>

@@ -68,10 +68,7 @@ function BlogDetails({blog}) {
             <p className="blog-description">
               {blog.description}
             </p>
-            <div className="social-reach-cnt">
-              <IoLogoFacebook className="facebook-icon"/>
-              <span>2.5k</span>
-            </div>
+     
             <div className="blog-tags">
               {blog.hashtags.map((e) => (
                 <div key={e} className="blog-tags-content">

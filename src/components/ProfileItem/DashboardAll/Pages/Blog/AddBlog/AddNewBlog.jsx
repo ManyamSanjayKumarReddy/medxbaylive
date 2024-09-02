@@ -11,7 +11,7 @@ const AddNewBlog = ({loadBlogs}) => {
     title: "",
     author: "",
     category: "",
-    subCategory: "",
+    subcategories: "",
     hashtags: "",
     priority: "",
     description: "",
@@ -59,7 +59,7 @@ const AddNewBlog = ({loadBlogs}) => {
         if (res.data) {
           console.log("Blog updated successfully:", res.data);
           loadBlogs()
-          handleAddClick()
+          handleCancel()
       } else {
           console.error("Failed to update Blog:", res.data);
       } 
@@ -133,19 +133,19 @@ const AddNewBlog = ({loadBlogs}) => {
 
             <div className="publish-blog-header">
               <select
-                value={newBlog.subCategory}
+                value={newBlog.subcategories}
                 className="publish-blog-input"
                 onChange={(e) =>
-                  setNewBlog({ ...newBlog, subCategory: e.target.value })
+                  setNewBlog({ ...newBlog, subcategories: e.target.value })
                 }
               >
                 <option value="" disabled hidden>
                   Choose Blog Sub Category
                 </option>
                 {newBlog.category &&
-                  subCategories[newBlog.category].map((subCategory, index) => (
-                    <option key={index} value={subCategory}>
-                      {subCategory}
+                  subCategories[newBlog.category].map((subcategories, index) => (
+                    <option key={index} value={subcategories}>
+                      {subcategories}
                     </option>
                   ))}
               </select>

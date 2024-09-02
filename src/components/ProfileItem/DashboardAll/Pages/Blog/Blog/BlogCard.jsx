@@ -70,7 +70,7 @@ const BlogCard = ({blogData,loadBlogs}) => {
             </div>
             <div className="blog-content-preview-cnt">
               <h4>{blog.title}</h4>
-              <p>{blog.description}</p>
+              {/* <p>{blog.description}</p> */}
             </div>
             <div className="readMore-cnt" onClick={(e) => { e.preventDefault(); handleBlogClick(blog._id); }}>
               <h4>Read more in 8 Minutes</h4>
